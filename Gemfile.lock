@@ -86,6 +86,8 @@ GEM
       i18n (>= 1.8.11, < 2)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    heroicon (0.4.0)
+      rails (>= 5.2)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     io-console (0.5.11)
@@ -240,6 +242,7 @@ DEPENDENCIES
   cssbundling-rails (~> 1.1)
   debug
   faker (~> 2.21)
+  heroicon (~> 0.4.0)
   jbuilder
   jsbundling-rails
   pg (~> 1.1)
