@@ -1,0 +1,15 @@
+<!--
+Options:
+  model - the Model of the items to be sorted
+  parent - if the list is in the show page of another object, that object is a parent
+  legacy_params - params that store the information of filters and per_page)
+  method - method by which the items are to be sorted
+  order - sorting order (:asc/:desc)
+ -->
+<%= button_to(admin_search_path(model, parent), params: sort_params(method, order, legacy_params), data:{turbo_frame: frame_name(model, parent) })  do %>
+  <% if order == :desc  %>
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+  <% elsif order == :asc %>
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7l4-4m0 0l4 4m-4-4v18"></path></svg>
+  <% end %>
+<% end %>

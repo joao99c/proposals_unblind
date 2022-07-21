@@ -1,0 +1,69 @@
+<!--
+List options:
+  model - the Model of each item in the list
+  objects - items of the list
+  parent - if the list is in the show page of another object, that object is a parent
+  q - result of ransack
+  legacy_params
+ -->
+<%#= raise %>
+<div class="flex justify-between">
+  <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white"><%= table_header(model) %></h1>
+  <%= link_to admin_new_path(model, parent) do %>
+    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+      New <%= model.to_s %>
+    </button>
+  <% end %>
+</div>
+<%= turbo_frame_tag frame_name(model, parent), target: "_top" do %>
+  <div class="flex flex-col">
+    <div class="overflow-x-auto shadow-md sm:rounded-lg">
+      <div class="inline-block min-w-full align-middle">
+        <div class="overflow-hidden ">
+          <table id="<%= table_id(model, parent) %>" class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-700">
+            <thead class="bg-gray-100 dark:bg-gray-700">
+            <tr>
+              <% model.index_methods.each do |method| %>
+                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                  <%= column_header(method) %>
+                  <% if is_attribute?(model, method) %>
+                    <%= render 'admin/list_parts/sort_button', model:, parent:, method:, legacy_params:, order: :desc %>
+                    <%= render 'admin/list_parts/sort_button', model:, parent:, method:, legacy_params:, order: :asc %>
+                  <% end %>
+                </th>
+              <% end %>
+            </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+            <% objects.each do |object| %>
+              <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                <% model.index_methods.each do |method| %>
+                  <%= index_td(model, object, method, class: 'py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white') %>
+                <% end %>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-12 flex justify-center items-end">
+    <%= paginate objects, remote: true, model:, parent:, legacy_params: %>
+    <div class="justify-self-start inline-flex">
+      <%= form_with url: admin_search_path(model, parent), data: { turbo_frame: frame_name(model, parent) } do |f| %>
+        <%= raw hash_as_hidden_fields(legacy_params) %>
+        <%= f.label :per, 'Per page', class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
+        <%= f.number_field :per, value: "#{objects.limit_value}", class: "block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+      <% end %>
+    </div>
+  </div>
+  <%= search_form_for q, url: admin_search_path(model, parent), html: { method: :post }, data: { turbo_frame: frame_name(model, parent) } do |f| %>
+    <%= raw hash_as_hidden_fields(legacy_params) %>
+    <% model.filter_methods.each do |method| %>
+      <%= f.label :"#{method}_cont" %>
+      <%= f.search_field :"#{method}_cont" %>
+    <% end %>
+    <%= f.submit %>
+  <% end %>
+<% end %>
