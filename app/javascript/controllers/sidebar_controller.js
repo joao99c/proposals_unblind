@@ -1,4 +1,4 @@
-import { Controller } from "@hotwired/stimulus";
+import {Controller} from "@hotwired/stimulus";
 
 // Connects to data-controller="sidebar"
 export default class extends Controller {
@@ -81,24 +81,24 @@ export default class extends Controller {
         const toggleSidebarEl = document.getElementById("toggleSidebar");
         const sidebar = document.getElementById("sidebar");
 
-        document
-            .querySelectorAll(
-                "#" + sidebar.getAttribute("id") + " ul > li > ul > li > a"
-            )
-            .forEach((e) => {
-                var fullText = e.textContent;
-                var firstLetter = fullText.substring(0, 1);
-
-                var fullTextEl = document.createElement("span");
-                var firstLetterEl = document.createElement("span");
-                firstLetterEl.classList.add("hidden");
-                fullTextEl.textContent = fullText;
-                firstLetterEl.textContent = firstLetter;
-
-                e.textContent = "";
-                e.appendChild(fullTextEl);
-                e.appendChild(firstLetterEl);
-            });
+        // document
+        //     .querySelectorAll(
+        //         "#" + sidebar.getAttribute("id") + " ul > li > ul > li > a"
+        //     )
+        //     .forEach((e) => {
+        //         var fullText = e.textContent;
+        //         var firstLetter = fullText.substring(0, 1);
+        //
+        //         var fullTextEl = document.createElement("span");
+        //         var firstLetterEl = document.createElement("span");
+        //         firstLetterEl.classList.add("hidden");
+        //         fullTextEl.textContent = fullText;
+        //         firstLetterEl.textContent = firstLetter;
+        //
+        //         e.textContent = "";
+        //         e.appendChild(fullTextEl);
+        //         e.appendChild(firstLetterEl);
+        //     });
 
         // initialize sidebar
         if (localStorage.getItem("sidebarExpanded") !== null) {
