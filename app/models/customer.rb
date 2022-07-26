@@ -1,4 +1,5 @@
 class Customer < ApplicationRecord
+  include Admin::AdminResource
 
   has_many :deals, counter_cache: true
 
@@ -6,14 +7,11 @@ class Customer < ApplicationRecord
     parent.table[:name]
   end
 
+  paginates_per 5
 
-  def self.index_methods
-    %i[id name email]
-  end
-
-  def self.show_lists
-    []
-  end
+  column :id
+  column :name
+  column :email
 
   def self.filter_methods
     %i[id name email]

@@ -59,4 +59,8 @@ module ApplicationHelper
     end
     hidden_fields.join("\n")
   end
+
+  def error_message_for(obj, attr_name)
+    render partial: "shared/input_error_message", locals: { obj: obj, attr_name: attr_name }
+  end
 end

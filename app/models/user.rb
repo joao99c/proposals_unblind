@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  has_many :deals, counter_cache: true
+  include Admin::AdminResource
+  has_many :deals
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -10,14 +11,13 @@ class User < ApplicationRecord
     parent.table[:name]
   end
 
+  # kaminari
+  paginates_per 5
 
-  def self.index_methods
-    %i[id name email]
-  end
-
-  def self.show_lists
-    []
-  end
+  # Index Table
+  column :id, class: 'some-class another-class'
+  column :name, class: 'some-class another-class'
+  column :email, class: 'some-class another-class'
 
   def self.filter_methods
     %i[id name email]

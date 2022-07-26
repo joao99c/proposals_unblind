@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Admin::BaseHelper
-  # merges existing params forpagination/filters with new sort params
+  # merges existing params for pagination/filters with new sort params
   def sort_params(method, order, legacy_params)
     return { q: { s: ["#{method} #{order}"] }, per: legacy_params[:per] } unless legacy_params[:q].present?
 

@@ -7,8 +7,17 @@ import { application } from "./application"
 import DarkModeController from "./dark_mode_controller"
 application.register("dark-mode", DarkModeController)
 
+import DiscountInputController from "./discount_input_controller"
+application.register("discount-input", DiscountInputController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+import ModalController from "./modal_controller"
+application.register("modal", ModalController)
+
 import SidebarController from "./sidebar_controller"
 application.register("sidebar", SidebarController)
+
+import TabsController from "./tabs_controller"
+application.register("tabs", TabsController)

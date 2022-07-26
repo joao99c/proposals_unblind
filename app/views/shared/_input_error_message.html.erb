@@ -1,0 +1,6 @@
+<% if obj.errors.has_key?(attr_name) %>
+  <div class="text-error text-caption flex space-x-1 items-center">
+    <i><%= heroicon("exclamation", options: { class: "icon-sm" }) %></i>
+    <p><%= obj.errors.full_messages_for(attr_name).join(', ') %></p>
+  </div>
+<% end %>

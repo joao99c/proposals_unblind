@@ -13,6 +13,7 @@ class Admin::BaseController < ApplicationController
     paginate_objects
     p "===========@queries", @queries
     p @objects = @queries.inject(@q) { |o, a| o.send(*a) }
+    @table_builder = TableBuilder.new(@objects)
     set_list_options
   end
 
@@ -37,7 +38,8 @@ class Admin::BaseController < ApplicationController
       objects: @objects,
       parent: @parent,
       q: @q,
-      legacy_params: @legacy_params
+      legacy_params: @legacy_params,
+      table_builder: @table_builder
     }
   end
 
@@ -55,6 +57,7 @@ class Admin::BaseController < ApplicationController
   end
 
   def set_model
+    # 'users' => User
     @model = params[:model]&.s_to_model || controller_name.s_to_model
   end
 
@@ -83,7 +86,8 @@ class Admin::BaseController < ApplicationController
         objects:,
         parent: @object,
         q: objects.ransack({}),
-        legacy_params: {}
+        legacy_params: {},
+        table_builder: TableBuilder.new(objects)
       }
       instance_variable_set(:"@#{list}_list_options", list_options)
     end

@@ -1,0 +1,3 @@
+div[modal-backdrop] {
+    @apply z-40 bg-opacity-70 bg-neutral-900
+}

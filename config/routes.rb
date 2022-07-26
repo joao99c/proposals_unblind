@@ -1,13 +1,45 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   devise_scope :user do
     # Redirests signing out users back to sign-in
-    get "users", to: "devise/sessions#new"
+    get 'users', to: 'devise/sessions#new'
   end
   devise_for :users
 
+  scope :admin do
+    get '/', to: 'home#index', as: 'backoffice_home'
+  end
   root 'website#index'
 
   namespace :admin do
+    scope 'deals/:id' do
+      scope 'step_1' do
+        get '/', to: 'deals#step_1', as: 'deal_step_1'
+        post '/', to: 'deals#save_step_1'
+
+        # get '/customer'
+
+        scope :customer do
+          get '/', to: 'deal_customers#show', as: 'deal_customers'
+
+          get '/new', to: 'deal_customers#new', as: 'new_deal_customer'
+          post 'existing_user', to: 'deal_customers#save_existing_user', as: 'save_deal_existing_user'
+          post 'new_user', to: 'deal_customers#save_new_user', as: 'save_deal_new_user'
+        end
+
+        scope :products do
+          get '/', to: 'deal_products#index', as: 'deal_products'
+          get '/new', to: 'deal_products#new', as: 'new_deal_product'
+          post '/new', to: 'deal_products#create'
+
+          delete '/:dp_id', to: 'deal_products#destroy', as: 'destroy_deal_product'
+        end
+      end
+
+      get 'step_2', to: 'deals#step_2', as: 'deal_step_2'
+      post 'step_2', to: 'deals#save_step_2'
+    end
     ApplicationRecord.admin_resources.each do |admin_resource|
       resources admin_resource do
         admin_resource.s_to_model.show_lists.each do |list|

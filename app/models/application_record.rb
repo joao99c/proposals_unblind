@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class ApplicationRecord < ActiveRecord::Base
   primary_abstract_class
 
   # defines the models that have admin index routes
   def self.admin_resources
-    [:deals, :users, :customers]
+    %i[deals users customers]
   end
 
   # the methods that are called to display the instance
@@ -71,5 +73,4 @@ class ApplicationRecord < ActiveRecord::Base
   def self.data_type_of(method)
     type_for_attribute(method).type
   end
-
 end
