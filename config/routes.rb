@@ -14,6 +14,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     scope 'deals/:id' do
+      get 'pdf/show' => 'pdf#show'
+      get 'pdf/download' => 'pdf#download'
+
       scope 'step_1' do
         get '/', to: 'deals#step_1', as: 'deal_step_1'
         post '/', to: 'deals#save_step_1'
