@@ -3,6 +3,21 @@
 class Deal < ApplicationRecord
   include Admin::AdminResource
 
+  STATUSES_ORDER = %w[open won lost].freeze
+
+  enum status: {
+    "Aberta": 'open',
+    "Perdida": 'lost',
+    "Ganha": 'won'
+  }, _suffix: true
+
+  scope :won, -> { where(status: 'won') }
+  scope :lost, -> { where(status: 'lost') }
+  scope :open, -> { where(status: 'open') }
+
+  scope :newest_first, -> { order(created_at: :desc) }
+  scope :index_set, -> { newest_first }
+
   # Relationships
   has_many :deal_products, dependent: :destroy
   accepts_nested_attributes_for :deal_products, allow_destroy: true, reject_if: :all_blank
@@ -17,25 +32,14 @@ class Deal < ApplicationRecord
   validates :user, :customer, presence: true, on: :update
 
   # kaminari
-  paginates_per 5
+  paginates_per 10
 
   # Table columns
-  column :name
-  column :customer
-  column :user
-  column :total_amount
-  column :finish_date
-
-  # Table column custom filters
-  ransacker :id do
-    Arel.sql("to_char(\"#{table_name}\".\"id\", '99999999')")
-  end
-  ransacker :user_id do
-    Arel.sql("to_char(\"#{table_name}\".\"user_id\", '99999999')")
-  end
-  ransacker :customer_id do
-    Arel.sql("to_char(\"#{table_name}\".\"customer_id\", '99999999')")
-  end
+  column :name, { sortable: false }
+  column :customer, { sortable: false }
+  column :user, { sortable: false }
+  column :total_amount, { sortable: false }
+  column :finish_date, { sortable: false }
 
   def update_total_amount
     self.total_amount = deal_products.map(&:price).sum

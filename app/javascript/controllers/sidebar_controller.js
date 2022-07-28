@@ -4,13 +4,10 @@ import {Controller} from "@hotwired/stimulus";
 export default class extends Controller {
     connect() {
         const isSidebarExpanded = (toggleSidebarEl) => {
-            return toggleSidebarEl.getAttribute("aria-expanded") === "true"
-                ? true
-                : false;
+            return toggleSidebarEl.getAttribute("aria-expanded") === "true";
         };
 
         const toggleSidebar = (sidebarEl, expand, setExpanded = false) => {
-            const bottomMenuEl = document.querySelector("[sidebar-bottom-menu]");
             const mainContentEl = document.getElementById("main-content");
             if (expand) {
                 sidebarEl.classList.add("lg:w-64");
@@ -39,11 +36,6 @@ export default class extends Controller {
                         e.childNodes[1].classList.add("hidden");
                     });
 
-                bottomMenuEl.classList.remove("flex-col", "space-y-4", "p-2");
-                bottomMenuEl.classList.add("space-x-4", "p-4");
-                setExpanded
-                    ? toggleSidebarEl.setAttribute("aria-expanded", "true")
-                    : null;
             } else {
                 sidebarEl.classList.remove("lg:w-64");
                 sidebarEl.classList.add("lg:w-16");
@@ -69,12 +61,6 @@ export default class extends Controller {
                         e.childNodes[0].classList.add("hidden");
                         e.childNodes[1].classList.remove("hidden");
                     });
-
-                bottomMenuEl.classList.add("flex-col", "space-y-4", "p-2");
-                bottomMenuEl.classList.remove("space-x-4", "p-4");
-                setExpanded
-                    ? toggleSidebarEl.setAttribute("aria-expanded", "false")
-                    : null;
             }
         };
 
@@ -151,18 +137,6 @@ export default class extends Controller {
         const toggleSidebarMobileClose = document.getElementById(
             "toggleSidebarMobileClose"
         );
-        const toggleSidebarMobileSearch = document.getElementById(
-            "toggleSidebarMobileSearch"
-        );
-
-        toggleSidebarMobileSearch.addEventListener("click", () => {
-            toggleSidebarMobile(
-                sidebar,
-                sidebarBackdrop,
-                toggleSidebarMobileHamburger,
-                toggleSidebarMobileClose
-            );
-        });
 
         toggleSidebarMobileEl.addEventListener("click", () => {
             toggleSidebarMobile(

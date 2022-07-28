@@ -1,0 +1,90 @@
+<%= turbo_frame_tag frame_name(model, parent), target: "_top" do %>
+  <div class="space-y-4 max-w-screen-xl mx-auto">
+
+    <div class="flex justify-between items-center py-4">
+      <p class="text-2xl font-semibold">Propostas</p>
+
+      <%= turbo_frame_tag dom_id(model.new), src: admin_new_path(model, parent) %>
+
+    </div>
+
+    <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+      <table id="<%= table_id(model, parent) %>" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+
+        <% active_css = "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active dark:text-blue-500 dark:border-blue-500" %>
+        <% css = "inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" %>
+
+        <div class="bg-gray-50 text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+          <ul class="flex flex-wrap -mb-px">
+            <li class="mr-2">
+              <%= link_to "Todas", "http://localhost:3000/admin/deals?scope=index_set", data: { turbo_frame: frame_name(model, parent) }, class: params[:scope] == "index_set" ? active_css : css, aria: { current: "#{params[:scope] ? 'page' : ''}" } %>
+            </li>
+            <li class="mr-2">
+              <%= link_to "Abertas", "http://localhost:3000/admin/deals?scope=open", data: { turbo_frame: frame_name(model, parent) }, class: params[:scope] == "open" ? active_css : css, aria: { current: "#{params[:scope] ? 'page' : ''}" } %>
+            </li>
+            <li class="mr-2">
+              <%= link_to "Ganhas", "http://localhost:3000/admin/deals?scope=won", data: { turbo_frame: frame_name(model, parent) }, class: params[:scope] == "won" ? active_css : css, aria: { current: "#{params[:scope] ? 'page' : ''}" } %>
+            </li>
+            <li class="mr-2">
+              <%= link_to "Perdidas", "http://localhost:3000/admin/deals?scope=lost", data: { turbo_frame: frame_name(model, parent) }, class: params[:scope] == "lost" ? active_css : css, aria: { current: "#{params[:scope] ? 'page' : ''}" } %>
+            </li>
+          </ul>
+        </div>
+
+        <tr class="border-b dark:border-gray-700">
+          <th scope="col" class="text-gray-500 py-3 px-6">
+            Nome da Proposta
+          </th>
+          <th scope="col" class="text-gray-500 py-3 px-6">
+            Cliente
+          </th>
+          <th scope="col" class="text-gray-500 py-3 px-6">
+            Data Fecho
+          </th>
+          <th scope="col" class="text-gray-500 py-3 px-6">
+            Estado
+          </th>
+          <th scope="col" class="text-gray-500 py-3 px-6">
+            Valor Total
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <% objects.each do |d| %>
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <td class="py-4 px-6 font-normal">
+              <%= d.name %>
+            </td>
+            <td class="py-4 px-6 text-gray-900">
+              <% if d.customer %>
+                <span class="font-semibold"><%= d.customer.responsable_name %></span> da <%= d.customer.name %>
+              <% else %>
+                -
+              <% end %>
+            </td>
+            <td class="py-4 px-6">
+              <% if d.finish_date %>
+                <%= d.finish_date.strftime("%b %d, %Y") %>
+              <% else %>
+                -
+              <% end %>
+            </td>
+            <td class="py-4 px-6">
+              <%= deal_list_badge(d) %>
+            </td>
+            <td class="py-4 px-6 text-gray-900">
+              <%= number_to_currency d.total_amount %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="py-4 flex justify-center items-end">
+      <%= paginate objects, remote: true, model: model, parent: parent, legacy_params: legacy_params %>
+    </div>
+  </div>
+
+<% end %>

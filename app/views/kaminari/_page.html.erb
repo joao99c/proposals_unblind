@@ -7,8 +7,9 @@
     per_page:      number of items to fetch per page
     remote:        data-remote
 -%>
-<% current_classes  = "py-2 px-3 text-blue-600 bg-blue-50 border border-gray-300 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"%>
+<% current_classes = "py-2 px-3 leading-tight text-blue-600 bg-blue-50 border border-gray-300 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white" %>
 <% classes = "py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" %>
-<li class="first">
-  <%= button_to page, admin_search_path(model, parent), {remote: remote, params:{page:, per: per_page}.merge(legacy_params), data:{turbo_frame: frame_name(model, parent)}, rel: page.rel, class: page.current? ? current_classes : classes, aria: {current: "#{page.current? ? 'page' : ''}"} } %>
+
+<li>
+  <%= button_to page, admin_search_path(model, parent), { remote: remote, params: { page:, per: per_page }.merge(legacy_params), data: { turbo_frame: frame_name(model, parent) }, rel: page.rel, class: page.current? ? current_classes : classes, aria: { current: "#{page.current? ? 'page' : ''}" } } %>
 </li>

@@ -4,6 +4,10 @@ module Admin
   class DealsController < Admin::BaseController
     before_action :set_deal, only: %w[step_1 save_step_1 save_step_1_customer step_2 save_step_2]
 
+    def index
+      super
+    end
+
     def new
       @deal = Deal.new
     end

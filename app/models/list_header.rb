@@ -3,7 +3,7 @@ class ListHeader
     @model = model
     @method = method
     @options = options
-    @sortable = options[:sortable] || true
+    @sortable = options[:sortable].nil? ? true : options[:sortable]
   end
 
   def content

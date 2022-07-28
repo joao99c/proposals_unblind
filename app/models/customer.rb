@@ -1,7 +1,7 @@
 class Customer < ApplicationRecord
   include Admin::AdminResource
 
-  has_many :deals, counter_cache: true
+  has_many :deals, dependent: :destroy
 
   ransacker :reversed_name, type: :string, formatter: proc { |v| v.reverse } do |parent|
     parent.table[:name]

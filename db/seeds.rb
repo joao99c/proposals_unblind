@@ -13,8 +13,16 @@ User.create([
               { email: 'jc@unblind.io', name: 'Jota Carvalho', password: 123_123_123 }
             ])
 
+Customer.destroy_all
 100.times do
-  Customer.create(name: Faker::Name.name, email: Faker::Internet.email)
+  Customer.create(
+    name: Faker::Company.name,
+    email: Faker::Internet.email,
+    responsable_name: Faker::Name.name,
+    responsable_email: Faker::Internet.email,
+    website: Faker::Internet.url,
+    responsable_tel: Faker::PhoneNumber.phone_number,
+  )
 end
 
 Deal.destroy_all
@@ -23,7 +31,8 @@ Deal.destroy_all
     name: Faker::Name.name,
     user: User.find(User.pluck(:id).sample),
     customer: Customer.find(Customer.pluck(:id).sample),
-    finish_date: DateTime.now + rand(30).day
+    finish_date: DateTime.now + rand(30).day,
+    status: %w[open won lost].sample
   )
 end
 
@@ -37,5 +46,8 @@ Product.destroy_all
 end
 
 DealProduct.destroy_all
-DealProduct.create(deal: Deal.find(Deal.pluck(:id).sample), product: Product.find(Product.pluck(:id).sample),
-                   quantity: rand(1..10))
+50.times do
+  DealProduct.create(deal: Deal.find(Deal.pluck(:id).sample), product: Product.find(Product.pluck(:id).sample),
+                     quantity: rand(1..10))
+
+end

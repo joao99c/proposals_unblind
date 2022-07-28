@@ -6,10 +6,10 @@
     remote:        data-remote
     paginator:     the paginator that renders the pagination tags inside
 -%>
-<%= paginator.render do -%>
+<%= paginator.render do %>
   <nav class="pagination" role="navigation" aria-label="pager">
-    <ul class="inline-flex -space-x-px">
-      <%= first_page_tag unless current_page.first? %>
+    <ul class="inline-flex items-center -space-x-px">
+      <%#= first_page_tag unless current_page.first? %>
       <%= prev_page_tag unless current_page.first? %>
       <% each_page do |page| -%>
         <% if page.display_tag? -%>
@@ -20,7 +20,7 @@
       <% end -%>
       <% unless current_page.out_of_range? %>
         <%= next_page_tag unless current_page.last? %>
-        <%= last_page_tag unless current_page.last? %>
+        <%#= last_page_tag unless current_page.last? %>
       <% end %>
     </ul>
   </nav>

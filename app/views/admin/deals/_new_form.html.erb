@@ -1,11 +1,23 @@
 <%= turbo_frame_tag "#{dom_id(deal)}_form" do %>
-  <%= form_with model: deal, url: admin_deals_path, method: :post, class: "space-y-6", data: { turbo_frame: "_top" } do |form| %>
-    <div>
-      <%= form.label :name %>
-      <%= form.text_field :name, placeholder: "The deal's name...", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
-      <%= error_message_for form.object, :name %>
+  <%= form_with model: deal, url: admin_deals_path, method: :post, data: { turbo_frame: "_top" } do |form| %>
+
+    <div class="p-6 space-y-6">
+      <div>
+        <%= form.label :name, "Nome Proposta" %>
+        <%= form.text_field :name, placeholder: "Descrever a proposta...", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+        <%= error_message_for form.object, :name %>
+      </div>
     </div>
 
-    <%= form.submit class: "w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+    <%
+      # TODO: Add Tags Fields
+    %>
+
+    <!-- Modal footer -->
+    <div class="flex items-center justify-end p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+      <button data-action="modal#hide" type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800">Cancel</button>
+      <%= form.submit "Criar Proposta", class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+    </div>
+
   <% end %>
 <% end %>

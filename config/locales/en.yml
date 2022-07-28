@@ -36,4 +36,12 @@ en:
       list_columns:
         description:
           header: "Description header"
-
+  number:
+    currency:
+      format:
+        delimiter: "."
+        format: "%u%n"
+        precision: 2
+        separator: ","
+        strip_insignificant_zeros: false
+        unit: "€"

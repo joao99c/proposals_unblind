@@ -16,6 +16,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_25_101305) do
 
   # Custom types defined in this database.
   # Note that some types may not work with other database engines. Be careful if changing database.
+  create_enum "deal_status", ["lost", "open", "won"]
   create_enum "discount_type", ["none", "percent", "fixed", "free"]
 
   create_table "customers", force: :cascade do |t|
@@ -46,6 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_25_101305) do
     t.decimal "total_amount", precision: 10, scale: 2, default: "0.0"
     t.decimal "total_discount", precision: 10, scale: 2, default: "0.0"
     t.datetime "finish_date"
+    t.enum "status", default: "open", null: false, enum_type: "deal_status"
     t.bigint "user_id"
     t.bigint "customer_id"
     t.datetime "created_at", null: false
