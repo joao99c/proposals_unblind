@@ -10,6 +10,7 @@ module Admin
 
     def new
       @deal = Deal.new
+      @deal.tags << Tag.new if @deal.tags.empty?
     end
 
     def create
@@ -38,7 +39,10 @@ module Admin
     end
 
     def deal_params
-      params.require(:deal).permit(:name)
+      params.require(:deal).permit(
+        :name,
+        tag_ids: []
+      )
     end
 
   end

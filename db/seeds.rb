@@ -49,5 +49,12 @@ DealProduct.destroy_all
 50.times do
   DealProduct.create(deal: Deal.find(Deal.pluck(:id).sample), product: Product.find(Product.pluck(:id).sample),
                      quantity: rand(1..10))
+end
 
+
+Tag.destroy_all
+50.times do
+  Tag.create(
+    name: Faker::Name.name,
+  )
 end

@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   root 'website#index'
 
   namespace :admin do
+    resources :tags, only: [:create]
+    post 'tags/create'
     scope 'deals/:id' do
       scope 'step_1' do
         get '/', to: 'deals#step_1', as: 'deal_step_1'

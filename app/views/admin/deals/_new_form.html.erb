@@ -7,11 +7,21 @@
         <%= form.text_field :name, placeholder: "Descrever a proposta...", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
         <%= error_message_for form.object, :name %>
       </div>
-    </div>
 
-    <%
-      # TODO: Add Tags Fields
-    %>
+      <div>
+        <%= form.label :tag_ids, "Tags" %>
+        <%= form.select :tag_ids, [],
+                        {},
+                        multiple: true,
+                        data: {
+                          controller: 'ts--tag-select',
+                          options: Tag.all.map { |tag| [tag.name, tag.text_color, tag.background_color, tag.id] },
+                          items: form.object.tag_ids.to_json,
+                        },
+                        placeholder: "Encontrar ou criar tag..." %>
+        <%= error_message_for form.object, :tag_ids %>
+      </div>
+    </div>
 
     <!-- Modal footer -->
     <div class="flex items-center justify-end p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">

@@ -21,3 +21,6 @@ application.register("sidebar", SidebarController)
 
 import TabsController from "./tabs_controller"
 application.register("tabs", TabsController)
+
+import Ts__TagSelectController from "./ts/tag_select_controller"
+application.register("ts--tag-select", Ts__TagSelectController)

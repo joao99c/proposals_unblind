@@ -19,6 +19,9 @@ class Deal < ApplicationRecord
   scope :index_set, -> { newest_first }
 
   # Relationships
+  has_many :taggings, dependent: :destroy
+  has_many :tags, -> { order(:name) }, through: :taggings
+
   has_many :deal_products, dependent: :destroy
   accepts_nested_attributes_for :deal_products, allow_destroy: true, reject_if: :all_blank
 
