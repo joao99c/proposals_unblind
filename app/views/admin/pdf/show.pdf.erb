@@ -1,0 +1,21 @@
+<div class="document">
+  <p><%= @deal.name %></p>
+
+  <div class="alwaysbreak"></div>
+
+  <p>Nova página</p>
+  
+  <p>Customer: <%= @deal.customer.name %></p>
+  <p>Customer email: <%= @deal.customer.email %></p>
+
+  <div class="alwaysbreak"></div>
+
+  <% @deal.deal_products.map do |dp| %>
+    <p>Name: <%= dp.product.name %> <br></p>
+    <p>Quantity: <%= dp.quantity %> <br></p>
+    <p>Price: <%= number_to_currency dp.price %> <br></p>
+    <p>Discount Type: <%= dp.discount_type %></p>
+    <p>Discount Value: <%= dp.discount_amount %></p>
+    <hr>
+  <% end %>
+</div>
