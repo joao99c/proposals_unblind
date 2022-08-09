@@ -3,6 +3,7 @@ import {Controller} from "@hotwired/stimulus";
 // Connects to data-controller="sidebar"
 export default class extends Controller {
     connect() {
+        console.log("sidebar connected");
         const isSidebarExpanded = (toggleSidebarEl) => {
             return toggleSidebarEl.getAttribute("aria-expanded") === "true";
         };
@@ -62,6 +63,10 @@ export default class extends Controller {
                         e.childNodes[1].classList.remove("hidden");
                     });
             }
+
+            if (setExpanded) {
+                toggleSidebarEl.setAttribute("aria-expanded", expand);
+            }
         };
 
         const toggleSidebarEl = document.getElementById("toggleSidebar");
@@ -96,9 +101,7 @@ export default class extends Controller {
         }
 
         toggleSidebarEl.addEventListener("click", () => {
-            localStorage.setItem(
-                "sidebarExpanded",
-                !isSidebarExpanded(toggleSidebarEl)
+            localStorage.setItem("sidebarExpanded", !isSidebarExpanded(toggleSidebarEl)
             );
             toggleSidebar(sidebar, !isSidebarExpanded(toggleSidebarEl), true);
         });

@@ -1,0 +1,122 @@
+<%= form_with(model: deal_section,
+              url: admin_deal_editor_deal_section_path(deal_id: deal_section.deal_id, id: deal_section.id),
+              data: {
+                controller: "editor--form editor--autosave",
+                action: "editor:page-section:changed->editor--autosave#save",
+                "editor--form-id": deal_section.id,
+                remote: true,
+                turbo: true,
+              },
+              class: "px-3"
+    ) do |form| %>
+  <% if deal_section.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(deal_section.errors.count, "error") %> prohibited this deal_section from being saved:</h2>
+
+      <ul>
+        <% deal_section.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :preHeading %>
+    <%= form.text_field :preHeading, data: { key: "preHeading" } %>
+  </div>
+
+  <div>
+    <%= form.label :heading %>
+    <%= form.text_field :heading, data: { key: "heading" } %>
+  </div>
+
+  <div>
+    <%= form.label :subHeading %>
+    <%= form.text_field :subHeading, data: { key: "subHeading" } %>
+  </div>
+
+
+  <% if deal_section.section.is_bio? %>
+    <div class="space-y-1">
+      <%= form.label :social %>
+      <div class="flex space-x-2 items-center">
+        <%= image_tag("icons/social_media/Twitter - Original", class: "h-5 w-5") %>
+        <%= form.text_field :twitter, data: { key: "twitter" }, placeholder: true, value: deal_section.links.dig("twitter", "url") %>
+      </div>
+      <div class="flex space-x-2 items-center">
+        <%= image_tag("icons/social_media/Facebook - Original", class: "h-5 w-5") %>
+        <%= form.text_field :facebook, data: { key: "facebook" }, placeholder: true, value: deal_section.links.dig("facebook", "url") %>
+      </div>
+      <div class="flex space-x-2 items-center">
+        <%= image_tag("icons/social_media/Instagram - Original", class: "h-5 w-5") %>
+        <%= form.text_field :instagram, data: { key: "instagram" }, placeholder: true, value: deal_section.links.dig("instagram", "url") %>
+      </div>
+      <div class="flex space-x-2 items-center">
+        <%= image_tag("icons/social_media/Pinterest - Original", class: "h-5 w-5") %>
+        <%= form.text_field :pinterest, data: { key: "pinterest" }, placeholder: true, value: deal_section.links.dig("pinterest", "url") %>
+      </div>
+      <div class="flex space-x-2 items-center">
+        <%= image_tag("icons/social_media/LinkedIn - Original", class: "h-5 w-5") %>
+        <%= form.text_field :linkedin, data: { key: "linkedin" }, placeholder: true, value: deal_section.links.dig("linkedin", "url") %>
+      </div>
+      <div class="flex space-x-2 items-center">
+        <%= image_tag("icons/social_media/YouTube - Original", class: "h-5 w-5") %>
+        <%= form.text_field :youtube, data: { key: "youtube" }, placeholder: true, value: deal_section.links.dig("youtube", "url") %>
+      </div>
+      <div class="flex space-x-2 items-center">
+        <%= image_tag("icons/social_media/TikTok - Original", class: "h-5 w-5") %>
+        <%= form.text_field :tiktok, data: { key: "tiktok" }, placeholder: true, value: deal_section.links.dig("tiktok", "url") %>
+      </div>
+      <div class="flex space-x-2 items-center">
+        <%= heroicon("globe-alt", variant: :solid, options: { class: "w-5 h-5" }) %>
+        <%= form.text_field :website, data: { key: "website" }, placeholder: true, value: deal_section.links.dig("website", "url") %>
+      </div>
+      <div class="flex space-x-2 items-center">
+        <%= heroicon("mail", variant: :solid, options: { class: "w-5 h-5" }) %>
+        <%= form.text_field :mail, data: { key: "mail" }, placeholder: true, value: deal_section.links.dig("mail", "url") %>
+      </div>
+    </div>
+  <% end %>
+
+  <!--  <div>-->
+  <%#= form.label :buttonSubtext %>
+  <%#= form.text_field :buttonSubtext, data:{key: "buttonSubtext"} %>
+  <!--  </div>-->
+
+  <!--  <div>-->
+  <%#= form.label :theme %>
+  <%#= form.text_field :theme, data:{key: "theme"} %>
+  <!--  </div>-->
+
+  <!--  <div>-->
+  <%#= form.label :background %>
+  <%#= form.text_field :background, data:{key: "background"} %>
+  <!--  </div>-->
+
+  <!--  <div>-->
+  <%#= form.label :button %>
+  <%#= form.text_field :button, data:{key: "button"} %>
+  <!--  </div>-->
+
+  <!--  <div>-->
+  <%#= form.label :button2 %>
+  <%#= form.text_field :button2, data:{key: "button2"} %>
+  <!--  </div>-->
+
+  <div>
+    <%= form.label :text %>
+    <%= form.text_field :text, data: { key: "text" } %>
+  </div>
+
+  <!--  <div>-->
+  <%#= form.label :mediaAlignment %>
+  <%#= form.text_field :mediaAlignment %>
+  <!--  </div>-->
+
+  <!--  <div>-->
+  <%#= form.label :mediaStyle %>
+  <%#= form.text_field :mediaStyle %>
+  <!--  </div>-->
+
+<% end %>

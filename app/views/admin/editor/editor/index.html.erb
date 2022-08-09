@@ -1,0 +1,73 @@
+<!-- <body> -->
+<nav data-turbo-permanent class="fixed z-30 w-full bg-white border-b border-gray-200 rounded dark:bg-gray-900 dark:border-gray-700">
+  <div class="flex flex-wrap justify-between items-center mx-auto">
+    <div class="flex divide-x">
+      <%= link_to admin_deal_step_1_path(@deal), class: "p-4 flex items-center" do %>
+        <%= heroicon("x", options: { class: "text-gray-500 h-8 w-8" }) %>
+      <% end %>
+      <div class="p-5">
+        <span class="self-center whitespace-nowrap dark:text-white"><%= @deal.name %></span>
+      </div>
+
+
+    </div>
+    <div class="flex divide-x h-16">
+      <div class="h-full px-4 space-x-2.5 flex items-center text-gray-900 border-l">
+        <%= heroicon("device-mobile", options: {
+          class: "w-7 h-7",
+          "data-action": "click->editor--responsive#resize",
+          "data-editor--responsive-target": "button",
+          "data-breakpoint": "mobile",
+          "data-title": "Mobile"
+        }) %>
+
+        <%= heroicon("device-tablet", options: {
+          class: "w-7 h-7",
+          "data-action": "click->editor--responsive#resize",
+          "data-editor--responsive-target": "button",
+          "data-breakpoint": "tablet",
+          "data-title": "Tablet"
+        }) %>
+
+        <%= heroicon("desktop-computer", options: {
+          class: "w-7 h-7 bg-gray-200 rounded",
+          "data-action": "click->editor--responsive#resize",
+          "data-editor--responsive-target": "button",
+          "data-breakpoint": "desktop",
+          "data-title": "Desktop"
+        }) %>
+
+
+      </div>
+
+      <div class="h-full px-4 space-x-2.5 flex items-center">
+        <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Finalizar</button>
+      </div>
+    </div>
+
+  </div>
+</nav>
+<div class="flex pt-16 overflow-hidden h-full">
+  <aside data-turbo-permanent data-editor--sidebar-target="sidebar" class="fixed top-0 left-0 z-20 flex flex-col flex-shrink-0 hidden w-64 h-full pt-16 duration-75 transition-width border-r" aria-label="Sidebar">
+    <%= turbo_frame_tag dom_id(@deal, :sidebar),
+                        src: admin_deal_editor_deal_sections_path(@deal),
+                        data: {
+                          action: "turbo:frame-render->editor--reorder#connect"
+                        },
+                        class: "relative flex flex-col flex-1 min-h-0 pt-0"
+    %>
+  </aside>
+  <div class="fixed inset-0 z-10 hidden bg-gray-900/50 dark:bg-gray-900/90" id="sidebarBackdrop"></div>
+  <div id="main-content" class="p-4 relative w-full h-full bg-gray-100 overflow-y-auto ml-64">
+    <main class="h-full">
+
+      <iframe id="<%= dom_id(@deal, :preview) %>"
+              src="<%= admin_deal_editor_preview_url(@deal) %>"
+              class="w-full h-full mx-auto transition-all transition-500 ease-in-out max-w-[100%]"
+              data-editor--responsive-target="preview">
+      </iframe>
+
+
+    </main>
+  </div>
+</div>

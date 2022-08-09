@@ -7,6 +7,7 @@ module.exports = {
     ],
     // make sure to safelist these classes when using purge
     safelist: [
+        'max-w-[100%]',
         'w-64',
         'w-1/2',
         'rounded-l-lg',
@@ -56,7 +57,14 @@ module.exports = {
         'dark:text-purple-900',
     ],
     theme: {
-        extend: {},
+        extend: {
+            screens: {
+                'xs': '420px',
+            },
+            transitionProperty: {
+                'max-width': 'max-width'
+            },
+        },
     },
 
     plugins: [

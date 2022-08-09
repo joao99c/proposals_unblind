@@ -1,5 +1,6 @@
 class WebsiteController < ActionController::Base
   before_action :set_is_app
+  layout 'website'
 
   def index
   end

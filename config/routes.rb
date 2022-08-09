@@ -14,7 +14,38 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :tags, only: [:create]
-    post 'tags/create'
+
+    resources :deals, only: [:index, :new, :create] do
+      namespace :editor do
+        get '/', to: 'editor#index'
+        get 'preview', to: 'editor#preview'
+        get 'sections', to: 'editor#sections'
+
+        # post '/text' => 'editor#create_text_section', as: 'create_text'
+
+        resources "deal_sections" do
+          member do
+            get 'confirm_destroy'
+            patch 'reorder'
+          end
+        end
+      end
+
+      resources :deal_customers, only: [:show, :new] do
+        collection do
+          post 'save_existing_user'
+          post 'save_new_user'
+        end
+      end
+
+      resources :deal_products, only: [:index, :new, :create, :destroy]
+
+      member do
+        get 'step_1'
+        post 'step_1'
+      end
+    end
+
     scope 'deals/:id' do
       scope 'step_1' do
         get '/', to: 'deals#step_1', as: 'deal_step_1'

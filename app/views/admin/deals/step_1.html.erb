@@ -11,4 +11,4 @@
 
 <%= turbo_frame_tag dom_id(@deal, :customer), src: admin_deal_customers_path(@deal) %>
 <%= turbo_frame_tag dom_id(@deal, :service), src: admin_deal_products_path(@deal) %>
-<%= link_to "Configurar", admin_deal_step_2_path %>
+<%= link_to "Configurar", admin_deal_editor_path(@deal) %>

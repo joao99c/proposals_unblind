@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-pt">
 <head>
   <title>Proposals Unblind</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,29 +8,18 @@
 
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-  <%#= hotwire_livereload_tags if Rails.env.development? %>
 </head>
 
-<% if @is_app %>
-  <body class="bg-gray-100 dark:bg-gray-900" data-controller="sidebar dark-mode">
-  <!-- <body> -->
-  <%= render 'shared/navbar' %>
-  <div class="flex pt-16 overflow-hidden">
-    <%= render 'shared/sidebar' %>
-    <div id="main-content" class="p-4 relative w-full h-full overflow-y-auto lg:ml-64">
-      <main>
-        <%= yield %>
-      </main>
-    </div>
-  </div>
-  </body>
-<% else %>
-  <body>
-  <div id="main-content" class="p-4 relative w-full h-full overflow-y-auto bg-gray-100 lg:ml-64 dark:bg-gray-900">
+<body class="bg-gray-100 dark:bg-gray-900" data-controller="sidebar dark-mode">
+<!-- <body> -->
+<%= render 'shared/navbar' %>
+<div class="flex pt-16 overflow-hidden">
+  <%= render 'shared/sidebar' %>
+  <div id="main-content" class="p-4 relative w-full h-full overflow-y-auto lg:ml-64">
     <main>
       <%= yield %>
     </main>
   </div>
-  </body>
-<% end %>
+</div>
+</body>
 </html>

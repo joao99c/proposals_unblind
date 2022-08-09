@@ -66,13 +66,14 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    acts_as_list (1.0.4)
+      activerecord (>= 4.2)
     ast (2.4.2)
     bcrypt (3.1.18)
     bindex (0.8.1)
     bootsnap (1.12.0)
       msgpack (~> 1.2)
     builder (3.2.4)
-    color-generator (0.0.4)
     concurrent-ruby (1.1.10)
     crass (1.0.6)
     cssbundling-rails (1.1.1)
@@ -89,7 +90,7 @@ GEM
     diff-lcs (1.5.0)
     digest (3.1.0)
     docile (1.4.0)
-    erubi (1.10.0)
+    erubi (1.11.0)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.2.0)
@@ -149,7 +150,7 @@ GEM
       net-protocol
       timeout
     nio4r (2.5.8)
-    nokogiri (1.13.7-arm64-darwin)
+    nokogiri (1.13.8-arm64-darwin)
       racc (~> 1.4)
     orm_adapter (0.5.0)
     parallel (1.22.1)
@@ -160,6 +161,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.6.0)
     rack (2.2.4)
+    rack-mini-profiler (3.0.0)
+      rack (>= 1.2.0)
     rack-test (2.0.2)
       rack (>= 1.3)
     rails (7.0.3.1)
@@ -247,7 +250,7 @@ GEM
       sprockets (>= 3.0.0)
     stimulus-rails (1.1.0)
       railties (>= 6.0.0)
-    strscan (3.0.3)
+    strscan (3.0.4)
     thor (1.2.1)
     timeout (0.3.0)
     turbo-rails (1.1.1)
@@ -273,8 +276,8 @@ PLATFORMS
   arm64-darwin-21
 
 DEPENDENCIES
+  acts_as_list
   bootsnap
-  color-generator (~> 0.0.4)
   cssbundling-rails (~> 1.1)
   debug
   devise (~> 4.8)
@@ -286,6 +289,7 @@ DEPENDENCIES
   kaminari
   pg (~> 1.1)
   puma (~> 5.0)
+  rack-mini-profiler
   rails (~> 7.0.3, >= 7.0.3.1)
   ransack
   redis (~> 4.0)

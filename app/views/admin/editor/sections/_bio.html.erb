@@ -1,0 +1,83 @@
+<div id="<%= dom_id(deal_section) %>" class="editor--page-section-preview">
+  <div id="section_2" class="hidden"></div>
+  <div class="text-center">
+    <section>
+      <div>
+        <div>
+          <header>
+            <span><%= deal_section.preHeading %></span>
+            <h1 class=""><%= deal_section.heading %></h1>
+            <span><%= deal_section.subHeading %></span>
+          </header>
+          <p>
+          <div><%= deal_section.text %></div>
+          </p>
+
+
+          <div class="flex space-x-2 justify-center">
+            <% if deal_section.links.dig("twitter", "url").present? %>
+              <%= link_to "https://#{deal_section.links.dig("twitter", "url")}", target: "_blank" do %>
+                <%= image_tag("icons/social_media/Twitter - Original", class: "h-5 w-5") %>
+              <% end %>
+            <% end %>
+
+            <% if deal_section.links.dig("facebook", "url").present? %>
+              <%= link_to "https://#{deal_section.links.dig("facebook", "url")}", target: "_blank" do %>
+                <%= image_tag("icons/social_media/Facebook - Original", class: "h-5 w-5") %>
+              <% end %>
+            <% end %>
+
+            <% if deal_section.links.dig("instagram", "url").present? %>
+              <%= link_to "https://#{deal_section.links.dig("instagram", "url")}", target: "_blank" do %>
+                <%= image_tag("icons/social_media/Instagram - Original", class: "h-5 w-5") %>
+              <% end %>
+            <% end %>
+
+            <% if deal_section.links.dig("pinterest", "url").present? %>
+              <%= link_to "https://#{deal_section.links.dig("pinterest", "url")}", target: "_blank" do %>
+                <%= image_tag("icons/social_media/Pinterest - Original", class: "h-5 w-5") %>
+              <% end %>
+            <% end %>
+
+            <% if deal_section.links.dig("linkedin", "url").present? %>
+              <%= link_to "https://#{deal_section.links.dig("linkedin", "url")}", target: "_blank" do %>
+                <%= image_tag("icons/social_media/LinkedIn - Original", class: "h-5 w-5") %>
+              <% end %>
+            <% end %>
+
+            <% if deal_section.links.dig("youtube", "url").present? %>
+              <%= link_to "https://#{deal_section.links.dig("youtube", "url")}", target: "_blank" do %>
+                <%= image_tag("icons/social_media/YouTube - Original", class: "h-5 w-5") %>
+              <% end %>
+            <% end %>
+
+            <% if deal_section.links.dig("tiktok", "url").present? %>
+              <%= link_to "https://#{deal_section.links.dig("tiktok", "url")}", target: "_blank" do %>
+                <%= image_tag("icons/social_media/TikTok - Original", class: "h-5 w-5") %>
+              <% end %>
+            <% end %>
+
+            <% if deal_section.links.dig("website", "url").present? %>
+              <%= link_to "https://#{deal_section.links.dig("website", "url")}", target: "_blank" do %>
+                <%= heroicon("globe-alt", variant: :solid, options: { class: "w-5 h-5" }) %>
+              <% end %>
+            <% end %>
+
+            <% if deal_section.links.dig("mail", "url").present? %>
+              <%= link_to "https://#{deal_section.links.dig("mail", "url")}", target: "_blank" do %>
+                <%= heroicon("mail", variant: :solid, options: { class: "w-5 h-5" }) %>
+              <% end %>
+            <% end %>
+          </div>
+
+
+          <div>
+            <a href="<%= deal_section.button&.dig "url" %>"><%= deal_section.button&.dig "text" %></a>
+            <a href="<%= deal_section.button2&.dig "url" %>"><%= deal_section.button2&.dig "text" %></a>
+            <p><%= deal_section.buttonSubtext %></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

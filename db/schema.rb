@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_28_143645) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_01_102800) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,28 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_28_143645) do
     t.index ["product_id"], name: "index_deal_products_on_product_id"
   end
 
+  create_table "deal_sections", force: :cascade do |t|
+    t.bigint "deal_id", null: false
+    t.bigint "section_id", null: false
+    t.integer "position", default: 0, null: false
+    t.string "preHeading"
+    t.string "heading"
+    t.string "subHeading"
+    t.string "buttonSubtext"
+    t.json "theme"
+    t.json "background"
+    t.json "button"
+    t.json "button2"
+    t.json "links"
+    t.text "text"
+    t.string "mediaAlignment"
+    t.string "mediaStyle"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deal_id"], name: "index_deal_sections_on_deal_id"
+    t.index ["section_id"], name: "index_deal_sections_on_section_id"
+  end
+
   create_table "deals", force: :cascade do |t|
     t.string "name"
     t.decimal "total_amount", precision: 10, scale: 2, default: "0.0"
@@ -62,6 +84,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_28_143645) do
     t.decimal "price", precision: 10, scale: 2, default: "0.0", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "section_categories", force: :cascade do |t|
+    t.string "name"
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sections", force: :cascade do |t|
+    t.string "name"
+    t.bigint "section_category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["section_category_id"], name: "index_sections_on_section_category_id"
   end
 
   create_table "taggings", force: :cascade do |t|
@@ -95,8 +132,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_28_143645) do
 
   add_foreign_key "deal_products", "deals"
   add_foreign_key "deal_products", "products"
+  add_foreign_key "deal_sections", "deals"
+  add_foreign_key "deal_sections", "sections"
   add_foreign_key "deals", "customers"
   add_foreign_key "deals", "users"
+  add_foreign_key "sections", "section_categories"
   add_foreign_key "taggings", "deals"
   add_foreign_key "taggings", "tags"
 end

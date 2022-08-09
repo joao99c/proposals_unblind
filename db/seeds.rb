@@ -13,7 +13,7 @@ User.create([
               { email: 'jc@unblind.io', name: 'Jota Carvalho', password: 123_123_123 }
             ])
 
-Customer.destroy_all
+# Customer.destroy_all
 100.times do
   Customer.create(
     name: Faker::Company.name,
@@ -21,11 +21,11 @@ Customer.destroy_all
     responsable_name: Faker::Name.name,
     responsable_email: Faker::Internet.email,
     website: Faker::Internet.url,
-    responsable_tel: Faker::PhoneNumber.phone_number,
+    responsable_tel: Faker::PhoneNumber.phone_number
   )
 end
 
-Deal.destroy_all
+# Deal.destroy_all
 50.times do
   Deal.create(
     name: Faker::Name.name,
@@ -36,7 +36,7 @@ Deal.destroy_all
   )
 end
 
-Product.destroy_all
+# Product.destroy_all
 50.times do
   Product.create(
     name: Faker::Commerce.product_name,
@@ -45,16 +45,109 @@ Product.destroy_all
   )
 end
 
-DealProduct.destroy_all
+# DealProduct.destroy_all
 50.times do
   DealProduct.create(deal: Deal.find(Deal.pluck(:id).sample), product: Product.find(Product.pluck(:id).sample),
                      quantity: rand(1..10))
 end
 
-
-Tag.destroy_all
+# Tag.destroy_all
 50.times do
   Tag.create(
-    name: Faker::Name.name,
+    name: Faker::Name.name
   )
 end
+
+['Conteúdo Básico', 'Destaques', 'Testemunhos', 'Equipa', 'Imagens', 'Videos',
+ 'FAQ’s'].each_with_index do |word, position,|
+  SectionCategory.create(name: word, position:)
+end
+Section.destroy_all
+Section.create!([name: 'text', section_category: SectionCategory.first])
+Section.create!([name: 'bio', section_category: SectionCategory.first])
+
+DealSection.destroy_all
+DealSection.create({
+                     deal_id: 50,
+                     section: Section.find(Section.pluck(:id).sample),
+                     preHeading: 'Pre Heading',
+                     heading: 'Heading',
+                     subHeading: 'Sub Heading',
+                     theme: {
+                       name: 'none',
+                       colors: {
+                         background: '#ffffff',
+                         button: '#4b2aad',
+                         buttonText: '#ffffff',
+                         heading: '#0d161b',
+                         text: '#0d161b'
+                       },
+                       background: {
+                         blend: 'normal',
+                         blur: 0,
+                         contrast: 75,
+                         grayscale: 100,
+                         opacity: 38,
+                         url: nil
+                       }
+                     },
+                     button: {
+                       text: 'Button',
+                       url: 'https://www.google.com'
+                     },
+                     button2: {
+                       text: 'Button 2',
+                       url: 'https://www.google.com'
+                     },
+                     links: {
+                       twitter: {
+                         position: 0,
+                         name: 'twitter',
+                         url: '1'
+                       },
+                       facebook: {
+                         position: 1,
+                         name: 'facebook',
+                         url: '1'
+                       },
+                       instagram: {
+                         position: 2,
+                         name: 'instagram',
+                         url: '1'
+                       },
+                       pinterest: {
+                         position: 3,
+                         name: 'pinterest',
+                         url: '1'
+                       },
+                       linkedin: {
+                         position: 4,
+                         name: 'linkedin',
+                         url: '1'
+                       },
+                       youtube: {
+                         position: 5,
+                         name: 'youtube',
+                         url: '1'
+                       },
+                       tiktok: {
+                         position: 6,
+                         name: 'tiktok',
+                         url: '1'
+                       },
+                       website: {
+                         position: 7,
+                         name: 'website',
+                         url: '1'
+                       },
+                       mailto: {
+                         position: 8,
+                         name: 'mailto',
+                         url: 'mailto:1'
+                       }
+                     },
+                     buttonSubtext: 'Button Subtext',
+                     text: 'Im a text',
+                     mediaAlignment: 'left', # left, center, right ...
+                     mediaStyle: 'plain' # plain, card ...
+                   })

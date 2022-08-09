@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @deal_section %>
+
+<div>
+  <%= link_to "Edit this deal section", edit_admin_editor_deal_section_path(@deal_section) %> |
+  <%= link_to "Back to deal sections", admin_editor_deal_sections_path %>
+
+  <%= button_to "Destroy this deal section", @deal_section, method: :delete %>
+</div>
