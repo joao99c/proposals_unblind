@@ -1,1 +1,3 @@
-<%= render partial: "admin/editor/deal_sections/edit", locals: { deal: @deal, deal_section: @deal_section } %>
+<%= turbo_frame_tag dom_id(@deal, :sidebar) do %>
+  <%= render partial:"admin/editor/deal_sections/edit", locals:{deal:@deal, deal_section:@deal_section} %>
+<% end %>
