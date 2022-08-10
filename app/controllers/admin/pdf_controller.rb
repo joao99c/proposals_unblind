@@ -8,16 +8,9 @@ module Admin
         format.pdf do
           render pdf: 'proposal',
                  layout: 'pdf/pdf',
+                 template: 'admin/pdf/preview',
                  page_size: 'A4',
-                 background: true,
-                 margin: {
-                   top: 0,
-                   right: 0,
-                   left: 0,
-                   bottom: 0
-                 },
                  header: {
-                   spacing: 5,
                    html: {
                      template: 'layouts/pdf/header'
                    }
@@ -26,13 +19,16 @@ module Admin
                    html: {
                      template: 'layouts/pdf/footer'
                    }
-                 }
+                 },
+                 show_as_html: params.key?('debug'),
+                 cover: render_to_string('layouts/pdf/cover')
         end
       end
     end
 
     def download
-      html = render_to_string(action: :show)
+      @deal = Deal.find(params[:id])
+      html = render_to_string(template: 'admin/pdf/preview', layout: 'pdf/pdf')
       pdf = WickedPdf.new.pdf_from_string(html)
 
       send_data(pdf,

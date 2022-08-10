@@ -1,12 +1,14 @@
 <%= turbo_frame_tag dom_id(@deal, :sidebar) do %>
+  <div class="h-full bg-gray-800 text-white overflow-scroll">
+    <div class="flex flex-col flex-1 pt-5 pb-4">
+      <%= link_to "Voltar", admin_deal_editor_deal_sections_path(@deal) %>
+      <h1>Editing deal section</h1>
 
-  <%= link_to "Voltar", admin_deal_editor_deal_sections_path(@deal) %>
-  <h1>Editing deal section</h1>
+      <%= render "form", deal_section: @deal_section %>
 
-  <%= render "form", deal_section: @deal_section %>
+      <%= link_to "Apagar", confirm_destroy_admin_deal_editor_deal_section_path(deal_id: @deal.id, id: @deal_section.id), class: "font-medium text-red-600 dark:text-red-500 hover:underline" %>
 
-  <%= link_to "Apagar", confirm_destroy_admin_deal_editor_deal_section_path(deal_id: @deal.id, id: @deal_section.id), class: "font-medium text-red-600 dark:text-red-500 hover:underline" %>
-
-  <br>
-
+      <br>
+    </div>
+  </div>
 <% end %>
