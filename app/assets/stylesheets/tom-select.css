@@ -1,5 +1,5 @@
 .ts-control {
-    @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
+    @apply flex flex-wrap content-center items-center gap-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
 }
 
 .ts-control input {
@@ -15,11 +15,11 @@
 }
 
 .ts-wrapper.plugin-remove_button .item .remove {
-    @apply border-none text-lg leading-none py-1 rounded-r-lg
+    @apply border-none text-lg leading-none !py-0 !ml-0 rounded-r-lg
 }
 
 .ts-dropdown {
-    @apply rounded-md border border-solid border-t border-gray-300
+    @apply rounded-md border border-solid border-t border-gray-300 p-1
 }
 
 .ts-dropdown [data-selectable].option:first-child {
@@ -39,5 +39,13 @@
 }
 
 .ts-wrapper.multi.has-items .ts-control .item {
-    @apply m-0
+    @apply m-0 px-1 py-1.5
+}
+
+.ts-dropdown-content {
+    @apply flex flex-col items-start space-y-1
+}
+
+.ts-dropdown-content .option {
+    @apply px-2 py-1.5 shrink-0
 }

@@ -72,10 +72,10 @@ export default class extends Controller {
                 },
                 render: {
                     option: function (data, escape) {
-                        return '<div class="!bg-' + data.background_color + ' !text-' + data.text_color + ' text-xs font-semibold rounded">' + escape(data.text) + '</div>';
+                        return '<div class="!bg-' + data.background_color + ' !text-' + data.text_color + ' text-xs font-semibold rounded"><span>' + escape(data.text) + '</span></div>';
                     },
                     item: function (data, escape) {
-                        return '<div class="!bg-' + data.background_color + ' !text-' + data.text_color + ' text-xs font-semibold !m-1 h-10 rounded">' + escape(data.text) + '</div>';
+                        return '<div class="!bg-' + data.background_color + ' !text-' + data.text_color + ' text-xs font-semibold rounded flex items-center justify-center space-x-2"><span>' + escape(data.text) + '</span></div>';
                     },
                     option_create: function (data, escape) {
                         return '<div class="create">Adicionar <strong>' + escape(data.input) + '</strong>&hellip;</div>';

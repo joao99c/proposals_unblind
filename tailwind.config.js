@@ -27,6 +27,8 @@ module.exports = {
         'text-red-600',
         'dark:text-red-500',
         '!m-1',
+        '!ml-0',
+        'gap-2',
         '!text-gray-800',
         '!text-red-800',
         '!text-yellow-800',
