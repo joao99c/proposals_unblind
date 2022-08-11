@@ -31,9 +31,9 @@ module Admin
         respond_to do |format|
           if @deal_section.save
             format.turbo_stream do
-              render turbo_stream: turbo_stream.replace(
+              render turbo_stream: turbo_stream.update(
                 helpers.dom_id(@deal, :sidebar),
-                inline: render_to_string(action: :edit, layout: false, formats: [:html])
+                partial: 'admin/editor/deal_sections/edit', locals: { deal: @deal, deal_section: @deal_section }
               )
             end
           else
