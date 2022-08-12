@@ -3,7 +3,7 @@
 module Admin
   module Editor
     class DealSectionItemsController < ApplicationController
-      before_action :set_deal_section_item, only: %i[show edit update destroy]
+      before_action :set_deal_section_item, only: %i[show edit update destroy reorder]
       before_action :parent
       before_action :deal
 
@@ -66,6 +66,11 @@ module Admin
           end
           format.json { head :no_content }
         end
+      end
+
+      def reorder
+        @deal_section_item.insert_at(params[:position].to_i)
+        head :ok
       end
 
       private
