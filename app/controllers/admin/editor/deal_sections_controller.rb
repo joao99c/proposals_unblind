@@ -73,16 +73,12 @@ module Admin
 
       # DELETE /admin/editor/deal_sections/1 or /admin/editor/deal_sections/1.json
       def destroy
-        id = helpers.dom_id(@deal_section)
         @deal_section.destroy
 
         respond_to do |format|
-          format.turbo_stream do
-            render turbo_stream: [
-              turbo_stream.update(helpers.dom_id(@deal, :sidebar),
-                                  inline: render_to_string(action: :index, layout: false, formats: [:html])),
-              turbo_stream.remove(id)
-            ]
+          format.html do
+            redirect_to admin_deal_editor_deal_sections_path(deal_id: @deal.id),
+                        notice: 'Deal section item was successfully destroyed.'
           end
         end
       end

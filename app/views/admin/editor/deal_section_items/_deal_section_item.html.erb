@@ -1,0 +1,7 @@
+<div id="<%= dom_id deal_section_item %>">
+  <%= link_to edit_admin_deal_editor_deal_section_deal_section_item_path(deal_id: @deal.id, deal_section_id: @parent.id, id: deal_section_item),
+              data: { turbo_frame: dom_id(@deal, :sidebar) } do %>
+    <%= deal_section_item.child.name %>
+    <%= deal_section_item.position %>
+  <% end %>
+</div>

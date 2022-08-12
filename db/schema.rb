@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_01_102800) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_12_103523) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_01_102800) do
     t.index ["product_id"], name: "index_deal_products_on_product_id"
   end
 
+  create_table "deal_section_items", force: :cascade do |t|
+    t.bigint "parent_id"
+    t.bigint "child_id"
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["child_id"], name: "index_deal_section_items_on_child_id"
+    t.index ["parent_id"], name: "index_deal_section_items_on_parent_id"
+  end
+
   create_table "deal_sections", force: :cascade do |t|
     t.bigint "deal_id", null: false
     t.bigint "section_id", null: false
@@ -60,6 +70,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_01_102800) do
     t.string "mediaStyle"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "child", default: false
+    t.integer "parent_id"
     t.index ["deal_id"], name: "index_deal_sections_on_deal_id"
     t.index ["section_id"], name: "index_deal_sections_on_section_id"
   end
@@ -132,6 +144,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_01_102800) do
 
   add_foreign_key "deal_products", "deals"
   add_foreign_key "deal_products", "products"
+  add_foreign_key "deal_section_items", "deal_sections", column: "child_id"
+  add_foreign_key "deal_section_items", "deal_sections", column: "parent_id"
   add_foreign_key "deal_sections", "deals"
   add_foreign_key "deal_sections", "sections"
   add_foreign_key "deals", "customers"

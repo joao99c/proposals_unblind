@@ -9,4 +9,8 @@ class Section < ApplicationRecord
   def is_bio?
     name == 'bio'
   end
+
+  def is_grid?
+    name == 'grid'
+  end
 end

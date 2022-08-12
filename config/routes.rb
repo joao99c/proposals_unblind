@@ -21,13 +21,12 @@ Rails.application.routes.draw do
         get 'preview', to: 'editor#preview'
         get 'sections', to: 'editor#sections'
 
-        # post '/text' => 'editor#create_text_section', as: 'create_text'
-
         resources "deal_sections" do
           member do
             get 'confirm_destroy'
             patch 'reorder'
           end
+          resources :deal_section_items, except: [:new, :show]
         end
       end
 

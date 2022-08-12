@@ -30,7 +30,7 @@ class Deal < ApplicationRecord
   belongs_to :customer, optional: true
   accepts_nested_attributes_for :customer
 
-  has_many :deal_sections, -> { order(position: :asc) }, dependent: :destroy
+  has_many :deal_sections, -> { order(position: :asc).where(child: false) }, dependent: :destroy
   accepts_nested_attributes_for :deal_sections, allow_destroy: true, reject_if: :all_blank
 
   # Validations

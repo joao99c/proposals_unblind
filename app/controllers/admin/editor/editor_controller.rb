@@ -4,7 +4,11 @@ class Admin::Editor::EditorController < ApplicationController
 
   def index; end
 
-  def preview; end
+  def preview
+    @text_preview_item = DealSection.new(section_id: 1)
+    @bio_preview_item = DealSection.new(section_id: 2)
+    @grid_preview_item = DealSection.new({ section_id: 3, deal_section_items: [DealSectionItem.new({ child: DealSection.new({ section: Section.find_by_name('text'), heading: 'Item', preHeading: '', subHeading: '', child: true }) })] })
+  end
 
   def sections; end
 

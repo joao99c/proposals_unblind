@@ -1,0 +1,31 @@
+<div id="<%= dom_id(deal_section) %>" class="editor--page-section-preview">
+  <div id="section_3" class="hidden"></div>
+  <div class="text-center">
+    <section>
+      <div>
+        <div class="space-y-4">
+          <header class="text-gray-900 space-y-0">
+            <div><span class=""><%= deal_section.preHeading %></span></div>
+            <div><h1 class="text-4xl"><%= deal_section.heading %></h1></div>
+            <div><span class=""><%= deal_section.subHeading %></span></div>
+          </header>
+          <p>
+          <div><%= deal_section.text %></div>
+          </p>
+          <div>
+            <a href="<%= deal_section.button&.dig "url" %>"><%= deal_section.button&.dig "text" %></a>
+            <a href="<%= deal_section.button2&.dig "url" %>"><%= deal_section.button2&.dig "text" %></a>
+            <p><%= deal_section.buttonSubtext %></p>
+          </div>
+
+
+          <div id="<%= dom_id(deal_section, "items") %>" class="grid gap-6 grid-cols-2">
+            <% deal_section.deal_section_items.map do |dsi| %>
+              <%= render dsi.child %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

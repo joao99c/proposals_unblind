@@ -1,0 +1,51 @@
+<%= form_with(model: deal_section_item,
+              url: admin_deal_editor_deal_section_deal_section_item_path(deal_id:, deal_section_id:),
+              data: {
+                controller: "editor--form editor--autosave",
+                action: "editor:page-section:changed->editor--autosave#save",
+                "editor--form-id": deal_section_item.id,
+                remote: true,
+                turbo: true,
+              },
+              class: "px-3"
+    ) do |form| %>
+  <% if deal_section_item.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(deal_section_item.errors.count, "error") %> prohibited this deal_section_item from being
+        saved:</h2>
+
+      <ul>
+        <% deal_section_item.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.fields_for :child do |c_form| %>
+    <%= c_form.hidden_field :id %>
+    <%= c_form.hidden_field :deal_id, value: deal_id %>
+    <%= c_form.hidden_field :section_id, value: Section.find_by_name("text").id %>
+
+    <div>
+      <%= c_form.label :preHeading, class: "text-white" %>
+      <%= c_form.text_field :preHeading, data: { key: "preHeading" } %>
+    </div>
+
+    <div>
+      <%= c_form.label :heading, class: "text-white" %>
+      <%= c_form.text_field :heading, data: { key: "heading" } %>
+    </div>
+
+    <div>
+      <%= c_form.label :subHeading, class: "text-white" %>
+      <%= c_form.text_field :subHeading, data: { key: "subHeading" } %>
+    </div>
+
+    <div>
+      <%= c_form.label :text, class: "text-white" %>
+      <%= c_form.text_field :text, data: { key: "subHeading" } %>
+    </div>
+  <% end %>
+
+<% end %>

@@ -1,0 +1,2 @@
+module DealSectionItemsHelper
+end
