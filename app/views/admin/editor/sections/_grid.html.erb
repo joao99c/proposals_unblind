@@ -21,7 +21,7 @@
 
           <div id="<%= dom_id(deal_section, "items") %>" class="grid gap-6 grid-cols-2">
             <% deal_section.deal_section_items.map do |dsi| %>
-              <%= render dsi.child %>
+              <%= render partial: "admin/editor/deal_sections/deal_section", locals: { deal_section: dsi.child } %>
             <% end %>
           </div>
         </div>
