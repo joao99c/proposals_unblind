@@ -15,18 +15,18 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :tags, only: [:create]
 
-    resources :deals, only: [:index, :new, :create] do
+    resources :deals, only: %i[index new create] do
       namespace :editor do
         get '/', to: 'editor#index'
         get 'preview', to: 'editor#preview'
         get 'sections', to: 'editor#sections'
 
-        resources "deal_sections" do
+        resources 'deal_sections' do
           member do
             get 'confirm_destroy'
             patch 'reorder'
           end
-          resources :deal_section_items, except: [:new, :show] do
+          resources :deal_section_items, except: %i[new show] do
             member do
               patch 'reorder'
             end
@@ -34,14 +34,14 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :deal_customers, only: [:show, :new] do
+      resources :deal_customers, only: %i[show new] do
         collection do
           post 'save_existing_user'
           post 'save_new_user'
         end
       end
 
-      resources :deal_products, only: [:index, :new, :create, :destroy]
+      resources :deal_products, only: %i[index new create destroy]
 
       member do
         get 'step_1'
