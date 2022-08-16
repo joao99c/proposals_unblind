@@ -27,7 +27,18 @@ module Admin
 
       # POST /admin/editor/deal_sections or /admin/editor/deal_sections.json
       def create
-        @deal_section = @deal.deal_sections.new(params.permit(:section_id))
+        case params.permit(:section_id)[:section_id]
+        when '1'
+          @deal_section = TextSection.new
+        when '2'
+          @deal_section = BioSection.new
+        when '3'
+          @deal_section = GridSection.new
+          @deal_section.deal_section_items = []
+        end
+        @deal_section.deal = @deal
+        @deal_section = @deal_section.becomes(DealSection)
+
         respond_to do |format|
           if @deal_section.save
             format.turbo_stream do

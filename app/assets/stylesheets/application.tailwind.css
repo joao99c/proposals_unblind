@@ -36,5 +36,10 @@
         @apply hidden
     }
 
+    .preview_before_add_section .editor--page-section-preview #items_admin_editor_grid_section .editor--page-section-preview {
+        @apply block
+    }
+
+
 }
 
