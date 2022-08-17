@@ -98,10 +98,14 @@ GEM
       railties (>= 5.0.0)
     faker (2.22.0)
       i18n (>= 1.8.11, < 2)
+    ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
     heroicon (0.4.0)
       rails (>= 5.2)
+    hotwire-livereload (1.2.1)
+      listen (>= 3.0.0)
+      rails (>= 6.0.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     io-console (0.5.11)
@@ -125,6 +129,9 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
+    listen (3.7.1)
+      rb-fsevent (~> 0.10, >= 0.10.3)
+      rb-inotify (~> 0.9, >= 0.9.10)
     loofah (2.18.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -201,6 +208,9 @@ GEM
       activerecord (>= 6.1.5)
       activesupport (>= 6.1.5)
       i18n
+    rb-fsevent (0.11.1)
+    rb-inotify (0.10.1)
+      ffi (~> 1.0)
     redis (4.7.1)
     regexp_parser (2.5.0)
     reline (0.3.1)
@@ -293,6 +303,7 @@ DEPENDENCIES
   factory_bot_rails (~> 6.2)
   faker (~> 2.21)
   heroicon (~> 0.4.0)
+  hotwire-livereload (~> 1.2)
   jbuilder
   jsbundling-rails
   kaminari

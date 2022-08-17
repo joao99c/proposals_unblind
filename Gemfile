@@ -93,4 +93,7 @@ group :development do
   # gem "spring"
 
   gem 'rubocop', '~> 1.31'
+
+  gem "hotwire-livereload", "~> 1.2"
+
 end
