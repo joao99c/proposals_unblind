@@ -1,10 +1,14 @@
 <%= turbo_frame_tag dom_id(@parent, "items") do %>
-  <div id="deal_section_items">
-    <div data-controller="editor--sortable" data-editor--sortable-url="<%= reorder_admin_deal_editor_deal_section_path(deal_id: @deal.id, id: ":id") %>">
+
+  <div class="space-y-1">
+    <div id="deal_section_items" data-controller="editor--sortable" data-editor--sortable-url="<%= reorder_admin_deal_editor_deal_section_path(deal_id: @deal.id, id: ":id") %>" class="space-y-1">
       <% @deal_section_items.each do |deal_section_item| %>
         <%= render deal_section_item %>
       <% end %>
     </div>
+    <%= button_to admin_deal_editor_deal_section_deal_section_items_path(deal_id: @deal.id, deal_section_id: @parent.id), data: { turbo_frame: dom_id(@parent, "items") }, class: "flex items-center space-x-2 truncate text-blue-500" do %>
+      <%= heroicon("plus-circle", variant: :solid, options: { class: "h-6 w-6 shrink-0" }) %>
+      <p>Novo Item</p>
+    <% end %>
   </div>
-  <%= button_to "New deal section item", admin_deal_editor_deal_section_deal_section_items_path(deal_id: @deal.id, deal_section_id: @parent.id), data: { turbo_frame: dom_id(@parent, "items") } %>
 <% end %>

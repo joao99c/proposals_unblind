@@ -37,6 +37,21 @@
         @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800
     }
 
+    input[type="color"] {
+        -webkit-appearance: none;
+        border: none;
+        width: 32px;
+        height: 32px;
+    }
+    input[type="color"]::-webkit-color-swatch-wrapper {
+        padding: 0;
+        border-radius: 100%;
+    }
+    input[type="color"]::-webkit-color-swatch {
+        border: darkgray solid;
+        border-radius: 100%;
+    }
+
     .field_with_errors label {
         @apply text-red-700 dark:text-red-500
     }
@@ -53,14 +68,22 @@
         @apply block
     }
 
-
+    form .section-title {
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: #53595c;
+        font-size: 0.75rem;
+        font-weight: 700;
+        line-height: 1.35;
+    }
 }
 
 @layer components {
-    .media-alignment-center{
+    .media-alignment-center {
         @apply text-center
     }
-    .media-alignment-left{
+
+    .media-alignment-left {
         @apply text-left
     }
 }
