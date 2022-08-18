@@ -5,16 +5,17 @@
       <%= link_to admin_deal_editor_deal_sections_path(deal) do %>
         <%= heroicon("x", options: { class: "h-5 w-5" }) %>
       <% end %>
-      <%= link_to confirm_destroy_admin_deal_editor_deal_section_path(deal_id: deal.id, id: deal_section.id), class: "font-medium hover:text-red-600 dark:hover:text-red-500 hover:underline" do %>
-        <%= heroicon("trash", options: { class: "h-4 w-4" }) %>
+
+      <%= form_with model: @deal_section, url: admin_deal_editor_deal_section_path(deal_id: @deal_section.deal_id, id: @deal_section.id), method: :delete, data: { turbo_confirm: "Are your sure?" } do %>
+        <%= button_tag class: "font-medium hover:text-red-600 dark:hover:text-red-500 hover:underline" do %>
+          <%= heroicon("trash", options: { class: "h-4 w-4" }) %>
+        <% end %>
       <% end %>
     </div>
-
 
     <h1 class="text-base font-semibold"><%= deal_section.section.name.titleize %></h1>
 
     <%= render "form", deal_section: deal_section %>
-
 
     <br>
   </div>

@@ -1,8 +1,0 @@
-<%= turbo_frame_tag dom_id(@deal, :sidebar) do %>
-  <p>Remove section</p>
-  <p>Are you sure you want to remove the <%= @deal_section.section.name %> section from this page?</p>
-
-  <%= form_with model: @deal_section, url: admin_deal_editor_deal_section_path(deal_id: @deal_section.deal_id, id: @deal_section.id), method: :delete, data: { turbo_confirm: "Are your sure?" } do %>
-    <%= button_tag "Apagar", class: "font-medium text-red-600 dark:text-red-500 hover:underline" %>
-  <% end %>
-<% end %>

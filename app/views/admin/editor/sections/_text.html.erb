@@ -6,28 +6,14 @@
       <div>
         <div class="space-y-4">
           <header class="text-gray-900 space-y-0">
-            <%= render partial: "admin/editor/sections/shared/preHeading", locals:{deal_section:} %>
-            <%= render partial: "admin/editor/sections/shared/heading", locals:{deal_section:} %>
-            <%= render partial: "admin/editor/sections/shared/subHeading", locals:{deal_section:} %>
+            <%= render partial: "admin/editor/sections/shared/preHeading", locals: { deal_section: } %>
+            <%= render partial: "admin/editor/sections/shared/heading", locals: { deal_section: } %>
+            <%= render partial: "admin/editor/sections/shared/subHeading", locals: { deal_section: } %>
           </header>
-          <p>
           <div><%= deal_section.text %></div>
-          </p>
           <div>
-            <% if deal_section.button_valid %>
-              <button style="background-color: <%=deal_section.button_background_color %>;color:<%= deal_section.button_text_color %>">
-                <a href="<%= deal_section.button&.dig "url" %>">
-                  <%= deal_section.button&.dig "text" %>
-                </a>
-              </button>
-            <% end %>
-            <% if deal_section.button2_valid %>
-              <button style="background-color: <%=deal_section.button_background_color %>;color:<%= deal_section.button_text_color %>">
-                <a href="<%= deal_section.button2&.dig "url" %>">
-                  <%= deal_section.button2&.dig "text" %>
-                </a>
-              </button>
-            <% end %>
+            <%= render partial: "admin/editor/sections/shared/button", locals: { deal_section: } %>
+            <%= render partial: "admin/editor/sections/shared/button2", locals: { deal_section: } %>
             <p><%= deal_section.buttonSubtext %></p>
           </div>
         </div>

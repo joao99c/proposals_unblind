@@ -3,7 +3,7 @@
 module Admin
   module Editor
     class DealSectionsController < ApplicationController
-      before_action :set_deal_section, only: %i[show edit update reorder confirm_destroy destroy]
+      before_action :set_deal_section, only: %i[show edit update reorder destroy]
       before_action :set_deal
 
       # GET /admin/editor/deal_sections or /admin/editor/deal_sections.json
@@ -99,8 +99,6 @@ module Admin
           end
         end
       end
-
-      def confirm_destroy; end
 
       # DELETE /admin/editor/deal_sections/1 or /admin/editor/deal_sections/1.json
       def destroy

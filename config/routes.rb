@@ -23,7 +23,6 @@ Rails.application.routes.draw do
 
         resources 'deal_sections' do
           member do
-            get 'confirm_destroy'
             patch 'reorder'
           end
           resources :deal_section_items, except: %i[new show] do

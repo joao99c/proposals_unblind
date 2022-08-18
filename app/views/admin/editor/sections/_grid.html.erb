@@ -5,19 +5,16 @@
       <div>
         <div class="space-y-4">
           <header class="text-gray-900 space-y-0">
-            <%= render partial: "admin/editor/sections/shared/preHeading", locals:{deal_section:} %>
-            <%= render partial: "admin/editor/sections/shared/heading", locals:{deal_section:} %>
-            <%= render partial: "admin/editor/sections/shared/subHeading", locals:{deal_section:} %>
+            <%= render partial: "admin/editor/sections/shared/preHeading", locals: { deal_section: } %>
+            <%= render partial: "admin/editor/sections/shared/heading", locals: { deal_section: } %>
+            <%= render partial: "admin/editor/sections/shared/subHeading", locals: { deal_section: } %>
           </header>
-          <p>
           <div><%= deal_section.text %></div>
-          </p>
           <div>
-            <a href="<%= deal_section.button&.dig "url" %>"><%= deal_section.button&.dig "text" %></a>
-            <a href="<%= deal_section.button2&.dig "url" %>"><%= deal_section.button2&.dig "text" %></a>
+            <%= render partial: "admin/editor/sections/shared/button", locals: { deal_section: } %>
+            <%= render partial: "admin/editor/sections/shared/button2", locals: { deal_section: } %>
             <p><%= deal_section.buttonSubtext %></p>
           </div>
-
 
           <div id="<%= dom_id(deal_section, "items") %>" class="grid gap-6 grid-cols-2">
             <% deal_section.deal_section_items.map do |dsi| %>
