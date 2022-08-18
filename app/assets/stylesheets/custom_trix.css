@@ -1,0 +1,94 @@
+.trix-container {
+    font-family: "Inter", sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.75;
+    color: #0d161b;
+    text-align: left;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    border: 1px solid #d5d7d9;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    border-radius: 0.5rem;
+}
+
+.trix-container trix-toolbar .trix-button-row .trix-button-group, .trix-container trix-toolbar .trix-button-row .trix-button {
+    border: none;
+}
+
+
+trix-toolbar .trix-button-row .trix-button {
+    padding-left: 0;
+    padding-right: 0;
+    height: 24px;
+    border-radius: 0.375rem;
+    margin-right: 8px;
+    width: 24px;
+}
+
+trix-toolbar .trix-button-row .trix-button.trix-active {
+    background: #b1aebe;
+    color: white;
+}
+
+trix-toolbar .trix-button-row .trix-button.trix-button--icon::before {
+    margin-left: 3px;
+    width: 20px;
+}
+
+.trix-container trix-toolbar {
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    border: 0;
+    padding: 6px 0;
+}
+
+.trix-container .trix-button-row {
+    padding: 0 12px;
+}
+
+.trix-container trix-toolbar .trix-button-group {
+    margin-bottom: 0;
+}
+
+trix-toolbar .trix-button-group:not(:first-child) {
+    margin-left: 0;
+}
+
+
+.trix-container trix-editor {
+    font-family: "Inter", sans-serif;
+    text-align: left;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    font-weight: 400;
+    color: #0d161b;
+    background-color: #fff;
+    background-clip: padding-box;
+    margin: 0;
+    outline: none;
+    min-height: 10em;
+    border: 0 solid #bbb;
+    border-top-width: 1px;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    border-radius: 0.5rem;
+    padding: 0.297rem 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.75;
+    height: auto;
+}
+
+.trix-container .trix-button--icon-quote,
+.trix-container .trix-button--icon-code,
+.trix-container .trix-button--icon-strike,
+.trix-container .trix-button--icon-heading-1,
+.trix-container .trix-button--icon-decrease-nesting-level,
+.trix-container .trix-button--icon-increase-nesting-level,
+.trix-container .trix-button-group--history-tools{
+    display: none;
+}
+

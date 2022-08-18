@@ -7,7 +7,7 @@
                 remote: true,
                 turbo: true,
               },
-              class: "px-3"
+              class: "space-y-4"
     ) do |form| %>
   <% if deal_section.errors.any? %>
     <div style="color: red">
@@ -22,24 +22,44 @@
   <% end %>
 
   <div>
-    <%= form.label :preHeading, class: "text-white" %>
-    <%= form.text_field :preHeading, data: { key: "preHeading" } %>
+    <%= form.label :title %>
+    <div class="space-y-2">
+      <%= form.text_field :preHeading, data: { key: "preHeading" } %>
+      <%= form.text_field :heading, data: { key: "heading" } %>
+      <%= form.text_field :subHeading, data: { key: "subHeading" } %>
+    </div>
+  </div>
+
+  <%= form.label :text %>
+  <div class="trix-container">
+    <%= form.rich_text_area :text, data: { key: "text" } %>
   </div>
 
   <div>
-    <%= form.label :heading, class: "text-white" %>
-    <%= form.text_field :heading, data: { key: "heading" } %>
+    <%= form.label :button %>
+    <div class="flex space-x-4">
+      <%= form.text_field :button_text, placeholder: "Label", value: form.object.button&.dig("text"), data: { key: "button_text" } %>
+      <%= form.url_field :button_url, placeholder: "https://", value: form.object.button&.dig("url"), data: { key: "button_url" }, pattern: "https://.*" %>
+    </div>
   </div>
 
   <div>
-    <%= form.label :subHeading, class: "text-white" %>
-    <%= form.text_field :subHeading, data: { key: "subHeading" } %>
+    <%= form.label :button2 %>
+    <div class="flex space-x-4">
+      <%= form.text_field :button2_text, placeholder: "Label", value: form.object.button2&.dig("text"), data: { key: "button2_text" } %>
+      <%= form.url_field :button2_url, placeholder: "https://", value: form.object.button2&.dig("url"), data: { key: "button2_url" }, pattern: "https://.*" %>
+    </div>
+  </div>
+
+  <div>
+    <%= form.label :buttonSubtext %>
+    <%= form.text_field :buttonSubtext, data: { key: "buttonSubtext" } %>
   </div>
 
 
   <% if deal_section.section.is_bio? %>
     <div class="space-y-1">
-      <%= form.label :social, class: "text-white" %>
+      <%= form.label :social %>
       <div class="flex space-x-2 items-center">
         <%= image_tag("icons/social_media/Twitter - Dark.svg", class: "h-5 w-5") %>
         <%= form.text_field :twitter, data: { key: "twitter" }, placeholder: true, value: deal_section.links.dig("twitter", "url") %>
@@ -79,10 +99,63 @@
     </div>
   <% end %>
 
-  <!--  <div>-->
-  <%#= form.label :buttonSubtext %>
-  <%#= form.text_field :buttonSubtext, data:{key: "buttonSubtext"} %>
-  <!--  </div>-->
+
+  <div>
+    <%= form.label :design %>
+
+    <div class="flex justify-between">
+      <%= form.label :mediaAlignment %>
+      <div class="flex space-x-1">
+        <% [%w[left menu-alt-2], %w[center menu]].map do |co| %>
+          <div>
+            <%= form.radio_button :mediaAlignment, co[0], class: "hidden peer", data: { key: "layout" } %>
+            <%= form.label :mediaAlignment, value: co[0], class: "rounded p-2 border-2 border-neutral-200 peer-checked:border-neutral-900" do %>
+              <%= heroicon(co[1], options: { class: "h-5 w-5" }) %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div>
+      <style>
+          input[type="color"] {
+              -webkit-appearance: none;
+              border: none;
+              width: 32px;
+              height: 32px;
+          }
+
+          input[type="color"]::-webkit-color-swatch-wrapper {
+              padding: 0;
+              border-radius: 100%;
+          }
+
+          input[type="color"]::-webkit-color-swatch {
+              border: none;
+              border-radius: 100%;
+          }
+      </style>
+
+      <%= form.label :colors %>
+      <div class="flex flex-col">
+        <% [
+             ["background", "background_color"],
+             ["heading", "heading_color"],
+             ["text", "text_color"],
+             ["button background", "button_background_color"],
+             ["button text", "button_text_color"],
+           ].map do |co| %>
+          <div class="flex justify-between items-center py-1">
+            <p><%= co[0].titleize %></p>
+            <%= form.color_field co[1], value: form.object.theme.dig("colors", co[0].parameterize(separator: '_')), data: { key: "colors" }, class: "rounded-full" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+
+  </div>
 
   <!--  <div>-->
   <%#= form.label :theme %>
@@ -104,11 +177,6 @@
   <%#= form.text_field :button2, data:{key: "button2"} %>
   <!--  </div>-->
 
-  <div>
-    <%= form.label :text, class: "text-white" %>
-    <%= form.text_field :text, data: { key: "text" } %>
-  </div>
-
   <!--  <div>-->
   <%#= form.label :mediaAlignment %>
   <%#= form.text_field :mediaAlignment %>
@@ -120,6 +188,7 @@
   <!--  </div>-->
 
   <% if deal_section.section.is_grid? %>
+    <%= form.label :items %>
     <%= turbo_frame_tag dom_id(form.object, "items"), src: admin_deal_editor_deal_section_deal_section_items_path(deal: deal_section.deal_id, deal_section_id: deal_section.id) %>
   <% end %>
 

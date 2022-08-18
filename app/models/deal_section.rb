@@ -7,6 +7,8 @@ class DealSection < ApplicationRecord
 
   scope :ordered, -> { order(:position) }
 
+  has_rich_text :text
+
   belongs_to :deal
   belongs_to :section
   has_many :deal_section_items, foreign_key: :parent_id, dependent: :destroy
@@ -23,12 +25,40 @@ class DealSection < ApplicationRecord
     DealSection.find(parent_id) if parent_id.present?
   end
 
+  def button_valid
+    button&.dig('text').present? && button&.dig('url').present?
+  end
+
+  def button2_valid
+    button2&.dig('text').present? && button2&.dig('url').present?
+  end
+
+  def background_color
+    theme.dig("colors", "background") if theme.present?
+  end
+
+  def heading_color
+    theme.dig("colors", "heading") if theme.present?
+  end
+
+  def text_color
+    theme.dig("colors", "text") if theme.present?
+  end
+
+  def button_background_color
+    theme.dig("colors", "button_background") if theme.present?
+  end
+
+  def button_text_color
+    theme.dig("colors", "button_text") if theme.present?
+  end
+
   private
 
   def broadcast_create
     partial = 'admin/editor/deal_sections/deal_section'
     locals = { deal_section: self }
-    target = if self.child == false
+    target = if child == false
                'deal_sections_preview'
              else
                dom_id(parent, 'items')

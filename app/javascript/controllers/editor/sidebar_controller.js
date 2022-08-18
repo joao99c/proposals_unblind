@@ -35,13 +35,13 @@ export default class extends Controller {
     toggleSidebar(sidebarEl, expand, setExpanded = false, toggleSidebarEl = null) {
         const mainContentEl = document.getElementById("main-content");
         if (expand) {
-            sidebarEl.classList.add("lg:w-64");
+            sidebarEl.classList.add("lg:w-80");
             sidebarEl.classList.remove("hidden");
-            mainContentEl.classList.add("lg:ml-64");
+            mainContentEl.classList.add("lg:ml-80");
         } else {
-            sidebarEl.classList.remove("lg:w-64");
+            sidebarEl.classList.remove("lg:w-80");
             sidebarEl.classList.add("hidden");
-            mainContentEl.classList.remove("lg:ml-64");
+            mainContentEl.classList.remove("lg:ml-80");
         }
 
         if (setExpanded && toggleSidebarEl !== null) {

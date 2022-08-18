@@ -64,7 +64,27 @@ module Admin
           end
         end
 
+        @deal_section.button ||= {}
+        @deal_section.button[:text] = params.require(:deal_section)[:button_text]
+        @deal_section.button[:url] = params.require(:deal_section)[:button_url]
+
+        @deal_section.button2 ||= {}
+        @deal_section.button2[:text] = params.require(:deal_section)[:button2_text]
+        @deal_section.button2[:url] = params.require(:deal_section)[:button2_url]
+
+        @deal_section.theme ||= {}
+        @deal_section.theme[:colors] ||= {}
+
+        @deal_section.theme[:colors][:background] = params.require(:deal_section)[:background_color]
+        @deal_section.theme[:colors][:heading] = params.require(:deal_section)[:heading_color]
+        @deal_section.theme[:colors][:text] = params.require(:deal_section)[:text_color]
+        @deal_section.theme[:colors][:button_background] = params.require(:deal_section)[:button_background_color]
+        @deal_section.theme[:colors][:button_text] = params.require(:deal_section)[:button_text_color]
+
         @deal_section.assign_attributes(deal_section_params)
+
+
+
 
         respond_to do |format|
           if @deal_section.save

@@ -12,7 +12,9 @@ export default class extends Controller {
     }
 
     saveNow() {
-        Turbo.navigator.submitForm(this.element);
+        if (this.element.reportValidity()) {
+            Turbo.navigator.submitForm(this.element);
+        }
     }
 }
 

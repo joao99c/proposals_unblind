@@ -1,6 +1,11 @@
 @import 'modal_backdrop.css';
+
 @import 'tom-select/dist/css/tom-select.css';
 @import 'tom-select.css';
+
+@import 'trix/dist/trix.css';
+@import 'actiontext.css';
+@import 'custom_trix.css';
 
 @tailwind base;
 @tailwind components;
@@ -16,7 +21,15 @@
         @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
     }
 
-    input[type="text"], input[type="email"], input[type="number"] {
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    input[type="password"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="url"],
+    input[type="date"],
+    input[type="datetime-local"] {
         @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
     }
 
@@ -43,3 +56,11 @@
 
 }
 
+@layer components {
+    .media-alignment-center{
+        @apply text-center
+    }
+    .media-alignment-left{
+        @apply text-left
+    }
+}

@@ -70,7 +70,7 @@ Section.create!([name: 'grid', section_category: SectionCategory.first])
 DealSection.destroy_all
 DealSection.create({
                      deal_id: 50,
-                     section: Section.find(Section.pluck(:id).sample),
+                     section_id: 1,
                      preHeading: 'Pre Heading',
                      heading: 'Heading',
                      subHeading: 'Sub Heading',
@@ -153,23 +153,25 @@ DealSection.create({
                      mediaStyle: 'plain' # plain, card ...
                    })
 
-parent = DealSection.create({
-                              deal_id: 50,
-                              section: Section.find_by_name('grid'),
-                              preHeading: 'Pre Heading',
-                              heading: 'Heading',
-                              subHeading: 'Sub Heading'
-                            })
+parent = Admin::Editor::GridSection.new(
+  deal_id: 50,
+  section: Section.find_by_name('grid'),
+  preHeading: 'Pre Heading',
+  heading: 'Heading',
+  subHeading: 'Sub Heading'
+).becomes(DealSection)
+parent.save
 
-child1 = DealSection.create({
-                              deal_id: 50,
-                              section: Section.find_by_name('text'),
-                              preHeading: 'Pre Heading',
-                              heading: 'Heading',
-                              subHeading: 'Sub Heading',
-                              child: true,
-                              parent_id: parent.id
-                            })
+child1 = Admin::Editor::TextSection.new(
+  deal_id: 50,
+  section: Section.find_by_name('text'),
+  preHeading: 'Pre Heading',
+  heading: 'Heading',
+  subHeading: 'Sub Heading',
+  child: true,
+  parent_id: parent.id
+).becomes(DealSection)
+child1.save
 
 DealSectionItem.create({
                          parent_id: parent.id,

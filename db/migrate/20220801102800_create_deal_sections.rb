@@ -13,7 +13,6 @@ class CreateDealSections < ActiveRecord::Migration[7.0]
       t.json :button
       t.json :button2
       t.json :links
-      t.text :text
       t.string :mediaAlignment
       t.string :mediaStyle
 

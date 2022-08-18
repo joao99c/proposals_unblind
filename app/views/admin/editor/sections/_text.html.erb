@@ -1,20 +1,33 @@
-<div id="<%= dom_id(deal_section) %>" class="editor--page-section-preview">
+<div id="<%= dom_id(deal_section) %>" class="editor--page-section-preview text-section media-alignment-<%= deal_section.mediaAlignment %>">
   <div id="section_1" class="hidden"></div>
-  <div class="text-center">
+
+  <div style="background-color: <%= deal_section.background_color %>;color: <%= deal_section.text_color %>;">
     <section>
       <div>
         <div class="space-y-4">
           <header class="text-gray-900 space-y-0">
-            <div><span class=""><%= deal_section.preHeading %></span></div>
-            <div><h1 class="text-4xl"><%= deal_section.heading %></h1></div>
-            <div><span class=""><%= deal_section.subHeading %></span></div>
+            <%= render partial: "admin/editor/sections/shared/preHeading", locals:{deal_section:} %>
+            <%= render partial: "admin/editor/sections/shared/heading", locals:{deal_section:} %>
+            <%= render partial: "admin/editor/sections/shared/subHeading", locals:{deal_section:} %>
           </header>
           <p>
           <div><%= deal_section.text %></div>
           </p>
           <div>
-            <a href="<%= deal_section.button&.dig "url" %>"><%= deal_section.button&.dig "text" %></a>
-            <a href="<%= deal_section.button2&.dig "url" %>"><%= deal_section.button2&.dig "text" %></a>
+            <% if deal_section.button_valid %>
+              <button style="background-color: <%=deal_section.button_background_color %>;color:<%= deal_section.button_text_color %>">
+                <a href="<%= deal_section.button&.dig "url" %>">
+                  <%= deal_section.button&.dig "text" %>
+                </a>
+              </button>
+            <% end %>
+            <% if deal_section.button2_valid %>
+              <button style="background-color: <%=deal_section.button_background_color %>;color:<%= deal_section.button_text_color %>">
+                <a href="<%= deal_section.button2&.dig "url" %>">
+                  <%= deal_section.button2&.dig "text" %>
+                </a>
+              </button>
+            <% end %>
             <p><%= deal_section.buttonSubtext %></p>
           </div>
         </div>

@@ -1,19 +1,10 @@
 <%= turbo_frame_tag dom_id(@parent, "items") do %>
-
-  <p style="color: green"><%= notice %></p>
-
-  <h1>Deal section items</h1>
-
   <div id="deal_section_items">
-
     <div data-controller="editor--sortable" data-editor--sortable-url="<%= reorder_admin_deal_editor_deal_section_path(deal_id: @deal.id, id: ":id") %>">
       <% @deal_section_items.each do |deal_section_item| %>
         <%= render deal_section_item %>
       <% end %>
     </div>
   </div>
-
-  <%= button_to "New deal section item",
-                admin_deal_editor_deal_section_deal_section_items_path(deal_id: @deal.id, deal_section_id: @parent.id),
-                data: { turbo_frame: dom_id(@parent, "items") } %>
+  <%= button_to "New deal section item", admin_deal_editor_deal_section_deal_section_items_path(deal_id: @deal.id, deal_section_id: @parent.id), data: { turbo_frame: dom_id(@parent, "items") } %>
 <% end %>
