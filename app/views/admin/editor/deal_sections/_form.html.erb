@@ -61,40 +61,40 @@
     <div class="space-y-2">
       <p class="section-title">Links</p>
       <div class="flex space-x-2 items-center">
-        <%= image_tag("icons/social_media/Twitter - Dark.svg", class: "h-5 w-5") %>
-        <%= form.text_field :twitter, data: { key: "twitter" }, placeholder: true, value: deal_section.links.dig("twitter", "url") %>
+        <%= image_tag("icons/social_media/Twitter - Original.svg", class: "h-5 w-5") %>
+        <%= form.url_field :twitter, required: false, pattern: "https://.*", data: { key: "twitter" }, placeholder: "https://", value: deal_section.links.dig("twitter", "url") %>
       </div>
       <div class="flex space-x-2 items-center">
-        <%= image_tag("icons/social_media/Facebook - Dark.svg", class: "h-5 w-5") %>
-        <%= form.text_field :facebook, data: { key: "facebook" }, placeholder: true, value: deal_section.links.dig("facebook", "url") %>
+        <%= image_tag("icons/social_media/Facebook - Original.svg", class: "h-5 w-5") %>
+        <%= form.url_field :facebook, required: false, pattern: "https://.*", data: { key: "facebook" }, placeholder: "https://", value: deal_section.links.dig("facebook", "url") %>
       </div>
       <div class="flex space-x-2 items-center">
-        <%= image_tag("icons/social_media/Instagram - Dark.svg", class: "h-5 w-5") %>
-        <%= form.text_field :instagram, data: { key: "instagram" }, placeholder: true, value: deal_section.links.dig("instagram", "url") %>
+        <%= image_tag("icons/social_media/Instagram - Original.svg", class: "h-5 w-5") %>
+        <%= form.url_field :instagram, required: false, pattern: "https://.*", data: { key: "instagram" }, placeholder: "https://", value: deal_section.links.dig("instagram", "url") %>
       </div>
       <div class="flex space-x-2 items-center">
-        <%= image_tag("icons/social_media/Pinterest - Dark.svg", class: "h-5 w-5") %>
-        <%= form.text_field :pinterest, data: { key: "pinterest" }, placeholder: true, value: deal_section.links.dig("pinterest", "url") %>
+        <%= image_tag("icons/social_media/Pinterest - Original.svg", class: "h-5 w-5") %>
+        <%= form.url_field :pinterest, required: false, pattern: "https://.*", data: { key: "pinterest" }, placeholder: "https://", value: deal_section.links.dig("pinterest", "url") %>
       </div>
       <div class="flex space-x-2 items-center">
-        <%= image_tag("icons/social_media/LinkedIn - Dark.svg", class: "h-5 w-5") %>
-        <%= form.text_field :linkedin, data: { key: "linkedin" }, placeholder: true, value: deal_section.links.dig("linkedin", "url") %>
+        <%= image_tag("icons/social_media/LinkedIn - Original.svg", class: "h-5 w-5") %>
+        <%= form.url_field :linkedin, required: false, pattern: "https://.*", data: { key: "linkedin" }, placeholder: "https://", value: deal_section.links.dig("linkedin", "url") %>
       </div>
       <div class="flex space-x-2 items-center">
-        <%= image_tag("icons/social_media/YouTube - Dark.svg", class: "h-5 w-5") %>
-        <%= form.text_field :youtube, data: { key: "youtube" }, placeholder: true, value: deal_section.links.dig("youtube", "url") %>
+        <%= image_tag("icons/social_media/YouTube - Original.svg", class: "h-5 w-5") %>
+        <%= form.url_field :youtube, required: false, pattern: "https://.*", data: { key: "youtube" }, placeholder: "https://", value: deal_section.links.dig("youtube", "url") %>
       </div>
       <div class="flex space-x-2 items-center">
-        <%= image_tag("icons/social_media/TikTok - Dark.svg", class: "h-5 w-5") %>
-        <%= form.text_field :tiktok, data: { key: "tiktok" }, placeholder: true, value: deal_section.links.dig("tiktok", "url") %>
+        <%= image_tag("icons/social_media/TikTok - Original.svg", class: "h-5 w-5") %>
+        <%= form.url_field :tiktok, required: false, pattern: "https://.*", data: { key: "tiktok" }, placeholder: "https://", value: deal_section.links.dig("tiktok", "url") %>
       </div>
       <div class="flex space-x-2 items-center">
         <%= heroicon("globe-alt", variant: :solid, options: { class: "w-5 h-5" }) %>
-        <%= form.text_field :website, data: { key: "website" }, placeholder: true, value: deal_section.links.dig("website", "url") %>
+        <%= form.url_field :website, required: false, pattern: "https://.*", data: { key: "website" }, placeholder: "https://", value: deal_section.links.dig("website", "url") %>
       </div>
       <div class="flex space-x-2 items-center">
         <%= heroicon("mail", variant: :solid, options: { class: "w-5 h-5" }) %>
-        <%= form.text_field :mail, data: { key: "mail" }, placeholder: true, value: deal_section.links.dig("mail", "url") %>
+        <%= form.url_field :mail, required: false, pattern: "https://.*", data: { key: "mail" }, placeholder: "https://", value: deal_section.links.dig("mail", "url") %>
       </div>
     </div>
   <% end %>

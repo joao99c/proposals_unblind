@@ -48,7 +48,7 @@
         border-radius: 100%;
     }
     input[type="color"]::-webkit-color-swatch {
-        border: darkgray solid;
+        border: black solid;
         border-radius: 100%;
     }
 

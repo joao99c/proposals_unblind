@@ -60,7 +60,7 @@ module Admin
           @deal_section.links ||= {}
           link_params = params.require(:deal_section).permit(:twitter, :facebook, :instagram, :pinterest, :linkdin, :youtube, :tiktok, :website, :mail)
           link_params.each do |key, value|
-            @deal_section.links[key] = { name: key, url: value } unless value.blank?
+            @deal_section.links[key] = { name: key, url: value }
           end
         end
 
