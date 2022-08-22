@@ -10,10 +10,16 @@ module Admin
         attributes[:heading] ||= 'Texto principal'
         attributes[:subHeading] ||= 'Isto é um texto depois do texto principal'
         attributes[:text] ||= 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisi eu consectetur'
-        attributes[:mediaAlignment] ||= 'left'
+
+        attributes[:mediaAlignment] ||= 'center'
+        attributes[:headingAlignment] ||= 'center'
+        attributes[:contentAlignment] ||= 'center'
+        attributes[:contentLayout] ||= 'columns'
+        attributes[:contentStyle] ||= 'plain'
+
         attributes[:theme] ||= {}
         attributes[:theme][:colors] ||= {}
-        attributes[:theme][:colors][:background] ||= '#ffffff'
+        attributes[:theme][:colors][:background] ||= '#f3f4f6'
         attributes[:theme][:colors][:heading] ||= '#000000'
         attributes[:theme][:colors][:text] ||= '#000000'
         attributes[:theme][:colors][:button_background] ||= '#ffffff'

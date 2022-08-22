@@ -103,6 +103,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_17_103420) do
     t.json "button"
     t.json "button2"
     t.json "links"
+    t.string "headingAlignment"
+    t.string "contentAlignment"
+    t.string "contentLayout"
+    t.string "contentStyle"
     t.string "mediaAlignment"
     t.string "mediaStyle"
     t.datetime "created_at", null: false

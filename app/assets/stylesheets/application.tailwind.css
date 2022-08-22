@@ -43,10 +43,12 @@
         width: 32px;
         height: 32px;
     }
+
     input[type="color"]::-webkit-color-swatch-wrapper {
         padding: 0;
         border-radius: 100%;
     }
+
     input[type="color"]::-webkit-color-swatch {
         border: black solid;
         border-radius: 100%;
@@ -68,6 +70,20 @@
         @apply block
     }
 
+    .media-alignment-center .editor--page-section-preview {
+        @apply text-center
+    }
+
+    .media-alignment-left .editor--page-section-preview {
+        @apply text-left
+    }
+
+    .bio-section,
+    .text-section,
+    .grid-section {
+        @apply container container-sm mx-auto
+    }
+
     form .section-title {
         letter-spacing: 0.04em;
         text-transform: uppercase;
@@ -80,10 +96,10 @@
 
 @layer components {
     .media-alignment-center {
-        @apply text-center
+        @apply flex flex-col items-center
     }
 
     .media-alignment-left {
-        @apply text-left
+        @apply flex flex-col items-start
     }
 }

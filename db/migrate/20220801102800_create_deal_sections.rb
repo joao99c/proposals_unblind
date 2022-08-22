@@ -13,6 +13,13 @@ class CreateDealSections < ActiveRecord::Migration[7.0]
       t.json :button
       t.json :button2
       t.json :links
+
+      t.string :headingAlignment
+
+      t.string :contentAlignment
+      t.string :contentLayout
+      t.string :contentStyle
+
       t.string :mediaAlignment
       t.string :mediaStyle
 

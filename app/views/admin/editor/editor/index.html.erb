@@ -58,7 +58,7 @@
     %>
   </aside>
   <div class="fixed inset-0 z-10 hidden bg-gray-900/50 dark:bg-gray-900/90" id="sidebarBackdrop"></div>
-  <div id="main-content" class="p-4 relative w-full h-full bg-gray-100 overflow-y-auto ml-80">
+  <div id="main-content" class="relative w-full h-full bg-gray-100 overflow-y-auto ml-80">
     <main class="h-full">
       <iframe id="<%= dom_id(@deal, :preview) %>"
               src="<%= admin_deal_editor_preview_url(@deal) %>"

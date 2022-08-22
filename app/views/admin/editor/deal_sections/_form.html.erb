@@ -108,22 +108,53 @@
     </div>
   <% end %>
 
+  <p class="section-title">Design</p>
+  
   <div class="space-y-2">
-    <p class="section-title">Design</p>
+    <%= form.label :layout %>
 
     <div class="flex justify-between items-center">
-      <%= form.label :mediaAlignment %>
+      <%= form.label :headingAlignment %>
       <div class="flex space-x-1">
         <% [%w[left menu-alt-2], %w[center menu]].map do |co| %>
           <div>
-            <%= form.radio_button :mediaAlignment, co[0], class: "hidden peer", data: { key: "layout" } %>
-            <%= form.label :mediaAlignment, value: co[0], class: "rounded p-2 border-2 border-neutral-200 peer-checked:border-neutral-900" do %>
+            <%= form.radio_button :headingAlignment, co[0], class: "hidden peer", data: { key: "layout" } %>
+            <%= form.label :headingAlignment, value: co[0], class: "rounded p-2 border-2 border-neutral-200 peer-checked:border-neutral-900" do %>
               <%= heroicon(co[1], options: { class: "h-5 w-5" }) %>
             <% end %>
           </div>
         <% end %>
       </div>
     </div>
+   
+    <div class="flex justify-between items-center">
+      <%= form.label :contentAlignment %>
+      <div class="flex space-x-1">
+        <% [%w[left menu-alt-2], %w[center menu]].map do |co| %>
+          <div>
+            <%= form.radio_button :contentAlignment, co[0], class: "hidden peer", data: { key: "layout" } %>
+            <%= form.label :contentAlignment, value: co[0], class: "rounded p-2 border-2 border-neutral-200 peer-checked:border-neutral-900" do %>
+              <%= heroicon(co[1], options: { class: "h-5 w-5" }) %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    
+<!--    <div class="flex justify-between items-center">-->
+      <%#= form.label :mediaAlignment %>
+<!--      <div class="flex space-x-1">-->
+        <%# [%w[left menu-alt-2], %w[center menu]].map do |co| %>
+<!--          <div>-->
+            <%#= form.radio_button :mediaAlignment, co[0], class: "hidden peer", data: { key: "layout" } %>
+            <%#= form.label :mediaAlignment, value: co[0], class: "rounded p-2 border-2 border-neutral-200 peer-checked:border-neutral-900" do %>
+              <%#= heroicon(co[1], options: { class: "h-5 w-5" }) %>
+            <%# end %>
+<!--          </div>-->
+        <%# end %>
+<!--      </div>-->
+<!--    </div>-->
+
 
     <%= form.label :colors %>
     <div class="flex flex-col space-y-1">

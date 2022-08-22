@@ -28,24 +28,27 @@
     <%= c_form.hidden_field :section_id, value: Section.find_by_name("text").id %>
 
     <div>
-      <%= c_form.label :preHeading, class: "text-white" %>
+      <%= c_form.label :preHeading %>
       <%= c_form.text_field :preHeading, data: { key: "preHeading" } %>
     </div>
 
     <div>
-      <%= c_form.label :heading, class: "text-white" %>
+      <%= c_form.label :heading %>
       <%= c_form.text_field :heading, data: { key: "heading" } %>
     </div>
 
     <div>
-      <%= c_form.label :subHeading, class: "text-white" %>
+      <%= c_form.label :subHeading %>
       <%= c_form.text_field :subHeading, data: { key: "subHeading" } %>
     </div>
 
     <div>
-      <%= c_form.label :text, class: "text-white" %>
-      <%= c_form.text_field :text, data: { key: "subHeading" } %>
+      <%= c_form.label :text %>
+      <div class="trix-container">
+        <%= c_form.rich_text_area :text, data: { key: "text" } %>
+      </div>
     </div>
+
   <% end %>
 
 <% end %>

@@ -83,9 +83,6 @@ module Admin
 
         @deal_section.assign_attributes(deal_section_params)
 
-
-
-
         respond_to do |format|
           if @deal_section.save
             format.turbo_stream do
@@ -136,6 +133,10 @@ module Admin
           :button,
           :button2,
           :text,
+          :headingAlignment,
+          :contentAlignment,
+          :contentLayout,
+          :contentStyle,
           :mediaAlignment,
           :mediaStyle,
           :position
