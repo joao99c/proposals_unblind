@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_17_103420) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_22_132715) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -127,8 +127,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_17_103420) do
     t.bigint "customer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "text_typeface_id"
+    t.text "text_weight"
+    t.text "text_spacing"
+    t.text "text_height"
+    t.bigint "heading_typeface_id"
+    t.text "heading_weight"
+    t.text "heading_spacing"
+    t.text "heading_height"
     t.index ["customer_id"], name: "index_deals_on_customer_id"
+    t.index ["heading_typeface_id"], name: "index_deals_on_heading_typeface_id"
+    t.index ["text_typeface_id"], name: "index_deals_on_text_typeface_id"
     t.index ["user_id"], name: "index_deals_on_user_id"
+  end
+
+  create_table "fonts", force: :cascade do |t|
+    t.string "name"
+    t.string "weights"
   end
 
   create_table "products", force: :cascade do |t|
@@ -192,6 +207,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_17_103420) do
   add_foreign_key "deal_sections", "deals"
   add_foreign_key "deal_sections", "sections"
   add_foreign_key "deals", "customers"
+  add_foreign_key "deals", "fonts", column: "heading_typeface_id"
+  add_foreign_key "deals", "fonts", column: "text_typeface_id"
   add_foreign_key "deals", "users"
   add_foreign_key "sections", "section_categories"
   add_foreign_key "taggings", "deals"

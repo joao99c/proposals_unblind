@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
+  <% if defined?(@deal) %>
+  <%= google_webfonts_link_tag "#{@deal.heading_typeface.name.parameterize(separator: '_')}": "#{@deal.heading_typeface.weights.parameterize(separator: ',')}",
+                               "#{@deal.text_typeface.name.parameterize(separator: '_')}": "#{@deal.text_typeface.weights.parameterize(separator: ',')}"
+      %>
+  <% end %>
 
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>

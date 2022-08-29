@@ -1,5 +1,10 @@
 <%= turbo_frame_tag dom_id(@deal, :preview) do %>
-  <div class="h-full relative">
+  <div id="font-text" class="h-full relative" style="
+    font-family: <%= @deal.text_typeface&.name %>;
+    font-weight: <%= @deal.text_weight %>;
+    line-height: <%= @deal.text_height %>;
+    letter-spacing:<%= @deal.text_spacing %>em;
+  ">
 
     <p>Customer:</p>
     <%= @deal.customer.name %>

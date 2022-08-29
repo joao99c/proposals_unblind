@@ -13,6 +13,20 @@ User.create([
               { email: 'jc@unblind.io', name: 'Jota Carvalho', password: 123_123_123 }
             ])
 
+Font.create([
+              { name: 'Roboto', weights: %w[300 400 700 900] },
+              { name: 'Source Sans Pro', weights: %w[300 400 700 900] },
+              { name: 'Raleway', weights: %w[300 400 700 900] },
+              { name: 'Merriweather', weights: %w[300 400 700 900] },
+
+              { name: 'Open Sans', weights: %w[300 400 700 800] },
+              { name: 'Lato', weights: %w[300 400 700 800] },
+              { name: 'Montserrat', weights: %w[100 200 300 400 500 700 600 800 900] },
+
+              { name: 'Oswald', weights: %w[300 400 700] },
+              { name: 'PT Sans', weights: %w[400 700] },
+            ])
+
 # Customer.destroy_all
 100.times do
   Customer.create(
@@ -27,12 +41,13 @@ end
 
 # Deal.destroy_all
 50.times do
-  Deal.create(
+  Deal.create!(
     name: Faker::Name.name,
     user: User.find(User.pluck(:id).sample),
     customer: Customer.find(Customer.pluck(:id).sample),
     finish_date: DateTime.now + rand(30).day,
-    status: %w[open won lost].sample
+    status: %w[open won lost].sample,
+    heading_typeface_id: 2
   )
 end
 

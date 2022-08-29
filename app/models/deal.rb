@@ -33,6 +33,10 @@ class Deal < ApplicationRecord
   has_many :deal_sections, -> { order(position: :asc).where(child: false) }, dependent: :destroy
   accepts_nested_attributes_for :deal_sections, allow_destroy: true, reject_if: :all_blank
 
+  belongs_to :heading_typeface, class_name: 'Font', foreign_key: 'heading_typeface_id'
+  belongs_to :text_typeface, class_name: 'Font', foreign_key: 'text_typeface_id'
+
+
   # Validations
   validates :name, presence: true
   validates :user, :customer, presence: true, on: :update

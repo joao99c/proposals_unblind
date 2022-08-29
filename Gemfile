@@ -51,7 +51,7 @@ gem 'bootsnap', require: false
 # gem "sassc-rails"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem "image_processing", "~> 1.2"
+gem 'image_processing', '~> 1.2'
 
 gem 'heroicon', '~> 0.4.0'
 
@@ -70,6 +70,8 @@ gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 
 gem 'faker', '~> 2.21'
+
+gem 'google-webfonts', require: 'google/webfonts/rails'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -94,6 +96,6 @@ group :development do
 
   gem 'rubocop', '~> 1.31'
 
-  gem "hotwire-livereload", "~> 1.2"
+  gem 'hotwire-livereload', '~> 1.2'
 
 end

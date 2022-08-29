@@ -4,3 +4,4 @@ import "./controllers"
 import "flowbite";
 import "trix"
 import "@rails/actiontext"
+import "webfontloader"

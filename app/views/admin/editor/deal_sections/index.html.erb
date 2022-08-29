@@ -65,10 +65,12 @@
         <div class="hidden rounded-lg" id="new-customer" role="tabpanel" aria-labelledby="new-customer-tab">
           <div class="flex-1 space-y-1 divide-y divide-gray-200 dark:divide-gray-700 text-gray-900 font-medium text-base">
             <div class="space-y-3 py-6 px-3 border-b">
-              <div class="flex items-center space-x-2">
-                <%= heroicon("at-symbol", variant: :solid, options: { class: "h-6 w-6 text-gray-500" }) %>
-                <p>Tipos de Letra</p>
-              </div>
+              <%= link_to admin_deal_editor_fonts_path(@deal) do %>
+                <div class="flex items-center space-x-2">
+                  <%= heroicon("at-symbol", variant: :solid, options: { class: "h-6 w-6 text-gray-500" }) %>
+                  <p>Tipos de Letra</p>
+                </div>
+              <% end %>
               <div class="flex items-center space-x-2">
                 <%= heroicon("color-swatch", variant: :solid, options: { class: "h-6 w-6 text-gray-500" }) %>
                 <p>Cores</p>

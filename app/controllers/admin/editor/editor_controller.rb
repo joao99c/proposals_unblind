@@ -14,7 +14,19 @@ module Admin
         @grid_preview_item = GridSection.new
       end
 
-      def sections; end
+      def fonts; end
+
+      def update_fonts
+        @deal.update(deal_params)
+        respond_to do |format|
+          format.turbo_stream do
+            render turbo_stream: [
+              # turbo_stream.update(helpers.dom_id(@deal, :sidebar), ''),
+              # turbo_stream.update(helpers.dom_id(@deal_section), inline: helpers.render_section(@deal_section))
+            ]
+          end
+        end
+      end
 
       private
 
@@ -22,8 +34,18 @@ module Admin
         @deal = Deal.find(params[:deal_id])
       end
 
-      def deal_text_section_params
-        params.require(:deal_section).permit(:preHeading, :heading, :subHeading)
+      def deal_params
+        params.require(:deal).permit(
+          :heading_typeface_id,
+          :heading_weight,
+          :heading_spacing,
+          :heading_height,
+
+          :text_typeface_id,
+          :text_weight,
+          :text_spacing,
+          :text_height
+        )
       end
     end
   end
