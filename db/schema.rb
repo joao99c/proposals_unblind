@@ -127,12 +127,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_22_132715) do
     t.bigint "customer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "text_typeface_id"
-    t.text "text_weight"
+    t.bigint "text_typeface_id", default: 1
+    t.text "text_weight", default: "700"
     t.text "text_spacing"
     t.text "text_height"
-    t.bigint "heading_typeface_id"
-    t.text "heading_weight"
+    t.bigint "heading_typeface_id", default: 1
+    t.text "heading_weight", default: "400"
     t.text "heading_spacing"
     t.text "heading_height"
     t.index ["customer_id"], name: "index_deals_on_customer_id"

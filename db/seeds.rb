@@ -46,8 +46,7 @@ end
     user: User.find(User.pluck(:id).sample),
     customer: Customer.find(Customer.pluck(:id).sample),
     finish_date: DateTime.now + rand(30).day,
-    status: %w[open won lost].sample,
-    heading_typeface_id: 2
+    status: %w[open won lost].sample
   )
 end
 
