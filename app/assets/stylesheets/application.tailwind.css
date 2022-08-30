@@ -80,9 +80,7 @@
 
     .bio-section,
     .text-section,
-    .grid-section {
-        @apply container container-sm mx-auto
-    }
+    .grid-section {}
 
     form .section-title {
         letter-spacing: 0.04em;
