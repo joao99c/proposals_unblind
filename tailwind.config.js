@@ -7,6 +7,7 @@ module.exports = {
     ],
     // make sure to safelist these classes when using purge
     safelist: [
+        'container-sm',
         'max-w-[100%]',
         'w-64',
         'w-1/2',
