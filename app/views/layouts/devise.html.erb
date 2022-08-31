@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+  <title>Unblind | Authentication</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  <%= hotwire_livereload_tags if Rails.env.development? %>
+</head>
+
+<body class="bg-gray-100 dark:bg-gray-900">
+<!-- <body> -->
+<div id="main-content" class="p-4 relative w-full h-full overflow-y-auto max-w-screen-xs mx-auto">
+  <main>
+    <%= yield %>
+  </main>
+</div>
+</body>
+</html>
