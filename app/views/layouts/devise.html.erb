@@ -18,7 +18,15 @@
     <div class="w-full md:w-1/2">
       <%= yield %>
     </div>
-    <div class="hidden md:block w-1/2 bg-gray-200"></div>
+    <div class="hidden md:block w-1/2 bg-gray-200"
+         style="
+         background: url(<%= asset_url("devise_right_background.svg") %>) no-repeat center center;
+           -webkit-background-size: cover;
+           -moz-background-size: cover;
+           -o-background-size: cover;
+           background-size: cover;
+         ">
+    </div>
   </main>
 </div>
 </body>

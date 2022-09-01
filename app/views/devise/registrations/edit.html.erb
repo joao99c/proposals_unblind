@@ -1,43 +1,149 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="space-y-4 max-w-screen-xl mx-auto">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  <div class="flex justify-between items-center py-4">
+    <p class="text-2xl font-semibold">Propostas</p>
   </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+  <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+      <div class="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
+      <div class="bg-gray-50 text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+        <ul class="flex flex-wrap -mb-px">
+          <li class="mr-2">
+            <%= link_to "Pessoal", "#", class: "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active dark:text-blue-500 dark:border-blue-500" %>
+          </li>
+          <li class="mr-2">
+            <%= link_to "Notificações", "#", class: "inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" %>
+          </li>
+          <li class="mr-2">
+            <%= link_to "Palavra-Chave", "#", class: "inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" %>
+          </li>
+        </ul>
+      </div>
+
   </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+</div>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
 
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
+<!--<div class="p-4 md:p-10 overflow-auto h-full w-full relative">-->
 
-<h3>Cancel my account</h3>
+<!--  <div class="flex items-center justify-center md:h-full w-full">-->
+<!--    <div class="space-y-6 w-full max-w-screen-xs mx-auto">-->
+<!--      <div class="space-y-2">-->
+<!--        <h1 class="text-xl font-semibold">Edite o seu perfil!</h1>-->
+<!--        <h2 class="text-base font-medium">Por favor, adicione os seus detalhes.</h2>-->
+<!--      </div>-->
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<%#= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+<%#= render "devise/shared/error_messages", resource: resource %>
 
-<%= link_to "Back", :back %>
+<!--        <div class="space-y-6">-->
+<!--          <div class="field">-->
+<%#= f.label :email %>
+<%#= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<!--          </div>-->
+
+<%# if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+<!--            <div>Currently waiting confirmation for: <%#= resource.unconfirmed_email %></div>-->
+<%# end %>
+
+<!--          <div class="field">-->
+<%#= f.label :password %>
+<%#= f.password_field :password, autocomplete: "new-password" %>
+<%# if @minimum_password_length %>
+<!--              <br />-->
+<!--              <em><%#= @minimum_password_length %> characters minimum</em>-->
+<%# end %>
+<!--          </div>-->
+
+<!--          <div class="field">-->
+<!--            <%#= f.label :password_confirmation %><br />-->
+<%#= f.password_field :password_confirmation, autocomplete: "new-password" %>
+<!--          </div>-->
+
+<!--          <div class="field">-->
+<!--            <%#= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />-->
+<%#= f.password_field :current_password, autocomplete: "current-password" %>
+<!--          </div>-->
+
+<!--          <div class="space-y-2">-->
+<!--            <div class="field">-->
+<%#= f.label :password, "Palavra-passe" %>
+<%#= f.password_field :password, autocomplete: "current-password", placeholder: "6+ caracteres" %>
+<!--            </div>-->
+<%# if devise_mapping.rememberable? %>
+<!--              <div class="flex justify-between items-center text-xs font-normal text-gray-600">-->
+<!--                <div class="field flex items-center">-->
+<%#= f.check_box :remember_me, class: "mr-2" %>
+<%#= f.label :remember_me, "Guarde o meu login", class: "text-xs font-normal text-gray-600", style: "margin-bottom:0" %>
+<!--                </div>-->
+<!--                <div class="field">-->
+<!--                  <%#= link_to "Forgot your password?", new_password_path(resource_name) %><br/>-->
+<!--                </div>-->
+<!--              </div>-->
+<%# end %>
+<!--          </div>-->
+
+
+<!--          <div class="space-y-2">-->
+<!--            <div class="actions">-->
+<%#= f.submit "Log in", class: "dark w-full" %>
+<!--            </div>-->
+<!--            <div class="text-gray-600 text-xs flex space-x-2 items-center">-->
+<!--              <p>Ainda não tem uma conta?</p>-->
+<!--              <p><%#= link_to "Registe-se aqui.", new_registration_path(resource_name), class: "font-bold underline" %></p>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--        </div>-->
+<%# end %>
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+
+<!--<h2>Edit <%#= resource_name.to_s.humanize %></h2>-->
+
+<%#= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+<%#= render "devise/shared/error_messages", resource: resource %>
+
+<!--  <div class="field">-->
+<!--    <%#= f.label :email %><br />-->
+<%#= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<!--  </div>-->
+
+<%# if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+<!--    <div>Currently waiting confirmation for: <%#= resource.unconfirmed_email %></div>-->
+<%# end %>
+
+<!--  <div class="field">-->
+<!--    <%#= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />-->
+<%#= f.password_field :password, autocomplete: "new-password" %>
+<%# if @minimum_password_length %>
+<!--      <br />-->
+<!--      <em><%#= @minimum_password_length %> characters minimum</em>-->
+<%# end %>
+<!--  </div>-->
+
+<!--  <div class="field">-->
+<!--    <%#= f.label :password_confirmation %><br />-->
+<%#= f.password_field :password_confirmation, autocomplete: "new-password" %>
+<!--  </div>-->
+
+<!--  <div class="field">-->
+<!--    <%#= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />-->
+<%#= f.password_field :current_password, autocomplete: "current-password" %>
+<!--  </div>-->
+
+<!--  <div class="actions">-->
+<%#= f.submit "Update" %>
+<!--  </div>-->
+<%# end %>
+
+<!--<h3>Cancel my account</h3>-->
+
+<!--<p>Unhappy? <%#= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>-->
+
+<%#= link_to "Back", :back %>

@@ -5,7 +5,11 @@ Rails.application.routes.draw do
     # Redirests signing out users back to sign-in
     get 'users', to: 'devise/sessions#new'
   end
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    sessions: 'users/sessions',
+    omniauth_callbacks: 'users/omniauth_callbacks'
+  }
 
   scope :admin do
     get '/', to: 'home#index', as: 'backoffice_home'
