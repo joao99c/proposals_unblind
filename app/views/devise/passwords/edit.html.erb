@@ -1,25 +1,47 @@
-<h2>Change your password</h2>
+<div class="p-4 md:p-10 overflow-auto h-full w-full relative">
+  <nav class="px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900 md:fixed">
+    <div class="container flex flex-wrap justify-between items-center mx-auto">
+      <a href="https://flowbite.com/" class="flex items-center">
+        <img src="https://flowbite.com/docs/images/logo.svg" class="mr-3 h-6 sm:h-9" alt="Flowbite Logo"/>
+        <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Propostas</span>
+      </a>
+    </div>
+  </nav>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
+  <div class="flex items-center justify-center md:h-full w-full">
+    <div class="space-y-6 w-full max-w-screen-xs mx-auto">
+      <div class="space-y-2">
+        <h1 class="text-xl font-semibold">Alteração de palavra-passe</h1>
+        <h2 class="text-base font-medium">Por favor, adicione a nova palavra-passe.</h2>
+      </div>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+        <%= f.hidden_field :reset_password_token %>
+        <div class="space-y-6">
+          <div class="field">
+            <%= f.label :password, "Palavra-passe" %>
+            <%= f.password_field :password, autocomplete: "new-password", placeholder: "6+ caracteres" %>
+          </div>
+
+            <div class="field">
+              <%= f.label :password_confirmation, "Valide a sua palavra-passe" %>
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "6+ caracteres" %>
+            </div>
+
+
+          <div class="space-y-2">
+            <div class="actions">
+              <%= f.submit "Alterar palavra-passe", class: "dark w-full" %>
+            </div>
+            <div class="text-gray-600 text-xs flex space-x-2 items-center">
+              <p>Ainda não tem uma conta?</p>
+              <p><%= link_to "Registe-se aqui.", new_registration_path(resource_name), class: "font-bold underline" %></p>
+            </div>
+          </div>
+
+        </div>
+      <% end %>
+    </div>
   </div>
+</div>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
