@@ -62,11 +62,14 @@ module.exports = {
     theme: {
         extend: {
             screens: {
-                'xs': '420px',
+                'xs': '364px',
             },
             transitionProperty: {
                 'max-width': 'max-width'
             },
+            fontFamily: {
+                'sans': 'Inter',
+            }
         },
     },
 
