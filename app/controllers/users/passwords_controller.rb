@@ -11,6 +11,8 @@ class Users::PasswordsController < Devise::PasswordsController
   #   super
   # end
 
+  def verify_email; end
+
   # GET /resource/password/edit?reset_password_token=abcdef
   # def edit
   #   super
@@ -28,7 +30,7 @@ class Users::PasswordsController < Devise::PasswordsController
   # end
 
   # The path used after sending reset password instructions
-  # def after_sending_reset_password_instructions_path_for(resource_name)
-  #   super(resource_name)
-  # end
+  def after_sending_reset_password_instructions_path_for(resource_name)
+    users_password_verify_email_path if is_navigational_format?
+  end
 end

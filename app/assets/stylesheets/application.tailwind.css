@@ -43,7 +43,7 @@
     }
 
     input[type="submit"].dark {
-        @apply bg-gray-900 text-white focus:ring-4 focus:outline-none py-3 px-5 text-base font-medium text-center rounded-lg inline-flex items-center justify-center w-full
+        @apply bg-gray-300 text-gray-900 focus:ring-4 focus:outline-none py-3 px-5 text-sm font-medium text-center rounded-lg inline-flex items-center justify-center w-full
     }
 
     input[type="color"] {

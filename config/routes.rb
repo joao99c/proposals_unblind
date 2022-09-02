@@ -2,11 +2,13 @@
 
 Rails.application.routes.draw do
   devise_scope :user do
-    # Redirests signing out users back to sign-in
+    # Redirects signing out users back to sign-in
     get 'users', to: 'devise/sessions#new'
+    get 'users/password/verify_email', to: 'users/passwords#verify_email'
   end
   devise_for :users, controllers: {
     registrations: 'users/registrations',
+    passwords: 'users/passwords',
     sessions: 'users/sessions',
     omniauth_callbacks: 'users/omniauth_callbacks'
   }

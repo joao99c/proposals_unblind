@@ -11,16 +11,11 @@
   <div class="flex items-center justify-center md:h-full w-full">
     <div class="space-y-6 w-full max-w-screen-xs mx-auto">
       <div class="space-y-2">
-        <h1 class="text-xl font-semibold">Crie a sua conta.</h1>
+        <h1 class="text-xl font-semibold text-blue-900">Crie a sua conta.</h1>
         <h2 class="text-base font-medium">Por favor, adicione os seus detalhes.</h2>
       </div>
       <div class="space-y-2">
-        <button type="button" class="text-gray-900 bg-white hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 py-3 px-5 text-base font-medium text-center rounded-lg inline-flex items-center justify-center dark:focus:ring-[#4285F4]/55 w-full">
-          <svg class="mr-2 -ml-1 w-4 h-4" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512">
-            <path fill="currentColor" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"></path>
-          </svg>
-          Login com o Google
-        </button>
+        <%= render partial:"devise/shared/google_button", locals:{resource_name:} %>
       </div>
       <div class="flex space-x-4 items-center">
         <div class="w-full border-b border-black h-0"></div>
@@ -60,7 +55,7 @@
 
           <div class="space-y-2">
             <div class="actions">
-              <%= f.submit "Log in", class: "dark w-full" %>
+              <%= f.submit "Criar Conta", class: "dark w-full" %>
             </div>
             <div class="text-gray-600 text-xs flex space-x-2 items-center">
               <p>Já tem uma conta?</p>
