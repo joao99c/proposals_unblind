@@ -1,0 +1,55 @@
+<%= turbo_frame_tag :user_settings do %>
+
+  <div>
+    <div class="p-4 border-b">
+      <p class="uppercase text-xs font-semibold">Pessoal</p>
+    </div>
+    <div class="p-4 flex">
+
+      <div class="text-gray-500 w-1/3">
+        <p class="text-sm font-bold">Detalhes</p>
+        <p class=text-xs">Defina o seu nome, email e fotografia.</p>
+      </div>
+
+      <div class="w-2/3">
+        <%= form_with model: current_user, url: user_account_profile_path, method: :post do |form| %>
+          <div class="grid grid-cols-2 gap-5">
+            <div class="w-full">
+              <%= form.label :first_name, "Primeiro Nome" %>
+              <%= form.text_field :first_name %>
+            </div>
+
+            <div class="w-full">
+              <%= form.label :last_name, "Sobrenome" %>
+              <%= form.text_field :last_name %>
+            </div>
+
+            <div class="col-span-2">
+              <%= form.label :avatar, "Foto de perfil" %>
+              <%= form.file_field :avatar, class: "bg-red-500" %>
+              <p class="mt-2 text-xs text-gray-600">Recomendamos um PNG ou JPG quadrado com menos de 5MB.</p>
+            </div>
+
+
+            <div class="col-span-2">
+              <%= form.label :email, "Email" %>
+              <%= form.email_field :email %>
+            </div>
+
+            <div class="col-span-2">
+              <%= form.label :company_avatar, "Logo da empresa" %>
+              <%# if current_user.company_avatar.attached? %>
+              <%#= image_tag(current_user.company_avatar.variant(:thumb)) %>
+              <%# end %>
+              <%= form.file_field :company_avatar %>
+            </div>
+
+            <%= form.submit "Salvar" %>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+
+<% end %>

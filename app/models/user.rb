@@ -28,6 +28,14 @@ class User < ApplicationRecord
     Arel.sql("to_char(\"#{self.table_name}\".\"id\", '99999999')")
   end
 
+  has_one_attached :avatar do |attachable|
+    attachable.variant :thumb, resize_to_limit: [100, 100]
+  end
+  has_one_attached :company_avatar do |attachable|
+    attachable.variant :thumb, resize_to_limit: [100, 100]
+  end
+
+
   private
 
   def self.from_omniauth(auth)

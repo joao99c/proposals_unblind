@@ -16,7 +16,7 @@
           </svg>
         </button>
         <a href="/admin" class="flex items-center font-semibold text-md lg:mr-20 dark:text-white text-2xl text-gray-900">
-<!--           <img src="/images/logo.svg" class="mr-4 h-8" alt="FlowBite Logo">-->
+          <!--           <img src="/images/logo.svg" class="mr-4 h-8" alt="FlowBite Logo">-->
           <span class="hidden sm:flex">Propostas</span>
         </a>
       </div>
@@ -140,8 +140,11 @@
             <div>
               <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button-2" aria-expanded="false" data-dropdown-toggle="dropdown-2">
                 <span class="sr-only">Open user menu</span>
-<!--                <img class="w-8 h-8 rounded-full" src="https://i.pravatar.cc/32" alt="user photo">-->
-                <div class="w-8 h-8 rounded-full bg-red-50"></div>
+                <% if current_user.avatar.attached? %>
+                  <%= image_tag(current_user.avatar, class: "w-8 h-8 rounded-full") %>
+                <% else %>
+                  <div class="w-8 h-8 rounded-full bg-red-50"></div>
+                <% end %>
               </button>
             </div>
             <!-- Dropdown menu -->

@@ -128,13 +128,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_132209) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "text_typeface_id", default: 1
-    t.text "text_weight", default: "700"
-    t.text "text_spacing"
-    t.text "text_height"
+    t.text "text_weight", default: "400"
+    t.text "text_spacing", default: "0"
+    t.text "text_height", default: "1.2"
     t.bigint "heading_typeface_id", default: 1
-    t.text "heading_weight", default: "400"
-    t.text "heading_spacing"
-    t.text "heading_height"
+    t.text "heading_weight", default: "700"
+    t.text "heading_spacing", default: "0"
+    t.text "heading_height", default: "1.35"
     t.index ["customer_id"], name: "index_deals_on_customer_id"
     t.index ["heading_typeface_id"], name: "index_deals_on_heading_typeface_id"
     t.index ["text_typeface_id"], name: "index_deals_on_text_typeface_id"
@@ -186,7 +186,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_132209) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
+    t.string "first_name"
+    t.string "last_name"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

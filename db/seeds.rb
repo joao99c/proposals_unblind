@@ -9,9 +9,9 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 User.create([
-              { email: 'ld@unblind.io', name: 'Luís Diogo', password: 123_123_123 },
-              { email: 'jc@unblind.io', name: 'Jota Carvalho', password: 123_123_123 },
-              { email: 'madalenafigueirasdacosta@gmail.com', name: 'Madalena Costa', password: 123_123_123 }
+              { email: 'ld@unblind.io', first_name: 'Luís', last_name: 'Diogo', password: 123_123_123 },
+              { email: 'jc@unblind.io', first_name: 'Jota', last_name: 'Carvalho', password: 123_123_123 },
+              { email: 'madalenafigueirasdacosta@gmail.com', first_name: 'Madalena', last_name: 'Costa', password: 123_123_123 }
             ])
 
 Font.create([

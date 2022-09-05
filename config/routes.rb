@@ -1,6 +1,15 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'user_account', to: 'user_account#index'
+  get 'user_account/profile', to: 'user_account#profile'
+  post 'user_account/profile', to: 'user_account#save_profile'
+  get 'user_account/notifications', to: 'user_account#notifications'
+  post 'user_account/notifications', to: 'user_account#save_notifications'
+  get 'user_account/password', to: 'user_account#password'
+  post 'user_account/password', to: 'user_account#save_password'
+  get 'user_account/delete', to: 'user_account#delete'
+  post 'user_account/delete', to: 'user_account#save_delete'
   devise_scope :user do
     # Redirects signing out users back to sign-in
     get 'users', to: 'devise/sessions#new'
