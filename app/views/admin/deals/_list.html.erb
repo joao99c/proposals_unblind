@@ -32,20 +32,20 @@
           </ul>
         </div>
 
-        <tr class="border-b dark:border-gray-700">
-          <th scope="col" class="text-gray-500 py-3 px-6">
+        <tr class="border-b dark:border-gray-700 text-xs font-semibold uppercase">
+          <th scope="col" class="text-gray-500 p-4">
             Nome da Proposta
           </th>
-          <th scope="col" class="text-gray-500 py-3 px-6">
+          <th scope="col" class="text-gray-500 p-4">
             Cliente
           </th>
-          <th scope="col" class="text-gray-500 py-3 px-6">
+          <th scope="col" class="text-gray-500 p-4">
             Data Fecho
           </th>
-          <th scope="col" class="text-gray-500 py-3 px-6">
+          <th scope="col" class="text-gray-500 p-4">
             Estado
           </th>
-          <th scope="col" class="text-gray-500 py-3 px-6">
+          <th scope="col" class="text-gray-500 p-4">
             Valor Total
           </th>
         </tr>
@@ -53,27 +53,27 @@
         <tbody>
         <% objects.each do |d| %>
           <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-            <td class="py-4 px-6 font-normal">
+            <td class="p-4 font-normal">
               <%= d.name %>
             </td>
-            <td class="py-4 px-6 text-gray-900">
+            <td class="p-4 text-gray-900">
               <% if d.customer %>
                 <span class="font-semibold"><%= d.customer.responsable_name %></span> da <%= d.customer.name %>
               <% else %>
                 -
               <% end %>
             </td>
-            <td class="py-4 px-6">
+            <td class="p-4">
               <% if d.finish_date %>
                 <%= d.finish_date.strftime("%b %d, %Y") %>
               <% else %>
                 -
               <% end %>
             </td>
-            <td class="py-4 px-6">
+            <td class="p-4">
               <%= deal_list_badge(d) %>
             </td>
-            <td class="py-4 px-6 text-gray-900">
+            <td class="p-4 text-gray-900 font-semibold">
               <%= number_to_currency d.total_amount %>
             </td>
           </tr>
