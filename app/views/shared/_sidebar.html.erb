@@ -12,9 +12,9 @@
             { title: 'Definições', path: user_account_path, icon: "cog" },
             { title: 'Ajuda', path: "#", icon: "support" },
           ] %>
-          <li>
+          <li class="relative cursor-pointer whitespace-nowrap">
             <div class="flex items-center p-2 text-base font-medium text-gray-300 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700">
-              <%= heroicon("home", variant: :solid, options: { class: "w-6 h-6 text-gray-300 transition duration-75" }) %>
+              <%= heroicon("home", variant: :solid, options: { class: "w-6 h-6 text-gray-300 transition duration-75 flex-shrink-0" }) %>
               <span class="ml-3" sidebar-toggle-item> Página Inicial </span>
             </div>
           </li>
@@ -22,9 +22,9 @@
           <% css = "flex items-center p-2 text-base font-medium text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700" %>
           <% active_css = "flex items-center p-2 text-base font-medium text-white bg-blue-600 rounded-lg group" %>
           <% links.each do |link| %>
-            <li>
+            <li class="relative cursor-pointer whitespace-nowrap">
               <%= link_to link[:path], class: current_page?(link[:path]) ? active_css : css do %>
-                <%= heroicon(link[:icon], variant: :solid, options: { class: "w-6 h-6 transition duration-75" }) %>
+                <%= heroicon(link[:icon], variant: :solid, options: { class: "w-6 h-6 transition duration-75 flex-shrink-0" }) %>
                 <span class="ml-3" sidebar-toggle-item> <%= link[:title] %> </span>
               <% end %>
             </li>
@@ -32,9 +32,9 @@
         </ul>
         <ul class="pt-4 mt-4 space-y-2 border-t border-gray-200 dark:border-gray-700">
           <% other_section_links.each do |link| %>
-            <li>
+            <li class="relative cursor-pointer whitespace-nowrap">
               <%= link_to link[:path], class: current_page?(link[:path]) ? active_css : css do %>
-                <%= heroicon(link[:icon], variant: :solid, options: { class: "w-6 h-6 transition duration-75" }) %>
+                <%= heroicon(link[:icon], variant: :solid, options: { class: "w-6 h-6 transition duration-75 flex-shrink-0" }) %>
                 <span class="ml-3" sidebar-toggle-item> <%= link[:title] %> </span>
               <% end %>
             </li>
