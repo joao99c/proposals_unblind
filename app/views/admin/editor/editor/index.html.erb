@@ -34,29 +34,35 @@
       </ol>
 
       <div class="h-full px-4 space-x-2.5 flex items-center text-gray-900 border-l">
-        <%= heroicon("device-mobile", options: {
-          class: "w-7 h-7",
-          "data-action": "click->editor--responsive#resize",
-          "data-editor--responsive-target": "button",
-          "data-breakpoint": "mobile",
-          "data-title": "Mobile"
-        }) %>
+        <div class="p-0.5">
+          <%= heroicon("device-mobile", options: {
+            class: "w-7 h-7",
+            "data-action": "click->editor--responsive#resize",
+            "data-editor--responsive-target": "button",
+            "data-breakpoint": "mobile",
+            "data-title": "Mobile"
+          }) %>
+        </div>
 
-        <%= heroicon("device-tablet", options: {
-          class: "w-7 h-7",
-          "data-action": "click->editor--responsive#resize",
-          "data-editor--responsive-target": "button",
-          "data-breakpoint": "tablet",
-          "data-title": "Tablet"
-        }) %>
+        <div class="p-0.5">
+          <%= heroicon("device-tablet", options: {
+            class: "w-7 h-7",
+            "data-action": "click->editor--responsive#resize",
+            "data-editor--responsive-target": "button",
+            "data-breakpoint": "tablet",
+            "data-title": "Tablet"
+          }) %>
+        </div>
 
-        <%= heroicon("desktop-computer", options: {
-          class: "w-7 h-7 bg-gray-200 rounded",
-          "data-action": "click->editor--responsive#resize",
-          "data-editor--responsive-target": "button",
-          "data-breakpoint": "desktop",
-          "data-title": "Desktop"
-        }) %>
+        <div class="p-0.5">
+          <%= heroicon("desktop-computer", options: {
+            class: "w-7 h-7",
+            "data-action": "click->editor--responsive#resize",
+            "data-editor--responsive-target": "button",
+            "data-breakpoint": "desktop",
+            "data-title": "Desktop"
+          }) %>
+        </div>
 
 
       </div>

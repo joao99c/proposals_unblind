@@ -25,9 +25,6 @@ application.register("editor--reorder", Editor__ReorderController)
 import Editor__ResponsiveController from "./editor/responsive_controller"
 application.register("editor--responsive", Editor__ResponsiveController)
 
-import Editor__SidebarController from "./editor/sidebar_controller"
-application.register("editor--sidebar", Editor__SidebarController)
-
 import Editor__Slider__WeightController from "./editor/slider/weight_controller"
 application.register("editor--slider--weight", Editor__Slider__WeightController)
 

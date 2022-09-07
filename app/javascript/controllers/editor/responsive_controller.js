@@ -8,9 +8,9 @@ export default class extends Controller {
         event.preventDefault();
         this.buttonTargets.forEach((button) => {
             if (button === event.currentTarget) {
-                button.classList.add("bg-gray-200", "rounded");
+                button.parentElement.classList.add("bg-blue-600", "rounded", "text-white");
             } else {
-                button.classList.remove("bg-gray-200", "rounded");
+                button.parentElement.classList.remove("bg-blue-600", "rounded", "text-white");
             }
         });
 
