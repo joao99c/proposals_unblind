@@ -23,7 +23,7 @@
           <% active_css = "flex items-center p-2 text-base font-medium text-white bg-blue-600 rounded-lg group" %>
           <% links.each do |link| %>
             <li class="relative cursor-pointer whitespace-nowrap">
-              <%= link_to link[:path], class: current_page?(link[:path]) ? active_css : css do %>
+              <%= link_to link[:path], class: request.url.include?(link[:path]) ? active_css : css do %>
                 <%= heroicon(link[:icon], variant: :solid, options: { class: "w-6 h-6 transition duration-75 flex-shrink-0" }) %>
                 <span class="ml-3" sidebar-toggle-item> <%= link[:title] %> </span>
               <% end %>
@@ -33,7 +33,7 @@
         <ul class="pt-4 mt-4 space-y-2 border-t border-gray-200 dark:border-gray-700">
           <% other_section_links.each do |link| %>
             <li class="relative cursor-pointer whitespace-nowrap">
-              <%= link_to link[:path], class: current_page?(link[:path]) ? active_css : css do %>
+              <%= link_to link[:path], class: request.url.include?(link[:path]) ? active_css : css do %>
                 <%= heroicon(link[:icon], variant: :solid, options: { class: "w-6 h-6 transition duration-75 flex-shrink-0" }) %>
                 <span class="ml-3" sidebar-toggle-item> <%= link[:title] %> </span>
               <% end %>

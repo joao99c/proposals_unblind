@@ -24,8 +24,8 @@
               <%= heroicon("cog", variant: :solid, options: { class: "h-6 w-6 text-gray-500 shrink-0" }) %>
               <p>Cliente</p>
             </div>
-            <div class="py-4 px-0 space-y-6">
-              <p class="text-gray-600 px-4">Apresentação</p>
+            <div class="py-4 px-0">
+              <p class="text-gray-600 px-4 mb-6">Apresentação</p>
               <div data-controller="editor--sortable" data-editor--sortable-url="<%= reorder_admin_deal_editor_deal_section_path(deal_id: @deal.id, id: ":id") %>" class="px-3 space-y-4">
                 <% @deal.deal_sections.each do |deal_section| %>
                   <div data-id="<%= deal_section.id %>" data-preview-id="<%= dom_id(deal_section) %>" class="editor--page-section flex items-center justify-between space-x-4">
@@ -40,12 +40,12 @@
 
                   </div>
                 <% end %>
-
+              </div>
+              <div class="px-3 mt-4">
                 <%= link_to new_admin_deal_editor_deal_section_path(deal_id: @deal.id), class: "flex items-center space-x-2 truncate text-blue-500" do %>
                   <%= heroicon("plus-circle", variant: :solid, options: { class: "h-6 w-6 shrink-0" }) %>
                   <p>Nova Secção</p>
                 <% end %>
-
               </div>
             </div>
             <div class="py-4 px-3 space-y-4 text-gray-900 font-medium text-base">

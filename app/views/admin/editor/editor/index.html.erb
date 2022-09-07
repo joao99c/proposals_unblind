@@ -48,7 +48,7 @@
   </div>
 </nav>
 <div class="flex pt-16 overflow-hidden h-full">
-  <aside data-turbo-permanent data-editor--sidebar-target="sidebar" class="fixed top-0 left-0 z-20 flex flex-col flex-shrink-0 w-80 h-full pt-16 duration-75 transition-width border-r" aria-label="Sidebar">
+  <aside class="fixed top-0 left-0 z-20 flex flex-col flex-shrink-0 w-80 h-full pt-16 duration-75 transition-width border-r">
     <%= turbo_frame_tag dom_id(@deal, :sidebar),
                         src: admin_deal_editor_deal_sections_path(@deal),
                         data: {
