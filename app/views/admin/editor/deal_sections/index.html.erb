@@ -1,5 +1,9 @@
 <%= turbo_frame_tag dom_id(@deal, :sidebar) do %>
   <div class="h-full bg-white overflow-scroll">
+
+
+    <h1 class="text-lg font-semibold text-gray-900 py-4 px-3">Editor geral</h1>
+
     <div data-controller="tabs" class="flex flex-col flex-1 pb-4">
       <div class="">
         <ul class="flex -mb-px text-sm font-medium text-center" id="myTab" role="tablist">
@@ -21,21 +25,21 @@
         <div class="rounded-lg" id="existing-customer" role="tabpanel" aria-labelledby="existing-customer-tab">
           <div class="flex-1 divide-y divide-gray-200 dark:divide-gray-700 text-gray-900 font-medium text-base">
             <div class="py-3.5 px-3 flex items-center space-x-2">
-              <%= heroicon("cog", variant: :solid, options: { class: "h-6 w-6 text-gray-500 shrink-0" }) %>
+              <%= heroicon("cog", variant: :solid, options: { class: "h-6 w-6 text-blue-600 shrink-0" }) %>
               <p>Cliente</p>
             </div>
             <div class="py-4 px-0">
-              <p class="text-gray-600 px-4 mb-6">Apresentação</p>
+              <p class="text-blue-600 px-4 mb-6">Apresentação</p>
               <div data-controller="editor--sortable" data-editor--sortable-url="<%= reorder_admin_deal_editor_deal_section_path(deal_id: @deal.id, id: ":id") %>" class="px-3 space-y-4">
                 <% @deal.deal_sections.each do |deal_section| %>
                   <div data-id="<%= deal_section.id %>" data-preview-id="<%= dom_id(deal_section) %>" class="editor--page-section flex items-center justify-between space-x-4">
                     <%= link_to edit_admin_deal_editor_deal_section_path(deal_id: deal_section.deal_id, id: deal_section.id), class: "flex items-center space-x-2 truncate" do %>
-                      <%= heroicon("cog", variant: :solid, options: { class: "h-6 w-6 text-gray-500 shrink-0" }) %>
+                      <%= heroicon("cog", variant: :solid, options: { class: "h-6 w-6 text-blue-600 shrink-0" }) %>
                       <p><%= deal_section.name %></p>
                     <% end %>
 
                     <%= heroicon("menu-alt-4", options: {
-                      class: "handle w-5 h-5",
+                      class: "handle w-5 h-5 text-blue-600",
                     }) %>
 
                   </div>
@@ -51,11 +55,11 @@
             <div class="py-4 px-3 space-y-4 text-gray-900 font-medium text-base">
               <div class="space-y-3">
                 <div class="flex items-center space-x-2">
-                  <%= heroicon("currency-dollar", variant: :solid, options: { class: "h-6 w-6 text-gray-500" }) %>
+                  <%= heroicon("currency-dollar", variant: :solid, options: { class: "h-6 w-6 text-blue-600" }) %>
                   <p>Proposta Comercial</p>
                 </div>
                 <div class="flex items-center space-x-2">
-                  <%= heroicon("mail-open", variant: :solid, options: { class: "h-6 w-6 text-gray-500" }) %>
+                  <%= heroicon("mail-open", variant: :solid, options: { class: "h-6 w-6 text-blue-600" }) %>
                   <p>Contacto</p>
                 </div>
               </div>
@@ -67,16 +71,16 @@
             <div class="space-y-3 py-6 px-3 border-b">
               <%= link_to admin_deal_editor_fonts_path(@deal) do %>
                 <div class="flex items-center space-x-2">
-                  <%= heroicon("at-symbol", variant: :solid, options: { class: "h-6 w-6 text-gray-500" }) %>
+                  <%= heroicon("at-symbol", variant: :solid, options: { class: "h-6 w-6 text-blue-600" }) %>
                   <p>Tipos de Letra</p>
                 </div>
               <% end %>
               <div class="flex items-center space-x-2">
-                <%= heroicon("color-swatch", variant: :solid, options: { class: "h-6 w-6 text-gray-500" }) %>
+                <%= heroicon("color-swatch", variant: :solid, options: { class: "h-6 w-6 text-blue-600" }) %>
                 <p>Cores</p>
               </div>
               <div class="flex items-center space-x-2">
-                <%= heroicon("cube", variant: :solid, options: { class: "h-6 w-6 text-gray-500" }) %>
+                <%= heroicon("cube", variant: :solid, options: { class: "h-6 w-6 text-blue-600" }) %>
                 <p>Favicon</p>
               </div>
             </div>

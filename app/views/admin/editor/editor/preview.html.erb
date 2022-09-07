@@ -1,16 +1,19 @@
 <%= turbo_frame_tag dom_id(@deal, :preview) do %>
   <div id="font-text" class="h-full relative" style="
-    font-family: <%= @deal.text_typeface&.name %>;
+  font-family: <%= @deal.text_typeface&.name %>;
     font-weight: <%= @deal.text_weight %>;
     line-height: <%= @deal.text_height %>;
     letter-spacing:<%= @deal.text_spacing %>em;
   ">
 
-    <p>Customer:</p>
-    <%= @deal.customer.name %>
+    <div class="flex bg-gray-50">
+      <div class="bg-blue-600 text-blue-50 mx-10 mb-10 mt-40 p-10 space-y-2">
+        <h1 class="text-2xl font-bold">Proposta <%= @deal.customer.name %></h1>
+        <p class="font-medium">Data de Envio</p>
+      </div>
+    </div>
 
-    <br><br>
-    <p>Sections:</p>
+
     <%= turbo_stream_from @deal, :deal_sections_preview %>
     <div id="deal_sections_preview" class="space-y-10">
       <% @deal.deal_sections.map do |ds| %>
