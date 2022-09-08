@@ -54,7 +54,7 @@
           }) %>
         </div>
 
-        <div class="p-0.5">
+        <div class="p-0.5 bg-blue-600 rounded text-white">
           <%= heroicon("desktop-computer", options: {
             class: "w-7 h-7",
             "data-action": "click->editor--responsive#resize",
@@ -85,11 +85,11 @@
     %>
   </aside>
   <div class="fixed inset-0 z-10 hidden bg-gray-900/50 dark:bg-gray-900/90" id="sidebarBackdrop"></div>
-  <div id="main-content" class="relative w-full h-full bg-gray-100 overflow-y-auto ml-80">
-    <main class="h-full">
+  <div id="main-content" class="relative w-full h-full overflow-y-auto ml-80">
+    <main class="h-full bg-white bg-checkered">
       <iframe id="<%= dom_id(@deal, :preview) %>"
               src="<%= admin_deal_editor_preview_url(@deal) %>"
-              class="w-full h-full mx-auto transition-all transition-500 ease-in-out max-w-[100%]"
+              class="w-full h-full mx-auto transition-all transition-500 ease-in-out max-w-[100%] bg-gray-100"
               data-editor--responsive-target="preview">
       </iframe>
     </main>
