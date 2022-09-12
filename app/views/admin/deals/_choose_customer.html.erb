@@ -1,0 +1,48 @@
+<%= turbo_frame_tag :choose_customer do %>
+  <% if @deal.customer.present? %>
+    <div class="flex justify-between items-center">
+      <div class="flex space-x-4 items-center">
+        <div class="w-12 h-12 rounded-full bg-gray-50"></div>
+        <div>
+          <p class="font-semibold text-gray-700"><%= @deal.customer.name %></p>
+          <p class="text-sm text-gray-400"><%= @deal.customer.email %></p>
+        </div>
+      </div>
+
+
+      <div class="flex h-7">
+        <button type="submit" class="text-xs text-gray-70 px-4 border border-gray-300 rounded-lg rounded-r-none">
+          Editar
+        </button>
+
+        <%= form_tag step_1_choose_customer_admin_deal_path, method: :delete, class: "px-2 border border-gray-300 border-l-0 rounded-lg rounded-l-none" do %>
+          <button class="h-full">
+            <%= heroicon("x", options: { class: "w-5 h-5 text-gray-700" }) %>
+          </button>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="text-xs text-gray-400 mt-4 pl-16">
+      <p class="font-medium text-gray-700 mb-1.5">Responsável</p>
+      <div class="flex space-x-1.5 mb-0.5"><%= heroicon("user", options: { class: "w-4 h-4 stroke-2" }) %><p><%= @deal.customer.responsable_name %></p></div>
+      <div class="flex space-x-1.5 mb-0.5"><%= heroicon("mail", options: { class: "w-4 h-4 stroke-2" }) %><p><%= @deal.customer.responsable_email %></p></div>
+      <div class="flex space-x-1.5 mb-0.5"><%= heroicon("phone", options: { class: "w-4 h-4 stroke-2" }) %><p><%= @deal.customer.responsable_tel %></p></div>
+    </div>
+
+  <% else %>
+
+    <%= form_tag(step_1_search_customer_admin_deal_path, method: :get, class: "flex items-center", data: {
+      turbo_frame: "customer_search",
+    }) do %>
+      <label for="simple-search" class="sr-only">Search</label>
+      <div class="relative w-full">
+        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+          <%= heroicon("search", options: { class: "w-5 h-5 text-blue-600" }) %>
+        </div>
+        <%= text_field_tag :query, params[:query], placeholder: "Search", oninput: "this.form.requestSubmit()", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 !pl-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+      </div>
+    <% end %>
+    <%= turbo_frame_tag :customer_search %>
+  <% end %>
+<% end %>

@@ -1,0 +1,26 @@
+<tr id="product_total" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+  <td colspan="5" class="py-4 px-6 text-gray-500 text-sm">
+    <div class="space-y-2 w-72 ml-auto">
+      <h3 class="font-semibold text-gray-900">Resumo proposta</h3>
+
+      <div class="divide-y w-full">
+        <div class="flex py-3 justify-between">
+          <p>Subtotal</p>
+          <p class="text-sm font-semibold text-gray-900"><%= number_to_currency(deal.total_subtotal) %></p>
+        </div>
+        <div class="flex py-3 justify-between">
+          <p>Desconto</p>
+          <p class="text-sm font-semibold text-gray-900"><%= number_to_currency(deal.total_discount) %></p>
+        </div>
+        <div class="flex py-3 justify-between">
+          <p>IVA</p>
+          <p class="text-sm font-semibold text-gray-900"><%= number_to_currency(deal.total_iva) %></p>
+        </div>
+        <div class="flex pt-3 justify-between">
+          <p class="text-gray-900 font-semibold">Total Proposta</p>
+          <p class="text-sm font-semibold text-gray-900"><%= number_to_currency(deal.total_amount) %></p>
+        </div>
+      </div>
+    </div>
+  </td>
+</tr>

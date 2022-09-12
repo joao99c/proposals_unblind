@@ -1,0 +1,45 @@
+<tr id="<%= dom_id(dp) %>" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+  <td class="py-4 px-6 text-gray-900 dark:text-white">
+    <div class="flex items-center space-x-4">
+      <div class="w-12 h-12 bg-gray-300 rounded-lg"></div>
+      <div>
+        <p class="font-medium text-gray-900"><%= dp.product.name %></p>
+        <p class="text-sm text-gray-500"><%= dp.product.description.truncate(30) %></p>
+      </div>
+    </div>
+  </td>
+  <td class="py-4 px-6">
+    <div class="flex items-center">
+      <%= form_tag step_1_update_dp_admin_deal_path, method: :put, data: { controller: "editor--autosave quantity-changer" }, class: "flex items-center text-sm font-medium text-gray-900 space-x-2 bg-gray-100 py-1.5 px-1 rounded-lg" do %>
+        <%= hidden_field_tag :dp_id, dp.id %>
+        <%= hidden_field_tag :quantity, dp.quantity, data: { quantity_changer_target: "input", action: "editor--autosave#save" } %>
+
+        <%= heroicon("minus", options: { class: "w-4 h-4 shrink-0 text-gray-900 stroke-2", "data-action": "click->quantity-changer#minus" }) %>
+        <p data-quantity-changer-target="result"><%= dp.quantity %></p>
+        <%= heroicon("plus", options: { class: "w-4 h-4 shrink-0 text-gray-900 stroke-2", "data-action": "click->quantity-changer#plus" }) %>
+      <% end %>
+    </div>
+  </td>
+  <td class="py-4 px-6 font-medium text-gray-900 dark:text-white">
+    <div class="w-20">
+      <%= form_tag step_1_update_dp_admin_deal_path, method: :put, data: { controller: "editor--autosave" } do %>
+        <%= hidden_field_tag :dp_id, dp.id %>
+        <%= text_field_tag :discount_amount, "€#{number_with_precision(dp.discount_amount, precision: 2)}", id: "discount_amount", placeholder: "0€", class: "!bg-white text-center py-1", data: { action: "editor--autosave#save", controller: "currency-input", type: "currency" } %>
+      <% end %>
+    </div>
+  </td>
+  <td id="<%= dom_id(dp,"total_price") %>" class="py-4 px-6 font-medium text-gray-900 dark:text-white">
+    <%= number_to_currency(dp.price) %>
+  </td>
+  <td class="py-4 px-6">
+    <div class="flex space-x-1">
+      <%= heroicon("pencil-alt", options: { variant: :solid, class: "w-4 h-4 shrink-0 text-gray-500" }) %>
+      <%= form_tag step_1_choose_product_admin_deal_path, method: :delete do %>
+        <%= hidden_field_tag(:dp_id, dp.id) %>
+        <button class="w-4 h-4 shrink-0 text-red-600">
+          <%= heroicon("trash", options: { variant: :solid }) %>
+        </button>
+      <% end %>
+    </div>
+  </td>
+</tr>

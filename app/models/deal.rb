@@ -24,6 +24,7 @@ class Deal < ApplicationRecord
 
   has_many :deal_products, dependent: :destroy
   accepts_nested_attributes_for :deal_products, allow_destroy: true, reject_if: :all_blank
+  has_many :products, through: :deal_products
 
   belongs_to :user, optional: true
 
@@ -36,10 +37,9 @@ class Deal < ApplicationRecord
   belongs_to :heading_typeface, class_name: 'Font', foreign_key: 'heading_typeface_id'
   belongs_to :text_typeface, class_name: 'Font', foreign_key: 'text_typeface_id'
 
-
   # Validations
   validates :name, presence: true
-  validates :user, :customer, presence: true, on: :update
+  # validates :user, :customer, presence: true, on: :update
 
   # kaminari
   paginates_per 10
@@ -51,8 +51,22 @@ class Deal < ApplicationRecord
   column :total_amount, { sortable: false }
   column :finish_date, { sortable: false }
 
+  def total_amount
+    total_subtotal - total_discount
+  end
+
+  def total_iva
+    total_amount * 0.23
+  end
+
   def update_total_amount
-    self.total_amount = deal_products.map(&:price).sum
+    self.total_subtotal = 0
+    self.total_discount = 0
+    deal_products.map do |dp|
+      self.total_subtotal += dp.price
+      self.total_discount += dp.discount_amount
+    end
+    broadcast_replace_to(self, :product_total, target: :product_total, partial: 'admin/deals/product_total_footer', locals: { deal: self })
     save
   end
 end

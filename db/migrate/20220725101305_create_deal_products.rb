@@ -6,7 +6,7 @@ class CreateDealProducts < ActiveRecord::Migration[7.0]
       t.references :product, null: false, foreign_key: true
       t.decimal :discount_amount, precision: 10, scale: 2, default: 0.0, null: false
       t.enum :discount_type, enum_type: :discount_type, default: :none, null: false
-      t.integer :quantity
+      t.integer :quantity, default: 1
 
       t.timestamps
     end

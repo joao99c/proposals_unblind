@@ -61,6 +61,15 @@ Rails.application.routes.draw do
       member do
         get 'step_1'
         post 'step_1'
+
+        ["customer", "product"].each do |type|
+          get "step_1/search_#{type}", to: "deals#search_#{type}"
+          get "step_1/choose_#{type}", to: "deals#choose_#{type}", as: "step_1_choose_#{type}"
+          post "step_1/choose_#{type}", to: "deals#save_choose_#{type}"
+          delete "step_1/choose_#{type}", to: "deals#delete_choose_#{type}"
+        end
+        put "step_1/update_dp", to: "deals#update_dp"
+
       end
     end
 

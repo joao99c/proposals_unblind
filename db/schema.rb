@@ -73,7 +73,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_132209) do
     t.bigint "product_id", null: false
     t.decimal "discount_amount", precision: 10, scale: 2, default: "0.0", null: false
     t.enum "discount_type", default: "none", null: false, enum_type: "discount_type"
-    t.integer "quantity"
+    t.integer "quantity", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["deal_id"], name: "index_deal_products_on_deal_id"
@@ -119,8 +119,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_132209) do
 
   create_table "deals", force: :cascade do |t|
     t.string "name"
-    t.decimal "total_amount", precision: 10, scale: 2, default: "0.0"
     t.decimal "total_discount", precision: 10, scale: 2, default: "0.0"
+    t.decimal "total_subtotal", precision: 10, scale: 2, default: "0.0"
     t.datetime "finish_date"
     t.enum "status", default: "open", null: false, enum_type: "deal_status"
     t.bigint "user_id"

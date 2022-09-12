@@ -33,9 +33,9 @@ Font.create([
   Customer.create(
     name: Faker::Company.name,
     email: Faker::Internet.email,
+    website: Faker::Internet.url,
     responsable_name: Faker::Name.name,
     responsable_email: Faker::Internet.email,
-    website: Faker::Internet.url,
     responsable_tel: Faker::PhoneNumber.phone_number
   )
 end

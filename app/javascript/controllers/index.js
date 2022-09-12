@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import CurrencyInputController from "./currency_input_controller"
+application.register("currency-input", CurrencyInputController)
+
 import DarkModeController from "./dark_mode_controller"
 application.register("dark-mode", DarkModeController)
 
@@ -36,6 +39,9 @@ application.register("hello", HelloController)
 
 import ModalController from "./modal_controller"
 application.register("modal", ModalController)
+
+import QuantityChangerController from "./quantity_changer_controller"
+application.register("quantity-changer", QuantityChangerController)
 
 import SidebarController from "./sidebar_controller"
 application.register("sidebar", SidebarController)
