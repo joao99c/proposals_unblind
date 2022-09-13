@@ -136,7 +136,7 @@ module Admin
     end
 
     def new_customer
-      customer = Customer.new(params.require(:customer).permit(:name, :website, :logo, :responsable_name, :responsable_email, :responsable_tel))
+      customer = Customer.new(customer_params)
 
       @deal.customer = customer
 
@@ -156,7 +156,7 @@ module Admin
       customer = @deal.customer
 
       respond_to do |format|
-        if customer.update(params.require(:customer).permit(:name, :website, :logo, :responsable_name, :responsable_email, :responsable_tel))
+        if customer.update(customer_params)
           format.turbo_stream do
             render turbo_stream: [
               turbo_stream.replace('choose_customer', partial: 'admin/deals/choose_customer', locals: { deal: @deal }),
@@ -168,13 +168,13 @@ module Admin
     end
 
     def new_product
-      product_params = params.require(:product).permit(:name, :description, :logo, :price)
       product = Product.new(product_params)
       dp = DealProduct.new(deal: @deal, product:)
 
-      if product_params[:price]
-        product_params[:price] = product_params[:price].delete('$ , €') # => "123456.00"
-        product.price = product_params[:price].nil? ? 0 : product_params[:price].to_f.round(2)
+
+      if product_params['price']
+        price =  product_params['price'].delete('$ , €')
+        product.price = price.nil? ? 0 : price.to_f.round(2)
       end
 
       respond_to do |format|
@@ -191,16 +191,15 @@ module Admin
     end
 
     def update_product
-      product_id = params.require(:product).permit(:product_id)[:product_id]
-      deal_product_id = params.require(:product).permit(:deal_product_id)[:deal_product_id]
-      product_params = params.require(:product).permit(:name, :description, :logo, :price)
+      product_id = params.require(:product).permit('product_id')['product_id']
+      deal_product_id = params.require(:product).permit('deal_product_id')['deal_product_id']
       product = Product.find(product_id)
       dp = DealProduct.find(deal_product_id)
       product.assign_attributes(product_params)
 
-      if product_params[:price]
-        product_params[:price] = product_params[:price].delete('$ , €') # => "123456.00"
-        product.price = product_params[:price].nil? ? 0 : product_params[:price].to_f.round(2)
+      if product_params['price']
+        price =  product_params['price'].delete('$ , €')
+        product.price = price.nil? ? 0 : price.to_f.round(2)
       end
 
       respond_to do |format|
@@ -227,6 +226,14 @@ module Admin
         :name,
         tag_ids: []
       )
+    end
+
+    def product_params
+      params.require(:product).permit(:name, :description, :image, :price)
+    end
+
+    def customer_params
+      params.require(:customer).permit(:name, :website, :logo, :responsable_name, :responsable_email, :responsable_tel)
     end
 
   end
