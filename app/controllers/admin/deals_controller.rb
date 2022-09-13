@@ -2,7 +2,7 @@
 
 module Admin
   class DealsController < Admin::BaseController
-    before_action :set_deal, except: %i[new create index]
+    before_action :set_deal, only: %i[step_1 search_customer choose_customer save_choose_customer delete_choose_customer search_product choose_product save_choose_product delete_choose_product update_dp new_customer update_customer new_product update_product]
 
     def index
       super
