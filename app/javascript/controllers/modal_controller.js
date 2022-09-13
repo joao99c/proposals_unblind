@@ -7,7 +7,16 @@ export default class extends Controller {
     modal = null;
 
     connect() {
-        this.modal = new Modal(this.modalTarget);
+        this.modal = new Modal(this.modalTarget, {
+            onHide: () => {
+                console.log('modal is hide');
+            },
+            onShow: () => {
+                console.log('modal is shown');
+                let bd = document.querySelector("div[modal-backdrop]")
+                bd.id = "modal-backdrop"
+            },
+        });
     }
 
     show() {

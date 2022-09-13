@@ -3,6 +3,8 @@ class Customer < ApplicationRecord
 
   has_many :deals, dependent: :destroy
 
+  has_one_attached :logo
+
   ransacker :reversed_name, type: :string, formatter: proc { |v| v.reverse } do |parent|
     parent.table[:name]
   end

@@ -24,7 +24,7 @@
     <div class="w-20">
       <%= form_tag step_1_update_dp_admin_deal_path, method: :put, data: { controller: "editor--autosave" } do %>
         <%= hidden_field_tag :dp_id, dp.id %>
-        <%= text_field_tag :discount_amount, "€#{number_with_precision(dp.discount_amount, precision: 2)}", id: "discount_amount", placeholder: "0€", class: "!bg-white text-center py-1", data: { action: "editor--autosave#save", controller: "currency-input", type: "currency" } %>
+        <%= text_field_tag :discount_amount, "€#{number_with_precision(dp.discount_amount, precision: 2)}", id: "discount_amount", placeholder: "0€", class: "!bg-white text-center py-1 h-8", data: { action: "editor--autosave#save", controller: "currency-input", type: "currency" } %>
       <% end %>
     </div>
   </td>
@@ -33,11 +33,38 @@
   </td>
   <td class="py-4 px-6">
     <div class="flex space-x-1">
-      <%= heroicon("pencil-alt", options: { variant: :solid, class: "w-4 h-4 shrink-0 text-gray-500" }) %>
+
+      <div data-controller="modal">
+        <%= heroicon("pencil-alt", variant: :solid, options: { class: "w-4 h-4 shrink-0 text-gray-500", "data-action":"click->modal#show" }) %>
+
+        <!-- Main modal -->
+        <div data-modal-target="modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center flex" aria-modal="true" role="dialog">
+          <div class="relative p-4 w-full max-w-xl h-full md:h-auto">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+              <!-- Modal header -->
+              <div class="flex justify-between items-start p-6 rounded-t border-b dark:border-gray-600">
+                <h3 class="text-lg font-semibold text-blue-600 dark:text-white">
+                  Adicionar cliente
+                </h3>
+                <button data-action="modal#hide" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                  <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="sr-only">Close modal</span>
+                </button>
+              </div>
+              <%= render partial: "admin/deals/product_form", locals: { deal_product: dp } %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
       <%= form_tag step_1_choose_product_admin_deal_path, method: :delete do %>
         <%= hidden_field_tag(:dp_id, dp.id) %>
-        <button class="w-4 h-4 shrink-0 text-red-600">
-          <%= heroicon("trash", options: { variant: :solid }) %>
+        <button class="w-4 h-4 shrink-0">
+          <%= heroicon("trash", variant: :solid, options: { class:"text-red-600" }) %>
         </button>
       <% end %>
     </div>

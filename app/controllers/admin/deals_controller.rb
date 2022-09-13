@@ -128,6 +128,81 @@ module Admin
       end
     end
 
+    def new_customer
+      customer = Customer.new(params.require(:customer).permit(:name, :website, :logo, :responsable_name, :responsable_email, :responsable_tel))
+
+      @deal.customer = customer
+
+      respond_to do |format|
+        if @deal.save
+          format.turbo_stream do
+            render turbo_stream: [
+              turbo_stream.replace('choose_customer', partial: 'admin/deals/choose_customer', locals: { deal: @deal }),
+              turbo_stream.remove('modal-backdrop')
+            ]
+          end
+        end
+      end
+    end
+
+    def update_customer
+      customer = @deal.customer
+
+      respond_to do |format|
+        if customer.update(params.require(:customer).permit(:name, :website, :logo, :responsable_name, :responsable_email, :responsable_tel))
+          format.turbo_stream do
+            render turbo_stream: [
+              turbo_stream.replace('choose_customer', partial: 'admin/deals/choose_customer', locals: { deal: @deal }),
+              turbo_stream.remove('modal-backdrop')
+            ]
+          end
+        end
+      end
+    end
+
+    def new_product
+      product = Product.new(params.require(:product).permit(:name, :description, :logo, :price))
+      dp = DealProduct.new(deal: @deal, product:)
+
+      respond_to do |format|
+        if dp.save
+          format.turbo_stream do
+            render turbo_stream: [
+              turbo_stream.replace('choose_product', partial: 'admin/deals/choose_product', locals: { deal: @deal }),
+              turbo_stream.append('dp_list', partial: 'admin/deals/dp_item', locals: { dp: }),
+              turbo_stream.remove('modal-backdrop')
+            ]
+          end
+        end
+      end
+    end
+
+    def update_product
+      product_id = params.require(:product).permit(:product_id)[:product_id]
+      deal_product_id = params.require(:product).permit(:deal_product_id)[:deal_product_id]
+      product_params = params.require(:product).permit(:name, :description, :logo, :price)
+      product = Product.find(product_id)
+      dp = DealProduct.find(deal_product_id)
+      product.assign_attributes(product_params)
+
+      if product_params[:price]
+        product_params[:price] = product_params[:price].delete('$ , €') # => "123456.00"
+        product.price = product_params[:price].nil? ? 0 : product_params[:price].to_f.round(2)
+      end
+
+      respond_to do |format|
+        if product.save
+          format.turbo_stream do
+            render turbo_stream: [
+              turbo_stream.replace('choose_product', partial: 'admin/deals/choose_product', locals: { deal: @deal }),
+              turbo_stream.replace(helpers.dom_id(dp), partial: 'admin/deals/dp_item', locals: { dp: }),
+              turbo_stream.remove('modal-backdrop')
+            ]
+          end
+        end
+      end
+    end
+
     private
 
     def set_deal
