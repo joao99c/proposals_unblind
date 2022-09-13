@@ -16,16 +16,18 @@ export default class extends Controller {
     }
 
     minus() {
-        this.inputTarget.value--
-        this.dispatchChangeEvent()
-        this.uptadeResult()
+        if (this.inputTarget.value >= 2) {
+            this.inputTarget.value--
+            this.dispatchChangeEvent()
+            this.uptadeResult()
+        }
     }
 
     uptadeResult() {
         this.resultTarget.innerText = this.inputTarget.value
     }
 
-    dispatchChangeEvent(){
+    dispatchChangeEvent() {
         let changeEvent = new Event('input')
         this.inputTarget.dispatchEvent(changeEvent)
     }
