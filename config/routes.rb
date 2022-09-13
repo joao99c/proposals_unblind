@@ -49,15 +49,6 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :deal_customers, only: %i[show new] do
-        collection do
-          post 'save_existing_user'
-          post 'save_new_user'
-        end
-      end
-
-      resources :deal_products, only: %i[index new create destroy]
-
       member do
         get 'step_1'
         post 'step_1'

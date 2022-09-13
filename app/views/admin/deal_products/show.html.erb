@@ -1,8 +1,0 @@
-<%= turbo_frame_tag dom_id(@deal, :service) do %>
-  <br>
-  <br>
-  <br>
-  <% @deal.deal_products.map do |dp| %>
-    <%= dp.inspect %>
-  <% end %>
-<% end %>

@@ -1,9 +1,0 @@
-<%= turbo_frame_tag dom_id(@deal, :customer) do %>
-  <%= @deal.customer.name %>
-  <br>
-  <%= @deal.customer.id %>
-  <br>
-  <br>
-
-  <%= link_to "Choose another Customer", admin_new_deal_customer_path(@deal) %>
-<% end %>

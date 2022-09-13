@@ -1,6 +1,0 @@
-<%= turbo_frame_tag dom_id(@dealproduct) do %>
-  <div class="py-6 px-6 lg:px-8">
-    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Create a new Deal Product</h3>
-    <%= render partial: "admin/deal_products/new_form", locals: { dealproduct: @dealproduct, deal: @deal } %>
-  </div>
-<% end %>
