@@ -29,7 +29,7 @@
     </div>
   </td>
   <td id="<%= dom_id(dp,"total_price") %>" class="py-4 px-6 font-medium text-gray-900 dark:text-white">
-    <%= number_to_currency(dp.price) %>
+    <%= number_to_currency(dp.price_without_discount) %>
   </td>
   <td class="py-4 px-6">
     <div class="flex space-x-1">

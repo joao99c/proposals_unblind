@@ -38,11 +38,11 @@ class DealProduct < ApplicationRecord
     # end
   end
 
-  private
-
   def price_without_discount
     product.price * quantity
   end
+  
+  private
 
   def update_deal_total_amount
     deal.update_total_amount

@@ -128,7 +128,7 @@ module Admin
         if dp.save
           format.turbo_stream do
             render turbo_stream: [
-              turbo_stream.update(total_price_dom_id, inline: helpers.number_to_currency(dp.price))
+              turbo_stream.update(total_price_dom_id, inline: helpers.number_to_currency(dp.price_without_discount))
             ]
           end
         end

@@ -2,7 +2,7 @@
 
 class Deal < ApplicationRecord
   include Admin::AdminResource
-
+  IVA = 0.23
   STATUSES_ORDER = %w[open won lost].freeze
 
   enum status: {
@@ -52,18 +52,18 @@ class Deal < ApplicationRecord
   column :finish_date, { sortable: false }
 
   def total_amount
-    total_subtotal - total_discount
+    total_subtotal - total_discount + total_iva
   end
 
   def total_iva
-    total_amount * 0.23
+    total_subtotal * IVA
   end
 
   def update_total_amount
     self.total_subtotal = 0
     self.total_discount = 0
     deal_products.map do |dp|
-      self.total_subtotal += dp.price
+      self.total_subtotal += dp.price_without_discount
       self.total_discount += dp.discount_amount
     end
     broadcast_replace_to(self, :product_total, target: :product_total, partial: 'admin/deals/product_total_footer', locals: { deal: self })
