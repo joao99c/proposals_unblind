@@ -2,7 +2,7 @@
 
 class DealProduct < ApplicationRecord
 
-  after_commit :update_deal_total_amount
+  after_save_commit :update_deal_total_amount
 
   enum discount_types: {
     "None": 'none',

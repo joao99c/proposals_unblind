@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :tags, only: [:create]
 
-    resources :deals, only: %i[index new create] do
+    resources :deals, only: %i[index new create destroy] do
       namespace :editor do
         get '/', to: 'editor#index'
         get 'preview', to: 'editor#preview'

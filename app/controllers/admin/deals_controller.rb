@@ -2,7 +2,7 @@
 
 module Admin
   class DealsController < Admin::BaseController
-    before_action :set_deal, only: %i[step_1 search_customer choose_customer save_choose_customer delete_choose_customer search_product choose_product save_choose_product delete_choose_product update_dp new_customer update_customer new_product update_product]
+    before_action :set_deal, only: %i[destroy step_1 search_customer choose_customer save_choose_customer delete_choose_customer search_product choose_product save_choose_product delete_choose_product update_dp new_customer update_customer new_product update_product]
 
     def index
       super
@@ -27,6 +27,13 @@ module Admin
                                                       locals: { deal: @deal })
           end
         end
+      end
+    end
+
+    def destroy
+      @deal.destroy
+      respond_to do |format|
+        format.html { redirect_to admin_deals_path }
       end
     end
 
@@ -161,8 +168,14 @@ module Admin
     end
 
     def new_product
-      product = Product.new(params.require(:product).permit(:name, :description, :logo, :price))
+      product_params = params.require(:product).permit(:name, :description, :logo, :price)
+      product = Product.new(product_params)
       dp = DealProduct.new(deal: @deal, product:)
+
+      if product_params[:price]
+        product_params[:price] = product_params[:price].delete('$ , €') # => "123456.00"
+        product.price = product_params[:price].nil? ? 0 : product_params[:price].to_f.round(2)
+      end
 
       respond_to do |format|
         if dp.save
