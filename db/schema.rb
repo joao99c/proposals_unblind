@@ -59,10 +59,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_132209) do
 
   create_table "customers", force: :cascade do |t|
     t.string "name"
-    t.string "email"
+    t.text "website"
     t.string "responsable_name"
     t.string "responsable_email"
-    t.text "website"
     t.text "responsable_tel"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -32,7 +32,6 @@ Font.create([
 100.times do
   Customer.create(
     name: Faker::Company.name,
-    email: Faker::Internet.email,
     website: Faker::Internet.url,
     responsable_name: Faker::Name.name,
     responsable_email: Faker::Internet.email,
