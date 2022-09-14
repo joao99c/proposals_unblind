@@ -1,33 +1,33 @@
 <%= form_with(model: customer, url: step_1_update_customer_admin_deal_path, method: :put) do |form| %>
   <div class="p-6 space-y-5">
     <div class="space-y-2">
-      <%= form.label :name %>
-      <%= form.text_field :name, placeholder: "Inserir nome da empresa" %>
+      <%= form.label :name,"Nome empresa" %>
+      <%= form.text_field :name, placeholder: "Inserir nome da empresa..." %>
     </div>
 
     <div class="space-y-2">
-      <%= form.label :website %>
-      <%= form.text_field :website, placeholder: "Inserir website" %>
+      <%= form.label :website,"Website empresa" %>
+      <%= form.text_field :website, placeholder: "Inserir URL do website..." %>
     </div>
 
     <div class="space-y-2">
-      <%= form.label :logo %>
+      <%= form.label :logo,"Logo empresa" %>
       <%= form.file_field :logo, placeholder: "Inserir logo", class: "w-full" %>
     </div>
 
     <div class="space-y-2">
-      <%= form.label :responsable_name %>
-      <%= form.text_field :responsable_name, placeholder: "Inserir nome" %>
+      <%= form.label :responsable_name,"Nome do responsável" %>
+      <%= form.text_field :responsable_name, placeholder: "Inserir nome..." %>
     </div>
 
     <div class="space-y-2">
-      <%= form.label :responsable_email %>
-      <%= form.text_field :responsable_email, placeholder: "Inserir email" %>
+      <%= form.label :responsable_email,"Email do responsável" %>
+      <%= form.text_field :responsable_email, placeholder: "Inserir email..." %>
     </div>
 
     <div class="space-y-2">
-      <%= form.label :responsable_tel %>
-      <%= form.text_field :responsable_tel, placeholder: "Inserir telemóvel " %>
+      <%= form.label :responsable_tel,"Telefone do responsável" %>
+      <%= form.text_field :responsable_tel, placeholder: "Inserir telefone..." %>
     </div>
   </div>
 
