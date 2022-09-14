@@ -3,6 +3,7 @@
 class DealProduct < ApplicationRecord
 
   after_save_commit :update_deal_total_amount
+  after_destroy :update_deal_total_amount
 
   enum discount_types: {
     "None": 'none',
@@ -41,8 +42,6 @@ class DealProduct < ApplicationRecord
   def price_without_discount
     product.price * quantity
   end
-  
-  private
 
   def update_deal_total_amount
     deal.update_total_amount

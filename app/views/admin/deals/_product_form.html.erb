@@ -3,25 +3,23 @@
   <%= form.hidden_field :deal_product_id, value: deal_product.id %>
   <div class="p-6 space-y-5">
     <div class="space-y-2">
-      <%= form.label :name %>
-      <%= form.text_field :name, placeholder: "Inserir nome" %>
+      <%= form.label :name, "Nome produto" %>
+      <%= form.text_field :name, placeholder: "Inserir nome..." %>
     </div>
 
     <div class="space-y-2">
-      <%= form.label :description %>
+      <%= form.label :description, "Descrição" %>
       <%= form.text_area :description, placeholder: "Inserir descrição do produto ou serviço ... ", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
     </div>
 
     <div class="space-y-2">
-      <%= form.label :image %>
-      <%= form.file_field :image, placeholder: "Inserir imagem", class: "w-full" %>
+      <%= form.label :image, "Imagem do produto" %>
+      <%= form.file_field :image, placeholder: "Inserir image", class: "w-full" %>
     </div>
 
     <div class="space-y-2">
-      <%= form.label :price %>
-      <%#= form.text_area :price, placeholder: "1.900", class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
-
-      <%= form.text_field :price, value: "€#{number_with_precision(deal_product.product.price, precision: 2)}", id: "price", placeholder: "0€", data: { controller: "currency-input", type: "currency" } %>
+      <%= form.label :price, "Valor do produto" %>
+      <%= form.text_field :price, value: "€#{number_with_precision(deal_product.product.price, precision: 2)}", id: "price", placeholder: "Inserir valor ", data: { controller: "currency-input", type: "currency" } %>
     </div>
 
   </div>
