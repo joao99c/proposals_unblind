@@ -2,11 +2,11 @@
   <% if @deal.customer.present? %>
     <div class="flex justify-between items-center">
       <div class="flex space-x-4 items-center">
-        <% if @deal.customer.logo.attached? %>
-          <%= image_tag(@deal.customer.logo) %>
-        <% else %>
-          <div class="w-12 h-12 rounded-full bg-gray-50"></div>
-        <% end %>
+        <div class="w-12 h-12 rounded-full bg-gray-50 overflow-hidden">
+          <% if @deal.customer.logo.attached? %>
+            <%= image_tag(@deal.customer.logo) %>
+          <% end %>
+        </div>
         <div>
           <p class="font-semibold text-gray-700"><%= @deal.customer.name %></p>
           <p class="text-sm text-gray-400"><%= @deal.customer.website %></p>
@@ -17,7 +17,7 @@
       <div class="flex h-7" data-controller="modal">
 
         <!-- Modal toggle -->
-        <button data-action="modal#show" class="text-xs text-gray-70 px-4 border border-gray-300 rounded-lg rounded-r-none" type="button">
+        <button data-action="modal#show" class="hover:bg-gray-200 text-xs text-gray-70 px-4 border border-gray-300 rounded-lg rounded-r-none" type="button">
           Editar
         </button>
         <!-- Main modal -->
@@ -42,7 +42,7 @@
           </div>
         </div>
 
-        <%= form_tag step_1_choose_customer_admin_deal_path, method: :delete, class: "px-2 border border-gray-300 border-l-0 rounded-lg rounded-l-none" do %>
+        <%= form_tag step_1_choose_customer_admin_deal_path, method: :delete, class: "hover:bg-gray-200 px-2 border border-gray-300 border-l-0 rounded-lg rounded-l-none" do %>
           <button class="h-full">
             <%= heroicon("x", options: { class: "w-5 h-5 text-gray-700" }) %>
           </button>
@@ -50,14 +50,20 @@
       </div>
     </div>
 
-    <div class="text-xs text-gray-400 mt-4 pl-16">
+    <div class="text-base text-gray-400 mt-4 pl-16">
       <p class="font-medium text-gray-700 mb-1.5">Responsável</p>
-      <div class="flex space-x-1.5 mb-0.5"><%= heroicon("user", options: { class: "w-4 h-4 stroke-2" }) %>
-        <p><%= @deal.customer.responsable_name %></p></div>
-      <div class="flex space-x-1.5 mb-0.5"><%= heroicon("mail", options: { class: "w-4 h-4 stroke-2" }) %>
-        <p><%= @deal.customer.responsable_email %></p></div>
-      <div class="flex space-x-1.5 mb-0.5"><%= heroicon("phone", options: { class: "w-4 h-4 stroke-2" }) %>
-        <p><%= @deal.customer.responsable_tel %></p></div>
+      <div class="flex items-center space-x-1.5 mb-0.5">
+        <%= heroicon("user", options: { class: "w-5 h-5 stroke-2" }) %>
+        <p><%= @deal.customer.responsable_name %></p>
+      </div>
+      <div class="flex items-center space-x-1.5 mb-0.5">
+        <%= heroicon("mail", options: { class: "w-5 h-5 stroke-2" }) %>
+        <p><%= @deal.customer.responsable_email %></p>
+      </div>
+      <div class="flex items-center space-x-1.5 mb-0.5">
+        <%= heroicon("phone", options: { class: "w-5 h-5 stroke-2" }) %>
+        <p><%= @deal.customer.responsable_tel %></p>
+      </div>
     </div>
 
   <% else %>
