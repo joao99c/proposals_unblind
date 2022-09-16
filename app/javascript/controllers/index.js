@@ -46,6 +46,9 @@ application.register("quantity-changer", QuantityChangerController)
 import SidebarController from "./sidebar_controller"
 application.register("sidebar", SidebarController)
 
+import Step1Controller from "./step1_controller"
+application.register("step1", Step1Controller)
+
 import TabsController from "./tabs_controller"
 application.register("tabs", TabsController)
 

@@ -1,80 +1,82 @@
-<div class="flex justify-between mb-10">
-  <h1 class="text-2xl font-semibold">Dados da Proposta</h1>
+<div data-controller="step1">
+  <div class="flex justify-between mb-10">
+    <h1 class="text-2xl font-semibold">Dados da Proposta</h1>
 
-  <div class="flex justify-center items-center pr-6">
-    <%= image_tag("progress_1.svg", class: "h-10") %>
-  </div>
-</div>
-
-<div class="w-full flex">
-  <div class="w-1/3">
-    <p class="text-blue-600 text-sm font-medium">Clientes</p>
-    <p class="text-gray-500 text-sm font-normal">Selecione os clientes para a proposta.</p>
-  </div>
-
-  <div class="w-2/3">
-    <%= render partial: "admin/deals/choose_customer", locals: { deal: @deal } %>
-  </div>
-</div>
-
-<hr class="text-gray-300 my-10">
-
-<div class="w-full flex">
-  <div class="w-1/3">
-    <p class="text-blue-600 text-sm font-medium">Produtos</p>
-    <p class="text-gray-500 text-sm font-normal">Selecione os produtos da proposta</p>
-  </div>
-
-  <div class="w-2/3">
-    <%= render partial: "admin/deals/choose_product", locals: { deal: @deal } %>
-    <div class="overflow-x-auto relative shadow-md sm:rounded-lg mt-5">
-      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 border">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b">
-        <tr>
-          <th scope="col" class="py-3 px-6">
-            Produto
-          </th>
-          <th scope="col" class="py-3 px-6">
-            Quantidade
-          </th>
-          <th scope="col" class="py-3 px-6">
-            Desconto
-          </th>
-          <th scope="col" class="py-3 px-6">
-            Total
-          </th>
-          <th scope="col" class="py-3 px-6"></th>
-        </tr>
-        </thead>
-        <tbody id="dp_list">
-        <% @deal.deal_products.map do |dp| %>
-          <%= render partial: "admin/deals/dp_item", locals: { dp: } %>
-        <% end %>
-        </tbody>
-        <tfoot>
-        <%= turbo_stream_from @deal, :product_total %>
-        <%= render partial: "admin/deals/product_total_footer", locals: { deal: @deal } %>
-        </tfoot>
-      </table>
+    <div class="flex justify-center items-center pr-6">
+      <%= image_tag("progress_1.svg", class: "h-10") %>
     </div>
   </div>
-</div>
 
-<hr class="text-gray-300 my-10 mb-4">
+  <div class="w-full flex">
+    <div class="w-1/3">
+      <p class="text-blue-600 text-sm font-medium">Clientes</p>
+      <p class="text-gray-500 text-sm font-normal">Selecione os clientes para a proposta.</p>
+    </div>
+
+    <div class="w-2/3">
+      <%= render partial: "admin/deals/choose_customer", locals: { deal: @deal } %>
+    </div>
+  </div>
+
+  <hr class="text-gray-300 my-10">
+
+  <div class="w-full flex">
+    <div class="w-1/3">
+      <p class="text-blue-600 text-sm font-medium">Produtos</p>
+      <p class="text-gray-500 text-sm font-normal">Selecione os produtos da proposta</p>
+    </div>
+
+    <div class="w-2/3">
+      <%= render partial: "admin/deals/choose_product", locals: { deal: @deal } %>
+      <div class="overflow-x-auto relative shadow-md sm:rounded-lg mt-5">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 border">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b">
+          <tr>
+            <th scope="col" class="py-3 px-6">
+              Produto
+            </th>
+            <th scope="col" class="py-3 px-6">
+              Quantidade
+            </th>
+            <th scope="col" class="py-3 px-6">
+              Desconto
+            </th>
+            <th scope="col" class="py-3 px-6">
+              Total
+            </th>
+            <th scope="col" class="py-3 px-6"></th>
+          </tr>
+          </thead>
+          <tbody id="dp_list">
+          <% @deal.deal_products.map do |dp| %>
+            <%= render partial: "admin/deals/dp_item", locals: { dp: } %>
+          <% end %>
+          </tbody>
+          <tfoot>
+          <%= turbo_stream_from @deal, :product_total %>
+          <%= render partial: "admin/deals/product_total_footer", locals: { deal: @deal } %>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <hr class="text-gray-300 my-10 mb-4">
 
 
-<div class="flex justify-between">
-  <%= button_to admin_deal_path(@deal), method: :delete do %>
-    <button class="text-white bg-red-500 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 inline-flex items-center">
-      Descartar Proposta
-      <%= heroicon("x", options: { class: "ml-2 -mr-1 w-4 h-4" }) %>
-    </button>
-  <% end %>
+  <div class="flex justify-between">
+    <%= button_to admin_deal_path(@deal), method: :delete do %>
+      <button class="text-white bg-red-500 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 inline-flex items-center">
+        Descartar Proposta
+        <%= heroicon("x", options: { class: "ml-2 -mr-1 w-4 h-4" }) %>
+      </button>
+    <% end %>
 
-  <%= link_to admin_deal_editor_path(@deal) do %>
-    <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center">
-      Próximo passo
-      <%= heroicon("chevron-right", options: { class: "ml-2 -mr-1 w-4 h-4" }) %>
-    </button>
-  <% end %>
+    <%= form_tag(admin_deal_editor_path(@deal), method: :get) do %>
+      <%= button_tag data: { step1_target: "button" }, class: "disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center" do %>
+        Próximo passo
+        <%= heroicon("chevron-right", options: { class: "ml-2 -mr-1 w-4 h-4" }) %>
+      <% end %>
+    <% end %>
+  </div>
 </div>

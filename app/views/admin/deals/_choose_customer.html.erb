@@ -1,5 +1,6 @@
 <%= turbo_frame_tag :choose_customer do %>
   <% if @deal.customer.present? %>
+    <div class="hidden" data-step1-target="customer"></div>
     <div class="flex justify-between items-center">
       <div class="flex space-x-4 items-center">
         <div class="w-12 h-12 rounded-full bg-gray-50 overflow-hidden">
