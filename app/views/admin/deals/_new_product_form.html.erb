@@ -1,27 +1,7 @@
 <%= form_with(model: product, url: step_1_new_product_admin_deal_path, method: :post) do |form| %>
   <%= form.hidden_field :product_id, value: product.id %>
-  <div class="p-6 space-y-5">
-    <div class="space-y-2">
-      <%= form.label :name, "Nome produto" %>
-      <%= form.text_field :name, placeholder: "Inserir nome..." %>
-    </div>
 
-    <div class="space-y-2">
-      <%= form.label :description, "Descrição" %>
-      <%= form.text_area :description, placeholder: "Inserir descrição do produto ou serviço ... ", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
-    </div>
-
-    <div class="space-y-2">
-      <%= form.label :image, "Imagem do produto" %>
-      <%= form.file_field :image, placeholder: "Inserir image", class: "w-full" %>
-    </div>
-
-    <div class="space-y-2">
-      <%= form.label :price, "Valor do produto" %>
-      <%= form.text_field :price, value: "€#{number_with_precision(product.price, precision: 2)}", id: "price", placeholder: "Inserir valor ", data: { controller: "currency-input", type: "currency" } %>
-    </div>
-
-  </div>
+  <%= render partial: "admin/deals/product_form", locals:{form:} %>
 
   <div class="flex justify-end p-6 space-x-4 rounded-b border-t dark:border-gray-600">
     <%= form.submit "Adicionar produto" %>

@@ -1,0 +1,15 @@
+<%= form_with(model: dp.product, url: step_1_update_product_admin_deal_path, method: :put) do |form| %>
+  <%= form.hidden_field :product_id, value: dp.product.id %>
+  <%= form.hidden_field :dp_id, value: dp.id %>
+
+  <%= render partial: "admin/deals/product_form", locals: { form: } %>
+
+  <div class="flex justify-end p-6 space-x-4 rounded-b border-t dark:border-gray-600">
+    <button data-action="modal#hide" type="button" class="text-blue-600 bg-white hover:bg-blue-600 hover:text-white focus:ring-4 border border-blue-600 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+      Cancelar
+      <span class="sr-only">Close modal</span>
+    </button>
+
+    <%= form.submit "Guardar" %>
+  </div>
+<% end %>

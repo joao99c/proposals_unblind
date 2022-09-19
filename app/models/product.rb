@@ -7,4 +7,7 @@ class Product < ApplicationRecord
   def update_price
     deal_products.map(&:update_deal_total_amount)
   end
+
+  validates_presence_of :name, :price
+
 end

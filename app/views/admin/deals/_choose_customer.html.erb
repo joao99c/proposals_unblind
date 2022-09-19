@@ -38,7 +38,9 @@
                   <span class="sr-only">Close modal</span>
                 </button>
               </div>
-              <%= render partial: "admin/deals/customer_form", locals: { customer: @deal.customer } %>
+              <%= turbo_frame_tag dom_id(@deal, dom_id(@deal.customer)) do %>
+                <%= render partial: "admin/deals/edit_customer_form", locals: { customer: @deal.customer } %>
+              <% end %>
             </div>
           </div>
         </div>

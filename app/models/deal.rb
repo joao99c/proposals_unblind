@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Deal < ApplicationRecord
-  include Admin::AdminResource
   IVA = 0.23
   STATUSES_ORDER = %w[open won lost].freeze
 
@@ -39,17 +38,6 @@ class Deal < ApplicationRecord
 
   # Validations
   validates :name, presence: true
-  # validates :user, :customer, presence: true, on: :update
-
-  # kaminari
-  paginates_per 10
-
-  # Table columns
-  column :name, { sortable: false }
-  column :customer, { sortable: false }
-  column :user, { sortable: false }
-  column :total_amount, { sortable: false }
-  column :finish_date, { sortable: false }
 
   def total_amount
     total_subtotal - total_discount + total_iva

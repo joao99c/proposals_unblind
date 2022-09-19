@@ -148,6 +148,12 @@ module Admin
               turbo_stream.remove('modal-backdrop')
             ]
           end
+        else
+          format.turbo_stream do
+            render turbo_stream: [
+              turbo_stream.update(helpers.dom_id(@deal, helpers.dom_id(@deal.customer)), partial: "admin/deals/edit_customer_form", locals: { customer: @deal.customer })
+            ]
+          end
         end
       end
     end
@@ -163,22 +169,27 @@ module Admin
               turbo_stream.remove('modal-backdrop')
             ]
           end
+        else
+          format.turbo_stream do
+            render turbo_stream: [
+              turbo_stream.update(helpers.dom_id(@deal, helpers.dom_id(@deal.customer)), partial: "admin/deals/edit_customer_form", locals: { customer: })
+            ]
+          end
         end
       end
     end
 
     def new_product
       product = Product.new(product_params)
-      dp = DealProduct.new(deal: @deal, product:)
-
 
       if product_params['price']
-        price =  product_params['price'].delete('$ , €')
+        price = product_params['price'].delete('$ , €')
         product.price = price.nil? ? 0 : price.to_f.round(2)
       end
 
       respond_to do |format|
-        if dp.save
+        if product.save
+          dp = DealProduct.new(deal: @deal, product:).save
           format.turbo_stream do
             render turbo_stream: [
               turbo_stream.replace('choose_product', partial: 'admin/deals/choose_product', locals: { deal: @deal }),
@@ -186,19 +197,23 @@ module Admin
               turbo_stream.remove('modal-backdrop')
             ]
           end
+        else
+          format.turbo_stream do
+            render turbo_stream: [
+              turbo_stream.update(helpers.dom_id(Product.new), partial: "admin/deals/new_product_form", locals: { product: })
+            ]
+          end
         end
       end
     end
 
     def update_product
-      product_id = params.require(:product).permit('product_id')['product_id']
-      deal_product_id = params.require(:product).permit('deal_product_id')['deal_product_id']
-      product = Product.find(product_id)
-      dp = DealProduct.find(deal_product_id)
+      product = Product.find(params.require(:product).permit('product_id')['product_id'])
+      dp = DealProduct.find(params.require(:product).permit('dp_id')['dp_id'])
       product.assign_attributes(product_params)
 
       if product_params['price']
-        price =  product_params['price'].delete('$ , €')
+        price = product_params['price'].delete('$ , €')
         product.price = price.nil? ? 0 : price.to_f.round(2)
       end
 
@@ -209,6 +224,12 @@ module Admin
               turbo_stream.replace('choose_product', partial: 'admin/deals/choose_product', locals: { deal: @deal }),
               turbo_stream.replace(helpers.dom_id(dp), partial: 'admin/deals/dp_item', locals: { dp: }),
               turbo_stream.remove('modal-backdrop')
+            ]
+          end
+        else
+          format.turbo_stream do
+            render turbo_stream: [
+              turbo_stream.update(helpers.dom_id(dp, helpers.dom_id(product)), partial: "admin/deals/edit_product_form", locals: { dp: })
             ]
           end
         end
