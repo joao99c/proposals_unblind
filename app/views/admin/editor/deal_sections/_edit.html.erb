@@ -1,22 +1,54 @@
 <div class="h-full overflow-scroll">
-  <div class="flex flex-col flex-1 pt-5 pb-4 px-3 space-y-2">
 
-    <div class="flex justify-between items-center">
+  <div class="pt-6 p-3 pb-4 space-y-2">
+    <div class="flex justify-between">
+
       <%= link_to admin_deal_editor_deal_sections_path(deal) do %>
-        <%= heroicon("x", options: { class: "h-5 w-5" }) %>
+        <%= heroicon("arrow-circle-left", variant: :solid, options: { class: "h-6 w-6 text-blue-600" }) %>
       <% end %>
 
-      <%= form_with model: @deal_section, url: admin_deal_editor_deal_section_path(deal_id: @deal_section.deal_id, id: @deal_section.id), method: :delete, data: { turbo_confirm: "Are your sure?" } do %>
-        <%= button_tag class: "font-medium hover:text-red-600 dark:hover:text-red-500 hover:underline" do %>
-          <%= heroicon("trash", options: { class: "h-4 w-4" }) %>
+      <% unless @deal_section.section_id.in?([1]) %>
+        <%= form_with model: @deal_section, url: admin_deal_editor_deal_section_path(deal_id: @deal_section.deal_id, id: @deal_section.id), method: :delete, data: { turbo_confirm: "Are your sure?" } do %>
+          <%= button_tag class: "font-medium hover:text-red-600 dark:hover:text-red-500 hover:underline" do %>
+            <%= heroicon("trash", variant: :solid, options: { class: "h-6 w-6 text-blue-600" }) %>
+          <% end %>
         <% end %>
       <% end %>
     </div>
-
-    <h1 class="text-base font-semibold"><%= deal_section.section.name.titleize %></h1>
-
-    <%= render "form", deal_section: deal_section %>
-
-    <br>
+    <p class="text-lg text-gray-900"><%= @deal_section.section.name %></p>
   </div>
+
+
+  <div data-controller="tabs" class="flex flex-col flex-1 pb-4">
+    <div class="">
+      <ul class="flex -mb-px text-sm font-medium text-center" id="myTab" role="tablist">
+        <li class="w-full" role="presentation">
+          <button data-tabs-target="tabHeader" class="w-full inline-flex items-center justify-center p-4 rounded-t-lg border-b-2 text-blue-600 hover:text-blue-600 dark:text-blue-500 dark:hover:text-blue-500 border-blue-600 dark:border-blue-500" id="existing-customer-tab" type="button" role="tab" aria-controls="existing-customer" aria-selected="true">
+            <%= heroicon("pencil", variant: :solid, options: { class: "mr-2 -ml-1 w-4 h-4" }) %>
+            Conteúdo
+          </button>
+        </li>
+        <li class="w-full" role="presentation">
+          <button data-tabs-target="tabHeader" class="w-full inline-flex items-center justify-center p-4 rounded-t-lg border-b-2 dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-200 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300" id="new-customer-tab" type="button" role="tab" aria-controls="new-customer" aria-selected="false">
+            <%= heroicon("document", variant: :solid, options: { class: "mr-2 -ml-1 w-4 h-4" }) %>
+            Design
+          </button>
+        </li>
+      </ul>
+    </div>
+    <div id="myTabContent">
+      <div class="rounded-lg" id="existing-customer" role="tabpanel" aria-labelledby="existing-customer-tab">
+        <div class="flex-1 divide-y divide-gray-200 dark:divide-gray-700 text-gray-900 font-medium text-base">
+          <%= render "form", deal_section: deal_section %>
+        </div>
+      </div>
+      <div class="hidden rounded-lg" id="new-customer" role="tabpanel" aria-labelledby="new-customer-tab">
+        <div class="flex-1 divide-y divide-gray-200 dark:divide-gray-700 text-gray-900 font-medium text-base">
+          <%= render "design_form", deal_section: deal_section %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 </div>
