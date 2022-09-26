@@ -22,7 +22,7 @@ module Admin
             child_attributes:
               {
                 deal: @deal,
-                section: Section.find_by_name('text'),
+                section: Section.find_by_name('Grelha_Filho'),
                 heading: 'Item',
                 preHeading: '',
                 subHeading: '',
@@ -33,7 +33,7 @@ module Admin
         )
 
         respond_to do |format|
-          if @deal_section_item.save
+          if @deal_section_item.save!
             format.html do
               redirect_to admin_deal_editor_deal_section_deal_section_items_url(deal: @deal.id, deal_section_id: @parent.id),
                           notice: 'Deal section item was successfully created.'
@@ -44,6 +44,10 @@ module Admin
 
       # PATCH/PUT /deal_section_items/1 or /deal_section_items/1.json
       def update
+        @deal_section_item.child.button ||= {}
+        @deal_section_item.child.button[:text] = params.require(:deal_section_item).dig("child_attributes","button_text") if params.require(:deal_section_item).dig("child_attributes","button_text")
+        @deal_section_item.child.button[:url] = params.require(:deal_section_item).dig("child_attributes","button_url") if params.require(:deal_section_item).dig("child_attributes","button_url")
+
         @deal_section_item.assign_attributes(deal_section_item_params)
 
         respond_to do |format|
@@ -83,7 +87,7 @@ module Admin
       # Only allow a list of trusted parameters through.
       def deal_section_item_params
         params.require(:deal_section_item).permit(
-          child_attributes: %i[id heading preHeading subHeading text deal_id section_id]
+          child_attributes: %i[id heading text deal_id section_id logow]
         )
       end
 

@@ -8,6 +8,10 @@ class DealSection < ApplicationRecord
   scope :ordered, -> { order(:position) }
 
   has_rich_text :text
+  has_rich_text :address
+
+  has_one_attached :background_image
+  has_one_attached :logo
 
   belongs_to :deal
   belongs_to :section
@@ -18,7 +22,7 @@ class DealSection < ApplicationRecord
   after_destroy_commit :broadcast_destroy
 
   def name
-    "#{section.name} - #{heading}"
+    heading
   end
 
   def parent
@@ -51,6 +55,14 @@ class DealSection < ApplicationRecord
 
   def button_text_color
     theme.dig("colors", "button_text") if theme.present?
+  end
+
+  def customer_name
+    deal.try(:customer).try(:name)
+  end
+
+  def send_date(format: '%d %B %Y')
+    I18n.localize(deal.send_date, format:).titleize if deal.try(:send_date)
   end
 
   private

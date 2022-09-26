@@ -7,7 +7,7 @@
                 remote: true,
                 turbo: true,
               },
-              class: "px-3"
+              class: "px-3 space-y-4"
     ) do |form| %>
   <% if deal_section_item.errors.any? %>
     <div style="color: red">
@@ -25,30 +25,49 @@
   <%= form.fields_for :child do |c_form| %>
     <%= c_form.hidden_field :id %>
     <%= c_form.hidden_field :deal_id, value: deal_id %>
-    <%= c_form.hidden_field :section_id, value: Section.find_by_name("text").id %>
+    <%= c_form.hidden_field :section_id, value: Section.find_by_name("Grelha_Filho").id %>
 
-    <div>
-      <%= c_form.label :preHeading %>
-      <%= c_form.text_field :preHeading, data: { key: "preHeading" } %>
+
+    <div class="space-y-2">
+      <div class="flex justify-between items-center">
+        <%= c_form.label :logo, "Imagem", class: "mb-0" %>
+        <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
+      </div>
+      <div class="flex">
+        <%= c_form.file_field :logo, placeholder: "Titulo da secção aqui...", data: { key: "heading" } %>
+      </div>
     </div>
 
-    <div>
-      <%= c_form.label :heading %>
-      <%= c_form.text_field :heading, data: { key: "heading" } %>
+    <div class="space-y-2">
+      <div class="flex justify-between items-center">
+        <%= c_form.label :heading, "Título do Item", class: "mb-0" %>
+        <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
+      </div>
+      <div class="flex">
+        <%= c_form.text_field :heading, placeholder: "Titulo da secção aqui...", data: { key: "heading" } %>
+      </div>
     </div>
 
-    <div>
-      <%= c_form.label :subHeading %>
-      <%= c_form.text_field :subHeading, data: { key: "subHeading" } %>
-    </div>
-
-    <div>
-      <%= c_form.label :text %>
+    <div class="space-y-2">
+      <div class="flex justify-between items-center">
+        <%= c_form.label :text, "Descrição", class: "mb-0" %>
+        <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
+      </div>
       <div class="trix-container">
         <%= c_form.rich_text_area :text, data: { key: "text" } %>
       </div>
     </div>
 
+    <div class="space-y-2">
+      <div class="flex justify-between items-center">
+        <%= c_form.label :button, "Button", class: "mb-0" %>
+        <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
+      </div>
+      <div class="space-y-2">
+        <%= c_form.text_field :button_text, placeholder: "Label", value: c_form.object.button&.dig("text"), data: { key: "button_text" } %>
+        <%= c_form.url_field :button_url, placeholder: "https://", value: c_form.object.button&.dig("url"), data: { key: "button_url" }, pattern: "https://.*" %>
+      </div>
+    </div>
   <% end %>
 
 <% end %>

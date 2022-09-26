@@ -121,6 +121,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_132209) do
     t.decimal "total_discount", precision: 10, scale: 2, default: "0.0"
     t.decimal "total_subtotal", precision: 10, scale: 2, default: "0.0"
     t.datetime "finish_date"
+    t.datetime "send_date"
     t.enum "status", default: "open", null: false, enum_type: "deal_status"
     t.bigint "user_id"
     t.bigint "customer_id"
@@ -160,12 +161,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_132209) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "section_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "sections", force: :cascade do |t|
     t.string "name"
+    t.bigint "section_type_id", null: false
     t.bigint "section_category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["section_category_id"], name: "index_sections_on_section_category_id"
+    t.index ["section_type_id"], name: "index_sections_on_section_type_id"
   end
 
   create_table "taggings", force: :cascade do |t|
@@ -214,6 +223,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_132209) do
   add_foreign_key "deals", "fonts", column: "text_typeface_id"
   add_foreign_key "deals", "users"
   add_foreign_key "sections", "section_categories"
+  add_foreign_key "sections", "section_types"
   add_foreign_key "taggings", "deals"
   add_foreign_key "taggings", "tags"
 end

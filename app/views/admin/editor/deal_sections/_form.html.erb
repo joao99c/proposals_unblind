@@ -21,189 +21,107 @@
     </div>
   <% end %>
 
-  <div class="space-y-2">
-    <p class="section-title">Heading</p>
-    <div>
-      <%= form.label :title %>
+  <div class="space-y-4 px-3">
+
+    <% if deal_section.section.is_cabecalho? %>
       <div class="space-y-2">
-        <%= form.text_field :preHeading, data: { key: "preHeading" } %>
-        <%= form.text_field :heading, data: { key: "heading" } %>
-        <%= form.text_field :subHeading, data: { key: "subHeading" } %>
-      </div>
-    </div>
-    <div>
-      <%= form.label :text %>
-      <div class="trix-container">
-        <%= form.rich_text_area :text, data: { key: "text" } %>
-      </div>
-    </div>
-    <div>
-      <%= form.label :button %>
-      <div class="flex space-x-4">
-        <%= form.text_field :button_text, placeholder: "Label", value: form.object.button&.dig("text"), data: { key: "button_text" } %>
-        <%= form.url_field :button_url, placeholder: "https://", value: form.object.button&.dig("url"), data: { key: "button_url" }, pattern: "https://.*" %>
-      </div>
-    </div>
-    <div>
-      <%= form.label :button2 %>
-      <div class="flex space-x-4">
-        <%= form.text_field :button2_text, placeholder: "Label", value: form.object.button2&.dig("text"), data: { key: "button2_text" } %>
-        <%= form.url_field :button2_url, placeholder: "https://", value: form.object.button2&.dig("url"), data: { key: "button2_url" }, pattern: "https://.*" %>
-      </div>
-    </div>
-    <div>
-      <%= form.label :buttonSubtext %>
-      <%= form.text_field :buttonSubtext, data: { key: "buttonSubtext" } %>
-    </div>
-  </div>
-
-  <% if deal_section.section.is_bio? %>
-    <div class="space-y-2">
-      <p class="section-title">Links</p>
-      <div class="flex space-x-2 items-center">
-        <%= image_tag("icons/social_media/Twitter - Original.svg", class: "h-5 w-5") %>
-        <%= form.url_field :twitter, required: false, pattern: "https://.*", data: { key: "twitter" }, placeholder: "https://", value: deal_section.links.dig("twitter", "url") %>
-      </div>
-      <div class="flex space-x-2 items-center">
-        <%= image_tag("icons/social_media/Facebook - Original.svg", class: "h-5 w-5") %>
-        <%= form.url_field :facebook, required: false, pattern: "https://.*", data: { key: "facebook" }, placeholder: "https://", value: deal_section.links.dig("facebook", "url") %>
-      </div>
-      <div class="flex space-x-2 items-center">
-        <%= image_tag("icons/social_media/Instagram - Original.svg", class: "h-5 w-5") %>
-        <%= form.url_field :instagram, required: false, pattern: "https://.*", data: { key: "instagram" }, placeholder: "https://", value: deal_section.links.dig("instagram", "url") %>
-      </div>
-      <div class="flex space-x-2 items-center">
-        <%= image_tag("icons/social_media/Pinterest - Original.svg", class: "h-5 w-5") %>
-        <%= form.url_field :pinterest, required: false, pattern: "https://.*", data: { key: "pinterest" }, placeholder: "https://", value: deal_section.links.dig("pinterest", "url") %>
-      </div>
-      <div class="flex space-x-2 items-center">
-        <%= image_tag("icons/social_media/LinkedIn - Original.svg", class: "h-5 w-5") %>
-        <%= form.url_field :linkedin, required: false, pattern: "https://.*", data: { key: "linkedin" }, placeholder: "https://", value: deal_section.links.dig("linkedin", "url") %>
-      </div>
-      <div class="flex space-x-2 items-center">
-        <%= image_tag("icons/social_media/YouTube - Original.svg", class: "h-5 w-5") %>
-        <%= form.url_field :youtube, required: false, pattern: "https://.*", data: { key: "youtube" }, placeholder: "https://", value: deal_section.links.dig("youtube", "url") %>
-      </div>
-      <div class="flex space-x-2 items-center">
-        <%= image_tag("icons/social_media/TikTok - Original.svg", class: "h-5 w-5") %>
-        <%= form.url_field :tiktok, required: false, pattern: "https://.*", data: { key: "tiktok" }, placeholder: "https://", value: deal_section.links.dig("tiktok", "url") %>
-      </div>
-      <div class="flex space-x-2 items-center">
-        <%= heroicon("globe-alt", variant: :solid, options: { class: "w-5 h-5" }) %>
-        <%= form.url_field :website, required: false, pattern: "https://.*", data: { key: "website" }, placeholder: "https://", value: deal_section.links.dig("website", "url") %>
-      </div>
-      <div class="flex space-x-2 items-center">
-        <%= heroicon("mail", variant: :solid, options: { class: "w-5 h-5" }) %>
-        <%= form.url_field :mail, required: false, pattern: "https://.*", data: { key: "mail" }, placeholder: "https://", value: deal_section.links.dig("mail", "url") %>
-      </div>
-    </div>
-  <% end %>
-
-  <% if deal_section.section.is_grid? %>
-    <div class="space-y-2">
-      <p class="section-title">Items</p>
-      <div>
-        <%= turbo_frame_tag dom_id(form.object, "items"), src: admin_deal_editor_deal_section_deal_section_items_path(deal: deal_section.deal_id, deal_section_id: deal_section.id) %>
-      </div>
-    </div>
-  <% end %>
-
-  <p class="section-title">Design</p>
-  
-  <div class="space-y-2">
-    <%= form.label :layout %>
-
-    <div class="flex justify-between items-center">
-      <%= form.label :headingAlignment %>
-      <div class="flex space-x-1">
-        <% [%w[left menu-alt-2], %w[center menu]].map do |co| %>
-          <div>
-            <%= form.radio_button :headingAlignment, co[0], class: "hidden peer", data: { key: "layout" } %>
-            <%= form.label :headingAlignment, value: co[0], class: "rounded p-2 border-2 border-neutral-200 peer-checked:border-neutral-900" do %>
-              <%= heroicon(co[1], options: { class: "h-5 w-5" }) %>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-    </div>
-   
-    <div class="flex justify-between items-center">
-      <%= form.label :contentAlignment %>
-      <div class="flex space-x-1">
-        <% [%w[left menu-alt-2], %w[center menu]].map do |co| %>
-          <div>
-            <%= form.radio_button :contentAlignment, co[0], class: "hidden peer", data: { key: "layout" } %>
-            <%= form.label :contentAlignment, value: co[0], class: "rounded p-2 border-2 border-neutral-200 peer-checked:border-neutral-900" do %>
-              <%= heroicon(co[1], options: { class: "h-5 w-5" }) %>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-    </div>
-    
-<!--    <div class="flex justify-between items-center">-->
-      <%#= form.label :mediaAlignment %>
-<!--      <div class="flex space-x-1">-->
-        <%# [%w[left menu-alt-2], %w[center menu]].map do |co| %>
-<!--          <div>-->
-            <%#= form.radio_button :mediaAlignment, co[0], class: "hidden peer", data: { key: "layout" } %>
-            <%#= form.label :mediaAlignment, value: co[0], class: "rounded p-2 border-2 border-neutral-200 peer-checked:border-neutral-900" do %>
-              <%#= heroicon(co[1], options: { class: "h-5 w-5" }) %>
-            <%# end %>
-<!--          </div>-->
-        <%# end %>
-<!--      </div>-->
-<!--    </div>-->
-
-
-    <%= form.label :colors %>
-    <div class="flex flex-col space-y-1">
-      <% [
-           ["background", "background_color"],
-           ["heading", "heading_color"],
-           ["text", "text_color"],
-           ["button background", "button_background_color"],
-           ["button text", "button_text_color"],
-         ].map do |co| %>
         <div class="flex justify-between items-center">
-          <p><%= co[0].titleize %></p>
-          <%= form.color_field co[1],
-                               value: form.object.theme.dig("colors", co[0].parameterize(separator: '_')),
-                               data: { key: "colors" },
-                               class: "rounded-full" %>
+          <%= form.label :logo, "Logótipo", class: "mb-0" %>
+          <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
         </div>
-      <% end %>
-    </div>
+        <div class="flex">
+          <%= form.file_field :logo, data: { key: "heading" } %>
+        </div>
+      </div>
+    <% end %>
+
+    <% if deal_section.section.is_cabecalho? || deal_section.section.is_proposta? || deal_section.section.is_contacto? || deal_section.section.is_grelha? %>
+      <div class="space-y-2">
+        <div class="flex justify-between items-center">
+          <%= form.label :heading, "Título", class: "mb-0" %>
+          <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
+        </div>
+        <div class="flex">
+          <%= form.text_field :heading, placeholder: "Proposta #{deal_section.deal.customer.name}", data: { key: "heading" } %>
+        </div>
+      </div>
+      <div class="space-y-2">
+        <div class="flex justify-between items-center">
+          <%= form.label :text, "Descrição", class: "mb-0" %>
+          <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
+        </div>
+        <div class="trix-container">
+          <%= form.rich_text_area :text, data: { key: "text" } %>
+        </div>
+      </div>
+    <% end %>
+
+    <% if deal_section.section.is_proposta? || deal_section.section.is_contacto? || deal_section.section.is_grelha? %>
+      <div class="space-y-2">
+        <div class="flex justify-between items-center">
+          <%= form.label :button, "Button", class: "mb-0" %>
+          <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
+        </div>
+        <div class="space-y-2">
+          <%= form.text_field :button_text, placeholder: "Label", value: form.object.button&.dig("text"), data: { key: "button_text" } %>
+          <%= form.url_field :button_url, placeholder: "https://", value: form.object.button&.dig("url"), data: { key: "button_url" }, pattern: "https://.*" %>
+        </div>
+      </div>
+    <% end %>
+
+    <% if deal_section.section.is_grelha? %>
+      <hr style="margin-left: -12px; margin-right: -12px">
+      <div class="space-y-2">
+        <p class="text-sm font-medium text-gray-900">Items</p>
+        <div>
+          <%= turbo_frame_tag dom_id(form.object, "items"), src: admin_deal_editor_deal_section_deal_section_items_path(deal: deal_section.deal_id, deal_section_id: deal_section.id) %>
+        </div>
+      </div>
+    <% end %>
+
+    <% if deal_section.section.is_contacto? %>
+      <div class="space-y-2">
+        <div class="flex justify-between items-center">
+          <%= form.label :email, "Email", class: "mb-0" %>
+          <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
+        </div>
+        <div class="flex">
+          <%= form.text_field :email, value: form.object.theme.dig("contacto", "email"), placeholder: "Email aqui...", data: { key: "email" } %>
+        </div>
+      </div>
+      <div class="space-y-2">
+        <div class="flex justify-between items-center">
+          <%= form.label :tel, "Telefone", class: "mb-0" %>
+          <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
+        </div>
+        <div class="flex">
+          <%= form.text_field :tel, value: form.object.theme.dig("contacto", "tel"), placeholder: "Telefone aqui...", data: { key: "telefone" } %>
+        </div>
+      </div>
+      <div class="space-y-2">
+        <div class="flex justify-between items-center">
+          <%= form.label :address, "Morada", class: "mb-0" %>
+          <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
+        </div>
+        <div class="trix-container">
+          <%= form.rich_text_area :address, data: { key: "text" } %>
+        </div>
+      </div>
+    <% end %>
+
+
+    <% if deal_section.section.is_cabecalho? %>
+      <div class="space-y-2">
+        <div class="flex justify-between items-center">
+          <%= form.label :date, "Data", class: "mb-0" %>
+          <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
+        </div>
+        <div class="flex">
+          <%= form.date_field :date, value: deal_section&.deal&.send_date&.strftime('%Y-%m-%d'), data: { key: "date" } %>
+        </div>
+      </div>
+    <% end %>
+
   </div>
-
-  <!--  <div>-->
-  <%#= form.label :theme %>
-  <%#= form.text_field :theme, data:{key: "theme"} %>
-  <!--  </div>-->
-
-  <!--  <div>-->
-  <%#= form.label :background %>
-  <%#= form.text_field :background, data:{key: "background"} %>
-  <!--  </div>-->
-
-  <!--  <div>-->
-  <%#= form.label :button %>
-  <%#= form.text_field :button, data:{key: "button"} %>
-  <!--  </div>-->
-
-  <!--  <div>-->
-  <%#= form.label :button2 %>
-  <%#= form.text_field :button2, data:{key: "button2"} %>
-  <!--  </div>-->
-
-  <!--  <div>-->
-  <%#= form.label :mediaAlignment %>
-  <%#= form.text_field :mediaAlignment %>
-  <!--  </div>-->
-
-  <!--  <div>-->
-  <%#= form.label :mediaStyle %>
-  <%#= form.text_field :mediaStyle %>
-  <!--  </div>-->
 
 <% end %>

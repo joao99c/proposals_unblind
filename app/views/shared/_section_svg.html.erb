@@ -1,0 +1,10 @@
+<% case type %>
+<% when 'Grid' %>
+  <%= heroicon("template", variant: :solid, options: { class: "text-blue-600 w-6 h-6" }) %>
+<% when 'Content' %>
+  <%= heroicon("menu-alt-2", variant: :solid, options: { class: "text-blue-600 w-6 h-6" }) %>
+<% when 'Gallery' %>
+  <%= heroicon("photograph", variant: :solid, options: { class: "text-blue-600 w-6 h-6" }) %>
+<% when 'Accordion' %>
+  <%= heroicon("sort-descending", variant: :solid, options: { class: "text-blue-600 w-6 h-6" }) %>
+<% end %>

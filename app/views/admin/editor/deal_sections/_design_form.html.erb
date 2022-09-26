@@ -1,0 +1,306 @@
+<%= form_with(model: deal_section,
+              url: admin_deal_editor_deal_section_path(deal_id: deal_section.deal_id, id: deal_section.id),
+              data: {
+                controller: "editor--form editor--autosave",
+                action: "editor:page-section:changed->editor--autosave#save",
+                "editor--form-id": deal_section.id,
+                remote: true,
+                turbo: true,
+              },
+              multipart: true,
+              class: "space-y-8"
+    ) do |form| %>
+  <% if deal_section.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(deal_section.errors.count, "error") %> prohibited this deal_section from being saved:</h2>
+
+      <ul>
+        <% deal_section.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="space-y-4 px-3">
+    <div class="space-y-1">
+      <%= form.label :color_background, "Fundo da Secção" %>
+      <div data-controller="tabs" class="flex flex-col flex-1">
+        <div class="">
+          <ul class="flex -mb-px text-sm font-medium text-center border border-gray-300 rounded-lg overflow-auto" id="myTab" role="tablist">
+            <li class="w-full" role="presentation">
+              <button data-tabs-target="tabHeader" class="aria-selected:border-0 aria-selected:bg-blue-300 aria-selected:text-blue-600 w-full py-2.5 text-blue-600 hover:text-blue-600" id="imagem-tab" type="button" role="tab" aria-controls="imagem" aria-selected="true">
+                Imagem
+              </button>
+            </li>
+            <li class="w-full" role="presentation">
+              <button data-tabs-target="tabHeader" class="aria-selected:border-0 aria-selected:bg-blue-300 aria-selected:text-blue-600 w-full py-2.5 text-gray-500 hover:text-gray-600 border-gray-200 hover:border-gray-300" id="cor-tab" type="button" role="tab" aria-controls="cor" aria-selected="false">
+                Cor
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div id="myTabContent">
+          <div class="rounded-lg" id="imagem" role="tabpanel" aria-labelledby="imagem-tab">
+            <div class="flex divide-y divide-gray-200 dark:divide-gray-700 text-gray-900 font-medium text-base pt-2">
+              <%= form.file_field :background_image, data: { key: "colors" } %>
+            </div>
+          </div>
+          <div class="hidden rounded-lg" id="cor" role="tabpanel" aria-labelledby="cor-tab">
+            <div class="flex divide-y divide-gray-200 dark:divide-gray-700 text-gray-900 font-medium text-base pt-2">
+              <%= form.color_field :color_background,
+                                   value: form.object.theme.dig("colors", "background"),
+                                   data: { key: "colors" },
+                                   class: "rounded-full h-[60px] w-[60px]" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <% if deal_section.section.is_cabecalho? %>
+
+      <div class="space-y-1">
+        <%= form.label :color_overlay, "Overlay" %>
+        <div class="flex items-center space-x-3">
+          <%= form.color_field :color_overlay,
+                               value: form.object.theme.dig("colors", "overlay"),
+                               data: { key: "colors" },
+                               class: "rounded-full h-[60px] w-[60px]" %>
+          <p class="leading-tight text-sm text-gray-900"><%= form.object.theme.dig("colors", "overlay").upcase if form.object.theme.dig("colors", "overlay") %></p>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="space-y-1">
+      <%= form.label :color_title, "Título" %>
+      <div class="flex items-center space-x-3">
+        <%= form.color_field :color_title,
+                             value: form.object.theme.dig("colors", "title"),
+                             data: { key: "colors" },
+                             class: "rounded-full h-[60px] w-[60px]" %>
+        <p class="leading-tight text-sm text-gray-900"><%= form.object.theme.dig("colors", "title").upcase if form.object.theme.dig("colors", "title") %></p>
+
+      </div>
+    </div>
+
+    <div class="space-y-1">
+      <%= form.label :color_description, "Descrição" %>
+      <div class="flex items-center space-x-3">
+        <%= form.color_field :color_description,
+                             value: form.object.theme.dig("colors", "description"),
+                             data: { key: "colors" },
+                             class: "rounded-full h-[60px] w-[60px]" %>
+        <p class="leading-tight text-sm text-gray-900"><%= form.object.theme.dig("colors", "description").upcase if form.object.theme.dig("colors", "description") %></p>
+
+      </div>
+    </div>
+
+    <% if deal_section.section.is_grelha? %>
+      <div class="space-y-1">
+        <%= form.label :color_background_items, "Fundo dos Items" %>
+        <div class="flex items-center space-x-3">
+          <%= form.color_field :color_background_items,
+                               value: form.object.theme.dig("colors", "background_items"),
+                               data: { key: "colors" },
+                               class: "rounded-full h-[60px] w-[60px]" %>
+          <p class="leading-tight text-sm text-gray-900"><%= form.object.theme.dig("colors", "background_items").upcase if form.object.theme.dig("colors", "background_items") %></p>
+        </div>
+      </div>
+
+
+      <div class="space-y-1">
+        <%= form.label :color_border_items, "Bordas dos Items" %>
+        <div class="flex justify-between">
+          <div class="flex items-center space-x-3">
+            <%= form.color_field :color_border_items,
+                                 value: form.object.theme.dig("colors", "border_items"),
+                                 data: { key: "colors" },
+                                 class: "rounded-full h-[60px] w-[60px]" %>
+            <p class="leading-tight text-sm text-gray-900"><%= form.object.theme.dig("colors", "border_items").upcase if form.object.theme.dig("colors", "border_items") %></p>
+          </div>
+          <div class="flex w-20 h-10">
+            <%= form.select :border_items, ['0px', '1px', '2px', '3px'], { selected: form.object&.theme&.dig("border", "width") }, { data: { key: "border" } } %>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="space-y-1">
+        <%= form.label :image_format, "Formato da Imagem" %>
+
+        <div class="text-sm font-medium flex rounded-lg overflow-hidden border border-gray-300">
+          <div class="bg-white text-gray-500 w-full">
+            <%= form.radio_button :image_format, :square,
+                                  checked: form.object.theme.dig("image","format") == "square",
+                                  class: "hidden peer",
+                                  data:{key:"image_format"}%>
+            <%= form.label :image_format, value: :square, class: "flex items-center justify-center py-2.5 px-5 h-full peer-checked:text-blue-600 peer-checked:bg-blue-100" do %>
+              Quadrada
+            <% end %>
+          </div>
+          <div class="bg-white text-gray-500 w-full">
+            <%= form.radio_button :image_format, :rounded,
+                                  checked: form.object.theme.dig("image","format") == "rounded",
+                                  class: "hidden peer",
+                                  data:{key:"image_format"}%>
+            <%= form.label :image_format, value: :rounded, class: "flex items-center justify-center py-2.5 px-5 h-full peer-checked:text-blue-600 peer-checked:bg-blue-100" do %>
+              Redonda
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-1">
+        <%= form.label :color_items_title, "Título dos Items" %>
+        <div class="flex items-center space-x-3">
+          <%= form.color_field :color_items_title,
+                               value: form.object.theme.dig("colors", "items_title"),
+                               data: { key: "colors" },
+                               class: "rounded-full h-[60px] w-[60px]" %>
+          <p class="leading-tight text-sm text-gray-900"><%= form.object.theme.dig("colors", "items_title").upcase if form.object.theme.dig("colors", "items_title") %></p>
+        </div>
+      </div>
+
+      <div class="space-y-1">
+        <%= form.label :items_description, "Descrição dos Items" %>
+        <div class="flex items-center space-x-3">
+          <%= form.color_field :color_items_description,
+                               value: form.object.theme.dig("colors", "items_description"),
+                               data: { key: "colors" },
+                               class: "rounded-full h-[60px] w-[60px]" %>
+          <p class="leading-tight text-sm text-gray-900"><%= form.object.theme.dig("colors", "items_description").upcase if form.object.theme.dig("colors", "items_description") %></p>
+        </div>
+      </div>
+
+      <div class="space-y-1">
+        <%= form.label :color_links, "Links dos Items" %>
+        <div class="flex items-center space-x-3">
+          <%= form.color_field :color_links,
+                               value: form.object.theme.dig("colors", "links"),
+                               data: { key: "colors" },
+                               class: "rounded-full h-[60px] w-[60px]" %>
+          <p class="leading-tight text-sm text-gray-900"><%= form.object.theme.dig("colors", "links").upcase if form.object.theme.dig("colors", "links") %></p>
+        </div>
+      </div>
+    <% end %>
+
+    <% if deal_section.section.is_proposta? %>
+      <div class="space-y-1">
+        <%= form.label :color_table_border, "Bordas da Tabela" %>
+        <div class="flex justify-between">
+          <div class="flex items-center space-x-3">
+            <%= form.color_field :color_table_border,
+                                 value: form.object.theme.dig("colors", "table_border"),
+                                 data: { key: "colors" },
+                                 class: "rounded-full h-[60px] w-[60px]" %>
+            <p class="leading-tight text-sm text-gray-900"><%= form.object.theme.dig("colors", "table_border").upcase if form.object.theme.dig("colors", "table_border") %></p>
+          </div>
+          <div class="flex w-20 h-10">
+            <%= form.select :table_border, ['1px', '2px', '3px'], { selected: form.object&.theme&.dig("border", "width") }, { data: { key: "border" } } %>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-1">
+        <%= form.label :color_background_table_title, "Fundo do Cabeçalho" %>
+        <div class="flex items-center space-x-3">
+          <%= form.color_field :color_background_table_title,
+                               value: form.object.theme.dig("colors", "background_table_title"),
+                               data: { key: "colors" },
+                               class: "rounded-full h-[60px] w-[60px]" %>
+          <p class="leading-tight text-sm text-gray-900"><%= form.object.theme.dig("colors", "background_table_title").upcase if form.object.theme.dig("colors", "background_table_title") %></p>
+        </div>
+      </div>
+
+      <div class="space-y-1">
+        <%= form.label :color_background_table, "Fundo da Tabela" %>
+        <div class="flex items-center space-x-3">
+          <%= form.color_field :color_background_table,
+                               value: form.object.theme.dig("colors", "background_table"),
+                               data: { key: "colors" },
+                               class: "rounded-full h-[60px] w-[60px]" %>
+          <p class="leading-tight text-sm text-gray-900"><%= form.object.theme.dig("colors", "background_table").upcase if form.object.theme.dig("colors", "background_table") %></p>
+        </div>
+      </div>
+
+      <div class="space-y-1">
+        <%= form.label :color_table_title, "Título dos Items" %>
+        <div class="flex items-center space-x-3">
+          <%= form.color_field :color_table_title,
+                               value: form.object.theme.dig("colors", "table_title"),
+                               data: { key: "colors" },
+                               class: "rounded-full h-[60px] w-[60px]" %>
+          <p class="leading-tight text-sm text-gray-900"><%= form.object.theme.dig("colors", "table_title").upcase if form.object.theme.dig("colors", "table_title") %></p>
+        </div>
+      </div>
+
+      <div class="space-y-1">
+        <%= form.label :color_table_description, "Descrição dos Items" %>
+        <div class="flex items-center space-x-3">
+          <%= form.color_field :color_table_description,
+                               value: form.object.theme.dig("colors", "table_description"),
+                               data: { key: "colors" },
+                               class: "rounded-full h-[60px] w-[60px]" %>
+          <p class="leading-tight text-sm text-gray-900"><%= form.object.theme.dig("colors", "table_description").upcase if form.object.theme.dig("colors", "table_description") %></p>
+        </div>
+      </div>
+    <% end %>
+    <% if deal_section.section.is_cabecalho? %>
+      <div class="space-y-1">
+        <%= form.label :color_client_name, "Nome do Cliente" %>
+        <div class="flex items-center space-x-3">
+          <%= form.color_field :color_client_name,
+                               value: form.object.theme.dig("colors", "client_name"),
+                               data: { key: "colors" },
+                               class: "rounded-full h-[60px] w-[60px]" %>
+          <p class="leading-tight text-sm text-gray-900"><%= form.object.theme.dig("colors", "client_name").upcase if form.object.theme.dig("colors", "client_name") %></p>
+
+        </div>
+      </div>
+      <div class="space-y-1">
+        <%= form.label :color_date, "Data" %>
+        <div class="flex items-center space-x-3">
+          <%= form.color_field :color_date,
+                               value: form.object.theme.dig("colors", "date"),
+                               data: { key: "colors" },
+                               class: "rounded-full h-[60px] w-[60px]" %>
+          <p class="leading-tight text-sm text-gray-900"><%= form.object.theme.dig("colors", "date").upcase if form.object.theme.dig("colors", "date") %></p>
+
+        </div>
+      </div>
+    <% end %>
+    <% if deal_section.section.is_contacto? %>
+      <div class="space-y-1">
+        <%= form.label :color_contacto_title, "Título dos Contactos" %>
+        <div class="flex items-center space-x-3">
+          <%= form.color_field :color_contacto_title,
+                               value: form.object.theme.dig("colors", "contacto_title"),
+                               data: { key: "colors" },
+                               class: "rounded-full h-[60px] w-[60px]" %>
+          <p class="leading-tight text-sm text-gray-900"><%= form.object.theme.dig("colors", "contacto_title").upcase if form.object.theme.dig("colors", "contacto_title") %></p>
+        </div>
+      </div>
+
+      <div class="space-y-1">
+        <%= form.label :color_contacto_description, "Descrição dos Contactos" %>
+        <div class="flex items-center space-x-3">
+          <%= form.color_field :color_contacto_description,
+                               value: form.object.theme.dig("colors", "contacto_description"),
+                               data: { key: "colors" },
+                               class: "rounded-full h-[60px] w-[60px]" %>
+          <p class="leading-tight text-sm text-gray-900"><%= form.object.theme.dig("colors", "contacto_description").upcase if form.object.theme.dig("colors", "contacto_description") %></p>
+        </div>
+      </div>
+    <% end %>
+
+    <hr class="-mx-5">
+
+    <div class="px-1 py-2">
+      <p class="text-xs text-gray-500">Edite ainda mais o design da secção
+        nas <%= link_to "definições da proposta", admin_deal_editor_path, class: "text-blue-600" %></p>
+    </div>
+
+  </div>
+
+<% end %>

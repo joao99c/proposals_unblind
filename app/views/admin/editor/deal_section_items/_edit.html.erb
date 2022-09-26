@@ -1,17 +1,1 @@
-<div class="h-full overflow-scroll">
-<div class="flex flex-col flex-1 pt-5 pb-4">
-
-    <%= link_to "Voltar", edit_admin_deal_editor_deal_section_path(deal_id:, id: deal_section_id) %>
-    <h1>Editing deal section item</h1>
-
-    <%= render "form", deal_section_item:, deal_id:, deal_section_id: %>
-    <br>
-
-
-    <%= form_with model: deal_section_item, url: admin_deal_editor_deal_section_deal_section_item_path(deal_id:, deal_section_id: deal_section_id, id: deal_section_item.id), method: :delete, data: { turbo_confirm: "Are your sure?" } do %>
-      <%= button_tag "Apagar", class: "font-medium text-red-600 dark:text-red-500 hover:underline" %>
-    <% end %>
-
-    <br>
-  </div>
-</div>
+<%= render "form", deal_section_item:, deal_id:, deal_section_id: %>

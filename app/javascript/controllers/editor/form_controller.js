@@ -15,6 +15,7 @@ export default class FormController extends Controller {
   listenForChanges() {
     this.listenForChange("input:not([type='file'])", "input");
     this.listenForChange("input[type='checkbox']", "change");
+    this.listenForChange("input[type='file']", "change");
     this.listenForChange("trix-editor", "trix-change");
     this.listenForChange("select:not([data-autosave='false'])", "change");
     this.listenForChange("textarea", "input");

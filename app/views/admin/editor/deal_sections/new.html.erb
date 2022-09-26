@@ -1,43 +1,33 @@
 <%= turbo_frame_tag dom_id(@deal, :sidebar) do %>
-  <div class="h-full bg-gray-800 text-white overflow-scroll">
-    <div class="flex flex-col flex-1 pt-5 pb-4">
-      <ul class="space-y-2">
-        <% SectionCategory.includes(:sections).all.each do |c| %>
-          <%# if c.sections.present? %>
-          <li data-controller="togglable">
-            <button data-togglable-target="button" type="button" class="flex items-center px-4 w-full text-base font-normal rounded-lg transition duration-75 group  dark:text-white dark:hover:bg-gray-700">
-              <span class="flex-1 text-left whitespace-nowrap"><%= c.name %></span>
-              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-              </svg>
-            </button>
-            <ul data-togglable-target="item" id="basic_content" class="hidden py-2 space-y-4 text-gray-400 flex flex-col">
-              <% c.sections.map do |s| %>
-                <li class="inline-flex items-center">
-                  <%= button_to admin_deal_editor_deal_sections_path,
-                                {
-                                  params:
-                                    {
-                                      section_id: s.id,
-                                    },
-                                  data: { action: "mouseover->editor--preview#show mouseout->editor--preview#hide click->editor--preview#hide", id: dom_id(s) },
-                                  class: 'space-x-2 flex items-center p-2 px-6 py-0 w-full text-base font-normal rounded-lg transition duration-75 group  dark:text-white dark:hover:bg-gray-700'
-                                } do %>
-                    <%= heroicon("cog", variant: :solid, options: { class: "h-6 w-6 shrink-0" }) %>
-                    <span><%= s.name %></span>
-                  <% end %>
-                </li>
-              <% end %>
-            </ul>
-          </li>
-          <%# end %>
-        <% end %>
-      </ul>
+  <div class="h-full bg-gray-900 text-white overflow-scroll divide-y divide-gray-700">
 
-      <br><br>
-      <div>
-        <%= link_to "Back to deal sections", admin_deal_editor_deal_sections_path %>
-      </div>
+    <div class="pt-6 p-4 space-y-2">
+      <%= link_to admin_deal_editor_deal_sections_path do %>
+        <%= heroicon("arrow-circle-left", variant: :solid, options: { class: "h-6 w-6 text-blue-600" }) %>
+      <% end %>
+      <p class="text-lg text-gray-50">Nova Secção</p>
     </div>
+
+
+    <% SectionCategory.includes(:sections).all.each do |c| %>
+      <div class="p-4 space-y-4">
+        <p class="font-semibold text-blue-600"><%= c.name %></p>
+        <% c.sections.map do |s| %>
+          <% unless s.id.in? [1, 2, 5] #cabeçalho, proposta e item da grelha %>
+            <div>
+              <%= button_to admin_deal_editor_deal_sections_path, { params: { section_id: s.id, }, data: { action: "mouseover->editor--preview#show mouseout->editor--preview#hide click->editor--preview#hide", id: dom_id(s) }, class: "w-full" } do %>
+                <div class="flex justify-between w-full">
+                  <div class="flex space-x-2">
+                    <%= render partial: 'shared/section_svg', locals: { type: s.section_type.name } %>
+                    <span class="font-medium text-gray-50"><%= s.name %></span>
+                  </div>
+                  <%= heroicon("plus", variant: :solid, options: { class: "h-6 w-6 shrink-0 text-gray-500" }) %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 <% end %>

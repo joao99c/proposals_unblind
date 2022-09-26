@@ -6,11 +6,11 @@ module Admin
 
       def initialize(attributes = nil)
         attributes ||= {}
-        attributes[:section_id] ||= 3
-        attributes[:preHeading] ||= 'Isto é um texto antes da Grid'
-        attributes[:heading] ||= 'Grid'
-        attributes[:subHeading] ||= 'Isto é um texto depois da Grid'
-        attributes[:text] ||= 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisi eu consectetur'
+        attributes[:section_id] ||= 4
+        attributes[:preHeading] ||= nil
+        attributes[:heading] ||= 'Título da Grelha'
+        attributes[:subHeading] ||= nil
+        attributes[:text] ||= 'Explore the whole collection of open-source web components and elements built with the utility classes from Tailwind'
         attributes[:deal_section_items] ||= [create_item(1), create_item(2)]
 
         attributes[:mediaAlignment] ||= 'center'
@@ -21,11 +21,11 @@ module Admin
 
         attributes[:theme] ||= {}
         attributes[:theme][:colors] ||= {}
-        attributes[:theme][:colors][:background] ||= '#f3f4f6'
-        attributes[:theme][:colors][:heading] ||= '#000000'
-        attributes[:theme][:colors][:text] ||= '#000000'
-        attributes[:theme][:colors][:button_background] ||= '#ffffff'
-        attributes[:theme][:colors][:button_text] ||= '#000000'
+        # attributes[:theme][:colors][:background] ||= '#f3f4f6'
+        # attributes[:theme][:colors][:heading] ||= '#000000'
+        # attributes[:theme][:colors][:text] ||= '#000000'
+        # attributes[:theme][:colors][:button_background] ||= '#ffffff'
+        # attributes[:theme][:colors][:button_text] ||= '#000000'
 
         super(attributes)
       end

@@ -8,6 +8,34 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
+['Templates', 'Wireframe'].each_with_index do |word, position,|
+  SectionCategory.create(name: word, position:)
+end
+
+SectionType.destroy_all
+%w[Mandatory Grid Gallery Content Accordion].each do |name|
+  SectionType.create(name:)
+end
+
+Section.destroy_all
+Section.create!([name: 'Cabeçalho', section_category: SectionCategory.first, section_type: SectionType.find_by_name('Mandatory')])
+Section.create!([name: 'Proposta', section_category: SectionCategory.first, section_type: SectionType.find_by_name('Mandatory')])
+Section.create!([name: 'Contacto', section_category: SectionCategory.first, section_type: SectionType.find_by_name('Mandatory')])
+
+Section.create!([name: 'Grelha', section_category: SectionCategory.second, section_type: SectionType.find_by_name('Grid')])
+Section.create!([name: 'Grelha_Filho', section_category: SectionCategory.second, section_type: SectionType.find_by_name('Grid')])
+Section.create!([name: 'Galeria', section_category: SectionCategory.second, section_type: SectionType.find_by_name('Gallery')])
+Section.create!([name: 'Conteúdo', section_category: SectionCategory.second, section_type: SectionType.find_by_name('Content')])
+Section.create!([name: 'Acordeão', section_category: SectionCategory.second, section_type: SectionType.find_by_name('Accordion')])
+
+Section.create!([name: 'Sobre Nós', section_category: SectionCategory.first, section_type: SectionType.find_by_name('Content')])
+Section.create!([name: 'Equipa', section_category: SectionCategory.first, section_type: SectionType.find_by_name('Grid')])
+Section.create!([name: 'Passo a passo', section_category: SectionCategory.first, section_type: SectionType.find_by_name('Grid')])
+Section.create!([name: 'Portfolio', section_category: SectionCategory.first, section_type: SectionType.find_by_name('Gallery')])
+Section.create!([name: 'Os nossos Clientes', section_category: SectionCategory.first, section_type: SectionType.find_by_name('Gallery')])
+Section.create!([name: 'Faq’s', section_category: SectionCategory.first, section_type: SectionType.find_by_name('Accordion')])
+
+
 User.create([
               { email: 'ld@unblind.io', first_name: 'Luís', last_name: 'Diogo', password: 123_123_123 },
               { email: 'jc@unblind.io', first_name: 'Jota', last_name: 'Carvalho', password: 123_123_123 },
@@ -72,123 +100,3 @@ end
   )
 end
 
-['Conteúdo Básico', 'Destaques', 'Testemunhos', 'Equipa', 'Imagens', 'Videos',
- 'FAQ’s'].each_with_index do |word, position,|
-  SectionCategory.create(name: word, position:)
-end
-Section.destroy_all
-Section.create!([name: 'text', section_category: SectionCategory.first])
-Section.create!([name: 'bio', section_category: SectionCategory.first])
-Section.create!([name: 'grid', section_category: SectionCategory.first])
-
-DealSection.destroy_all
-DealSection.create({
-                     deal_id: 50,
-                     section_id: 1,
-                     preHeading: 'Pre Heading',
-                     heading: 'Heading',
-                     subHeading: 'Sub Heading',
-                     theme: {
-                       name: 'none',
-                       colors: {
-                         background: '#ffffff',
-                         button: '#4b2aad',
-                         buttonText: '#ffffff',
-                         heading: '#0d161b',
-                         text: '#0d161b'
-                       },
-                       background: {
-                         blend: 'normal',
-                         blur: 0,
-                         contrast: 75,
-                         grayscale: 100,
-                         opacity: 38,
-                         url: nil
-                       }
-                     },
-                     button: {
-                       text: 'Button',
-                       url: 'https://www.google.com'
-                     },
-                     button2: {
-                       text: 'Button 2',
-                       url: 'https://www.google.com'
-                     },
-                     links: {
-                       twitter: {
-                         position: 0,
-                         name: 'twitter',
-                         url: '1'
-                       },
-                       facebook: {
-                         position: 1,
-                         name: 'facebook',
-                         url: '1'
-                       },
-                       instagram: {
-                         position: 2,
-                         name: 'instagram',
-                         url: '1'
-                       },
-                       pinterest: {
-                         position: 3,
-                         name: 'pinterest',
-                         url: '1'
-                       },
-                       linkedin: {
-                         position: 4,
-                         name: 'linkedin',
-                         url: '1'
-                       },
-                       youtube: {
-                         position: 5,
-                         name: 'youtube',
-                         url: '1'
-                       },
-                       tiktok: {
-                         position: 6,
-                         name: 'tiktok',
-                         url: '1'
-                       },
-                       website: {
-                         position: 7,
-                         name: 'website',
-                         url: '1'
-                       },
-                       mailto: {
-                         position: 8,
-                         name: 'mailto',
-                         url: 'mailto:1'
-                       }
-                     },
-                     buttonSubtext: 'Button Subtext',
-                     text: 'Im a text',
-                     mediaAlignment: 'left', # left, center, right ...
-                     mediaStyle: 'plain' # plain, card ...
-                   })
-
-parent = Admin::Editor::GridSection.new(
-  deal_id: 50,
-  section: Section.find_by_name('grid'),
-  preHeading: 'Pre Heading',
-  heading: 'Heading',
-  subHeading: 'Sub Heading'
-).becomes(DealSection)
-parent.save
-
-child1 = Admin::Editor::TextSection.new(
-  deal_id: 50,
-  section: Section.find_by_name('text'),
-  preHeading: 'Pre Heading',
-  heading: 'Heading',
-  subHeading: 'Sub Heading',
-  child: true,
-  parent_id: parent.id
-).becomes(DealSection)
-child1.save
-
-DealSectionItem.create({
-                         parent_id: parent.id,
-                         child_id: child1.id,
-                         position: 0
-                       })

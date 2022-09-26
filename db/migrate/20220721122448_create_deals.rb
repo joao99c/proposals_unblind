@@ -6,6 +6,7 @@ class CreateDeals < ActiveRecord::Migration[7.0]
       t.decimal :total_discount, precision: 10, scale: 2, default: 0.0, null: true
       t.decimal :total_subtotal, precision: 10, scale: 2, default: 0.0, null: true
       t.datetime :finish_date
+      t.datetime :send_date
 
       t.enum :status, enum_type: :deal_status, default: :open, null: false
 

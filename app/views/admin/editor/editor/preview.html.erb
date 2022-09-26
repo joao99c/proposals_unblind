@@ -6,58 +6,17 @@
     letter-spacing:<%= @deal.text_spacing %>em;
   ">
 
-    <div class="flex bg-gray-50">
-      <div class="bg-blue-600 text-blue-50 mx-10 mb-10 mt-40 p-10 space-y-2">
-        <h1 class="text-2xl font-bold">Proposta <%= @deal.customer.name %></h1>
-        <p class="font-medium">Data de Envio</p>
-      </div>
-    </div>
-
-
     <%= turbo_stream_from @deal, :deal_sections_preview %>
-    <div id="deal_sections_preview" class="space-y-10">
+    <%= render @deal.deal_sections.first %>
+    <div id="deal_sections_preview">
       <% @deal.deal_sections.map do |ds| %>
-        <%= render ds %>
+        <%= render ds unless ds.section_id == 1 %>
       <% end %>
     </div>
     <div class="preview_before_add_section mt-10">
       <%= render partial: "admin/editor/sections/text", locals: { deal_section: @text_preview_item } %>
       <%= render partial: "admin/editor/sections/bio", locals: { deal_section: @bio_preview_item } %>
-      <%= render partial: "admin/editor/sections/grid", locals: { deal_section: @grid_preview_item } %>
-    </div>
-    <br><br>
-    <p> Products: </p>
-    <div class="overflow-x-auto relative">
-      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-        <tr>
-          <th scope="col" class="py-3 px-6">
-            Product name
-          </th>
-          <th scope="col" class="py-3 px-6">
-            Quantity
-          </th>
-          <th scope="col" class="py-3 px-6">
-            Price
-          </th>
-        </tr>
-        </thead>
-        <tbody>
-        <% @deal.deal_products.map do |dp| %>
-          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-              <%= dp.product.name %>
-            </th>
-            <td class="py-4 px-6">
-              <%= dp.quantity %>
-            </td>
-            <td class="py-4 px-6">
-              <%= number_to_currency dp.price %>
-            </td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
+      <%= render partial: "admin/editor/sections/grelha", locals: { deal_section: @grid_preview_item } %>
     </div>
   </div>
 <% end %>

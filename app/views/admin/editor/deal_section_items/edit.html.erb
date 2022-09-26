@@ -1,8 +1,28 @@
 <%= turbo_frame_tag dom_id(@deal, :sidebar) do %>
-  <%= render partial: "admin/editor/deal_section_items/edit",
-             locals: {
-               deal_section_item: @deal_section_item,
-               deal_id: @deal.id,
-               deal_section_id: @parent.id
-             } %>
+  <div class="h-full overflow-scroll">
+
+    <div class="pt-6 p-3 pb-4 space-y-2">
+      <div class="flex justify-between">
+
+        <%= link_to edit_admin_deal_editor_deal_section_path(deal:@deal.id,id:@parent.id) do %>
+          <%= heroicon("arrow-circle-left", variant: :solid, options: { class: "h-6 w-6 text-blue-600" }) %>
+        <% end %>
+
+        <% unless @parent.section_id.in?([1]) %>
+          <%= form_with model: @parent, url: admin_deal_editor_deal_section_deal_section_item_path(deal_id: @parent.deal_id, deal_section_id: @parent.id, id: @deal_section_item.id), method: :delete, data: { turbo_confirm: "Are your sure?" } do %>
+            <%= button_tag class: "font-medium hover:text-red-600 dark:hover:text-red-500 hover:underline" do %>
+              <%= heroicon("trash", variant: :solid, options: { class: "h-6 w-6 text-blue-600" }) %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+      <p class="text-lg text-gray-900"><span class="underline"><%= @parent.section.name %></span> / <%= @deal_section_item.child.heading %></p>
+    </div>
+    <%= render partial: "admin/editor/deal_section_items/edit",
+               locals: {
+                 deal_section_item: @deal_section_item,
+                 deal_id: @deal.id,
+                 deal_section_id: @parent.id
+               } %>
+  </div>
 <% end %>

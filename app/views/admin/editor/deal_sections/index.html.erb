@@ -8,14 +8,14 @@
       <div class="">
         <ul class="flex -mb-px text-sm font-medium text-center" id="myTab" role="tablist">
           <li class="w-full" role="presentation">
-            <button data-tabs-target="tabHeader" class="w-full inline-flex items-center p-4 rounded-t-lg border-b-2 text-blue-600 hover:text-blue-600 dark:text-blue-500 dark:hover:text-blue-500 border-blue-600 dark:border-blue-500" id="existing-customer-tab" type="button" role="tab" aria-controls="existing-customer" aria-selected="true">
-              <%= heroicon("clipboard-list", options: { class: "mr-2 -ml-1 w-4 h-4" }) %>
+            <button data-tabs-target="tabHeader" class="w-full inline-flex items-center justify-center p-4 rounded-t-lg border-b-2 text-blue-600 hover:text-blue-600 dark:text-blue-500 dark:hover:text-blue-500 border-blue-600 dark:border-blue-500" id="existing-customer-tab" type="button" role="tab" aria-controls="existing-customer" aria-selected="true">
+              <%= heroicon("clipboard-list", variant: :solid, options: { class: "mr-2 -ml-1 w-4 h-4" }) %>
               Secções
             </button>
           </li>
           <li class="w-full" role="presentation">
-            <button data-tabs-target="tabHeader" class="w-full inline-flex items-center p-4 rounded-t-lg border-b-2 dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-200 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300" id="new-customer-tab" type="button" role="tab" aria-controls="new-customer" aria-selected="false">
-              <%= heroicon("adjustments", options: { class: "mr-2 -ml-1 w-4 h-4" }) %>
+            <button data-tabs-target="tabHeader" class="w-full inline-flex items-center justify-center p-4 rounded-t-lg border-b-2 dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-200 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300" id="new-customer-tab" type="button" role="tab" aria-controls="new-customer" aria-selected="false">
+              <%= heroicon("adjustments", variant: :solid, options: { class: "mr-2 -ml-1 w-4 h-4" }) %>
               Definições
             </button>
           </li>
@@ -30,21 +30,31 @@
             </div>
             <div class="py-4 px-0">
               <p class="text-blue-600 px-4 mb-6">Apresentação</p>
-              <div data-controller="editor--sortable" data-editor--sortable-url="<%= reorder_admin_deal_editor_deal_section_path(deal_id: @deal.id, id: ":id") %>" class="px-3 space-y-4">
-                <% @deal.deal_sections.each do |deal_section| %>
-                  <div data-id="<%= deal_section.id %>" data-preview-id="<%= dom_id(deal_section) %>" class="editor--page-section flex items-center justify-between space-x-4">
-                    <%= link_to edit_admin_deal_editor_deal_section_path(deal_id: deal_section.deal_id, id: deal_section.id), class: "flex items-center space-x-2 truncate" do %>
-                      <%= heroicon("cog", variant: :solid, options: { class: "h-6 w-6 text-blue-600 shrink-0" }) %>
-                      <p><%= deal_section.name %></p>
-                    <% end %>
 
-                    <%= heroicon("menu-alt-4", options: {
-                      class: "handle w-5 h-5 text-blue-600",
-                    }) %>
-
-                  </div>
+              <div data-id="<%= @deal.section_cabecalho.section_id %>" data-preview-id="<%= dom_id(@deal.section_cabecalho) %>" class="editor--page-section flex items-center justify-between space-x-4 px-3 my-4">
+                <%= link_to edit_admin_deal_editor_deal_section_path(deal_id: @deal.id, id: @deal.section_cabecalho.id), class: "flex items-center space-x-2 truncate" do %>
+                  <%= heroicon("cog", variant: :solid, options: { class: "h-6 w-6 text-blue-600 shrink-0" }) %>
+                  <p><%= @deal.section_cabecalho.name %></p>
                 <% end %>
               </div>
+
+              <div data-controller="editor--sortable" data-editor--sortable-url="<%= reorder_admin_deal_editor_deal_section_path(deal_id: @deal.id, id: ":id") %>" class="px-3 space-y-4">
+                <% @deal.deal_sections.each do |deal_section| %>
+                  <% unless deal_section.section_id == 1 %>
+                    <div data-id="<%= deal_section.id %>" data-preview-id="<%= dom_id(deal_section) %>" class="editor--page-section flex items-center justify-between space-x-4">
+                      <%= link_to edit_admin_deal_editor_deal_section_path(deal_id: deal_section.deal_id, id: deal_section.id), class: "flex items-center space-x-2 truncate" do %>
+                        <%= heroicon("cog", variant: :solid, options: { class: "h-6 w-6 text-blue-600 shrink-0" }) %>
+                        <p><%= deal_section.name %></p>
+                      <% end %>
+
+                      <%= heroicon("menu-alt-4", options: {
+                        class: "handle w-5 h-5 text-blue-600",
+                      }) %>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+
               <div class="px-3 mt-4">
                 <%= link_to new_admin_deal_editor_deal_section_path(deal_id: @deal.id), class: "flex items-center space-x-2 truncate text-blue-500" do %>
                   <%= heroicon("plus-circle", variant: :solid, options: { class: "h-6 w-6 shrink-0" }) %>

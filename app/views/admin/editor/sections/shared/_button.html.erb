@@ -1,5 +1,5 @@
 <% if deal_section.button_valid %>
-  <button style="background-color: <%=deal_section.button_background_color %>;color:<%= deal_section.button_text_color %>">
+  <button class="text-blue-600 underline font-medium" style="background-color: <%=deal_section.button_background_color %>;color:<%= deal_section.button_text_color %>">
     <a href="<%= deal_section.button&.dig "url" %>" target="_blank">
       <%= deal_section.button&.dig "text" %>
     </a>

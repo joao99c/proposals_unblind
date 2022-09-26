@@ -65,8 +65,6 @@
     input[type="color"] {
         -webkit-appearance: none;
         border: none;
-        width: 32px;
-        height: 32px;
     }
 
     input[type="color"]::-webkit-color-swatch-wrapper {
@@ -75,7 +73,7 @@
     }
 
     input[type="color"]::-webkit-color-swatch {
-        border: black solid;
+        border: #D1D5DB solid;
         border-radius: 100%;
     }
 
@@ -108,13 +106,12 @@
     .grid-section {
     }
 
-    form .section-title {
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-        color: #53595c;
-        font-size: 0.75rem;
-        font-weight: 700;
-        line-height: 1.35;
+    .img-square{
+        @apply rounded-lg
+    }
+
+    .img-rounded{
+        @apply rounded-full
     }
 }
 
