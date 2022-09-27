@@ -132,18 +132,18 @@
         <div class="text-sm font-medium flex rounded-lg overflow-hidden border border-gray-300">
           <div class="bg-white text-gray-500 w-full">
             <%= form.radio_button :image_format, :square,
-                                  checked: form.object.theme.dig("image","format") == "square",
+                                  checked: form.object.theme.dig("image", "format") == "square",
                                   class: "hidden peer",
-                                  data:{key:"image_format"}%>
+                                  data: { key: "image_format" } %>
             <%= form.label :image_format, value: :square, class: "flex items-center justify-center py-2.5 px-5 h-full peer-checked:text-blue-600 peer-checked:bg-blue-100" do %>
               Quadrada
             <% end %>
           </div>
           <div class="bg-white text-gray-500 w-full">
             <%= form.radio_button :image_format, :rounded,
-                                  checked: form.object.theme.dig("image","format") == "rounded",
+                                  checked: form.object.theme.dig("image", "format") == "rounded",
                                   class: "hidden peer",
-                                  data:{key:"image_format"}%>
+                                  data: { key: "image_format" } %>
             <%= form.label :image_format, value: :rounded, class: "flex items-center justify-center py-2.5 px-5 h-full peer-checked:text-blue-600 peer-checked:bg-blue-100" do %>
               Redonda
             <% end %>
@@ -246,6 +246,7 @@
         </div>
       </div>
     <% end %>
+
     <% if deal_section.section.is_cabecalho? %>
       <div class="space-y-1">
         <%= form.label :color_client_name, "Nome do Cliente" %>
@@ -270,6 +271,7 @@
         </div>
       </div>
     <% end %>
+
     <% if deal_section.section.is_contacto? %>
       <div class="space-y-1">
         <%= form.label :color_contacto_title, "Título dos Contactos" %>
@@ -294,6 +296,43 @@
       </div>
     <% end %>
 
+    <% if deal_section.section.is_galeria? %>
+      <div class="space-y-1">
+        <%= form.label :color_border_images, "Bordas das Imagens" %>
+        <div class="flex justify-between">
+          <div class="flex items-center space-x-3">
+            <%= form.color_field :color_border_images,
+                                 value: form.object.theme.dig("colors", "border_images"),
+                                 data: { key: "colors" },
+                                 class: "rounded-full h-[60px] w-[60px]" %>
+            <p class="leading-tight text-sm text-gray-900"><%= form.object.theme.dig("colors", "border_images").upcase if form.object.theme.dig("colors", "border_images") %></p>
+          </div>
+          <div class="flex w-20 h-10">
+            <%= form.select :border_images, ['0px', '1px', '2px', '3px'], { selected: form.object&.theme&.dig("border", "width") }, { data: { key: "border" } } %>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-2">
+        <%= form.label :image_organization, "Organização" %>
+
+        <div class="flex space-x-2 items-center">
+          <%= form.radio_button :image_organization, :feature,
+                                checked: form.object.theme.dig("image", "organization") == "feature",
+                                class: "w-4 h-4",
+                                data: { key: "image_organization" } %>
+          <%= form.label :image_organization, "Usar imagem em destaque", value: :feature, class: "text-xs text-gray-600 mb-0 ml-0" %>
+        </div>
+
+        <div class="flex space-x-2 items-center">
+          <%= form.radio_button :image_organization, :equal,
+                                checked: form.object.theme.dig("image", "organization") == "equal",
+                                class: "w-4 h-4",
+                                data: { key: "image_organization" } %>
+          <%= form.label :image_organization, "Todas as imagens Ideênticas", value: :equal, class: "text-xs text-gray-600 mb-0 ml-0" %>
+        </div>
+      </div>
+    <% end %>
     <hr class="-mx-5">
 
     <div class="px-1 py-2">

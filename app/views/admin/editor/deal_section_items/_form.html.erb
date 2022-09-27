@@ -38,15 +38,17 @@
       </div>
     </div>
 
-    <div class="space-y-2">
-      <div class="flex justify-between items-center">
-        <%= c_form.label :heading, "Título do Item", class: "mb-0" %>
-        <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
+    <% if deal_section_item.parent.section.is_grelha? %>
+      <div class="space-y-2">
+        <div class="flex justify-between items-center">
+          <%= c_form.label :heading, "Título do Item", class: "mb-0" %>
+          <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
+        </div>
+        <div class="flex">
+          <%= c_form.text_field :heading, placeholder: "Titulo da secção aqui...", data: { key: "heading" } %>
+        </div>
       </div>
-      <div class="flex">
-        <%= c_form.text_field :heading, placeholder: "Titulo da secção aqui...", data: { key: "heading" } %>
-      </div>
-    </div>
+    <% end %>
 
     <div class="space-y-2">
       <div class="flex justify-between items-center">
@@ -58,16 +60,19 @@
       </div>
     </div>
 
-    <div class="space-y-2">
-      <div class="flex justify-between items-center">
-        <%= c_form.label :button, "Button", class: "mb-0" %>
-        <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
-      </div>
+    <% if deal_section_item.parent.section.is_grelha? %>
+
       <div class="space-y-2">
-        <%= c_form.text_field :button_text, placeholder: "Label", value: c_form.object.button&.dig("text"), data: { key: "button_text" } %>
-        <%= c_form.url_field :button_url, placeholder: "https://", value: c_form.object.button&.dig("url"), data: { key: "button_url" }, pattern: "https://.*" %>
+        <div class="flex justify-between items-center">
+          <%= c_form.label :button, "Button", class: "mb-0" %>
+          <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
+        </div>
+        <div class="space-y-2">
+          <%= c_form.text_field :button_text, placeholder: "Label", value: c_form.object.button&.dig("text"), data: { key: "button_text" } %>
+          <%= c_form.url_field :button_url, placeholder: "https://", value: c_form.object.button&.dig("url"), data: { key: "button_url" }, pattern: "https://.*" %>
+        </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
 
 <% end %>

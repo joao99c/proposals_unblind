@@ -35,6 +35,8 @@ module Admin
         when '4'
           @deal_section = GridSection.new
           @deal_section.deal_section_items = []
+        when '6'
+          @deal_section = GallerySection.new
         end
         @deal_section.deal = @deal
         @deal_section = @deal_section.becomes(DealSection)
@@ -146,6 +148,28 @@ module Admin
 
           @deal_section.theme['border']['width'] = params.require(:deal_section)[:border_items] if params.require(:deal_section)[:border_items].present?
           @deal_section.theme['image']['format'] = params.require(:deal_section)[:image_format]
+
+        end
+
+        if @deal_section.section.is_galeria?
+          @deal_section.theme ||= {}
+          @deal_section.theme['colors'] ||= {}
+          @deal_section.theme['border'] ||= {}
+          @deal_section.theme['image'] ||= {}
+
+          if params.require(:deal_section)[:color_background].present?
+            @deal_section.theme['colors']['background'] = params.require(:deal_section)[:color_background] if params.require(:deal_section)[:color_background].present?
+            @deal_section.background_image = nil
+          else
+            @deal_section.background_image = params.require(:deal_section)[:background_image] if params.require(:deal_section)[:background_image].present?
+          end
+
+          @deal_section.theme['colors']['title'] = params.require(:deal_section)[:color_title] if params.require(:deal_section)[:color_title].present?
+          @deal_section.theme['colors']['description'] = params.require(:deal_section)[:color_description] if params.require(:deal_section)[:color_description].present?
+          @deal_section.theme['colors']['border_images'] = params.require(:deal_section)[:color_border_images] if params.require(:deal_section)[:color_border_images].present?
+
+          @deal_section.theme['border']['width'] = params.require(:deal_section)[:border_images] if params.require(:deal_section)[:border_images].present?
+          @deal_section.theme['image']['organization'] = params.require(:deal_section)[:image_organization] if params.require(:deal_section)[:image_organization].present?
 
         end
 

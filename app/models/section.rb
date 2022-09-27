@@ -30,4 +30,8 @@ class Section < ApplicationRecord
   def is_grelha?
     name == 'Grelha'
   end
+
+  def is_galeria?
+    name == 'Galeria'
+  end
 end

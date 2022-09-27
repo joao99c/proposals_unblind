@@ -17,13 +17,19 @@ module Admin
 
       # POST /deal_section_items or /deal_section_items.json
       def create
+        if @parent.section.is_galeria?
+          heading = "Imagem #{@parent.deal_section_items.length + 1}"
+        else
+          heading = "Item"
+        end
+
         @deal_section_item = @parent.deal_section_items.new(
           {
             child_attributes:
               {
                 deal: @deal,
                 section: Section.find_by_name('Grelha_Filho'),
-                heading: 'Item',
+                heading:,
                 preHeading: '',
                 subHeading: '',
                 child: true,
@@ -33,7 +39,7 @@ module Admin
         )
 
         respond_to do |format|
-          if @deal_section_item.save!
+          if @deal_section_item.save
             format.html do
               redirect_to admin_deal_editor_deal_section_deal_section_items_url(deal: @deal.id, deal_section_id: @parent.id),
                           notice: 'Deal section item was successfully created.'
@@ -45,8 +51,8 @@ module Admin
       # PATCH/PUT /deal_section_items/1 or /deal_section_items/1.json
       def update
         @deal_section_item.child.button ||= {}
-        @deal_section_item.child.button[:text] = params.require(:deal_section_item).dig("child_attributes","button_text") if params.require(:deal_section_item).dig("child_attributes","button_text")
-        @deal_section_item.child.button[:url] = params.require(:deal_section_item).dig("child_attributes","button_url") if params.require(:deal_section_item).dig("child_attributes","button_url")
+        @deal_section_item.child.button[:text] = params.require(:deal_section_item).dig("child_attributes", "button_text") if params.require(:deal_section_item).dig("child_attributes", "button_text")
+        @deal_section_item.child.button[:url] = params.require(:deal_section_item).dig("child_attributes", "button_url") if params.require(:deal_section_item).dig("child_attributes", "button_url")
 
         @deal_section_item.assign_attributes(deal_section_item_params)
 
@@ -87,7 +93,7 @@ module Admin
       # Only allow a list of trusted parameters through.
       def deal_section_item_params
         params.require(:deal_section_item).permit(
-          child_attributes: %i[id heading text deal_id section_id logow]
+          child_attributes: %i[id heading text deal_id section_id logo]
         )
       end
 
