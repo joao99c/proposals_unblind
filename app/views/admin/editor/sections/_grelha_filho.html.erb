@@ -28,18 +28,27 @@
         <% end %>
       </div>
     </div>
-  <% else %>
+  <% elsif deal_section.parent.section.is_galeria? %>
     <div class="text-white text-center h-full" style="<%= style %>;
       border-color: <%= deal_section.parent&.theme&.dig("colors","border_images") %>;
       border-width: <%= deal_section.parent&.theme&.dig("border", "width") %>">
       <% if deal_section.logo.attached? %>
         <div class="w-full h-full min-h-[300px] mx-auto" style="<%= "background: url(#{url_for(deal_section.logo)}) no-repeat center center; background-size: cover;" %>">
           <div class="flex justify-center items-end h-full">
-          <h2 class="font-medium text-black bg-gray-50 mb-4 p-1 py-0.5" style="background-color: <%= deal_section.parent&.theme&.dig("colors","border_images") %>"><%= deal_section.text %></h2>
+            <h2 class="font-medium text-black bg-gray-50 mb-4 p-1 py-0.5" style="background-color: <%= deal_section.parent&.theme&.dig("colors", "border_images") %>"><%= deal_section.text %></h2>
           </div>
         </div>
       <% end %>
-
+    </div>
+  <% elsif deal_section.parent.section.is_conteudo? %>
+    <div class="text-white flex space-x-12 <%= deal_section&.theme&.dig("image","organization") == "left" ? '' : 'flex-row-reverse' %>">
+      <% if deal_section.logo.attached? %>
+        <%= image_tag(deal_section.logo, class: "w-full h-[489px] mx-auto border", style: "border-width: #{deal_section.parent.theme.dig("border","width")};border-color:#{deal_section.parent.theme.dig("colors","border_images")}") %>
+      <% end %>
+      <div class="space-y-4 w-full flex flex-col justify-center <%= deal_section.logo.attached? ? 'items-start' : 'items-center max-w-[672px] mx-auto' %>">
+        <h1 class="text-2xl leading-tight font-bold text-gray-900" style="color: <%= deal_section&.parent&.theme&.dig("colors", "items_title") %>"><%= deal_section.heading %></h1>
+        <div class="font-medium text-gray-500 text-left" style="color: <%= deal_section&.parent&.theme&.dig("colors", "items_description") %>"><%= deal_section.text %></div>
+      </div>
     </div>
   <% end %>
 </div>

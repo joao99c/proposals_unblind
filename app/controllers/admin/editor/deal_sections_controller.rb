@@ -37,6 +37,8 @@ module Admin
           @deal_section.deal_section_items = []
         when '6'
           @deal_section = GallerySection.new
+        when '7'
+          @deal_section = ContentSection.new
         end
         @deal_section.deal = @deal
         @deal_section = @deal_section.becomes(DealSection)
@@ -181,6 +183,28 @@ module Admin
           end
         end
 
+        if @deal_section.section.is_conteudo?
+          @deal_section.theme ||= {}
+          @deal_section.theme['colors'] ||= {}
+          @deal_section.theme['border'] ||= {}
+          @deal_section.theme['image'] ||= {}
+
+          if params.require(:deal_section)[:color_background].present?
+            @deal_section.theme['colors']['background'] = params.require(:deal_section)[:color_background] if params.require(:deal_section)[:color_background].present?
+            @deal_section.background_image = nil
+          else
+            @deal_section.background_image = params.require(:deal_section)[:background_image] if params.require(:deal_section)[:background_image].present?
+          end
+
+          @deal_section.theme['colors']['title'] = params.require(:deal_section)[:color_title] if params.require(:deal_section)[:color_title].present?
+          @deal_section.theme['colors']['description'] = params.require(:deal_section)[:color_description] if params.require(:deal_section)[:color_description].present?
+          @deal_section.theme['colors']['items_title'] = params.require(:deal_section)[:color_items_title] if params.require(:deal_section)[:color_items_title].present?
+          @deal_section.theme['colors']['items_description'] = params.require(:deal_section)[:color_items_description] if params.require(:deal_section)[:color_items_description].present?
+          @deal_section.theme['colors']['links'] = params.require(:deal_section)[:color_links] if params.require(:deal_section)[:color_links].present?
+          @deal_section.theme['colors']['border_images'] = params.require(:deal_section)[:color_border_images] if params.require(:deal_section)[:color_border_images].present?
+          @deal_section.theme['border']['width'] = params.require(:deal_section)[:border_images] if params.require(:deal_section)[:border_images].present?
+
+        end
         # @deal_section.button ||= {}
         # @deal_section.button[:text] = params.require(:deal_section)[:button_text]
         # @deal_section.button[:url] = params.require(:deal_section)[:button_url]

@@ -38,7 +38,8 @@
       </div>
     </div>
 
-    <% if deal_section_item.parent.section.is_grelha? %>
+    <% if deal_section_item.parent.section.is_grelha? ||
+      deal_section_item.parent.section.is_conteudo? %>
       <div class="space-y-2">
         <div class="flex justify-between items-center">
           <%= c_form.label :heading, "Título do Item", class: "mb-0" %>
@@ -60,8 +61,7 @@
       </div>
     </div>
 
-    <% if deal_section_item.parent.section.is_grelha? %>
-
+    <% if deal_section_item.parent.section.is_grelha? || deal_section_item.parent.section.is_conteudo? %>
       <div class="space-y-2">
         <div class="flex justify-between items-center">
           <%= c_form.label :button, "Button", class: "mb-0" %>
@@ -70,6 +70,34 @@
         <div class="space-y-2">
           <%= c_form.text_field :button_text, placeholder: "Label", value: c_form.object.button&.dig("text"), data: { key: "button_text" } %>
           <%= c_form.url_field :button_url, placeholder: "https://", value: c_form.object.button&.dig("url"), data: { key: "button_url" }, pattern: "https://.*" %>
+        </div>
+      </div>
+    <% end %>
+
+    <% if deal_section_item.parent.section.is_conteudo? %>
+      <div class="space-y-1">
+        <%= form.label :image_organization, "Organização" %>
+        <div class="text-sm font-medium flex rounded-lg overflow-hidden border border-gray-300">
+          <div class="bg-white text-gray-500 w-full">
+            <%= form.radio_button :image_organization, :left,
+                                  checked: form.object&.child&.theme&.dig("image", "organization") == "left",
+                                  class: "hidden peer",
+                                  data: { key: "image_format" } %>
+            <%= form.label :image_organization, value: :left, class: "text-gray-500 flex space-x-2 items-center justify-center py-2.5 px-5 h-full peer-checked:text-blue-600 peer-checked:bg-blue-100" do %>
+              <%= heroicon("photograph", options:{class:"w-6 h-6"}) %>
+              <%= heroicon("menu-alt-2", options:{class:"w-6 h-6"}) %>
+            <% end %>
+          </div>
+          <div class="bg-white text-gray-500 w-full">
+            <%= form.radio_button :image_organization, :right,
+                                  checked: form.object&.child&.theme&.dig("image", "organization") == "right",
+                                  class: "hidden peer",
+                                  data: { key: "image_format" } %>
+            <%= form.label :image_organization, value: :right, class: "text-gray-500 flex items-center justify-center py-2.5 px-5 h-full peer-checked:text-blue-600 peer-checked:bg-blue-100" do %>
+              <%= heroicon("menu-alt-2", options:{class:"w-6 h-6"}) %>
+              <%= heroicon("photograph", options:{class:"w-6 h-6"}) %>
+            <% end %>
+          </div>
         </div>
       </div>
     <% end %>

@@ -2,7 +2,7 @@
 
 module Admin
   module Editor
-    class TextSection < DealSection
+    class ContentSection < DealSection
       def initialize(attributes = nil)
         attributes ||= {}
         attributes[:section_id] ||= 7

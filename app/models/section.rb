@@ -34,4 +34,8 @@ class Section < ApplicationRecord
   def is_galeria?
     name == 'Galeria'
   end
+
+  def is_conteudo?
+    name == 'Conteúdo'
+  end
 end

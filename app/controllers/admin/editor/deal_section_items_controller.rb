@@ -17,10 +17,16 @@ module Admin
 
       # POST /deal_section_items or /deal_section_items.json
       def create
+        theme ||= {}
         if @parent.section.is_galeria?
           heading = "Imagem #{@parent.deal_section_items.length + 1}"
-        else
+        elsif @parent.section.is_grelha?
           heading = "Item"
+        elsif @parent.section.is_conteudo?
+          heading = "Secção"
+          theme ||= {}
+          theme['image'] ||= {}
+          theme['image']['organization'] = "left"
         end
 
         @deal_section_item = @parent.deal_section_items.new(
@@ -33,7 +39,8 @@ module Admin
                 preHeading: '',
                 subHeading: '',
                 child: true,
-                parent_id: @parent.id
+                parent_id: @parent.id,
+                theme:
               }
           }
         )
@@ -54,10 +61,16 @@ module Admin
         @deal_section_item.child.button[:text] = params.require(:deal_section_item).dig("child_attributes", "button_text") if params.require(:deal_section_item).dig("child_attributes", "button_text")
         @deal_section_item.child.button[:url] = params.require(:deal_section_item).dig("child_attributes", "button_url") if params.require(:deal_section_item).dig("child_attributes", "button_url")
 
+        if @parent.section.is_conteudo?
+          @deal_section_item.child.theme ||= {}
+          @deal_section_item.child.theme['image'] ||= {}
+          @deal_section_item.child.theme['image']['organization'] = params.require(:deal_section_item)[:image_organization] if params.require(:deal_section_item)[:image_organization].present?
+        end
+
         @deal_section_item.assign_attributes(deal_section_item_params)
 
         respond_to do |format|
-          if @deal_section_item.save
+          if @deal_section_item.save!
             format.turbo_stream { render turbo_stream: [] }
           else
             format.html { render :edit, status: :unprocessable_entity }
