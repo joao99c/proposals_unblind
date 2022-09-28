@@ -5,7 +5,7 @@
       <div>
         <%= form.label :name, "Nome Proposta" %>
         <%= form.text_field :name, placeholder: "Descrever a proposta..." %>
-        <%= error_message_for form.object, :name %>
+        <%= error_message_for form.object, :name, "Nome Proposta" %>
       </div>
 
       <div>
@@ -19,7 +19,7 @@
                           items: form.object.tag_ids.to_json,
                         },
                         placeholder: "Encontrar ou criar tag..." %>
-        <%= error_message_for form.object, :tag_ids %>
+        <%= error_message_for form.object, :tag_ids, "Tags" %>
       </div>
     </div>
 
