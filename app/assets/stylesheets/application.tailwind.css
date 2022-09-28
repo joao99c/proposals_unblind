@@ -113,6 +113,9 @@
     .img-rounded{
         @apply rounded-full
     }
+    img{
+        @apply object-cover
+    }
 }
 
 @layer components {

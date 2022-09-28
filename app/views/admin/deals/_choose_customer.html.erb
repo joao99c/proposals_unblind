@@ -10,7 +10,7 @@
         </div>
         <div>
           <p class="font-semibold text-gray-700"><%= @deal.customer.name %></p>
-          <p class="text-sm text-gray-400"><%= @deal.customer.website %></p>
+          <%= link_to @deal.customer.website, @deal.customer.website, class: "text-sm text-gray-400" %>
         </div>
       </div>
 
@@ -61,11 +61,11 @@
       </div>
       <div class="flex items-center space-x-1.5 mb-0.5">
         <%= heroicon("mail", options: { class: "w-5 h-5 stroke-2" }) %>
-        <p><%= @deal.customer.responsable_email %></p>
+        <%= mail_to @deal.customer.responsable_email, @deal.customer.responsable_email %>
       </div>
       <div class="flex items-center space-x-1.5 mb-0.5">
         <%= heroicon("phone", options: { class: "w-5 h-5 stroke-2" }) %>
-        <p><%= @deal.customer.responsable_tel %></p>
+        <%= link_to @deal.customer.responsable_tel, "tel:#{@deal.customer.responsable_tel}" %>
       </div>
     </div>
 
