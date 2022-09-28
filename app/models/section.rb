@@ -38,4 +38,8 @@ class Section < ApplicationRecord
   def is_conteudo?
     name == 'Conteúdo'
   end
+
+  def is_acordeao?
+    name == 'Acordeão'
+  end
 end

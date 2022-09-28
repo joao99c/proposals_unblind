@@ -27,8 +27,10 @@ module Admin
           theme ||= {}
           theme['image'] ||= {}
           theme['image']['organization'] = "left"
+        elsif @parent.section.is_acordeao?
+          heading = "Secção"
+          theme ||= {}
         end
-
         @deal_section_item = @parent.deal_section_items.new(
           {
             child_attributes:

@@ -383,6 +383,74 @@
         </div>
       </div>
     <% end %>
+
+    <% if deal_section.section.is_acordeao? %>
+      <div class="space-y-1">
+        <%= form.label :color_border_accordion, "Bordas do Acordeão" %>
+        <div class="flex justify-between">
+          <div class="flex items-center space-x-3">
+            <%= form.color_field :color_border_accordion,
+                                 value: form.object.theme.dig("colors", "border_accordion"),
+                                 data: { key: "colors" },
+                                 class: "rounded-full h-[60px] w-[60px]" %>
+            <p class="leading-tight text-sm text-gray-900"><%= form.object.theme.dig("colors", "border_accordion").upcase if form.object.theme.dig("colors", "border_accordion") %></p>
+          </div>
+          <div class="flex w-20 h-10">
+            <%= form.select :border_accordion, ['0px', '1px', '2px', '3px'], { selected: form.object&.theme&.dig("border", "accordion") }, { data: { key: "border" } } %>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-1">
+        <%= form.label :color_border_separator, "Separadores do Acordeão" %>
+        <div class="flex justify-between">
+          <div class="flex items-center space-x-3">
+            <%= form.color_field :color_border_separator,
+                                 value: form.object.theme.dig("colors", "border_separator"),
+                                 data: { key: "colors" },
+                                 class: "rounded-full h-[60px] w-[60px]" %>
+            <p class="leading-tight text-sm text-gray-900"><%= form.object.theme.dig("colors", "border_separator").upcase if form.object.theme.dig("colors", "border_separator") %></p>
+          </div>
+          <div class="flex w-20 h-10">
+            <%= form.select :border_separator, ['0px', '1px', '2px', '3px'], { selected: form.object&.theme&.dig("border", "separator") }, { data: { key: "border" } } %>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-1">
+        <%= form.label :color_items_title, "Título das Secções" %>
+        <div class="flex items-center space-x-3">
+          <%= form.color_field :color_items_title,
+                               value: form.object.theme.dig("colors", "items_title"),
+                               data: { key: "colors" },
+                               class: "rounded-full h-[60px] w-[60px]" %>
+          <p class="leading-tight text-sm text-gray-900"><%= form.object.theme.dig("colors", "items_title").upcase if form.object.theme.dig("colors", "items_title") %></p>
+        </div>
+      </div>
+
+      <div class="space-y-1">
+        <%= form.label :items_description, "Descrição das Secções" %>
+        <div class="flex items-center space-x-3">
+          <%= form.color_field :color_items_description,
+                               value: form.object.theme.dig("colors", "items_description"),
+                               data: { key: "colors" },
+                               class: "rounded-full h-[60px] w-[60px]" %>
+          <p class="leading-tight text-sm text-gray-900"><%= form.object.theme.dig("colors", "items_description").upcase if form.object.theme.dig("colors", "items_description") %></p>
+        </div>
+      </div>
+
+      <div class="space-y-1">
+        <%= form.label :color_background_accordion, "Fundo do Acordeão" %>
+        <div class="flex accordion-center space-x-3">
+          <%= form.color_field :color_background_accordion,
+                               value: form.object.theme.dig("colors", "background_accordion"),
+                               data: { key: "colors" },
+                               class: "rounded-full h-[60px] w-[60px]" %>
+          <p class="leading-tight text-sm text-gray-900"><%= form.object.theme.dig("colors", "background_accordion").upcase if form.object.theme.dig("colors", "background_accordion") %></p>
+        </div>
+      </div>
+    <% end %>
+
     <hr class="-mx-5">
 
     <div class="px-1 py-2">

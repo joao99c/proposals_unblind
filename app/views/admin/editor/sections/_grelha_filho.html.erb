@@ -41,13 +41,34 @@
       <% end %>
     </div>
   <% elsif deal_section.parent.section.is_conteudo? %>
-    <div class="text-white flex space-x-12 <%= deal_section&.theme&.dig("image","organization") == "left" ? '' : 'flex-row-reverse' %>">
+    <div class="text-white flex space-x-12 <%= deal_section&.theme&.dig("image", "organization") == "left" ? '' : 'flex-row-reverse' %>">
       <% if deal_section.logo.attached? %>
-        <%= image_tag(deal_section.logo, class: "w-full h-[489px] mx-auto border", style: "border-width: #{deal_section.parent.theme.dig("border","width")};border-color:#{deal_section.parent.theme.dig("colors","border_images")}") %>
+        <%= image_tag(deal_section.logo, class: "w-full h-[489px] mx-auto border", style: "border-width: #{deal_section.parent.theme.dig("border", "width")};border-color:#{deal_section.parent.theme.dig("colors", "border_images")}") %>
       <% end %>
       <div class="space-y-4 w-full flex flex-col justify-center <%= deal_section.logo.attached? ? 'items-start' : 'items-center max-w-[672px] mx-auto' %>">
         <h1 class="text-2xl leading-tight font-bold text-gray-900" style="color: <%= deal_section&.parent&.theme&.dig("colors", "items_title") %>"><%= deal_section.heading %></h1>
         <div class="font-medium text-gray-500 text-left" style="color: <%= deal_section&.parent&.theme&.dig("colors", "items_description") %>"><%= deal_section.text %></div>
+      </div>
+    </div>
+  <% elsif deal_section.parent.section.is_acordeao? %>
+
+
+    <button data-accordion-target="item"
+            id="accordion-flush-heading-<%= deal_section.id %>"
+            type="button"
+            class="flex items-center justify-between w-full py-6 text-2xl font-semibold text-left border-b border-gray-200 text-gray-900"
+            aria-expanded="false"
+            aria-controls="accordion-flush-body-<%= deal_section.id %>"
+            style="<%= "border-bottom-width: #{deal_section&.parent&.theme&.dig('border', 'separator')};border-color:#{deal_section&.parent&.theme&.dig('colors', 'border_separator')}" %>">
+      <span style="color: <%= deal_section&.parent&.theme&.dig("colors", "items_title") %>"><%= deal_section.heading %></span>
+      <svg data-accordion-icon="" class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+      </svg>
+    </button>
+    <div id="accordion-flush-body-<%= deal_section.id %>" class="hidden" aria-labelledby="accordion-flush-heading-<%= deal_section.id %>">
+      <div class="py-5 font-light border-b border-gray-200"
+           style="<%= "border-bottom-width: #{deal_section&.parent&.theme&.dig('border', 'separator')};border-color:#{deal_section&.parent&.theme&.dig('colors', 'border_separator')}" %>">
+        <div class="mb-2 text-gray-500 text-left" style="color: <%= deal_section&.parent&.theme&.dig("colors", "items_description") %>"><%= deal_section.text %></div>
       </div>
     </div>
   <% end %>

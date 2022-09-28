@@ -28,18 +28,21 @@
     <%= c_form.hidden_field :section_id, value: Section.find_by_name("Grelha_Filho").id %>
 
 
-    <div class="space-y-2">
-      <div class="flex justify-between items-center">
-        <%= c_form.label :logo, "Imagem", class: "mb-0" %>
-        <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
+    <% unless deal_section_item.parent.section.is_acordeao? %>
+      <div class="space-y-2">
+        <div class="flex justify-between items-center">
+          <%= c_form.label :logo, "Imagem", class: "mb-0" %>
+          <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
+        </div>
+        <div class="flex">
+          <%= c_form.file_field :logo, placeholder: "Titulo da secção aqui...", data: { key: "heading" } %>
+        </div>
       </div>
-      <div class="flex">
-        <%= c_form.file_field :logo, placeholder: "Titulo da secção aqui...", data: { key: "heading" } %>
-      </div>
-    </div>
+    <% end %>
 
     <% if deal_section_item.parent.section.is_grelha? ||
-      deal_section_item.parent.section.is_conteudo? %>
+      deal_section_item.parent.section.is_conteudo? ||
+      deal_section_item.parent.section.is_acordeao? %>
       <div class="space-y-2">
         <div class="flex justify-between items-center">
           <%= c_form.label :heading, "Título do Item", class: "mb-0" %>
@@ -84,8 +87,8 @@
                                   class: "hidden peer",
                                   data: { key: "image_format" } %>
             <%= form.label :image_organization, value: :left, class: "text-gray-500 flex space-x-2 items-center justify-center py-2.5 px-5 h-full peer-checked:text-blue-600 peer-checked:bg-blue-100" do %>
-              <%= heroicon("photograph", options:{class:"w-6 h-6"}) %>
-              <%= heroicon("menu-alt-2", options:{class:"w-6 h-6"}) %>
+              <%= heroicon("photograph", options: { class: "w-6 h-6" }) %>
+              <%= heroicon("menu-alt-2", options: { class: "w-6 h-6" }) %>
             <% end %>
           </div>
           <div class="bg-white text-gray-500 w-full">
@@ -94,8 +97,8 @@
                                   class: "hidden peer",
                                   data: { key: "image_format" } %>
             <%= form.label :image_organization, value: :right, class: "text-gray-500 flex items-center justify-center py-2.5 px-5 h-full peer-checked:text-blue-600 peer-checked:bg-blue-100" do %>
-              <%= heroicon("menu-alt-2", options:{class:"w-6 h-6"}) %>
-              <%= heroicon("photograph", options:{class:"w-6 h-6"}) %>
+              <%= heroicon("menu-alt-2", options: { class: "w-6 h-6" }) %>
+              <%= heroicon("photograph", options: { class: "w-6 h-6" }) %>
             <% end %>
           </div>
         </div>

@@ -40,6 +40,7 @@
       deal_section.section.is_contacto? ||
       deal_section.section.is_grelha? ||
       deal_section.section.is_conteudo? ||
+      deal_section.section.is_acordeao? ||
       deal_section.section.is_galeria? %>
       <div class="space-y-2">
         <div class="flex justify-between items-center">
@@ -65,6 +66,7 @@
       deal_section.section.is_contacto? ||
       deal_section.section.is_grelha? ||
       deal_section.section.is_conteudo? ||
+      deal_section.section.is_acordeao? ||
       deal_section.section.is_galeria? %>
       <div class="space-y-2">
         <div class="flex justify-between items-center">
@@ -80,6 +82,7 @@
 
     <% if deal_section.section.is_grelha? ||
       deal_section.section.is_conteudo? ||
+      deal_section.section.is_acordeao? ||
       deal_section.section.is_galeria? %>
       <hr style="margin-left: -12px; margin-right: -12px">
       <div class="space-y-2">
@@ -89,7 +92,7 @@
         <% if deal_section.section.is_galeria? %>
           <p class="text-sm font-medium text-gray-900">Imagens</p>
         <% end %>
-        <% if deal_section.section.is_conteudo? %>
+        <% if deal_section.section.is_conteudo? || deal_section.section.is_acordeao?  %>
           <p class="text-sm font-medium text-gray-900">Secções</p>
         <% end %>
         <div>
