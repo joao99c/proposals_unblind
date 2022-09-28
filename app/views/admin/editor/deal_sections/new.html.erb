@@ -13,7 +13,7 @@
       <div class="p-4 space-y-4">
         <p class="font-semibold text-blue-600"><%= c.name %></p>
         <% c.sections.map do |s| %>
-          <% unless s.id.in? [1, 2, 5] #cabeçalho, proposta e item da grelha %>
+          <% unless s.id.in? [1, 2, 3, 5] #cabeçalho, proposta, contacto e item da grelha %>
             <div>
               <%= button_to admin_deal_editor_deal_sections_path, { params: { section_id: s.id, }, data: { action: "mouseover->editor--preview#show mouseout->editor--preview#hide click->editor--preview#hide", id: dom_id(s) }, class: "w-full" } do %>
                 <div class="flex justify-between w-full">
