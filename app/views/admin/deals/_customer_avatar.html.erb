@@ -1,0 +1,11 @@
+<div class="flex space-x-4 items-center">
+  <div class="w-12 h-12 rounded-full bg-gray-50 overflow-hidden">
+    <% if customer.logo.attached? %>
+      <%= image_tag(customer.logo) %>
+    <% end %>
+  </div>
+  <div>
+    <p class="font-semibold text-gray-700"><%= customer.name %></p>
+    <%= link_to customer.website, customer.website, class: "text-sm text-gray-400" %>
+  </div>
+</div>

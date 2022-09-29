@@ -53,6 +53,8 @@ Rails.application.routes.draw do
         get 'step_1'
         post 'step_1'
 
+        get 'review'
+
         %w[customer product].each do |type|
           get "step_1/search_#{type}", to: "deals#search_#{type}"
           get "step_1/choose_#{type}", to: "deals#choose_#{type}", as: "step_1_choose_#{type}"

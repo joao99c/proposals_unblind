@@ -2,7 +2,7 @@
 
 module Admin
   class DealsController < Admin::BaseController
-    before_action :set_deal, only: %i[destroy step_1 search_customer choose_customer save_choose_customer delete_choose_customer search_product choose_product save_choose_product delete_choose_product update_dp new_customer update_customer new_product update_product]
+    before_action :set_deal, only: %i[destroy step_1 review search_customer choose_customer save_choose_customer delete_choose_customer search_product choose_product save_choose_product delete_choose_product update_dp new_customer update_customer new_product update_product]
 
     def index
       super
@@ -38,6 +38,8 @@ module Admin
     end
 
     def step_1; end
+
+    def review; end
 
     def search_customer
       if params[:query].present?
