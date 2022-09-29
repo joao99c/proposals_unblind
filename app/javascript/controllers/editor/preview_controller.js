@@ -8,10 +8,12 @@ export default class extends Controller {
 
     show(e) {
         this.getPreviewItem(e).parentElement.style.display = "block"
+        this.getPreviewItem(e).parentElement.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
     hide(e) {
         this.getPreviewItem(e).parentElement.style.display = "none"
+        this.getPreviewItem(e).parentElement.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
     getPreviewItem(e) {

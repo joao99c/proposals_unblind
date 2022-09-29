@@ -9,7 +9,6 @@ module Admin
         attributes[:heading] ||= 'Content'
         attributes[:text] ||= 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisi eu consectetur'
 
-
         attributes[:theme] ||= {}
         attributes[:theme][:colors] ||= {}
         attributes[:theme][:colors][:background] ||= '#f3f4f6'

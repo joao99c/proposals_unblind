@@ -1,7 +1,13 @@
 <div id="<%= dom_id(deal_section) %>" class="editor--page-section-preview text-section">
   <div id="<%= dom_id(Section.find(2)) %>" class="hidden"></div>
 
-  <div class="text-white bg-gray-500 py-24 px-20" style="color: <%= deal_section.text_color %>;">
+  <% if deal_section.background_image.attached? %>
+    <% style = "background: linear-gradient(0deg, #{deal_section&.theme&.dig("colors", "overlay")}70, #{deal_section&.theme&.dig("colors", "overlay")}70), url(#{url_for(deal_section.background_image)}) no-repeat center center; background-size: cover;" %>
+  <% else %>
+    <% style = "background-color: #{deal_section&.theme&.dig("colors", "background")};" %>
+  <% end %>
+
+  <div class="text-white bg-gray-500 py-24 px-20" style="<%= style %>color: <%= deal_section.text_color %>;">
     <div class="max-w-[672px] mx-auto text-center">
       <div class="space-y-4 mb-24">
         <h1 class="text-6xl leading-tight font-semibold" style="color: <%= deal_section&.theme&.dig("colors", "title") %>"><%= deal_section.heading %></h1>
@@ -27,7 +33,7 @@
           </tr>
           </thead>
           <tbody id="dp_list">
-          <% deal_section.deal.deal_products.map do |dp| %>
+          <% deal_section&.deal&.deal_products&.map do |dp| %>
             <tr id="<%= dom_id(dp) %>" class="bg-white border-b hover:bg-gray-50" data-step1-target="product" style="border-color: <%= deal_section&.theme&.dig("colors","table_border") %>;border-width: <%= deal_section&.theme&.dig("border","width"); %>;background-color: <%= deal_section&.theme&.dig("colors","background_table")%>;">
               <td class="py-4 px-6 font-medium text-gray-900">
                 <div class="flex items-center space-x-4">
@@ -68,19 +74,19 @@
                 <div class="divide-y w-full">
                   <div class="flex py-3 justify-between">
                     <p>Subtotal</p>
-                    <p class="text-sm font-semibold text-gray-900"><%= number_to_currency(deal_section.deal.total_subtotal) %></p>
+                    <p class="text-sm font-semibold text-gray-900"><%= number_to_currency(deal_section&.deal&.total_subtotal) %></p>
                   </div>
                   <div class="flex py-3 justify-between">
                     <p>Desconto</p>
-                    <p class="text-sm font-semibold text-gray-900"><%= number_to_currency(deal_section.deal.total_discount) %></p>
+                    <p class="text-sm font-semibold text-gray-900"><%= number_to_currency(deal_section&.deal&.total_discount) %></p>
                   </div>
                   <div class="flex py-3 justify-between">
                     <p>IVA</p>
-                    <p class="text-sm font-semibold text-gray-900"><%= number_to_currency(deal_section.deal.total_iva) %></p>
+                    <p class="text-sm font-semibold text-gray-900"><%= number_to_currency(deal_section&.deal&.total_iva) %></p>
                   </div>
                   <div class="flex pt-3 justify-between">
                     <p class="text-gray-900 font-semibold">Total Proposta</p>
-                    <p class="text-sm font-semibold text-gray-900"><%= number_to_currency(deal_section.deal.total_amount) %></p>
+                    <p class="text-sm font-semibold text-gray-900"><%= number_to_currency(deal_section&.deal&.total_amount) %></p>
                   </div>
                 </div>
               </div>

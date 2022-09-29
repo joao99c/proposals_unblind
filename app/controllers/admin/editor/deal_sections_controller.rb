@@ -28,19 +28,219 @@ module Admin
       # POST /admin/editor/deal_sections or /admin/editor/deal_sections.json
       def create
         case params.permit(:section_id)[:section_id]
-        when '1'
-          @deal_section = TextSection.new
-        when '2'
-          @deal_section = BioSection.new
-        when '4'
+        when '4' # Grelha
           @deal_section = GridSection.new
           @deal_section.deal_section_items = []
-        when '6'
+        when '6' # Galeria
           @deal_section = GallerySection.new
-        when '7'
+        when '7' # Contéudo
           @deal_section = ContentSection.new
-        when '8'
+        when '8' # Acordeão
           @deal_section = AccordionSection.new
+        when '9' # Sobre nós
+          @deal_section = ContentSection.create(
+            deal: @deal,
+            heading: 'Sobre Nós',
+            text: 'Deliver great service experiences fast - without the complexity of traditional ITSM solutions.Accelerate critical development work, eliminate toil, and deploy changes with ease.',
+          )
+          dsi = DealSectionItem.create(
+            parent: @deal_section,
+            child_attributes: {
+              deal: @deal,
+              parent_id: @deal_section.id,
+              heading: "We invest in the world’s potential",
+              text: 'Deliver great service experiences fast - without the complexity of traditional ITSM solutions.Accelerate critical development work, eliminate toil, and deploy changes with ease.',
+              section_id: 5,
+              child: true,
+              theme: { image: { organization: :left } },
+            })
+          dsi.child.logo.attach(io: File.open(File.join(Rails.root, 'app/assets/images/unblind.png')), filename: 'unblind.png', content_type: 'image/png')
+          dsi.child.save
+        when '10' # Equipa
+          @deal_section = GridSection.create(
+            deal: @deal,
+            heading: 'A Nossa Equipa',
+            text: 'Explore the whole collection of open-source web components and elements built with the utility classes from Tailwind',
+            theme: {
+              colors: {
+                background: '#F9FAFB',
+                title: '#111928',
+                description: '#6B7280',
+                background_items: '#F3F4F6',
+                border_items: '#F3F4F6',
+                items_title: '#111928',
+                items_description: '#6B7280',
+                links: '#1C64F2'
+              },
+              border: {
+                width: '0px'
+              },
+              image: {
+                format: :rounded
+              }
+            },
+            deal_section_items: []
+          )
+          5.times do
+            dsi = DealSectionItem.create(
+              parent: @deal_section,
+              child_attributes: {
+                deal: @deal,
+                parent_id: @deal_section.id,
+                heading: "Bonnie Green",
+                text: 'Senior Front-end Developer',
+                section_id: 5,
+                child: true
+              })
+            dsi.child.logo.attach(io: File.open(File.join(Rails.root, 'app/assets/images/unblind.png')), filename: 'unblind.png', content_type: 'image/png')
+            dsi.child.save
+          end
+        when '11' # Passo a Passo
+          @deal_section = GridSection.create(
+            deal: @deal,
+            heading: 'Passo a passo',
+            text: 'Explore the whole collection of open-source web components and elements built with the utility classes from Tailwind',
+            theme: {
+              colors: {
+                background: '#F9FAFB',
+                title: '#111928',
+                description: '#6B7280',
+                background_items: '#F3F4F6',
+                border_items: '#F3F4F6',
+                items_title: '#111928',
+                items_description: '#6B7280',
+                links: '#1C64F2'
+              },
+              border: {
+                width: '0px'
+              },
+              image: {
+                format: :rounded
+              }
+            },
+            deal_section_items: []
+          )
+          6.times do |i|
+            dsi = DealSectionItem.create(
+              parent: @deal_section,
+              child_attributes: {
+                deal: @deal,
+                parent_id: @deal_section.id,
+                heading: '%02i' % (i + 1),
+                text: 'Definição de microestratégias a desenvolver mensalmente e formas de aplicação nas diferentes plataformas.',
+                section_id: 5,
+                child: true
+              })
+          end
+        when '12' # Portfolio
+          @deal_section = GallerySection.create(
+            deal: @deal,
+            heading: 'Portfolio',
+            text: 'Explore the whole collection of open-source web components and elements built with the utility classes from Tailwind',
+            theme: {
+              colors: {
+                background: '#F9FAFB',
+                title: '#111928',
+                description: '#6B7280',
+                background_items: '#F3F4F6',
+                border_items: '#F3F4F6',
+                items_title: '#111928',
+                items_description: '#6B7280',
+                links: '#1C64F2'
+              },
+              border: {
+                width: '0px'
+              },
+              image: {
+                organization: :feature
+              }
+            },
+            deal_section_items: []
+          )
+          5.times do
+            dsi = DealSectionItem.create(
+              parent: @deal_section,
+              child_attributes: {
+                deal: @deal,
+                parent_id: @deal_section.id,
+                section_id: 5,
+                child: true
+              })
+            dsi.child.logo.attach(io: File.open(File.join(Rails.root, 'app/assets/images/unblind.png')), filename: 'unblind.png', content_type: 'image/png')
+            dsi.child.save
+          end
+        when '13' # Os nossos clientes
+          @deal_section = GallerySection.create(
+            deal: @deal,
+            heading: 'Os nossos Clientes',
+            text: 'Explore the whole collection of open-source web components and elements built with the utility classes from Tailwind',
+            theme: {
+              colors: {
+                background: '#F9FAFB',
+                title: '#111928',
+                description: '#6B7280',
+                background_items: '#F3F4F6',
+                border_items: '#F3F4F6',
+                items_title: '#111928',
+                items_description: '#6B7280',
+                links: '#1C64F2'
+              },
+              border: {
+                width: '0px'
+              },
+              image: {
+                organization: :equal
+              }
+            },
+            deal_section_items: []
+          )
+          6.times do
+            dsi = DealSectionItem.create(
+              parent: @deal_section,
+              child_attributes: {
+                deal: @deal,
+                parent_id: @deal_section.id,
+                section_id: 5,
+                child: true
+              })
+            dsi.child.logo.attach(io: File.open(File.join(Rails.root, 'app/assets/images/unblind.png')), filename: 'unblind.png', content_type: 'image/png')
+            dsi.child.save
+          end
+        when '14' # Faq's
+          @deal_section = AccordionSection.create(
+            deal: @deal,
+            heading: 'Faq’s',
+            text: '',
+            theme: {
+              colors: {
+                background: '#F9FAFB',
+                title: '#111928',
+                description: '#6B7280',
+                background_items: '#F3F4F6',
+                border_items: '#F3F4F6',
+                items_title: '#111928',
+                items_description: '#6B7280',
+                links: '#1C64F2'
+              },
+              border: {
+                width: '0px'
+              },
+            },
+            deal_section_items: []
+          )
+          6.times do |i|
+            dsi = DealSectionItem.create(
+              parent: @deal_section,
+              child_attributes: {
+                deal: @deal,
+                parent_id: @deal_section.id,
+                section_id: 5,
+                heading: "Pergunta #{'%02i' % (i + 1)}",
+                text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur debitis deleniti dolores dolorum excepturi iste iusto, laborum libero minima nobis, nulla odio perferendis quos repellat sed sit tenetur voluptate voluptatibus.
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur debitis deleniti dolores dolorum excepturi iste iusto, laborum libero minima nobis, nulla odio perferendis quos repellat sed sit tenetur voluptate voluptatibus.",
+                child: true
+              })
+          end
         end
         @deal_section.deal = @deal
         @deal_section = @deal_section.becomes(DealSection)
@@ -67,8 +267,8 @@ module Admin
             @deal.save(validate: false)
           end
 
-          if params.require(:deal_section)[:background_color].present?
-            @deal_section.background_color = params.require(:deal_section)[:background_color]
+          if params.require(:deal_section)[:color_background].present?
+            @deal_section.theme['colors']['background'] = params.require(:deal_section)[:color_background]
             @deal_section.background_image = nil
           else
             @deal_section.background_image = params.require(:deal_section)[:background_image] if params.require(:deal_section)[:background_image].present?
@@ -86,8 +286,8 @@ module Admin
         end
 
         if @deal_section.section.is_proposta?
-          if params.require(:deal_section)[:background_color].present?
-            @deal_section.background_color = params.require(:deal_section)[:background_color]
+          if params.require(:deal_section)[:color_background].present?
+            @deal_section.theme['colors']['background'] = params.require(:deal_section)[:color_background]
             @deal_section.background_image = nil
           else
             @deal_section.background_image = params.require(:deal_section)[:background_image] if params.require(:deal_section)[:background_image].present?
@@ -109,8 +309,8 @@ module Admin
         end
 
         if @deal_section.section.is_contacto?
-          if params.require(:deal_section)[:background_color].present?
-            @deal_section.background_color = params.require(:deal_section)[:background_color]
+          if params.require(:deal_section)[:color_background].present?
+            @deal_section.theme['colors']['background'] = params.require(:deal_section)[:color_background]
             @deal_section.background_image = nil
           else
             @deal_section.background_image = params.require(:deal_section)[:background_image] if params.require(:deal_section)[:background_image].present?
@@ -149,7 +349,6 @@ module Admin
           @deal_section.theme['colors']['items_title'] = params.require(:deal_section)[:color_items_title] if params.require(:deal_section)[:color_items_title].present?
           @deal_section.theme['colors']['items_description'] = params.require(:deal_section)[:color_items_description] if params.require(:deal_section)[:color_items_description].present?
           @deal_section.theme['colors']['links'] = params.require(:deal_section)[:color_links] if params.require(:deal_section)[:color_links].present?
-
           @deal_section.theme['border']['width'] = params.require(:deal_section)[:border_items] if params.require(:deal_section)[:border_items].present?
           @deal_section.theme['image']['format'] = params.require(:deal_section)[:image_format]
 
@@ -243,7 +442,7 @@ module Admin
         # @deal_section.theme ||= {}
         # @deal_section.theme[:colors] ||= {}
         #
-        # @deal_section.theme[:colors][:background] = params.require(:deal_section)[:background_color]
+        # @deal_section.theme[:colors][:background] = params.require(:deal_section)[:color_background]
         # @deal_section.theme[:colors][:heading] = params.require(:deal_section)[:heading_color]
         # @deal_section.theme[:colors][:text] = params.require(:deal_section)[:text_color]
         # @deal_section.theme[:colors][:button_background] = params.require(:deal_section)[:button_background_color]

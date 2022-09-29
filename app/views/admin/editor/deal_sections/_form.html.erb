@@ -108,7 +108,7 @@
           <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
         </div>
         <div class="flex">
-          <%= form.text_field :email, value: form.object.theme.dig("contacto", "email"), placeholder: "Email aqui...", data: { key: "email" } %>
+          <%= form.text_field :email, value: form.object&.theme&.dig("contacto", "email"), placeholder: "Email aqui...", data: { key: "email" } %>
         </div>
       </div>
       <div class="space-y-2">
@@ -117,7 +117,7 @@
           <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
         </div>
         <div class="flex">
-          <%= form.text_field :tel, value: form.object.theme.dig("contacto", "tel"), placeholder: "Telefone aqui...", data: { key: "telefone" } %>
+          <%= form.text_field :tel, value: form.object&.theme&.dig("contacto", "tel"), placeholder: "Telefone aqui...", data: { key: "telefone" } %>
         </div>
       </div>
       <div class="space-y-2">

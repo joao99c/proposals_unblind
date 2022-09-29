@@ -16,6 +16,7 @@ class DealSection < ApplicationRecord
   belongs_to :deal
   belongs_to :section
   has_many :deal_section_items, foreign_key: :parent_id, dependent: :destroy
+  accepts_nested_attributes_for :deal_section_items, allow_destroy: true, reject_if: :all_blank
 
   after_create_commit :broadcast_create
   after_update_commit :broadcast_update

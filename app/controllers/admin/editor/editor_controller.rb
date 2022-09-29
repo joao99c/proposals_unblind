@@ -12,6 +12,16 @@ module Admin
         @text_preview_item = TextSection.new
         @bio_preview_item = BioSection.new
         @grid_preview_item = GridSection.new
+
+        @acordeao_preview_item = AccordionSection.new
+        @bio_preview_item = BioSection.new
+        @cabecalho_preview_item = HeadingSection.new
+        @contacto_preview_item = ContactSection.new
+        @conteudo_preview_item = ContentSection.new
+        @galeria_preview_item = GallerySection.new
+        @grelha_preview_item = GridSection.new
+        @proposta_preview_item = ProposalSection.new
+        @text_preview_item = TextSection.new
       end
 
       def fonts; end

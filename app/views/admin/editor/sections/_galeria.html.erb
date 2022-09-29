@@ -26,7 +26,7 @@
 
       <div class="flex space-x-8">
         <div class="w-full">
-        <%= render partial: "admin/editor/deal_sections/deal_section", locals: { deal_section: deal_section.deal_section_items.first.child } %>
+          <%= render partial: "admin/editor/deal_sections/deal_section", locals: { deal_section: deal_section.deal_section_items.first.child } %>
         </div>
         <div class="w-full">
           <div id="<%= dom_id(deal_section, "items") %>" class="grid grid-cols-2 gap-8">

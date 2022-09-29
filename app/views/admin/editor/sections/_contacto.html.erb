@@ -4,8 +4,9 @@
   <% if deal_section.background_image.attached? %>
     <% style = "background: linear-gradient(0deg, #{deal_section&.theme&.dig("colors", "overlay")}70, #{deal_section&.theme&.dig("colors", "overlay")}70), url(#{url_for(deal_section.background_image)}) no-repeat center center; background-size: cover;" %>
   <% else %>
-    <% style = "background-color: #{deal_section&.background_color};" %>
+    <% style = "background-color: #{deal_section&.theme&.dig("colors", "background")};" %>
   <% end %>
+
 
   <div class="text-white bg-gray-500 p-12" style="<%= style %>color: <%= deal_section.text_color %>;">
     <div class="text-center">
