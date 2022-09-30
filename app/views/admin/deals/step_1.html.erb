@@ -72,7 +72,7 @@
       </button>
     <% end %>
 
-    <%= form_tag(admin_deal_editor_path(@deal), method: :get) do %>
+    <%= form_tag(admin_deal_step_2_path(@deal), method: :get) do %>
       <%= button_tag data: { step1_target: "button" }, class: "disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center" do %>
         Próximo passo
         <%= heroicon("chevron-right", options: { class: "ml-2 -mr-1 w-4 h-4" }) %>

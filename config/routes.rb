@@ -53,6 +53,8 @@ Rails.application.routes.draw do
         get 'step_1'
         post 'step_1'
 
+        get 'step_2'
+
         get 'review'
 
         %w[customer product].each do |type|
