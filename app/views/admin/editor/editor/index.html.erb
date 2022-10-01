@@ -2,7 +2,7 @@
 <nav data-turbo-permanent class="fixed z-30 w-full bg-white border-b border-gray-200 rounded dark:bg-gray-900 dark:border-gray-700">
   <div class="flex flex-wrap justify-between items-center mx-auto">
     <div class="flex divide-x">
-      <%= link_to admin_deal_step_1_path(@deal), class: "p-4 flex items-center" do %>
+      <%= link_to admin_deal_step_2_path(@deal), class: "p-4 flex items-center" do %>
         <%= heroicon("x", options: { class: "text-gray-500 h-8 w-8" }) %>
       <% end %>
       <div class="p-5">
@@ -59,7 +59,7 @@
 <div class="flex pt-16 overflow-hidden h-full">
   <aside class="fixed top-0 left-0 z-20 flex flex-col flex-shrink-0 w-80 h-full pt-16 duration-75 transition-width border-r">
     <%= turbo_frame_tag dom_id(@deal, :sidebar),
-                        src: admin_deal_editor_deal_sections_path(@deal),
+                        src: admin_deal_editor_deal_sections_path(@deal, template: params[:template]),
                         data: {
                           action: "turbo:frame-render->editor--reorder#connect"
                         },
@@ -70,7 +70,7 @@
   <div id="main-content" class="relative w-full h-full overflow-y-auto ml-80">
     <main class="h-full bg-white bg-checkered">
       <iframe id="<%= dom_id(@deal, :preview) %>"
-              src="<%= admin_deal_editor_preview_url(@deal) %>"
+              src="<%= admin_deal_editor_preview_url(@deal, template: params[:template]) %>"
               class="w-full h-full mx-auto transition-all transition-500 ease-in-out max-w-[100%] bg-gray-100"
               data-editor--responsive-target="preview">
       </iframe>

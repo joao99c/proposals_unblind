@@ -7,22 +7,22 @@
   ">
 
     <%= turbo_stream_from @deal, :deal_sections_preview %>
-    <%= render @deal.deal_sections.first %>
+    <%= render partial: 'admin/editor/deal_sections/deal_section', locals: { deal_section: @template.section_cabecalho, deal: @deal } %>
     <div id="deal_sections_preview">
-      <% @deal.deal_sections.map do |ds| %>
-        <%= render ds unless ds.section_id == 1 %>
+      <% @template.deal_sections.map do |deal_section| %>
+        <%= render partial: 'admin/editor/deal_sections/deal_section', locals: { deal_section:, deal: @deal } unless deal_section.section_id == 1 %>
       <% end %>
     </div>
     <div class="preview_before_add_section mt-10">
-      <%= render partial: "admin/editor/sections/acordeao", locals: { deal_section: @acordeao_preview_item } %>
-      <%= render partial: "admin/editor/sections/bio", locals: { deal_section: @bio_preview_item } %>
-      <%= render partial: "admin/editor/sections/cabecalho", locals: { deal_section: @cabecalho_preview_item } %>
-      <%= render partial: "admin/editor/sections/contacto", locals: { deal_section: @contacto_preview_item } %>
-      <%= render partial: "admin/editor/sections/conteudo", locals: { deal_section: @conteudo_preview_item } %>
-      <%= render partial: "admin/editor/sections/galeria", locals: { deal_section: @galeria_preview_item } %>
-      <%= render partial: "admin/editor/sections/grelha", locals: { deal_section: @grelha_preview_item } %>
-      <%= render partial: "admin/editor/sections/proposta", locals: { deal_section: @proposta_preview_item } %>
-      <%= render partial: "admin/editor/sections/text", locals: { deal_section: @text_preview_item } %>
+      <%= render partial: "admin/editor/sections/acordeao", locals: { deal_section: @acordeao_preview_item, deal: @deal } %>
+      <%= render partial: "admin/editor/sections/bio", locals: { deal_section: @bio_preview_item, deal: @deal } %>
+      <%= render partial: "admin/editor/sections/cabecalho", locals: { deal_section: @cabecalho_preview_item, deal: @deal } %>
+      <%= render partial: "admin/editor/sections/contacto", locals: { deal_section: @contacto_preview_item, deal: @deal } %>
+      <%= render partial: "admin/editor/sections/conteudo", locals: { deal_section: @conteudo_preview_item, deal: @deal } %>
+      <%= render partial: "admin/editor/sections/galeria", locals: { deal_section: @galeria_preview_item, deal: @deal } %>
+      <%= render partial: "admin/editor/sections/grelha", locals: { deal_section: @grelha_preview_item, deal: @deal } %>
+      <%= render partial: "admin/editor/sections/proposta", locals: { deal_section: @proposta_preview_item, deal: @deal } %>
+      <%= render partial: "admin/editor/sections/text", locals: { deal_section: @text_preview_item, deal: @deal } %>
     </div>
   </div>
 <% end %>

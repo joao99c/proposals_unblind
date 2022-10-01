@@ -69,12 +69,14 @@ end
 
 # Deal.destroy_all
 50.times do
+  user = User.find(User.pluck(:id).sample)
   Deal.create!(
     name: Faker::Name.name,
-    user: User.find(User.pluck(:id).sample),
+    user: ,
     customer: Customer.find(Customer.pluck(:id).sample),
     finish_date: DateTime.now + rand(30).day,
-    status: %w[open won lost].sample
+    status: %w[open won lost].sample,
+    template: user.templates.first
   )
 end
 

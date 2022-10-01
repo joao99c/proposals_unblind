@@ -36,6 +36,7 @@
               <%= form.email_field :email %>
             </div>
 
+
             <div class="col-span-2">
               <%= form.label :company_avatar, "Logo da empresa" %>
               <%# if current_user.company_avatar.attached? %>
@@ -43,6 +44,15 @@
               <%# end %>
               <%= form.file_field :company_avatar %>
             </div>
+
+            <div class="col-span-2">
+              <%= form.label :iva, "Percentagem de Iva" %>
+              <div class="flex w-1/2 pr-3">
+                <%= form.text_field :iva, placeholder:"23%" %>
+              </div>
+            </div>
+
+
 
             <%= form.submit "Salvar" %>
           </div>

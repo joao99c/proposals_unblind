@@ -1,5 +1,5 @@
 <%= form_with(model: deal_section,
-              url: admin_deal_editor_deal_section_path(deal_id: deal_section.deal_id, id: deal_section.id),
+              url: admin_deal_editor_deal_section_path(deal_id: @deal.id, id: deal_section.id, template: params[:template]),
               data: {
                 controller: "editor--form editor--autosave",
                 action: "editor:page-section:changed->editor--autosave#save",
@@ -27,7 +27,7 @@
       <div class="space-y-2">
         <div class="flex justify-between items-center">
           <%= form.label :logo, "Logótipo", class: "mb-0" %>
-          <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
+          <%= hide_button_field form, :logo %>
         </div>
         <div class="flex">
           <%= form.file_field :logo, data: { key: "heading" } %>
@@ -45,16 +45,16 @@
       <div class="space-y-2">
         <div class="flex justify-between items-center">
           <%= form.label :heading, "Título", class: "mb-0" %>
-          <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
+          <%= hide_button_field form, :heading %>
         </div>
         <div class="flex">
-          <%= form.text_field :heading, placeholder: "Proposta #{deal_section.deal.customer.name}", data: { key: "heading" } %>
+          <%= form.text_field :heading, placeholder: "Proposta #{@deal.customer.name}", data: { key: "heading" } %>
         </div>
       </div>
       <div class="space-y-2">
         <div class="flex justify-between items-center">
           <%= form.label :text, "Descrição", class: "mb-0" %>
-          <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
+          <%= hide_button_field form, :text %>
         </div>
         <div class="trix-container">
           <%= form.rich_text_area :text, data: { key: "text" } %>
@@ -71,7 +71,7 @@
       <div class="space-y-2">
         <div class="flex justify-between items-center">
           <%= form.label :button, "Button", class: "mb-0" %>
-          <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
+          <%= hide_button_field form, :button %>
         </div>
         <div class="space-y-2">
           <%= form.text_field :button_text, placeholder: "Label", value: form.object.button&.dig("text"), data: { key: "button_text" } %>
@@ -92,11 +92,11 @@
         <% if deal_section.section.is_galeria? %>
           <p class="text-sm font-medium text-gray-900">Imagens</p>
         <% end %>
-        <% if deal_section.section.is_conteudo? || deal_section.section.is_acordeao?  %>
+        <% if deal_section.section.is_conteudo? || deal_section.section.is_acordeao? %>
           <p class="text-sm font-medium text-gray-900">Secções</p>
         <% end %>
         <div>
-          <%= turbo_frame_tag dom_id(form.object, "items"), src: admin_deal_editor_deal_section_deal_section_items_path(deal: deal_section.deal_id, deal_section_id: deal_section.id) %>
+          <%= turbo_frame_tag dom_id(form.object, "items"), src: admin_deal_editor_deal_section_deal_section_items_path(deal: @deal.id, deal_section_id: deal_section.id, template: params[:template]) %>
         </div>
       </div>
     <% end %>
@@ -105,7 +105,7 @@
       <div class="space-y-2">
         <div class="flex justify-between items-center">
           <%= form.label :email, "Email", class: "mb-0" %>
-          <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
+          <%= hide_button_field form, :email %>
         </div>
         <div class="flex">
           <%= form.text_field :email, value: form.object&.theme&.dig("contacto", "email"), placeholder: "Email aqui...", data: { key: "email" } %>
@@ -114,7 +114,7 @@
       <div class="space-y-2">
         <div class="flex justify-between items-center">
           <%= form.label :tel, "Telefone", class: "mb-0" %>
-          <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
+          <%= hide_button_field form, :tel %>
         </div>
         <div class="flex">
           <%= form.text_field :tel, value: form.object&.theme&.dig("contacto", "tel"), placeholder: "Telefone aqui...", data: { key: "telefone" } %>
@@ -123,7 +123,7 @@
       <div class="space-y-2">
         <div class="flex justify-between items-center">
           <%= form.label :address, "Morada", class: "mb-0" %>
-          <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
+          <%= hide_button_field form, :address %>
         </div>
         <div class="trix-container">
           <%= form.rich_text_area :address, data: { key: "text" } %>
@@ -136,10 +136,10 @@
       <div class="space-y-2">
         <div class="flex justify-between items-center">
           <%= form.label :date, "Data", class: "mb-0" %>
-          <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
+          <%= hide_button_field form, :date %>
         </div>
         <div class="flex">
-          <%= form.date_field :date, value: deal_section&.deal&.send_date&.strftime('%Y-%m-%d'), data: { key: "date" } %>
+          <%= form.date_field :date, value: @deal&.send_date&.strftime('%Y-%m-%d'), data: { key: "date" } %>
         </div>
       </div>
     <% end %>

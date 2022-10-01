@@ -8,7 +8,7 @@
     <%= turbo_stream_from @deal, :deal_sections_preview %>
     <div id="deal_sections_preview">
       <% @deal.deal_sections.map do |ds| %>
-        <%= render_section_preview ds %>
+        <%= render_section_preview ds, @deal %>
         <div class="page-break"></div>
       <% end %>
     </div>

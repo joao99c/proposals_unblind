@@ -5,7 +5,7 @@ module Admin
     class DealSectionItemsController < ApplicationController
       before_action :set_deal_section_item, only: %i[show edit update destroy reorder]
       before_action :parent
-      before_action :deal
+      before_action :set_deal
 
       # GET /deal_section_items or /deal_section_items.json
       def index
@@ -35,7 +35,7 @@ module Admin
           {
             child_attributes:
               {
-                deal: @deal,
+                template: @template,
                 section: Section.find_by_name('Grelha_Filho'),
                 heading:,
                 preHeading: '',
@@ -49,8 +49,9 @@ module Admin
 
         respond_to do |format|
           if @deal_section_item.save
+            @deal.broadcast_preview_create(@parent)
             format.html do
-              redirect_to admin_deal_editor_deal_section_deal_section_items_url(deal: @deal.id, deal_section_id: @parent.id),
+              redirect_to admin_deal_editor_deal_section_deal_section_items_url(deal: @deal.id, deal_section_id: @parent.id, template: @template),
                           notice: 'Deal section item was successfully created.'
             end
           end
@@ -69,10 +70,17 @@ module Admin
           @deal_section_item.child.theme['image']['organization'] = params.require(:deal_section_item)[:image_organization] if params.require(:deal_section_item)[:image_organization].present?
         end
 
+        @deal_section_item.child.theme ||= {}
+        @deal_section_item.child.theme['hidden'] ||= {}
+        %w[heading logo text button].each do |visibility_item|
+          @deal_section_item.child.theme['hidden'][visibility_item.to_s] = params.require(:deal_section_item)["hidden_#{visibility_item}"] if params.require(:deal_section_item)["hidden_#{visibility_item}"].present?
+        end
+
         @deal_section_item.assign_attributes(deal_section_item_params)
 
         respond_to do |format|
-          if @deal_section_item.save!
+          if @deal_section_item.save
+            @deal.broadcast_preview_update(@parent)
             format.turbo_stream { render turbo_stream: [] }
           else
             format.html { render :edit, status: :unprocessable_entity }
@@ -83,7 +91,7 @@ module Admin
       # DELETE /deal_section_items/1 or /deal_section_items/1.json
       def destroy
         @deal_section_item.destroy
-
+        @deal.broadcast_preview_update(@parent)
         respond_to do |format|
           format.html do
             redirect_to edit_admin_deal_editor_deal_section_path(deal_id: @deal.id, id: @parent.id),
@@ -108,17 +116,21 @@ module Admin
       # Only allow a list of trusted parameters through.
       def deal_section_item_params
         params.require(:deal_section_item).permit(
-          child_attributes: %i[id heading text deal_id section_id logo]
+          child_attributes: %i[id heading text section_id logo]
         )
       end
 
       def parent
-        @deal = Deal.find(params[:deal_id])
-        @parent = @deal.deal_sections.find(params[:deal_section_id])
+        @parent = DealSection.find(params[:deal_section_id])
       end
 
-      def deal
+      def set_deal
         @deal = Deal.find(params[:deal_id])
+        @template = if params[:template]
+                      Template.find(params[:template])
+                    else
+                      @deal.template
+                    end
       end
     end
   end

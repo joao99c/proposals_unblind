@@ -23,7 +23,7 @@
          data-inactive-classes="text-gray-500"
          style="<%= "background-color:#{deal_section&.theme&.dig('colors','background_accordion')};border-width: #{deal_section&.theme&.dig('border','accordion')};border-color:#{deal_section&.theme&.dig('colors','border_accordion')}" %>">
       <% deal_section.deal_section_items.map do |dsi| %>
-        <%= render partial: "admin/editor/deal_sections/deal_section", locals: { deal_section: dsi.child } %>
+        <%= render partial: "admin/editor/deal_sections/deal_section", locals: { deal_section: dsi.child, deal: } %>
       <% end %>
     </div>
   </div>

@@ -3,23 +3,107 @@
     <h1 class="text-2xl font-semibold">Design da Proposta</h1>
 
     <div class="flex justify-center items-center pr-6">
-      <%= image_tag("progress_1.svg", class: "h-12") %>
+      <%= image_tag("progress_2.svg", class: "h-12") %>
     </div>
   </div>
 
   <div class="w-full flex">
     <div class="w-1/3">
       <p class="text-blue-600 text-sm font-medium">Design</p>
-      <p class="text-gray-500 text-sm font-normal">Estes são os templates guardados, pode escolher e personalizar qualquer template da biblioteca. </p>
+      <p class="text-gray-500 text-sm font-normal">Estes são os templates guardados, pode escolher e personalizar
+        qualquer template da biblioteca. </p>
     </div>
 
     <div class="w-2/3">
-      <%= render partial: "admin/deals/choose_customer", locals: { deal: @deal } %>
+      <% if @deal.template %>
+        <div class="space-y-4">
+          <div class="p-4 space-y-4 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+
+            <div class="flex justify-between items-center">
+              <div>
+                <p class="text-xs font-medium text-blue-600">Activo</p>
+                <p class="text-gray-900 font-semibold"><%= @deal.template.name %></p>
+                <p class="text-sm text-gray-500">Ultima
+                  versão: <%= localize(@deal.template.updated_at, format: "%B %d às %H:%M").titleize %></p>
+              </div>
+              <div>
+                <div class="flex space-x-4">
+                  <%= link_to admin_deal_editor_preview_path(@deal, template: @deal.template) do %>
+                    <button type="button" class="font-medium text-sm inline-flex items-center justify-center py-2 px-3 rounded-lg border dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-200 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300">
+                      <%= heroicon("eye", options: { class: "mr-2 -ml-1 w-5 h-5" }) %>
+                      Visualizar
+                    </button>
+                  <% end %>
+
+                  <%= link_to admin_deal_editor_path(@deal, template: @deal.template) do %>
+                    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center">
+                      Personalizar
+                    </button>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+
+            <div class="rounded-lg h-[200px] overflow-hidden">
+              <%= render partial: "admin/editor/deal_sections/deal_section", locals: { deal_section: @deal.template.deal_sections.first, deal:@deal } %>
+            </div>
+
+          </div>
+
+          <% @deal.template.class.all.where(user: current_user).map do |t| %>
+            <% unless t == @deal.template %>
+              <div class="p-4 space-y-4 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+
+                <div class="flex justify-between items-center">
+                  <div>
+                    <p class="text-gray-900 font-semibold"><%= t.name %></p>
+                    <p class="text-sm text-gray-500">Ultima
+                      versão: <%= localize(t.updated_at, format: "%B %d às %H:%M").titleize %></p>
+                  </div>
+                  <div>
+                    <div class="flex space-x-4">
+                      <%= form_tag(admin_deal_template_path(@deal, t), method: :delete) do %>
+                        <button type="submit" class="border border-blue-600 text-blue-600 bg-white font-medium text-sm inline-flex items-center justify-center py-2 px-3 rounded-lg border dark:border-transparent hover:text-blue-800 hover:border-blue-800">
+                          Apagar
+                        </button>
+                      <% end %>
+
+                      <%= form_tag(select_admin_deal_template_path(@deal, t), method: :delete) do %>
+                        <button type="submit" class="border border-blue-600 text-blue-600 bg-white font-medium text-sm inline-flex items-center justify-center py-2 px-3 rounded-lg border dark:border-transparent hover:text-blue-800 hover:border-blue-800">
+                          Selecionar
+                        </button>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="p-4 bg-transparent rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+          <%= image_tag("step_2.svg", class: "mx-auto") %>
+          <div class="space-y-0.5 text-center max-w-[400px] mx-auto">
+            <p class="text-xs font-medium text-blue-600">Design da Proposta</p>
+            <p class="font-semibold text-gray-900">Bem-Vindo nosso Magic Builder!</p>
+            <p class="text-xs text-gray-500">Nesta secção pode criar as suas apresentações, personalizar e transformar
+              em
+              template. Depois de criado o primeiro template, vai poder usar rapidamente em todas as propostas.</p>
+          </div>
+          <div class="flex justify-center mt-2 py-0.5">
+            <%= form_tag(admin_template_index_path(@deal), method: :post) do %>
+              <%= button_tag class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" do %>
+                Criar Template
+              <% end %>
+            <% end %>
+          </div>
+
+        </div>
+      <% end %>
     </div>
   </div>
 
   <hr class="text-gray-300 my-10">
-
 
 
   <div class="flex justify-between">

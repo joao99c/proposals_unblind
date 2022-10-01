@@ -33,7 +33,7 @@ module ApplicationHelper
         flat_hash.merge!(flatten_hash(v, names))
       else
         key = flat_hash_key(names)
-        key += "[]" if v.is_a?(Array)
+        key += '[]' if v.is_a?(Array)
         flat_hash[key] = v
       end
     end
@@ -61,6 +61,10 @@ module ApplicationHelper
   end
 
   def error_message_for(obj, attr_name, attr_label)
-    render partial: "shared/input_error_message", locals: { obj:, attr_name:, attr_label:}
+    render partial: 'shared/input_error_message', locals: { obj:, attr_name:, attr_label: }
+  end
+
+  def hide_button_field(form, field_name, object: form.object, class: 'w-6 h-6 shrink-0 text-gray-500')
+    render partial: 'shared/eye_field', locals: { form:, field_name:, class:, object: }
   end
 end

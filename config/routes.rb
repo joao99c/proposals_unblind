@@ -49,6 +49,13 @@ Rails.application.routes.draw do
         end
       end
 
+      resources :template, only: %i[create destroy] do
+        member do
+          post 'select'
+        end
+      end
+
+
       member do
         get 'step_1'
         post 'step_1'
@@ -76,28 +83,8 @@ Rails.application.routes.draw do
       get 'pdf/show' => 'pdf#show'
       get 'pdf/download' => 'pdf#download'
 
-      scope 'step_1' do
-        get '/', to: 'deals#step_1', as: 'deal_step_1'
-        post '/', to: 'deals#save_step_1'
-
-        # get '/customer'
-
-        scope :customer do
-          get '/', to: 'deal_customers#show', as: 'deal_customers'
-
-          get '/new', to: 'deal_customers#new', as: 'new_deal_customer'
-          post 'existing_user', to: 'deal_customers#save_existing_user', as: 'save_deal_existing_user'
-          post 'new_user', to: 'deal_customers#save_new_user', as: 'save_deal_new_user'
-        end
-
-        scope :products do
-          get '/', to: 'deal_products#index', as: 'deal_products'
-          get '/new', to: 'deal_products#new', as: 'new_deal_product'
-          post '/new', to: 'deal_products#create'
-
-          delete '/:dp_id', to: 'deal_products#destroy', as: 'destroy_deal_product'
-        end
-      end
+      get 'step_1', to: 'deals#step_1', as: 'deal_step_1'
+      post 'step_1', to: 'deals#save_step_1'
 
       get 'step_2', to: 'deals#step_2', as: 'deal_step_2'
       post 'step_2', to: 'deals#save_step_2'

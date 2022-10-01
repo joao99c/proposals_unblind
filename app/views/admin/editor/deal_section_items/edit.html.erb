@@ -9,7 +9,7 @@
         <% end %>
 
         <% unless @parent.section_id.in?([1]) %>
-          <%= form_with model: @parent, url: admin_deal_editor_deal_section_deal_section_item_path(deal_id: @parent.deal_id, deal_section_id: @parent.id, id: @deal_section_item.id), method: :delete, data: { turbo_confirm: "Are your sure?" } do %>
+          <%= form_with model: @parent, url: admin_deal_editor_deal_section_deal_section_item_path(deal_id: @deal.id, deal_section_id: @parent.id, id: @deal_section_item.id), method: :delete, data: { turbo_confirm: "Are your sure?" } do %>
             <%= button_tag class: "font-medium hover:text-red-600 dark:hover:text-red-500 hover:underline" do %>
               <%= heroicon("trash", variant: :solid, options: { class: "h-6 w-6 text-blue-600" }) %>
             <% end %>

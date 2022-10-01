@@ -10,14 +10,18 @@
   <div class="text-center text-white p-12" style="<%= style %>color: <%= deal_section.text_color %>;">
 
     <div class="space-y-4 mb-24 max-w-[672px] mx-auto">
-      <h1 class="text-6xl leading-tight font-semibold" style="color: <%= deal_section&.theme&.dig("colors", "title") %>"><%= deal_section.heading %></h1>
-      <h2 class="text-xl" style="color: <%= deal_section&.theme&.dig("colors", "description") %>"><%= deal_section.text %></h2>
+      <% unless deal_section&.theme&.dig("hidden", "heading") == "1" %>
+        <h1 class="text-6xl leading-tight font-semibold" style="color: <%= deal_section&.theme&.dig("colors", "title") %>"><%= deal_section.heading %></h1>
+      <% end %>
+      <% unless deal_section&.theme&.dig("hidden", "heading") == "1" %>
+        <h2 class="text-xl" style="color: <%= deal_section&.theme&.dig("colors", "description") %>"><%= deal_section.text %></h2>
+      <% end %>
     </div>
 
     <% if deal_section&.theme&.dig('image', 'organization') == "equal" %>
       <div id="<%= dom_id(deal_section, "items") %>" class="flex grid grid-cols-3 gap-8">
         <% deal_section.deal_section_items.map do |dsi| %>
-          <%= render partial: "admin/editor/deal_sections/deal_section", locals: { deal_section: dsi.child } %>
+          <%= render partial: "admin/editor/deal_sections/deal_section", locals: { deal_section: dsi.child, deal: } %>
         <% end %>
       </div>
     <% end %>
@@ -26,12 +30,14 @@
 
       <div class="flex space-x-8">
         <div class="w-full">
-          <%= render partial: "admin/editor/deal_sections/deal_section", locals: { deal_section: deal_section.deal_section_items.first.child } %>
+          <%= render partial: "admin/editor/deal_sections/deal_section", locals: { deal_section: deal_section.deal_section_items.first.child, deal: } %>
         </div>
         <div class="w-full">
           <div id="<%= dom_id(deal_section, "items") %>" class="grid grid-cols-2 gap-8">
             <% deal_section.deal_section_items.map do |dsi| %>
-              <%= render partial: "admin/editor/deal_sections/deal_section", locals: { deal_section: dsi.child } %>
+              <% unless dsi == deal_section.deal_section_items.first %>
+                <%= render partial: "admin/editor/deal_sections/deal_section", locals: { deal_section: dsi.child, deal: } %>
+              <% end %>
             <% end %>
           </div>
         </div>

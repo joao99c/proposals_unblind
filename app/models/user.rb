@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :deals
+  has_many :templates
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -14,8 +15,14 @@ class User < ApplicationRecord
     attachable.variant :thumb, resize_to_limit: [100, 100]
   end
 
+  after_create_commit :create_my_template
 
   private
+
+  def create_my_template
+    templates << Template.new(name: "Template de #{self.first_name} #{self.last_name}", user: self)
+    save
+  end
 
   def self.from_omniauth(auth)
     where(email: auth.info.email).first_or_create! do |user|

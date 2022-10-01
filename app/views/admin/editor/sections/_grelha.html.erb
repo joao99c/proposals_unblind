@@ -4,19 +4,23 @@
   <% if deal_section.background_image.attached? %>
     <% style = "background: linear-gradient(0deg, #{deal_section&.theme&.dig("colors", "overlay")}70, #{deal_section&.theme&.dig("colors", "overlay")}70), url(#{url_for(deal_section.background_image)}) no-repeat center center; background-size: cover;" %>
   <% else %>
-    <% style = "background-color: #{deal_section&.theme&.dig("colors","background")};" %>
+    <% style = "background-color: #{deal_section&.theme&.dig("colors", "background")};" %>
   <% end %>
 
   <div class="text-center text-white p-12" style="<%= style %>color: <%= deal_section.text_color %>;">
 
     <div class="space-y-4 mb-24 max-w-[672px] mx-auto">
-      <h1 class="text-6xl leading-tight font-semibold" style="color: <%= deal_section&.theme&.dig("colors", "title") %>"><%= deal_section.heading %></h1>
-      <h2 class="text-xl" style="color: <%= deal_section&.theme&.dig("colors", "description") %>"><%= deal_section.text %></h2>
+      <% unless deal_section&.theme&.dig("hidden", "heading") == "1" %>
+        <h1 class="text-6xl leading-tight font-semibold" style="color: <%= deal_section&.theme&.dig("colors", "title") %>"><%= deal_section.heading %></h1>
+      <% end %>
+      <% unless deal_section&.theme&.dig("hidden", "text") == "1" %>
+        <h2 class="text-xl" style="color: <%= deal_section&.theme&.dig("colors", "description") %>"><%= deal_section.text %></h2>
+      <% end %>
     </div>
 
     <div id="<%= dom_id(deal_section, "items") %>" class="grid gap-8 grid-cols-4 media-alignment-<%= deal_section.contentAlignment %>">
       <% deal_section.deal_section_items.map do |dsi| %>
-        <%= render partial: "admin/editor/deal_sections/deal_section", locals: { deal_section: dsi.child } %>
+        <%= render partial: "admin/editor/deal_sections/deal_section", locals: { deal_section: dsi.child, deal: } %>
       <% end %>
     </div>
 

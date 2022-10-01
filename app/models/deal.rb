@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Deal < ApplicationRecord
+  include ActionView::RecordIdentifier
+
   IVA = 0.23
   STATUSES_ORDER = %w[open won lost].freeze
 
@@ -33,22 +35,25 @@ class Deal < ApplicationRecord
   has_many :deal_sections, -> { order(position: :asc).where(child: false) }, dependent: :destroy
   accepts_nested_attributes_for :deal_sections, allow_destroy: true, reject_if: :all_blank
 
+  belongs_to :template, optional: true
+
   belongs_to :heading_typeface, class_name: 'Font', foreign_key: 'heading_typeface_id'
   belongs_to :text_typeface, class_name: 'Font', foreign_key: 'text_typeface_id'
 
   # Validations
   validates :name, presence: true
 
-  after_create_commit :create_cabecalho_propostas_and_contacto_section
-
   def total_amount
     total_subtotal - total_discount + total_iva
   end
 
   def total_iva
-    total_subtotal * IVA
+    total_subtotal * user.iva / 100
   end
 
+  def send_date_formatted(format: '%d %B %Y')
+    I18n.localize(send_date, format:).titleize if send_date.present?
+  end
   def update_total_amount
     self.total_subtotal = 0
     self.total_discount = 0
@@ -60,22 +65,34 @@ class Deal < ApplicationRecord
     save
   end
 
-
   def section_cabecalho
-    deal_sections.where(section_id: 1).first
+    template.section_cabecalho
   end
 
   def section_propostas
-    deal_sections.where(section_id: 2).first
+    template.section_propostas
   end
 
-  private
+  def broadcast_preview_create(deal_section)
+    partial = 'admin/editor/deal_sections/deal_section'
+    locals = { deal_section: }
+    target = if deal_section.child == false
+               'deal_sections_preview'
+             else
+               dom_id(deal_section.parent, 'items')
+             end
+    broadcast_append_to(self, :deal_sections_preview, target:, partial:, locals:)
+  end
 
-  def create_cabecalho_propostas_and_contacto_section
-    deal_sections << Admin::Editor::HeadingSection.new
-    deal_sections << Admin::Editor::ProposalSection.new
-    deal_sections << Admin::Editor::ContactSection.new
+  def broadcast_preview_update(deal_section)
+    broadcast_replace_to(self,
+                         :deal_sections_preview,
+                         target: dom_id(deal_section),
+                         partial: 'admin/editor/deal_sections/deal_section',
+                         locals: { deal_section: deal_section, deal: self })
+  end
 
-    save!
+  def broadcast_preview_destroy(deal_section)
+    broadcast_remove_to(self, :deal_sections_preview, target: dom_id(deal_section))
   end
 end

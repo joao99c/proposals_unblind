@@ -3,7 +3,7 @@
     <h1 class="text-2xl font-semibold">Review</h1>
 
     <div class="flex justify-center items-center pr-6">
-      <%= image_tag("progress_2.svg", class: "h-12") %>
+      <%= image_tag("progress_3.svg", class: "h-12") %>
     </div>
   </div>
 
@@ -68,7 +68,7 @@
                   <div class="flex items-center space-x-4">
                     <div class="w-12 h-12 rounded-lg bg-gray-300 overflow-hidden shrink-0">
                       <% if dp.product.image.attached? %>
-                        <%= image_tag(dp.product.image) %>
+                        <%= image_tag(dp.product.image, class: "w-full h-full") %>
                       <% end %>
                     </div>
                     <div>
@@ -150,7 +150,7 @@
             <div class="w-2.5 h-2.5 bg-[#FACA1570] rounded-full"></div>
             <div class="w-2.5 h-2.5 bg-[#0E9F6E70] rounded-full"></div>
           </div>
-          <%= render partial: "admin/editor/deal_sections/deal_section", locals: { deal_section: @deal.deal_sections.first } %>
+          <%= render partial: "admin/editor/deal_sections/deal_section", locals: { deal_section: @deal.template.deal_sections.first, deal: @deal } %>
         </div>
 
       </div>

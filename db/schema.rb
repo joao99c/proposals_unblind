@@ -90,7 +90,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_132209) do
   end
 
   create_table "deal_sections", force: :cascade do |t|
-    t.bigint "deal_id", null: false
+    t.bigint "template_id", null: false
     t.bigint "section_id", null: false
     t.integer "position", default: 0, null: false
     t.string "preHeading"
@@ -112,8 +112,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_132209) do
     t.datetime "updated_at", null: false
     t.boolean "child", default: false
     t.integer "parent_id"
-    t.index ["deal_id"], name: "index_deal_sections_on_deal_id"
     t.index ["section_id"], name: "index_deal_sections_on_section_id"
+    t.index ["template_id"], name: "index_deal_sections_on_template_id"
   end
 
   create_table "deals", force: :cascade do |t|
@@ -127,6 +127,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_132209) do
     t.bigint "customer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "template_id"
     t.bigint "text_typeface_id", default: 1
     t.text "text_weight", default: "400"
     t.text "text_spacing", default: "0"
@@ -137,6 +138,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_132209) do
     t.text "heading_height", default: "1.35"
     t.index ["customer_id"], name: "index_deals_on_customer_id"
     t.index ["heading_typeface_id"], name: "index_deals_on_heading_typeface_id"
+    t.index ["template_id"], name: "index_deals_on_template_id"
     t.index ["text_typeface_id"], name: "index_deals_on_text_typeface_id"
     t.index ["user_id"], name: "index_deals_on_user_id"
   end
@@ -193,9 +195,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_132209) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "templates", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_templates_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
+    t.decimal "iva", precision: 10, scale: 2, default: "23.0", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -216,14 +227,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_132209) do
   add_foreign_key "deal_products", "products"
   add_foreign_key "deal_section_items", "deal_sections", column: "child_id"
   add_foreign_key "deal_section_items", "deal_sections", column: "parent_id"
-  add_foreign_key "deal_sections", "deals"
   add_foreign_key "deal_sections", "sections"
+  add_foreign_key "deal_sections", "templates"
   add_foreign_key "deals", "customers"
   add_foreign_key "deals", "fonts", column: "heading_typeface_id"
   add_foreign_key "deals", "fonts", column: "text_typeface_id"
+  add_foreign_key "deals", "templates"
   add_foreign_key "deals", "users"
   add_foreign_key "sections", "section_categories"
   add_foreign_key "sections", "section_types"
   add_foreign_key "taggings", "deals"
   add_foreign_key "taggings", "tags"
+  add_foreign_key "templates", "users"
 end

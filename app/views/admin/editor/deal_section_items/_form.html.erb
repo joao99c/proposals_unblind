@@ -32,7 +32,7 @@
       <div class="space-y-2">
         <div class="flex justify-between items-center">
           <%= c_form.label :logo, "Imagem", class: "mb-0" %>
-          <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
+          <%= hide_button_field form, :logo, object: form.object.child %>
         </div>
         <div class="flex">
           <%= c_form.file_field :logo, placeholder: "Titulo da secção aqui...", data: { key: "heading" } %>
@@ -46,7 +46,7 @@
       <div class="space-y-2">
         <div class="flex justify-between items-center">
           <%= c_form.label :heading, "Título do Item", class: "mb-0" %>
-          <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
+          <%= hide_button_field form, :heading, object: form.object.child %>
         </div>
         <div class="flex">
           <%= c_form.text_field :heading, placeholder: "Titulo da secção aqui...", data: { key: "heading" } %>
@@ -57,7 +57,7 @@
     <div class="space-y-2">
       <div class="flex justify-between items-center">
         <%= c_form.label :text, "Descrição", class: "mb-0" %>
-        <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
+        <%= hide_button_field form, :text, object: form.object.child %>
       </div>
       <div class="trix-container">
         <%= c_form.rich_text_area :text, data: { key: "text" } %>
@@ -68,7 +68,7 @@
       <div class="space-y-2">
         <div class="flex justify-between items-center">
           <%= c_form.label :button, "Button", class: "mb-0" %>
-          <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0 text-gray-500" }) %>
+          <%= hide_button_field form, :button, object: form.object.child %>
         </div>
         <div class="space-y-2">
           <%= c_form.text_field :button_text, placeholder: "Label", value: c_form.object.button&.dig("text"), data: { key: "button_text" } %>

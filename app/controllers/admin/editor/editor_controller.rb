@@ -42,6 +42,11 @@ module Admin
 
       def set_deal
         @deal = Deal.find(params[:deal_id])
+        @template = if params[:template]
+                      Template.find(params[:template])
+                    else
+                      @deal.template
+                    end
       end
 
       def deal_params

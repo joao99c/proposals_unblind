@@ -1,0 +1,8 @@
+<div>
+  <% checked = object&.theme&.dig("hidden", field_name.to_s) == "1" %>
+
+  <%= form.check_box "hidden_#{field_name}", class: "peer hidden", checked:, data: { key: "#{field_name}" } %>
+  <%= form.label "hidden_#{field_name}", class: "peer-checked:text-gray-300 text-gray-600" do %>
+    <%= heroicon("eye", options: { class: "w-6 h-6 shrink-0" }) %>
+  <% end %>
+</div>

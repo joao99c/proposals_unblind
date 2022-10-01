@@ -39,16 +39,16 @@ module Admin
           @deal_section = AccordionSection.new
         when '9' # Sobre nós
           @deal_section = ContentSection.create(
-            deal: @deal,
+            template: @template,
             heading: 'Sobre Nós',
             text: 'Deliver great service experiences fast - without the complexity of traditional ITSM solutions.Accelerate critical development work, eliminate toil, and deploy changes with ease.',
           )
           dsi = DealSectionItem.create(
             parent: @deal_section,
             child_attributes: {
-              deal: @deal,
+              template: @template,
               parent_id: @deal_section.id,
-              heading: "We invest in the world’s potential",
+              heading: 'We invest in the world’s potential',
               text: 'Deliver great service experiences fast - without the complexity of traditional ITSM solutions.Accelerate critical development work, eliminate toil, and deploy changes with ease.',
               section_id: 5,
               child: true,
@@ -58,7 +58,7 @@ module Admin
           dsi.child.save
         when '10' # Equipa
           @deal_section = GridSection.create(
-            deal: @deal,
+            template: @template,
             heading: 'A Nossa Equipa',
             text: 'Explore the whole collection of open-source web components and elements built with the utility classes from Tailwind',
             theme: {
@@ -85,9 +85,9 @@ module Admin
             dsi = DealSectionItem.create(
               parent: @deal_section,
               child_attributes: {
-                deal: @deal,
+                template: @template,
                 parent_id: @deal_section.id,
-                heading: "Bonnie Green",
+                heading: 'Bonnie Green',
                 text: 'Senior Front-end Developer',
                 section_id: 5,
                 child: true
@@ -97,7 +97,7 @@ module Admin
           end
         when '11' # Passo a Passo
           @deal_section = GridSection.create(
-            deal: @deal,
+            template: @template,
             heading: 'Passo a passo',
             text: 'Explore the whole collection of open-source web components and elements built with the utility classes from Tailwind',
             theme: {
@@ -124,7 +124,7 @@ module Admin
             dsi = DealSectionItem.create(
               parent: @deal_section,
               child_attributes: {
-                deal: @deal,
+                template: @template,
                 parent_id: @deal_section.id,
                 heading: '%02i' % (i + 1),
                 text: 'Definição de microestratégias a desenvolver mensalmente e formas de aplicação nas diferentes plataformas.',
@@ -134,7 +134,7 @@ module Admin
           end
         when '12' # Portfolio
           @deal_section = GallerySection.create(
-            deal: @deal,
+            template: @template,
             heading: 'Portfolio',
             text: 'Explore the whole collection of open-source web components and elements built with the utility classes from Tailwind',
             theme: {
@@ -161,7 +161,7 @@ module Admin
             dsi = DealSectionItem.create(
               parent: @deal_section,
               child_attributes: {
-                deal: @deal,
+                template: @template,
                 parent_id: @deal_section.id,
                 section_id: 5,
                 child: true
@@ -171,7 +171,7 @@ module Admin
           end
         when '13' # Os nossos clientes
           @deal_section = GallerySection.create(
-            deal: @deal,
+            template: @template,
             heading: 'Os nossos Clientes',
             text: 'Explore the whole collection of open-source web components and elements built with the utility classes from Tailwind',
             theme: {
@@ -198,7 +198,7 @@ module Admin
             dsi = DealSectionItem.create(
               parent: @deal_section,
               child_attributes: {
-                deal: @deal,
+                template: @template,
                 parent_id: @deal_section.id,
                 section_id: 5,
                 child: true
@@ -208,7 +208,7 @@ module Admin
           end
         when '14' # Faq's
           @deal_section = AccordionSection.create(
-            deal: @deal,
+            template: @template,
             heading: 'Faq’s',
             text: '',
             theme: {
@@ -232,7 +232,7 @@ module Admin
             dsi = DealSectionItem.create(
               parent: @deal_section,
               child_attributes: {
-                deal: @deal,
+                template: @template,
                 parent_id: @deal_section.id,
                 section_id: 5,
                 heading: "Pergunta #{'%02i' % (i + 1)}",
@@ -242,15 +242,16 @@ module Admin
               })
           end
         end
-        @deal_section.deal = @deal
+        @deal_section.template = @template
         @deal_section = @deal_section.becomes(DealSection)
 
         respond_to do |format|
           if @deal_section.save
+            @deal.broadcast_preview_create(@deal_section)
             format.turbo_stream do
               render turbo_stream: turbo_stream.update(
                 helpers.dom_id(@deal, :sidebar),
-                partial: 'admin/editor/deal_sections/edit', locals: { deal: @deal, deal_section: @deal_section }
+                partial: 'admin/editor/deal_sections/edit', locals: { template: @template, deal_section: @deal_section }
               )
             end
           else
@@ -260,6 +261,10 @@ module Admin
       end
 
       # PATCH/PUT /admin/editor/deal_sections/1 or /admin/editor/deal_sections/1.json
+      def visibility_heading
+        # code here
+      end
+
       def update
         if @deal_section.section.is_cabecalho?
           if params.require(:deal_section).permit(:date)[:date]
@@ -431,43 +436,24 @@ module Admin
           @deal_section.theme['colors']['background_accordion'] = params.require(:deal_section)[:color_background_accordion] if params.require(:deal_section)[:color_background_accordion].present?
 
         end
-        # @deal_section.button ||= {}
-        # @deal_section.button[:text] = params.require(:deal_section)[:button_text]
-        # @deal_section.button[:url] = params.require(:deal_section)[:button_url]
-        #
-        # @deal_section.button2 ||= {}
-        # @deal_section.button2[:text] = params.require(:deal_section)[:button2_text]
-        # @deal_section.button2[:url] = params.require(:deal_section)[:button2_url]
 
-        # @deal_section.theme ||= {}
-        # @deal_section.theme[:colors] ||= {}
-        #
-        # @deal_section.theme[:colors][:background] = params.require(:deal_section)[:color_background]
-        # @deal_section.theme[:colors][:heading] = params.require(:deal_section)[:heading_color]
-        # @deal_section.theme[:colors][:text] = params.require(:deal_section)[:text_color]
-        # @deal_section.theme[:colors][:button_background] = params.require(:deal_section)[:button_background_color]
-        # @deal_section.theme[:colors][:button_text] = params.require(:deal_section)[:button_text_color]
+        @deal_section.theme ||= {}
+        @deal_section.theme['hidden'] ||= {}
+        %w[heading logo text button email tel address date].each do |visibility_item|
+          @deal_section.theme['hidden'][visibility_item.to_s] = params.require(:deal_section)["hidden_#{visibility_item}"] if params.require(:deal_section)["hidden_#{visibility_item}"].present?
+        end
 
         @deal_section.assign_attributes(deal_section_params)
 
-        respond_to do |format|
-          if @deal_section.save
-            format.turbo_stream do
-              render turbo_stream: [
-                # turbo_stream.update(helpers.dom_id(@deal, :sidebar), ''),
-                # turbo_stream.update(helpers.dom_id(@deal_section), inline: helpers.render_section(@deal_section))
-              ]
-            end
-          else
-            format.html { render :edit, status: :unprocessable_entity }
-          end
+        if @deal_section.save
+          @deal.broadcast_preview_update(@deal_section)
         end
       end
 
       # DELETE /admin/editor/deal_sections/1 or /admin/editor/deal_sections/1.json
       def destroy
+        @deal.broadcast_preview_destroy(@deal_section)
         @deal_section.destroy
-
         respond_to do |format|
           format.html do
             redirect_to admin_deal_editor_deal_sections_path(deal_id: @deal.id),
@@ -480,6 +466,11 @@ module Admin
 
       def set_deal
         @deal = Deal.find(params[:deal_id])
+        @template = if params[:template]
+                      Template.find(params[:template])
+                    else
+                      @deal.template
+                    end
       end
 
       # Use callbacks to share common setup or constraints between actions.

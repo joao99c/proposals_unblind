@@ -3,7 +3,7 @@
 class DealSection < ApplicationRecord
   include ActionView::RecordIdentifier
 
-  acts_as_list scope: :deal, sequential_updates: false
+  acts_as_list scope: :template, sequential_updates: false
 
   scope :ordered, -> { order(:position) }
 
@@ -13,17 +13,23 @@ class DealSection < ApplicationRecord
   has_one_attached :background_image
   has_one_attached :logo
 
-  belongs_to :deal
+  belongs_to :template
   belongs_to :section
   has_many :deal_section_items, foreign_key: :parent_id, dependent: :destroy
   accepts_nested_attributes_for :deal_section_items, allow_destroy: true, reject_if: :all_blank
 
-  after_create_commit :broadcast_create
-  after_update_commit :broadcast_update
-  after_destroy_commit :broadcast_destroy
+  # after_create_commit :broadcast_create
+  # after_update_commit :broadcast_update
+  # after_destroy_commit :broadcast_destroy
 
   def name
-    heading
+    if heading.present?
+      heading
+    elsif text.present?
+      text.to_plain_text
+    else
+      "Item"
+    end
   end
 
   def parent
@@ -68,25 +74,16 @@ class DealSection < ApplicationRecord
 
   private
 
-  def broadcast_create
-    partial = 'admin/editor/deal_sections/deal_section'
-    locals = { deal_section: self }
-    target = if child == false
-               'deal_sections_preview'
-             else
-               dom_id(parent, 'items')
-             end
-    broadcast_append_to(deal, :deal_sections_preview, target:, partial:, locals:)
-  end
+  # def broadcast_create
+  #   partial = 'admin/editor/deal_sections/deal_section'
+  #   locals = { deal_section: self }
+  #   target = if child == false
+  #              'deal_sections_preview'
+  #            else
+  #              dom_id(parent, 'items')
+  #            end
+  #   broadcast_append_to(deal, :deal_sections_preview, target:, partial:, locals:)
+  # end
+  #
 
-  def broadcast_update
-    broadcast_replace_to(deal, :deal_sections_preview,
-                         target: dom_id(self),
-                         partial: 'admin/editor/deal_sections/deal_section',
-                         locals: { deal_section: self })
-  end
-
-  def broadcast_destroy
-    broadcast_remove_to(deal, :deal_sections_preview, target: dom_id(self))
-  end
 end
