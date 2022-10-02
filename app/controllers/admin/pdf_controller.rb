@@ -7,21 +7,22 @@ module Admin
       respond_to do |format|
         format.pdf do
           render pdf: 'proposal',
-                 layout: 'pdf/pdf',
+                 layout: 'pdf',
                  template: 'admin/pdf/preview',
                  page_size: 'A4',
-                 header: {
-                   html: {
-                     template: 'layouts/pdf/header'
-                   }
-                 },
-                 footer: {
-                   html: {
-                     template: 'layouts/pdf/footer'
-                   }
-                 },
                  show_as_html: params.key?('debug'),
-                 cover: render_to_string('layouts/pdf/cover')
+                 margin: {
+                   top: 0, # default 10 (mm)
+                   bottom: 0,
+                   left: 0,
+                   right: 0
+                 },
+                 padding: {
+                   top: 0, # default 10 (mm)
+                   bottom: 0,
+                   left: 0,
+                   right: 0
+                 }
         end
       end
     end

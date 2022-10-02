@@ -10,6 +10,7 @@ module.exports = {
         'container-sm',
         'max-w-[100%]',
         'w-64',
+        'w-80',
         'w-1/2',
         'rounded-l-lg',
         'rounded-r-lg',

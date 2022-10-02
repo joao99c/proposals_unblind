@@ -1,0 +1,69 @@
+<div id="<%= dom_id(deal_section) %>" class="editor--page-section-preview text-section">
+  <div id="<%= dom_id(Section.find(3)) %>" class="hidden"></div>
+
+  <% if deal_section.background_image.attached? %>
+    <% style = "background: linear-gradient(0deg, #{deal_section&.theme&.dig("colors", "overlay")}70, #{deal_section&.theme&.dig("colors", "overlay")}70), url(#{url_for(deal_section.background_image)}) no-repeat center center; background-size: cover;" %>
+  <% else %>
+    <% style = "background-color: #{deal_section&.theme&.dig("colors", "background")};" %>
+  <% end %>
+
+
+  <div class="text-white bg-gray-500 p-12" style="<%= style %>color: <%= deal_section.text_color %>;">
+    <div class="text-center">
+
+      <div class="space-y-4 mb-24 max-w-[672px] mx-auto">
+        <% unless deal_section&.theme&.dig("hidden", "heading") == "1" %>
+          <h1 class="text-6xl leading-tight font-semibold" style="color: <%= deal_section&.theme&.dig("colors", "title") %>"><%= deal_section.heading %></h1>
+        <% end %>
+        <% unless deal_section&.theme&.dig("hidden", "text") == "1" %>
+          <h2 class="text-xl" style="color: <%= deal_section&.theme&.dig("colors", "description") %>"><%= deal_section.text %></h2>
+        <% end %>
+      </div>
+
+      <div class="space-y-4 mb-24">
+        <div class="flex justify-center space-x-16">
+          <% unless deal_section&.theme&.dig("hidden", "email") == "1" %>
+            <div class="px-4 space-y-4 flex flex-col items-center justify-center">
+              <div class="flex">
+                <div class="bg-gray-100 p-2 rounded-lg">
+                  <%= heroicon('mail', variant: :solid, options: { class: "w-16 h-16 shrink-0 text-gray-500" }) %>
+                </div>
+              </div>
+              <div class="space-y-1">
+                <p class="text-xl font-bold text-gray-900" style="color: <%= deal_section&.theme&.dig("colors", "contacto_title") %>">Email</p>
+                <p class="text-sm font-bold text-blue-600" style="color: <%= deal_section&.theme&.dig("colors", "contacto_description") %>"><%= deal_section&.theme&.dig("contacto", "email") %>
+                </p>
+              </div>
+            </div>
+          <% end %>
+          <% unless deal_section&.theme&.dig("hidden", "tel") == "1" %>
+            <div class="px-4 space-y-4 flex flex-col items-center justify-center">
+              <div class="flex">
+                <div class="bg-gray-100 p-2 rounded-lg">
+                  <%= heroicon('support', variant: :solid, options: { class: "w-16 h-16 shrink-0 text-gray-500" }) %>
+                </div>
+              </div>
+              <div class="space-y-1">
+                <p class="text-xl font-bold text-gray-900" style="color: <%= deal_section&.theme&.dig("colors", "contacto_title") %>">Morada</p>
+                <div class="text-base font-normal text-gray-500" style="color: <%= deal_section&.theme&.dig("colors", "contacto_description") %>"><%= deal_section&.address %></div>
+              </div>
+            </div>
+          <% end %>
+          <% unless deal_section&.theme&.dig("hidden", "address") == "1" %>
+            <div class="px-4 space-y-4 flex flex-col items-center justify-center">
+              <div class="flex">
+                <div class="bg-gray-100 p-2 rounded-lg">
+                  <%= heroicon('phone', variant: :solid, options: { class: "w-16 h-16 shrink-0 text-gray-500" }) %>
+                </div>
+              </div>
+              <div class="space-y-1">
+                <p class="text-xl font-bold text-gray-900" style="color: <%= deal_section&.theme&.dig("colors", "contacto_title") %>">Telefone</p>
+                <p class="text-sm font-bold text-blue-600" style="color: <%= deal_section&.theme&.dig("colors", "contacto_description") %>"><%= deal_section&.theme&.dig("contacto", "tel") %></p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

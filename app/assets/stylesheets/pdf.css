@@ -1,5 +1,18 @@
 body {
-    padding: 40px;
+    margin: 0;
+    padding: 0;
+    background-color: #FFF;
+    width: 100%;
+    height: 100%;
+}
+
+.page_div {
+    display: inline-block;
+    clear: both;
+    border: 2px solid #FF0000;
+    width: 100%;
+    height: 371.3mm;
+    page-break-after: auto;
 }
 
 .page-break {
@@ -10,6 +23,11 @@ body {
 
 /* Fix wkhtmltopdf compatibility with BS flex features */
 .flex {
+    display: -webkit-box;
+    display: flex;
+}
+
+.flex-col {
     display: -webkit-box;
     display: flex;
 }

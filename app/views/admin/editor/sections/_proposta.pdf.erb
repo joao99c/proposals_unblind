@@ -1,0 +1,101 @@
+
+  <% if deal_section.background_image.attached? %>
+    <% style = "background: linear-gradient(0deg, #{deal_section&.theme&.dig("colors", "overlay")}70, #{deal_section&.theme&.dig("colors", "overlay")}70), url(#{url_for(deal_section.background_image)}) no-repeat center center; background-size: cover;" %>
+  <% else %>
+    <% style = "background-color: #{deal_section&.theme&.dig("colors", "background")};" %>
+  <% end %>
+
+  <div class="text-white bg-gray-500 py-24 px-20 h-full w-full" style="<%= style %>color: <%= deal_section.text_color %>;">
+    <div class="max-w-[672px] mx-auto text-center">
+      <div class="space-y-4 mb-24">
+        <% unless deal_section&.theme&.dig("hidden", "heading") == "1" %>
+          <h1 class="text-6xl leading-tight font-semibold" style="color: <%= deal_section&.theme&.dig("colors", "title") %>"><%= deal_section.heading %></h1>
+        <% end %>
+        <% unless deal_section&.theme&.dig("hidden", "text") == "1" %>
+          <h2 class="text-xl" style="color: <%= deal_section&.theme&.dig("colors", "description") %>"><%= deal_section.text %></h2>
+        <% end %>
+      </div>
+
+      <div class="overflow-x-auto relative shadow-md sm:rounded-lg max-w-[677px] mx-auto">
+        <table class="w-full text-sm text-left text-gray-500 border" style="border-color: <%= deal_section&.theme&.dig("colors","table_border") %>; border-width: <%= deal_section&.theme&.dig("border", "width") %>">
+          <thead class="text-xs uppercase bg-gray-50 border-b" style="border-color: <%= deal_section&.theme&.dig("colors","table_border") %>; border-width: <%= deal_section&.theme&.dig("border","width")%>;background-color: <%= deal_section&.theme&.dig("colors","background_table_title")%>;">
+          <tr>
+            <th scope="col" class="py-3 px-6">
+              Produto
+            </th>
+            <th scope="col" class="py-3 px-6">
+              Quantidade
+            </th>
+            <th scope="col" class="py-3 px-6">
+              Desconto
+            </th>
+            <th scope="col" class="py-3 px-6">
+              Total
+            </th>
+          </tr>
+          </thead>
+          <tbody id="dp_list">
+          <% @deal&.deal_products&.map do |dp| %>
+            <tr id="<%= dom_id(dp) %>" class="bg-white border-b hover:bg-gray-50" data-step1-target="product" style="border-color: <%= deal_section&.theme&.dig("colors","table_border") %>;border-width: <%= deal_section&.theme&.dig("border","width"); %>;background-color: <%= deal_section&.theme&.dig("colors","background_table")%>;">
+              <td class="py-4 px-6 font-medium text-gray-900">
+                <div class="flex items-center space-x-4">
+                  <div class="w-12 h-12 rounded-lg bg-gray-300 overflow-hidden shrink-0">
+                    <% if dp.product.image.attached? %>
+                      <%= image_tag(dp.product.image, class: "w-full h-full") %>
+                    <% end %>
+                  </div>
+                  <div>
+                    <p class="font-medium text-gray-900" style="color: <%= deal_section&.theme&.dig("colors", "table_title") %>"><%= dp.product.name %></p>
+                    <p class="text-sm text-gray-500" style="color: <%= deal_section&.theme&.dig("colors", "table_description") %>"><%= dp.product.description.truncate(50) %></p>
+                  </div>
+                </div>
+              </td>
+              <td class="py-4 px-6 font-medium text-gray-900 text-center">
+                <%= dp.quantity %>
+              </td>
+              <td class="py-4 px-6 font-medium text-gray-900 text-center">
+                <%= number_to_currency(dp.discount_amount) %>
+              </td>
+              <td class="py-4 px-6 font-medium text-gray-900 text-center whitespace-nowrap">
+                <%= number_to_currency(dp.price_without_discount) %>
+              </td>
+            </tr>
+
+          <% end %>
+          </tbody>
+          <tfoot>
+          <%= turbo_stream_from @deal, :product_total %>
+          <tr id="product_total" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" style="
+          border-color: <%= deal_section&.theme&.dig("colors","table_border") %>;
+            border-width: <%= deal_section&.theme&.dig("border","width"); %>;
+            background-color: <%= deal_section&.theme&.dig("colors","background_table")%>;">
+            <td colspan="5" class="py-4 px-6 text-gray-500 text-sm">
+              <div class="space-y-2 w-72 ml-auto">
+                <h3 class="font-semibold text-gray-900">Resumo proposta</h3>
+
+                <div class="divide-y w-full">
+                  <div class="flex py-3 justify-between">
+                    <p>Subtotal</p>
+                    <p class="text-sm font-semibold text-gray-900"><%= number_to_currency(@deal&.total_subtotal) %></p>
+                  </div>
+                  <div class="flex py-3 justify-between">
+                    <p>Desconto</p>
+                    <p class="text-sm font-semibold text-gray-900"><%= number_to_currency(@deal&.total_discount) %></p>
+                  </div>
+                  <div class="flex py-3 justify-between">
+                    <p>IVA</p>
+                    <p class="text-sm font-semibold text-gray-900"><%= number_to_currency(@deal&.total_iva) %></p>
+                  </div>
+                  <div class="flex pt-3 justify-between">
+                    <p class="text-gray-900 font-semibold">Total Proposta</p>
+                    <p class="text-sm font-semibold text-gray-900"><%= number_to_currency(@deal&.total_amount) %></p>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>

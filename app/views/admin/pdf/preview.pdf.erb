@@ -1,52 +1,16 @@
-<%= turbo_frame_tag dom_id(@deal, :preview) do %>
-  <div class="h-full relative">
+<%# @deal.template.deal_sections.map do |ds| %>
+<!--  <div class="page_div">-->
+<!--    <div class="w-full h-full relative">-->
+<!--      <p>123</p>-->
+<%#= render_section_preview ds, @deal %>
+<!--    </div>-->
+<!--  </div>-->
+<%# end %>
 
-    <p>Customer:</p>
-    <%= @deal.customer.name %>
-    <div class="page-break"></div>
-
-    <%= turbo_stream_from @deal, :deal_sections_preview %>
-    <div id="deal_sections_preview">
-      <% @deal.deal_sections.map do |ds| %>
-        <%= render_section_preview ds, @deal %>
-        <div class="page-break"></div>
-      <% end %>
-    </div>
-
-    <div class="page-break"></div>
-
-    <p> Products: </p>
-    <div class="overflow-x-auto relative">
-      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-        <tr>
-          <th scope="col" class="py-3 px-6">
-            Product name
-          </th>
-          <th scope="col" class="py-3 px-6">
-            Quantity
-          </th>
-          <th scope="col" class="py-3 px-6">
-            Price
-          </th>
-        </tr>
-        </thead>
-        <tbody>
-        <% @deal.deal_products.map do |dp| %>
-          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-              <%= dp.product.name %>
-            </th>
-            <td class="py-4 px-6">
-              <%= dp.quantity %>
-            </td>
-            <td class="py-4 px-6">
-              <%= number_to_currency dp.price %>
-            </td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
+<% @deal.template.deal_sections.map do |ds| %>
+  <div class="page_div">
+    <div class="w-full h-full relative">
+      <%= render_section_preview ds, @deal %>
     </div>
   </div>
 <% end %>
