@@ -1,4 +1,4 @@
-<div id="<%= dom_id(deal_section) %>" class="editor--page-section-preview text-section">
+<div id="<%= dom_id(deal_section) %>" class="editor--page-section-preview text-section full-full">
   <div id="<%= dom_id(Section.find(2)) %>" class="hidden"></div>
 
   <% if deal_section.background_image.attached? %>
@@ -7,7 +7,7 @@
     <% style = "background-color: #{deal_section&.theme&.dig("colors", "background")};" %>
   <% end %>
 
-  <div class="text-white bg-gray-500 py-24 px-20" style="<%= style %>color: <%= deal_section.text_color %>;">
+  <div class="text-white bg-gray-500 py-24 px-20 full-full" style="<%= style %>color: <%= deal_section.text_color %>;">
     <div class="max-w-[672px] mx-auto text-center">
       <div class="space-y-4 mb-24">
         <% unless deal_section&.theme&.dig("hidden", "heading") == "1" %>
@@ -18,7 +18,7 @@
         <% end %>
       </div>
 
-      <div class="overflow-x-auto relative shadow-md sm:rounded-lg max-w-[677px] mx-auto">
+      <div class="overflow-hidden relative shadow-md rounded-lg max-w-[677px] mx-auto">
         <table class="w-full text-sm text-left text-gray-500 border" style="border-color: <%= deal_section&.theme&.dig("colors","table_border") %>; border-width: <%= deal_section&.theme&.dig("border", "width") %>">
           <thead class="text-xs uppercase bg-gray-50 border-b" style="border-color: <%= deal_section&.theme&.dig("colors","table_border") %>; border-width: <%= deal_section&.theme&.dig("border","width")%>;background-color: <%= deal_section&.theme&.dig("colors","background_table_title")%>;">
           <tr>

@@ -65,9 +65,7 @@ gem 'ransack'
 
 gem 'acts_as_list'
 
-gem 'wicked_pdf'
-
-gem 'wkhtmltopdf-binary'
+gem 'grover'
 
 gem 'faker', '~> 2.21'
 

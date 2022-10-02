@@ -74,6 +74,9 @@ GEM
     bootsnap (1.13.0)
       msgpack (~> 1.2)
     builder (3.2.4)
+    combine_pdf (1.0.22)
+      matrix
+      ruby-rc4 (>= 0.1.5)
     concurrent-ruby (1.1.10)
     crass (1.0.6)
     cssbundling-rails (1.1.1)
@@ -106,6 +109,9 @@ GEM
     globalid (1.0.0)
       activesupport (>= 5.0)
     google-webfonts (0.3.2)
+    grover (1.1.2)
+      combine_pdf (~> 1.0)
+      nokogiri (~> 1.0)
     hashie (5.0.0)
     heroicon (0.4.0)
       rails (>= 5.2)
@@ -148,6 +154,7 @@ GEM
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     marcel (1.0.2)
+    matrix (0.4.2)
     method_source (1.0.0)
     mini_magick (4.11.0)
     mini_mime (1.1.2)
@@ -285,6 +292,7 @@ GEM
     rubocop-ast (1.21.0)
       parser (>= 3.1.1.0)
     ruby-progressbar (1.11.0)
+    ruby-rc4 (0.1.5)
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
@@ -323,9 +331,6 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    wicked_pdf (2.6.3)
-      activesupport
-    wkhtmltopdf-binary (0.12.6.5)
     zeitwerk (2.6.0)
 
 PLATFORMS
@@ -342,6 +347,7 @@ DEPENDENCIES
   factory_bot_rails (~> 6.2)
   faker (~> 2.21)
   google-webfonts
+  grover
   heroicon (~> 0.4.0)
   hotwire-livereload (~> 1.2)
   image_processing (~> 1.2)
@@ -364,8 +370,6 @@ DEPENDENCIES
   turbo-rails
   tzinfo-data
   web-console
-  wicked_pdf
-  wkhtmltopdf-binary
 
 RUBY VERSION
    ruby 3.1.2p20

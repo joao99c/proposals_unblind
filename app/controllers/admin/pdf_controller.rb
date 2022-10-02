@@ -1,40 +1,44 @@
 # frozen_string_literal: true
 
+require 'grover'
 module Admin
   class PdfController < ApplicationController
+    before_action :set_deal
+    before_action :cookies
+
     def show
-      @deal = Deal.find(params[:id])
+      grover = Grover.new("http://localhost:3000/admin/deals/2/editor/preview?hide_previews=1", format: 'A4', cookies:)
+      pdf = grover.to_pdf
+
       respond_to do |format|
+        format.html
         format.pdf do
-          render pdf: 'proposal',
-                 layout: 'pdf',
-                 template: 'admin/pdf/preview',
-                 page_size: 'A4',
-                 show_as_html: params.key?('debug'),
-                 margin: {
-                   top: 0, # default 10 (mm)
-                   bottom: 0,
-                   left: 0,
-                   right: 0
-                 },
-                 padding: {
-                   top: 0, # default 10 (mm)
-                   bottom: 0,
-                   left: 0,
-                   right: 0
-                 }
+          send_data(pdf, disposition: 'inline', filename: "#{@deal.customer.name} - Proposta ##{@deal.id}", type: 'application/pdf')
         end
       end
     end
 
     def download
-      @deal = Deal.find(params[:id])
-      html = render_to_string(template: 'admin/pdf/preview', layout: 'pdf/pdf')
-      pdf = WickedPdf.new.pdf_from_string(html)
+      grover = Grover.new("http://localhost:3000/admin/deals/2/editor/preview?hide_previews=1", format: 'A4', cookies:)
+      pdf = grover.to_pdf
 
-      send_data(pdf,
-                filename: 'my_pdf_name.pdf',
-                disposition: 'attachment')
+      respond_to do |format|
+        format.html
+        format.pdf do
+          send_data(pdf, disposition: 'attachment', filename: "#{@deal.customer.name} - Proposta ##{@deal.id}", type: 'application/pdf')
+        end
+      end
+    end
+    def set_deal
+      @deal = Deal.find(params[:id])
+    end
+
+    def cookies
+      request.headers['Cookie'].split('; ').map do |cookie|
+        key, value = cookie.split '='
+        { name: key, value: value, domain: request.headers['Host'] }
+      end
     end
   end
+
 end

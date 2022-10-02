@@ -1,4 +1,4 @@
-<div id="<%= dom_id(deal_section) %>" class="editor--page-section-preview text-section">
+<div id="<%= dom_id(deal_section) %>" class="editor--page-section-preview text-section full-full">
   <div id="<%= dom_id(Section.find(1)) %>" class="hidden"></div>
 
   <% if deal_section.background_image.attached? %>
@@ -7,11 +7,11 @@
     <% style = "background-color: #{deal_section&.theme&.dig("colors", "background")};" %>
   <% end %>
 
-  <div class="text-white bg-gray-500 p-12" style="<%= style %>color: <%= deal_section.text_color %>;">
-    <div class="max-w-[672px] mx-auto text-center">
+  <div class="text-white bg-gray-500 p-12 full-full" style="<%= style %>color: <%= deal_section.text_color %>;">
+    <div class="max-w-[672px] mx-auto text-center full-full flex flex-col justify-between">
 
       <% unless deal_section&.theme&.dig("hidden", "logo") == "1" %>
-        <div class="flex items-center justify-center space-x-3 mb-24">
+        <div class="flex items-center justify-center space-x-3">
           <% if deal_section.logo.attached? %>
             <%= image_tag(deal_section.logo, class: "w-8") %>
           <% end %>
@@ -19,7 +19,7 @@
         </div>
       <% end %>
 
-      <div class="space-y-4 mb-24">
+      <div class="space-y-4 pb-60">
         <% unless deal_section&.theme&.dig("hidden", "heading") == "1" %>
           <h1 class="text-6xl leading-tight font-semibold" style="color: <%= deal_section&.theme&.dig("colors", "title") %>"><%= deal_section.heading %></h1>
         <% end %>
@@ -29,7 +29,7 @@
         <% end %>
       </div>
 
-      <div class="space-y-4 mb-24">
+      <div class="space-y-4 pb-40">
         <h3 class="leading-tight text-3xl font-semibold" style="color: <%= deal_section&.theme&.dig("colors", "client_name") %>"><%= deal.customer.name %></h3>
         <% unless deal_section&.theme&.dig("hidden", "date") == "1" %>
           <h4 class="text-xl" style="color: <%= deal_section&.theme&.dig("colors", "date") %>"><%= deal.send_date_formatted %></h4>
