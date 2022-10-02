@@ -1,5 +1,5 @@
 class Template < ApplicationRecord
-  belongs_to :user
+  acts_as_tenant(:user)
   has_many :deals
   has_many :deal_sections, -> { order(position: :asc).where(child: false) }, dependent: :destroy
 

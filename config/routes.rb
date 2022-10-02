@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+
+  get 'ver_proposta/:uuid', to: 'admin/deals#public_preview', as: 'ver_proposta'
+
   get 'user_account', to: 'user_account#index'
   get 'user_account/profile', to: 'user_account#profile'
   post 'user_account/profile', to: 'user_account#save_profile'
@@ -55,8 +58,10 @@ Rails.application.routes.draw do
         end
       end
 
-
       member do
+
+        put 'update_state'
+
         get 'step_1'
         post 'step_1'
 

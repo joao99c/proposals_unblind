@@ -23,6 +23,8 @@ COLORS = [
 ].freeze
 
 class Tag < ApplicationRecord
+  acts_as_tenant(:user)
+
   has_many :taggings, dependent: :destroy
   has_many :posts, through: :taggings
 

@@ -2,7 +2,10 @@
 
 module Admin
   class DealsController < Admin::BaseController
-    before_action :set_deal, only: %i[destroy step_1 step_2 review search_customer choose_customer save_choose_customer delete_choose_customer search_product choose_product save_choose_product delete_choose_product update_dp new_customer update_customer new_product update_product]
+    before_action :set_deal, only: %i[destroy step_1 step_2 save_step_2 update_state review search_customer choose_customer save_choose_customer delete_choose_customer search_product choose_product save_choose_product delete_choose_product update_dp new_customer update_customer new_product update_product]
+
+    skip_before_action :authenticate_user!, only: :public_preview
+    skip_before_action :find_current_tenant, only: :public_preview
 
     def index
       super
@@ -40,6 +43,20 @@ module Admin
     def step_1; end
 
     def step_2; end
+
+    def save_step_2
+      unless @deal.template
+        template = Template.new(name: "Template Personalizado da Proposta ##{@deal.id}", user: current_user)
+        if template.save
+          @deal.template = template
+          @deal.save(validate: false)
+        end
+      end
+
+      respond_to do |format|
+        format.html { redirect_to admin_deal_editor_path(@deal, template: @deal.template) }
+      end
+    end
 
     def review; end
 
@@ -111,6 +128,18 @@ module Admin
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: turbo_stream.remove(html_dom_id)
+        end
+      end
+    end
+
+    def update_state
+      respond_to do |format|
+        if @deal.update(params.require(:deal).permit(:status))
+          format.turbo_stream do
+            render turbo_stream: [
+              turbo_stream.update(helpers.dom_id(@deal), partial: "admin/deals/list_item", locals: { d: @deal })
+            ]
+          end
         end
       end
     end
@@ -193,7 +222,8 @@ module Admin
 
       respond_to do |format|
         if product.save
-          dp = DealProduct.new(deal: @deal, product:).save
+          dp = DealProduct.new(deal: @deal, product:)
+          dp.save
           format.turbo_stream do
             render turbo_stream: [
               turbo_stream.replace('choose_product', partial: 'admin/deals/choose_product', locals: { deal: @deal }),
@@ -238,6 +268,12 @@ module Admin
           end
         end
       end
+    end
+
+    def public_preview
+      @deal = Deal.find_by_uuid(params[:uuid])
+      @template = @deal.template
+      render "admin/editor/editor/preview", layout: 'editor'
     end
 
     private

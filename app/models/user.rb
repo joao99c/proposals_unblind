@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_many :deals
   has_many :templates
+  has_many :customers
+  has_many :products
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -17,10 +19,18 @@ class User < ApplicationRecord
 
   after_create_commit :create_my_template
 
+  def name
+    if first_name.present? && last_name.present?
+      "#{first_name} #{last_name}"
+    else
+      "#{email}"
+    end
+  end
+
   private
 
   def create_my_template
-    templates << Template.new(name: "Template de #{self.first_name} #{self.last_name}", user: self)
+    templates << Template.new(name: "Template Geral", user: self)
     save
   end
 

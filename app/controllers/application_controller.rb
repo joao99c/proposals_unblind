@@ -2,6 +2,13 @@ class ApplicationController < ActionController::Base
   before_action :set_is_app
   before_action :authenticate_user!
 
+  set_current_tenant_through_filter
+  before_action :find_current_tenant
+
+  def find_current_tenant
+    set_current_tenant(current_user)
+  end
+
   private
 
   # Overwriting the sign_in redirect path method

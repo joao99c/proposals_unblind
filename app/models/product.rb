@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+  acts_as_tenant(:user)
+
   has_one_attached :image
   has_many :deal_products
 

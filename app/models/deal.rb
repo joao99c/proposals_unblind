@@ -3,7 +3,17 @@
 class Deal < ApplicationRecord
   include ActionView::RecordIdentifier
 
-  IVA = 0.23
+  acts_as_tenant(:user)
+
+  after_create do
+    self.uuid = generate_uuid
+    while !save
+      self.uuid = generate_uuid
+    end
+  end
+
+  validates_uniqueness_of :uuid, on: :update
+
   STATUSES_ORDER = %w[open won lost].freeze
 
   enum status: {
@@ -26,8 +36,6 @@ class Deal < ApplicationRecord
   has_many :deal_products, dependent: :destroy
   accepts_nested_attributes_for :deal_products, allow_destroy: true, reject_if: :all_blank
   has_many :products, through: :deal_products
-
-  belongs_to :user, optional: true
 
   belongs_to :customer, optional: true
   accepts_nested_attributes_for :customer
@@ -54,6 +62,7 @@ class Deal < ApplicationRecord
   def send_date_formatted(format: '%d %B %Y')
     I18n.localize(send_date, format:).titleize if send_date.present?
   end
+
   def update_total_amount
     self.total_subtotal = 0
     self.total_discount = 0
@@ -94,5 +103,11 @@ class Deal < ApplicationRecord
 
   def broadcast_preview_destroy(deal_section)
     broadcast_remove_to(self, :deal_sections_preview, target: dom_id(deal_section))
+  end
+
+  private
+
+  def generate_uuid()
+    SecureRandom.uuid
   end
 end

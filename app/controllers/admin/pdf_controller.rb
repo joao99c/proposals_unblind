@@ -7,11 +7,10 @@ module Admin
     before_action :cookies
 
     def show
-      grover = Grover.new("http://localhost:3000/admin/deals/2/editor/preview?hide_previews=1", format: 'A4', cookies:)
+      grover = Grover.new("#{admin_deal_editor_preview_url(@deal, hide_previews: 1)}", format: 'A4', cookies:)
       pdf = grover.to_pdf
 
       respond_to do |format|
-        format.html
         format.pdf do
           send_data(pdf, disposition: 'inline', filename: "#{@deal.customer.name} - Proposta ##{@deal.id}", type: 'application/pdf')
         end
@@ -19,16 +18,16 @@ module Admin
     end
 
     def download
-      grover = Grover.new("http://localhost:3000/admin/deals/2/editor/preview?hide_previews=1", format: 'A4', cookies:)
+      grover = Grover.new("#{admin_deal_editor_preview_url(@deal, hide_previews: 1)}", format: 'A4', cookies:)
       pdf = grover.to_pdf
 
       respond_to do |format|
-        format.html
         format.pdf do
           send_data(pdf, disposition: 'attachment', filename: "#{@deal.customer.name} - Proposta ##{@deal.id}", type: 'application/pdf')
         end
       end
     end
+
     def set_deal
       @deal = Deal.find(params[:id])
     end

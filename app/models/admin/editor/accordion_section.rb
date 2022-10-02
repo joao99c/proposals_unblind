@@ -6,7 +6,7 @@ module Admin
       def initialize(attributes = nil)
         attributes ||= {}
         attributes[:section_id] ||= 8
-        attributes[:heading] ||= 'Accordion'
+        attributes[:heading] ||= 'Acordeão'
         attributes[:text] ||= 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisi eu consectetur'
 
 

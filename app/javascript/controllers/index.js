@@ -16,6 +16,9 @@ application.register("dark-mode", DarkModeController)
 import DiscountInputController from "./discount_input_controller"
 application.register("discount-input", DiscountInputController)
 
+import DropdownController from "./dropdown_controller"
+application.register("dropdown", DropdownController)
+
 import Editor__AutosaveController from "./editor/autosave_controller"
 application.register("editor--autosave", Editor__AutosaveController)
 

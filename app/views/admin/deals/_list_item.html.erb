@@ -1,0 +1,70 @@
+<td class="p-4 font-normal">
+  <%= d.name %>
+</td>
+<td class="p-4 text-gray-900">
+  <% if d.customer %>
+    <span class="font-semibold"><%= d.customer.responsable_name %></span> da <%= d.customer.name %>
+  <% else %>
+    -
+  <% end %>
+</td>
+<td class="p-4">
+  <% if d.finish_date %>
+    <%= d.finish_date.strftime("%b %d, %Y") %>
+  <% else %>
+    -
+  <% end %>
+</td>
+<td class="p-4">
+  <%= deal_list_badge(d) %>
+</td>
+<td class="p-4 text-gray-900 font-semibold">
+  <%= number_to_currency d.total_amount %>
+</td>
+<td class="p-4 flex space-x-2">
+  <% if d.template.present? %>
+    <%= link_to "#{admin_pdf_download_path(d)}.pdf", donwload: "Proposta ##{d.id}" do %>
+      <%= button_tag class: "font-medium text-sm inline-flex items-center justify-center py-2 px-3 rounded-lg border dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-200 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300" do %>
+        <%= heroicon("download", options: { class: "w-5 h-5" }) %>
+      <% end %>
+    <% end %>
+
+
+    <%= link_to ver_proposta_path(d.uuid) do %>
+      <button type="button" class="font-medium text-sm inline-flex items-center justify-center py-2 px-3 rounded-lg border dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-200 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300">
+        <%= heroicon("eye", options: { class: "w-5 h-5" }) %>
+      </button>
+    <% end %>
+  <% end %>
+
+  <%= link_to step_1_admin_deal_path(d) do %>
+    <button type="button" class="font-medium text-sm inline-flex items-center justify-center py-2 px-3 rounded-lg border dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-200 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300">
+      <%= heroicon("pencil", options: { class: "w-5 h-5" }) %>
+    </button>
+  <% end %>
+
+  <%
+    if Deal.statuses[d.status] == "won"
+      won_status = "open"
+      won_style = "text-blue-600"
+    else
+      won_status = "won"
+    end
+
+    if Deal.statuses[d.status] == "lost"
+      lost_status = "open"
+      lost_style = "text-blue-600"
+    else
+      lost_status = "lost"
+    end
+  %>
+
+  <%= button_to update_state_admin_deal_path(d), method: :put, params: { deal: { status: won_status } }, aria: { selected: Deal.statuses[d.status] == "won" }, class: "aria-selected:text-green-800 aria-selected:bg-green-100 aria-selected:border-green-100 font-medium text-sm inline-flex items-center justify-center py-2 px-3 rounded-lg border dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-200 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300" do %>
+    <%= heroicon("thumb-up", options: { class: "w-5 h-5" }) %>
+  <% end %>
+
+  <%= button_to update_state_admin_deal_path(d), method: :put, params: { deal: { status: lost_status } }, aria: { selected: Deal.statuses[d.status] == "lost" }, class: "aria-selected:text-red-800 aria-selected:bg-red-100 aria-selected:border-red-100 font-medium text-sm inline-flex items-center justify-center py-2 px-3 rounded-lg border dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-200 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300" do %>
+    <%= heroicon("thumb-down", options: { class: "w-5 h-5" }) %>
+  <% end %>
+
+</td>

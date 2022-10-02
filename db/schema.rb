@@ -63,8 +63,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_132209) do
     t.string "responsable_name"
     t.string "responsable_email"
     t.text "responsable_tel"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_customers_on_user_id"
   end
 
   create_table "deal_products", force: :cascade do |t|
@@ -118,6 +120,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_132209) do
 
   create_table "deals", force: :cascade do |t|
     t.string "name"
+    t.text "uuid"
     t.decimal "total_discount", precision: 10, scale: 2, default: "0.0"
     t.decimal "total_subtotal", precision: 10, scale: 2, default: "0.0"
     t.datetime "finish_date"
@@ -152,8 +155,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_132209) do
     t.string "name"
     t.string "description"
     t.decimal "price", precision: 10, scale: 2, default: "0.0", null: false
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_products_on_user_id"
   end
 
   create_table "section_categories", force: :cascade do |t|
@@ -193,6 +198,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_132209) do
     t.string "color", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_tags_on_user_id"
   end
 
   create_table "templates", force: :cascade do |t|
@@ -223,6 +230,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_132209) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "customers", "users"
   add_foreign_key "deal_products", "deals"
   add_foreign_key "deal_products", "products"
   add_foreign_key "deal_section_items", "deal_sections", column: "child_id"
@@ -234,9 +242,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_132209) do
   add_foreign_key "deals", "fonts", column: "text_typeface_id"
   add_foreign_key "deals", "templates"
   add_foreign_key "deals", "users"
+  add_foreign_key "products", "users"
   add_foreign_key "sections", "section_categories"
   add_foreign_key "sections", "section_types"
   add_foreign_key "taggings", "deals"
   add_foreign_key "taggings", "tags"
+  add_foreign_key "tags", "users"
   add_foreign_key "templates", "users"
 end

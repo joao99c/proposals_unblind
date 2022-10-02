@@ -1,4 +1,6 @@
 class Customer < ApplicationRecord
+  acts_as_tenant(:user)
+
   include Admin::AdminResource
 
   has_many :deals, dependent: :destroy

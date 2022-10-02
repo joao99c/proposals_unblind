@@ -8,6 +8,8 @@ class CreateCustomers < ActiveRecord::Migration[7.0]
       t.string :responsable_email
       t.text :responsable_tel
 
+      t.references :user, null: true, foreign_key: true
+
       t.timestamps
     end
   end

@@ -58,22 +58,24 @@ Font.create([
 
 # Customer.destroy_all
 100.times do
-  Customer.create(
+  Customer.create!(
     name: Faker::Company.name,
     website: Faker::Internet.url,
     responsable_name: Faker::Name.name,
     responsable_email: Faker::Internet.email,
-    responsable_tel: Faker::PhoneNumber.phone_number
+    responsable_tel: Faker::PhoneNumber.phone_number,
+    user: User.find(User.pluck(:id).sample)
   )
 end
 
 # Deal.destroy_all
 50.times do
   user = User.find(User.pluck(:id).sample)
+  customer = Customer.find(user.customer_ids.sample)
   Deal.create!(
     name: Faker::Name.name,
     user: ,
-    customer: Customer.find(Customer.pluck(:id).sample),
+    customer: ,
     finish_date: DateTime.now + rand(30).day,
     status: %w[open won lost].sample,
     template: user.templates.first
@@ -82,23 +84,27 @@ end
 
 # Product.destroy_all
 50.times do
-  Product.create(
+  Product.create!(
     name: Faker::Commerce.product_name,
     price: Faker::Number.decimal,
-    description: Faker::Lorem.paragraph
+    description: Faker::Lorem.paragraph,
+    user: User.find(User.pluck(:id).sample)
   )
 end
 
 # DealProduct.destroy_all
 50.times do
-  DealProduct.create(deal: Deal.find(Deal.pluck(:id).sample), product: Product.find(Product.pluck(:id).sample),
-                     quantity: rand(1..10))
+  user = User.find(User.pluck(:id).sample)
+  product = Product.find(user.product_ids.sample)
+  deal = Deal.find(user.deal_ids.sample)
+  DealProduct.create(deal:, product:, quantity: rand(1..10))
 end
 
 # Tag.destroy_all
 50.times do
   Tag.create(
-    name: Faker::Name.name
+    name: Faker::Name.name,
+    user: User.find(User.pluck(:id).sample)
   )
 end
 

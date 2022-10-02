@@ -20,14 +20,14 @@
       <% end %>
     </div>
     <% unless params[:hide_previews] == "1" %>
-      <div class="preview_before_add_section mt-10 page_div">
-        <%= render partial: "admin/editor/sections/acordeao", locals: { deal_section: @acordeao_preview_item, deal: @deal } %>
-        <%= render partial: "admin/editor/sections/cabecalho", locals: { deal_section: @cabecalho_preview_item, deal: @deal } %>
-        <%= render partial: "admin/editor/sections/contacto", locals: { deal_section: @contacto_preview_item, deal: @deal } %>
-        <%= render partial: "admin/editor/sections/conteudo", locals: { deal_section: @conteudo_preview_item, deal: @deal } %>
-        <%= render partial: "admin/editor/sections/galeria", locals: { deal_section: @galeria_preview_item, deal: @deal } %>
-        <%= render partial: "admin/editor/sections/grelha", locals: { deal_section: @grelha_preview_item, deal: @deal } %>
-        <%= render partial: "admin/editor/sections/proposta", locals: { deal_section: @proposta_preview_item, deal: @deal } %>
+      <div class="preview_before_add_section mt-10">
+        <%= render partial: "admin/editor/sections/acordeao", locals: { deal_section: Admin::Editor::AccordionSection.new, deal: @deal } %>
+        <%= render partial: "admin/editor/sections/cabecalho", locals: { deal_section: Admin::Editor::HeadingSection.new, deal: @deal } %>
+        <%= render partial: "admin/editor/sections/contacto", locals: { deal_section: Admin::Editor::ContactSection.new, deal: @deal } %>
+        <%= render partial: "admin/editor/sections/conteudo", locals: { deal_section: Admin::Editor::ContentSection.new, deal: @deal } %>
+        <%= render partial: "admin/editor/sections/galeria", locals: { deal_section: Admin::Editor::GallerySection.new, deal: @deal } %>
+        <%= render partial: "admin/editor/sections/grelha", locals: { deal_section: Admin::Editor::GridSection.new, deal: @deal } %>
+        <%= render partial: "admin/editor/sections/proposta", locals: { deal_section: Admin::Editor::ProposalSection.new, deal: @deal } %>
       </div>
     <% end %>
   </div>
