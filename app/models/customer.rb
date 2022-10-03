@@ -7,5 +7,5 @@ class Customer < ApplicationRecord
 
   has_one_attached :logo
 
-  validates_presence_of :name, :website, :responsable_email, :responsable_name, :responsable_tel
+  validates_presence_of :name, :responsable_email, :responsable_name, :responsable_tel
 end

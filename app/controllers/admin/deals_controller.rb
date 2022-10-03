@@ -184,7 +184,7 @@ module Admin
         else
           format.turbo_stream do
             render turbo_stream: [
-              turbo_stream.update(helpers.dom_id(@deal, helpers.dom_id(@deal.customer)), partial: "admin/deals/edit_customer_form", locals: { customer: @deal.customer })
+              turbo_stream.update(helpers.dom_id(@deal, helpers.dom_id(@deal.customer)), partial: "admin/deals/new_customer_form", locals: { customer: @deal.customer })
             ]
           end
         end
