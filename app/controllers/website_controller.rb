@@ -3,6 +3,7 @@ class WebsiteController < ActionController::Base
   layout 'website'
 
   def index
+    redirect_to admin_deals_path
   end
 
   private
