@@ -1,0 +1,15 @@
+<% unless deal_section&.theme&.dig("hidden", "heading") == "1" %>
+  <h1 class="deal-font-sub-section-heading text-6xl leading-tight font-semibold" style="
+  color: <%= deal_section&.parent&.theme&.dig("colors", "items_title") %>;
+    font-family: <%= deal&.section_heading_typeface&.name %>;
+    font-weight: <%= deal&.section_heading_weight %>;
+    line-height: <%= deal&.section_heading_height %>;
+    letter-spacing:<%= deal&.section_heading_spacing %>em;">
+    <%= deal_section.heading %>
+  </h1>
+<% end %>
+
+
+<% unless deal_section&.theme&.dig("hidden", "heading") == "1" %>
+  <h1 class="text-2xl leading-tight font-bold text-gray-900" style="color: <%= deal_section&.parent&.theme&.dig("colors", "items_title") %>"><%= deal_section.heading %></h1>
+<% end %>

@@ -11,12 +11,8 @@
   <div class="text-white bg-gray-500 p-12 full-full text-center flex flex-col justify-center items-center" style="<%= style %>color: <%= deal_section.text_color %>;">
 
     <div class="space-y-4 mb-24 max-w-[672px] mx-auto">
-      <% unless deal_section&.theme&.dig("hidden", "heading") == "1" %>
-        <h1 class="text-6xl leading-tight font-semibold" style="color: <%= deal_section&.theme&.dig("colors", "title") %>"><%= deal_section.heading %></h1>
-      <% end %>
-      <% unless deal_section&.theme&.dig("hidden", "text") == "1" %>
-        <h2 class="text-xl" style="color: <%= deal_section&.theme&.dig("colors", "description") %>"><%= deal_section.text %></h2>
-      <% end %>
+      <%= render partial: "admin/editor/sections/shared/section_heading", locals: { deal_section:, deal: } %>
+      <%= render partial: "admin/editor/sections/shared/description", locals: { deal_section:, deal: } %>
     </div>
 
     <div class="space-y-4 mb-24">
@@ -30,8 +26,12 @@
             </div>
             <div class="space-y-1">
               <p class="text-xl font-bold text-gray-900" style="color: <%= deal_section&.theme&.dig("colors", "contacto_title") %>">Email</p>
-              <p class="text-sm font-bold text-blue-600" style="color: <%= deal_section&.theme&.dig("colors", "contacto_description") %>"><%= deal_section&.theme&.dig("contacto", "email") %>
-              </p>
+              <a href="mailto: <%= deal_section&.theme&.dig("contacto", "email") %>" class="deal-font-link text-sm font-bold text-blue-600" style="color: <%= deal_section&.theme&.dig("colors", "contacto_description") %>;
+                font-family: <%= deal&.link_typeface&.name %>;
+                font-weight: <%= deal&.link_weight %>;
+                line-height: <%= deal&.link_height %>;
+                letter-spacing:<%= deal&.link_spacing %>em;"><%= deal_section&.theme&.dig("contacto", "email") %>
+              </a>
             </div>
           </div>
         <% end %>
@@ -44,7 +44,12 @@
             </div>
             <div class="space-y-1">
               <p class="text-xl font-bold text-gray-900" style="color: <%= deal_section&.theme&.dig("colors", "contacto_title") %>">Morada</p>
-              <div class="text-base font-normal text-gray-500" style="color: <%= deal_section&.theme&.dig("colors", "contacto_description") %>"><%= deal_section&.address %></div>
+
+              <a href="https://www.google.pt/maps/search/<%= deal_section&.address.to_plain_text.parameterize %>" class="deal-font-link text-base font-normal text-gray-500" style="color: <%= deal_section&.theme&.dig("colors", "contacto_description") %>;
+                font-family: <%= deal&.link_typeface&.name %>;
+                font-weight: <%= deal&.link_weight %>;
+                line-height: <%= deal&.link_height %>;
+                letter-spacing:<%= deal&.link_spacing %>em;"><%= deal_section&.address %></a>
             </div>
           </div>
         <% end %>
@@ -57,7 +62,11 @@
             </div>
             <div class="space-y-1">
               <p class="text-xl font-bold text-gray-900" style="color: <%= deal_section&.theme&.dig("colors", "contacto_title") %>">Telefone</p>
-              <p class="text-sm font-bold text-blue-600" style="color: <%= deal_section&.theme&.dig("colors", "contacto_description") %>"><%= deal_section&.theme&.dig("contacto", "tel") %></p>
+              <a href="tel: <%= deal_section&.theme&.dig("contacto", "tel") %>" class="deal-font-link text-sm font-bold text-blue-600" style="color: <%= deal_section&.theme&.dig("colors", "contacto_description") %>;
+                font-family: <%= deal&.link_typeface&.name %>;
+                font-weight: <%= deal&.link_weight %>;
+                line-height: <%= deal&.link_height %>;
+                letter-spacing:<%= deal&.link_spacing %>em;"><%= deal_section&.theme&.dig("contacto", "tel") %></a>
             </div>
           </div>
         <% end %>

@@ -21,12 +21,17 @@
 
       <div class="space-y-4 pb-60">
         <% unless deal_section&.theme&.dig("hidden", "heading") == "1" %>
-          <h1 class="text-6xl leading-tight font-semibold" style="color: <%= deal_section&.theme&.dig("colors", "title") %>"><%= deal_section.heading %></h1>
+          <h1 class="deal-font-heading text-6xl leading-tight font-semibold" style="
+          color: <%= deal_section&.theme&.dig("colors", "title") %>;
+            font-family: <%= deal&.heading_typeface&.name %>;
+            font-weight: <%= deal&.heading_weight %>;
+            line-height: <%= deal&.heading_height %>;
+            letter-spacing:<%= deal&.heading_spacing %>em;">
+            <%= deal_section.heading %>
+          </h1>
         <% end %>
 
-        <% unless deal_section&.theme&.dig("hidden", "text") == "1" %>
-          <h2 class="text-xl" style="color: <%= deal_section&.theme&.dig("colors", "description") %>"><%= deal_section.text %></h2>
-        <% end %>
+        <%= render partial: "admin/editor/sections/shared/description", locals: { deal_section:, deal: } %>
       </div>
 
       <div class="space-y-4 pb-40">

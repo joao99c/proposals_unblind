@@ -37,7 +37,6 @@ Rails.application.routes.draw do
       namespace :editor do
         get '/', to: 'editor#index'
         get 'preview', to: 'editor#preview'
-        get 'fonts', to: 'editor#fonts'
         patch 'fonts', to: 'editor#update_fonts'
 
         resources 'deal_sections' do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_01_132209) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_07_100310) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -139,8 +139,32 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_132209) do
     t.text "heading_weight", default: "700"
     t.text "heading_spacing", default: "0"
     t.text "heading_height", default: "1.35"
+    t.bigint "section_heading_typeface_id", default: 1
+    t.text "section_heading_weight", default: "400"
+    t.text "section_heading_spacing", default: "0"
+    t.text "section_heading_height", default: "1.2"
+    t.bigint "sub_section_heading_typeface_id", default: 1
+    t.text "sub_section_heading_weight", default: "400"
+    t.text "sub_section_heading_spacing", default: "0"
+    t.text "sub_section_heading_height", default: "1.2"
+    t.bigint "link_typeface_id", default: 1
+    t.text "link_weight", default: "400"
+    t.text "link_spacing", default: "0"
+    t.text "link_height", default: "1.2"
+    t.bigint "button_typeface_id", default: 1
+    t.text "button_weight", default: "400"
+    t.text "button_spacing", default: "0"
+    t.text "button_height", default: "1.2"
+    t.string "button_background_color"
+    t.string "button_border_color"
+    t.string "button_border_width"
+    t.string "button_border_radius"
+    t.index ["button_typeface_id"], name: "index_deals_on_button_typeface_id"
     t.index ["customer_id"], name: "index_deals_on_customer_id"
     t.index ["heading_typeface_id"], name: "index_deals_on_heading_typeface_id"
+    t.index ["link_typeface_id"], name: "index_deals_on_link_typeface_id"
+    t.index ["section_heading_typeface_id"], name: "index_deals_on_section_heading_typeface_id"
+    t.index ["sub_section_heading_typeface_id"], name: "index_deals_on_sub_section_heading_typeface_id"
     t.index ["template_id"], name: "index_deals_on_template_id"
     t.index ["text_typeface_id"], name: "index_deals_on_text_typeface_id"
     t.index ["user_id"], name: "index_deals_on_user_id"
@@ -238,7 +262,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_132209) do
   add_foreign_key "deal_sections", "sections"
   add_foreign_key "deal_sections", "templates"
   add_foreign_key "deals", "customers"
+  add_foreign_key "deals", "fonts", column: "button_typeface_id"
   add_foreign_key "deals", "fonts", column: "heading_typeface_id"
+  add_foreign_key "deals", "fonts", column: "link_typeface_id"
+  add_foreign_key "deals", "fonts", column: "section_heading_typeface_id"
+  add_foreign_key "deals", "fonts", column: "sub_section_heading_typeface_id"
   add_foreign_key "deals", "fonts", column: "text_typeface_id"
   add_foreign_key "deals", "templates"
   add_foreign_key "deals", "users"

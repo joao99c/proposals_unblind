@@ -47,6 +47,10 @@ class Deal < ApplicationRecord
 
   belongs_to :heading_typeface, class_name: 'Font', foreign_key: 'heading_typeface_id'
   belongs_to :text_typeface, class_name: 'Font', foreign_key: 'text_typeface_id'
+  belongs_to :section_heading_typeface, class_name: 'Font', foreign_key: 'section_heading_typeface_id'
+  belongs_to :sub_section_heading_typeface, class_name: 'Font', foreign_key: 'sub_section_heading_typeface_id'
+  belongs_to :link_typeface, class_name: 'Font', foreign_key: 'link_typeface_id'
+  belongs_to :button_typeface, class_name: 'Font', foreign_key: 'button_typeface_id'
 
   # Validations
   validates :name, presence: true

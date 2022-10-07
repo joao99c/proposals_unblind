@@ -1,0 +1,10 @@
+<% unless deal_section&.theme&.dig("hidden", "heading") == "1" %>
+  <h1 class="deal-font-section-heading text-6xl leading-tight font-semibold" style="
+  color: <%= deal_section&.theme&.dig("colors", "title") %>;
+    font-family: <%= deal&.section_heading_typeface&.name %>;
+    font-weight: <%= deal&.section_heading_weight %>;
+    line-height: <%= deal&.section_heading_height %>;
+    letter-spacing:<%= deal&.section_heading_spacing %>em;">
+    <%= deal_section.heading %>
+  </h1>
+<% end %>

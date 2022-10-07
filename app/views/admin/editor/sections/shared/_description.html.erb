@@ -1,0 +1,30 @@
+<% unless deal_section&.theme&.dig("hidden", "text") == "1" %>
+  <h2 class="deal-font-text text-xl" style="color: <%= deal_section&.theme&.dig("colors", "description") %>;
+    font-family: <%= deal&.text_typeface&.name %>;
+    font-weight: <%= deal&.text_weight %>;
+    line-height: <%= deal&.text_height %>;
+    letter-spacing:<%= deal&.text_spacing %>em;">
+    <%= deal_section.text %>
+  </h2>
+<% end %>
+
+
+<% unless deal_section&.theme&.dig("hidden", "button") == "1" %>
+  <% if deal_section.button_valid %>
+    <div class="flex justify-center">
+      <%= link_to deal_section.button&.dig('url'), target: "_blank" do %>
+        <button class="deal-font-button block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                style="font-family: <%= deal&.button_typeface&.name %>;
+                  font-weight: <%= deal&.button_weight %>;
+                  line-height: <%= deal&.button_height %>;
+                  letter-spacing:<%= deal&.button_spacing %>em;
+                  background-color: <%= deal&.button_background_color %>;
+                  border-color: <%= deal&.button_border_color %>;
+                  border-width: <%= deal&.button_border_width %>;
+                  border-radius:<%= deal&.button_border_radius %> ;">
+          <%= deal_section.button&.dig('text') %>
+        </button>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

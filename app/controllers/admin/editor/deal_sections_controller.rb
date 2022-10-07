@@ -443,6 +443,9 @@ module Admin
           @deal_section.theme['hidden'][visibility_item.to_s] = params.require(:deal_section)["hidden_#{visibility_item}"] if params.require(:deal_section)["hidden_#{visibility_item}"].present?
         end
 
+        @deal_section.button ||= {}
+        @deal_section.button[:text] = params.require(:deal_section)[:button_text] if params.require(:deal_section)[:button_text].present?
+        @deal_section.button[:url] = params.require(:deal_section)[:button_url] if params.require(:deal_section)[:button_url].present?
         @deal_section.assign_attributes(deal_section_params)
 
         if @deal_section.save

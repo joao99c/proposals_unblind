@@ -10,10 +10,9 @@
   <div class="text-center text-white p-12 full-full" style="<%= style %>color: <%= deal_section.text_color %>;">
 
     <div class="space-y-4 mb-20 max-w-[672px] mx-auto">
-      <h1 class="text-6xl leading-tight font-semibold" style="color: <%= deal_section&.theme&.dig("colors", "title") %>"><%= deal_section.heading %></h1>
-      <h2 class="text-xl" style="color: <%= deal_section&.theme&.dig("colors", "description") %>"><%= deal_section.text %></h2>
+      <%= render partial: "admin/editor/sections/shared/section_heading", locals: { deal_section:, deal: } %>
+      <%= render partial: "admin/editor/sections/shared/description", locals: { deal_section:, deal: } %>
     </div>
-
 
 
     <div id="<%= dom_id(deal_section, "items") %>"
@@ -21,7 +20,7 @@
          data-controller="accordion"
          data-active-classes="text-gray-900"
          data-inactive-classes="text-gray-500"
-         style="<%= "background-color:#{deal_section&.theme&.dig('colors','background_accordion')};border-width: #{deal_section&.theme&.dig('border','accordion')};border-color:#{deal_section&.theme&.dig('colors','border_accordion')}" %>">
+         style="<%= "background-color:#{deal_section&.theme&.dig('colors', 'background_accordion')};border-width: #{deal_section&.theme&.dig('border', 'accordion')};border-color:#{deal_section&.theme&.dig('colors', 'border_accordion')}" %>">
       <% deal_section.deal_section_items.map do |dsi| %>
         <%= render_section_preview dsi.child, deal %>
       <% end %>

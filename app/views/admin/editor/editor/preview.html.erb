@@ -1,10 +1,5 @@
 <%= turbo_frame_tag dom_id(@deal, :preview) do %>
-  <div id="font-text" class="h-full relative" style="
-  font-family: <%= @deal.text_typeface&.name %>;
-    font-weight: <%= @deal.text_weight %>;
-    line-height: <%= @deal.text_height %>;
-    letter-spacing:<%= @deal.text_spacing %>em;
-  ">
+  <div id="font-text" class="h-full relative">
 
     <%= turbo_stream_from @deal, :deal_sections_preview %>
     <div id="deal_sections_preview">

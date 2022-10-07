@@ -1,0 +1,16 @@
+<div class="flex items-center">
+  <div class="flex space-x-2 items-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full h-11 px-4">
+    <%= yield %>
+    <%= form.select "#{name}",
+                    values,
+                    {},
+                    {
+                      selected: form.object.public_send("#{name}"),
+                      data: {
+                        "editor--slider--weight-target": js_target,
+                        key: "#{name}"
+                      },
+                      class: "bg-transparent border-none focus:ring-0 focus:outline-0"
+                    } %>
+  </div>
+</div>
