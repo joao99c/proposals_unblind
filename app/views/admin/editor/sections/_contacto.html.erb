@@ -26,7 +26,7 @@
             </div>
             <div class="space-y-1">
               <p class="text-xl font-bold text-gray-900" style="color: <%= deal_section&.theme&.dig("colors", "contacto_title") %>">Email</p>
-              <a href="mailto: <%= deal_section&.theme&.dig("contacto", "email") %>" class="deal-font-link text-sm font-bold text-blue-600" style="color: <%= deal_section&.theme&.dig("colors", "contacto_description") %>;
+              <a target="_blank" href="mailto: <%= deal_section&.theme&.dig("contacto", "email") %>" class="deal-font-link text-sm font-bold text-blue-600" style="color: <%= deal_section&.theme&.dig("colors", "contacto_description") %>;
                 font-family: <%= deal&.link_typeface&.name %>;
                 font-weight: <%= deal&.link_weight %>;
                 line-height: <%= deal&.link_height %>;
@@ -45,7 +45,7 @@
             <div class="space-y-1">
               <p class="text-xl font-bold text-gray-900" style="color: <%= deal_section&.theme&.dig("colors", "contacto_title") %>">Morada</p>
 
-              <a href="https://www.google.pt/maps/search/<%= deal_section&.address.to_plain_text.parameterize %>" class="deal-font-link text-base font-normal text-gray-500" style="color: <%= deal_section&.theme&.dig("colors", "contacto_description") %>;
+              <a target="_blank" href="https://www.google.pt/maps/search/<%= ERB::Util.url_encode deal_section&.address.to_plain_text %>" class="deal-font-link text-base font-normal text-gray-500" style="color: <%= deal_section&.theme&.dig("colors", "contacto_description") %>;
                 font-family: <%= deal&.link_typeface&.name %>;
                 font-weight: <%= deal&.link_weight %>;
                 line-height: <%= deal&.link_height %>;
@@ -62,7 +62,7 @@
             </div>
             <div class="space-y-1">
               <p class="text-xl font-bold text-gray-900" style="color: <%= deal_section&.theme&.dig("colors", "contacto_title") %>">Telefone</p>
-              <a href="tel: <%= deal_section&.theme&.dig("contacto", "tel") %>" class="deal-font-link text-sm font-bold text-blue-600" style="color: <%= deal_section&.theme&.dig("colors", "contacto_description") %>;
+              <a target="_blank" href="tel: <%= deal_section&.theme&.dig("contacto", "tel") %>" class="deal-font-link text-sm font-bold text-blue-600" style="color: <%= deal_section&.theme&.dig("colors", "contacto_description") %>;
                 font-family: <%= deal&.link_typeface&.name %>;
                 font-weight: <%= deal&.link_weight %>;
                 line-height: <%= deal&.link_height %>;
