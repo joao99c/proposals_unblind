@@ -7,7 +7,7 @@
     <% style = "background-color: #{deal_section&.theme&.dig("colors", "background")};" %>
   <% end %>
 
-  <div class="text-center text-white p-12 full-full" style="<%= style %>color: <%= deal_section.text_color %>;">
+  <div class="text-center text-white p-4 md:p-12 full-full" style="<%= style %>color: <%= deal_section.text_color %>;">
 
     <div class="space-y-4 mb-24 max-w-[672px] mx-auto">
       <%= render partial: "admin/editor/sections/shared/section_heading", locals: { deal_section:, deal: } %>
@@ -15,7 +15,7 @@
     </div>
 
     <% if deal_section&.theme&.dig('image', 'organization') == "equal" %>
-      <div id="<%= dom_id(deal_section, "items") %>" class="flex grid grid-cols-3 gap-8">
+      <div id="<%= dom_id(deal_section, "items") %>" class="flex grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
         <% deal_section.deal_section_items.map do |dsi| %>
           <%= render_section_preview dsi.child, deal %>
         <% end %>
@@ -23,8 +23,7 @@
     <% end %>
 
     <% if deal_section&.theme&.dig('image', 'organization') == "feature" %>
-
-      <div class="flex space-x-8">
+      <div class="flex flex-col md:flex-row space-y-8 md:space-x-8 md:space-y-0">
         <div class="w-full">
           <%= render partial: "admin/editor/deal_sections/deal_section", locals: { deal_section: deal_section.deal_section_items.first.child, deal: } %>
         </div>

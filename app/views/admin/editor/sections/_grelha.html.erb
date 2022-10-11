@@ -7,7 +7,7 @@
     <% style = "background-color: #{deal_section&.theme&.dig("colors", "background")};" %>
   <% end %>
 
-  <div class="text-center text-white p-12 full-full" style="<%= style %>color: <%= deal_section.text_color %>;">
+  <div class="text-center text-white p-4 md:p-12 full-full" style="<%= style %>color: <%= deal_section.text_color %>;">
 
     <div class="space-y-4 mb-24 max-w-[672px] mx-auto">
       <%= render partial: "admin/editor/sections/shared/section_heading", locals: { deal_section:, deal: } %>
@@ -16,7 +16,7 @@
 
     <% if deal_section.section.is_grelha? %>
       <div class="flex justify-center">
-        <div id="<%= dom_id(deal_section, "items") %>" class="flex grid grid-cols-3 gap-8">
+        <div id="<%= dom_id(deal_section, "items") %>" class="flex grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
           <% deal_section.deal_section_items.map do |dsi| %>
             <div class="flex">
               <%= render_section_preview dsi.child, deal %>

@@ -8,12 +8,14 @@
   <% end %>
 
   <% if deal_section.parent.section.is_grelha? %>
-    <div class="text-white p-12 text-center border rounded-lg" style="<%= style %>color: <%= deal_section.text_color %>;border-color: <%= deal_section.parent&.theme&.dig("colors","border_items") %>;border-width: <%= deal_section.parent&.theme&.dig("border", "width") %>">
+    <div class="text-white p-4 md:p-8 lg:p-12 text-center border rounded-lg" style="<%= style %>color: <%= deal_section.text_color %>;border-color: <%= deal_section.parent&.theme&.dig("colors","border_items") %>;border-width: <%= deal_section.parent&.theme&.dig("border", "width") %>">
       <div class="space-y-5">
         <div class="space-y-4">
           <% unless deal_section&.theme&.dig("hidden", "logo") == "1" %>
             <% if deal_section.logo.attached? %>
+              <div class="w-36 h-36 mx-auto">
               <%= image_tag(deal_section.logo, class: "w-36 h-36 mx-auto img-#{deal_section&.parent&.theme&.dig('image', 'format')}") %>
+              </div>
             <% end %>
           <% end %>
           <div class="space-y-1">
@@ -59,7 +61,7 @@
         border-color: <%= deal_section.parent&.theme&.dig("colors","border_images") %>;
         border-width: <%= deal_section.parent&.theme&.dig("border", "width") %>">
         <% if deal_section.logo.attached? %>
-          <div class="w-full h-full min-h-[300px] mx-auto" style="<%= "background: url(#{url_for(deal_section.logo)}) no-repeat center center; background-size: cover;" %>">
+          <div class="w-full h-full min-h-[150px] md:min-h-[300px] mx-auto" style="<%= "background: url(#{url_for(deal_section.logo)}) no-repeat center center; background-size: cover;" %>">
             <% if deal_section.text.to_plain_text.present? %>
               <% unless deal_section&.theme&.dig("hidden", "text") == "1" %>
                 <div class="flex justify-center items-end h-full">
@@ -76,10 +78,10 @@
     <% end %>
   <% elsif deal_section.parent.section.is_conteudo? %>
     <% if deal_section.logo.attached? %>
-      <div class="text-white flex space-x-12 <%= deal_section&.theme&.dig("image", "organization") == "left" ? '' : 'flex-row-reverse' %>">
+      <div class="text-white flex flex-col md:flex-row space-y-6 md:space-x-12 md:space-y-0 <%= deal_section&.theme&.dig("image", "organization") == "left" ? '' : 'flex-row-reverse' %>">
         <div class="flex w-full">
           <% unless deal_section&.theme&.dig("hidden", "logo") == "1" %>
-            <%= image_tag(deal_section.logo, class: "w-full h-[489px] mx-auto border", style: "border-width: #{deal_section.parent.theme.dig("border", "width")};border-color:#{deal_section.parent.theme.dig("colors", "border_images")}") %>
+            <%= image_tag(deal_section.logo, class: "w-full h-[300px] md:h-[489px] mx-auto border", style: "border-width: #{deal_section.parent.theme.dig("border", "width")};border-color:#{deal_section.parent.theme.dig("colors", "border_images")}") %>
           <% end %>
         </div>
         <div class="space-y-4 w-full flex flex-col justify-center <%= deal_section.logo.attached? ? 'items-start' : 'items-center max-w-[672px] mx-auto' %>">

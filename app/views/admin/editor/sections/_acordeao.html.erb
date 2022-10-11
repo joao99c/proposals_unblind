@@ -7,7 +7,7 @@
     <% style = "background-color: #{deal_section&.theme&.dig("colors", "background")};" %>
   <% end %>
 
-  <div class="text-center text-white p-12 full-full" style="<%= style %>color: <%= deal_section.text_color %>;">
+  <div class="text-center text-white p-4 md:p-12 full-full" style="<%= style %>color: <%= deal_section.text_color %>;">
 
     <div class="space-y-4 mb-20 max-w-[672px] mx-auto">
       <%= render partial: "admin/editor/sections/shared/section_heading", locals: { deal_section:, deal: } %>

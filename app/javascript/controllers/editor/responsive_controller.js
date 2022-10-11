@@ -17,7 +17,7 @@ export default class extends Controller {
         let class_name = ""
         switch (event.currentTarget.dataset.breakpoint) {
             case "mobile":
-                class_name = "max-w-screen-xs"
+                class_name = "max-w-screen-sm"
                 break;
             case "tablet":
                 class_name = "max-w-screen-md"
@@ -27,7 +27,7 @@ export default class extends Controller {
                 break;
         }
 
-        this.previewTarget.classList.remove("max-w-screen-xs", "max-w-screen-md", "max-w-[100%]")
+        this.previewTarget.classList.remove("max-w-screen-sm", "max-w-screen-md", "max-w-[100%]")
 
         // Add the class array to the class attribute
         this.previewTarget.classList.add(class_name)
