@@ -10,6 +10,6 @@
   </div>
   <div class="flex items-center space-x-1.5 mb-0.5">
     <%= heroicon("phone", options: { class: "w-5 h-5 stroke-2" }) %>
-    <%= link_to customer.responsable_tel, "tel:#{customer.responsable_tel}" %>
+    <%= link_to customer.formatted_phone, "tel:#{customer.responsable_tel}" %>
   </div>
 </div>

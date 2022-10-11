@@ -7,7 +7,7 @@
 
   <div class="space-y-2">
     <%= form.label :website, "Website empresa" %>
-    <%= form.text_field :website, placeholder: "Inserir URL do website..." %>
+    <%= form.url_field :website, placeholder: "Inserir URL do website...", pattern: "https://.*" %>
     <%= error_message_for(form.object, :website, "Website empresa") %>
   </div>
 
@@ -25,13 +25,13 @@
 
   <div class="space-y-2">
     <%= form.label :responsable_email, "Email do responsável" %>
-    <%= form.text_field :responsable_email, placeholder: "Inserir email..." %>
+    <%= form.email_field :responsable_email, placeholder: "Inserir email..." %>
     <%= error_message_for(form.object, :responsable_email, "Email do responsável") %>
   </div>
 
   <div class="space-y-2">
     <%= form.label :responsable_tel, "Telefone do responsável" %>
-    <%= form.text_field :responsable_tel, placeholder: "Inserir telefone..." %>
+    <%= form.telephone_field :responsable_tel, placeholder: "Inserir telefone..." %>
     <%= error_message_for(form.object, :responsable_tel, "Telefone do responsável") %>
   </div>
 </div>

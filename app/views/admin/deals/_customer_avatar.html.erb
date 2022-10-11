@@ -7,7 +7,7 @@
   <div>
     <p class="font-semibold text-gray-700"><%= customer.name %></p>
     <% if customer.website.present? %>
-      <%= link_to customer.website, customer.website, class: "text-sm text-gray-400" %>
+      <%= link_to customer.website, customer.website, target:"_blank", class: "text-sm text-gray-400" %>
     <% end %>
   </div>
 </div>
