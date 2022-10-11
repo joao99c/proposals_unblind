@@ -25,7 +25,16 @@ module Admin
         attributes[:theme][:colors][:text] ||= '#000000'
         attributes[:theme][:colors][:button_background] ||= '#ffffff'
         attributes[:theme][:colors][:button_text] ||= '#000000'
+        attributes[:theme][:colors][:title] ||= '#000000'
+        attributes[:theme][:colors][:description] ||= '#000000'
+        attributes[:theme][:colors][:border_images] ||= '#ffffff'
 
+
+        attributes[:theme][:border] ||= {}
+        attributes[:theme][:border][:width] ||= '0px'
+
+        attributes[:theme][:image] ||= {}
+        attributes[:theme][:image][:organization] ||= 'equal'
         super(attributes)
       end
 

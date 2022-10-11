@@ -3,7 +3,6 @@
 
     <%= turbo_stream_from @deal, :deal_sections_preview %>
     <div class="page_div">
-      <h1><%= @template.section_cabecalho.position %></h1>
       <%= render partial: 'admin/editor/deal_sections/deal_section', locals: { deal_section: @template.section_cabecalho, deal: @deal } %>
     </div>
     <div id="deal_sections_preview">
