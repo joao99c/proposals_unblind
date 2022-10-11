@@ -61,7 +61,11 @@ class Deal < ApplicationRecord
   end
 
   def send_date_formatted(format: '%d %B %Y')
-    I18n.localize(send_date, format:).titleize if send_date.present?
+    if send_date.present?
+      I18n.localize(send_date, format:).titleize
+    else
+      I18n.localize(DateTime.now, format:).titleize
+    end
   end
 
   def update_total_amount

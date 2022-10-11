@@ -71,6 +71,8 @@ Rails.application.routes.draw do
         get 'step_2'
 
         get 'review'
+        post 'save_review'
+
 
         %w[customer product].each do |type|
           get "step_1/search_#{type}", to: "deals#search_#{type}"

@@ -69,7 +69,7 @@ class DealSection < ApplicationRecord
   end
 
   def send_date(format: '%d %B %Y')
-    I18n.localize(deal.send_date, format:).titleize if deal.try(:send_date)
+    deal.send_date_formatted(format:)
   end
 
   private
