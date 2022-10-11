@@ -92,3 +92,11 @@ trix-toolbar .trix-button-group:not(:first-child) {
     display: none;
 }
 
+.trix-content action-text-attachment .attachment {
+    padding: 0!important;
+    max-width: 50%!important;
+}
+
+.trix-content .attachment__caption{
+    display: none
+}
