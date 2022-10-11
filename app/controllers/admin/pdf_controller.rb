@@ -23,7 +23,7 @@ module Admin
 
       respond_to do |format|
         format.pdf do
-          send_data(pdf, disposition: 'attachment', filename: "#{@deal.customer.name} - Proposta ##{@deal.id}", type: 'application/pdf')
+          send_data(pdf, disposition: 'attachment', filename: "#{@deal.customer.name} - Proposta ##{@deal.id}.pdf", type: 'application/pdf')
         end
       end
     end
