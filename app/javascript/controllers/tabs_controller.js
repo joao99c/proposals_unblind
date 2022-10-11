@@ -5,6 +5,8 @@ export default class extends Controller {
     static targets = ["tabHeader"]
 
     connect() {
+        let defaultTabId = null
+
         let tabElements = []
         this.tabHeaderTargets.forEach(th => {
             tabElements.push(
@@ -14,9 +16,20 @@ export default class extends Controller {
                     targetEl: document.querySelector(`#${th.getAttribute("aria-controls")}`)
                 }
             )
+
+            if (th.getAttribute("aria-selected") === "true") {
+                defaultTabId = th.id
+            }
         })
 
-        const tabs = new Tabs(tabElements);
+        let options = {}
+        if (defaultTabId) {
+            options = {defaultTabId: `${defaultTabId}`}
+        }
+
+
+        console.log(options)
+        const tabs = new Tabs(tabElements, options);
 
     }
 }
