@@ -29,7 +29,7 @@ export default class extends Controller {
 
     reorder_preview(event) {
         const eventPageSection = event.item
-        const currentPageSection = document.querySelector("iframe").contentDocument.querySelector("#" + eventPageSection.dataset.previewId);
+        const currentPageSection = document.querySelector("iframe").contentDocument.querySelector("#" + eventPageSection.dataset.previewId).parentElement;
         const parentNode = currentPageSection.parentNode;
 
         if (event.newIndex > event.oldIndex) {
