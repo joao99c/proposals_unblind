@@ -21,11 +21,11 @@ module Admin
 
         attributes[:theme] ||= {}
         attributes[:theme][:colors] ||= {}
-        # attributes[:theme][:colors][:background] ||= '#f3f4f6'
-        # attributes[:theme][:colors][:heading] ||= '#000000'
-        # attributes[:theme][:colors][:text] ||= '#000000'
-        # attributes[:theme][:colors][:button_background] ||= '#ffffff'
-        # attributes[:theme][:colors][:button_text] ||= '#000000'
+        attributes[:theme][:colors][:background] ||= '#f3f4f6'
+        attributes[:theme][:colors][:heading] ||= '#000000'
+        attributes[:theme][:colors][:text] ||= '#000000'
+        attributes[:theme][:colors][:button_background] ||= '#ffffff'
+        attributes[:theme][:colors][:button_text] ||= '#000000'
 
         super(attributes)
       end

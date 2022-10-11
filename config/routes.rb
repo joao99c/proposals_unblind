@@ -55,6 +55,10 @@ Rails.application.routes.draw do
         member do
           post 'select'
         end
+
+        collection do
+          post 'select_unblind'
+        end
       end
 
       member do

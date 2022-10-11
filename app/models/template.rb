@@ -3,7 +3,6 @@ class Template < ApplicationRecord
   has_many :deals
   has_many :deal_sections, -> { order(position: :asc).where(child: false) }, dependent: :destroy
 
-
   after_create_commit :create_default_sections
 
   def section_cabecalho
@@ -12,6 +11,10 @@ class Template < ApplicationRecord
 
   def section_propostas
     deal_sections.where(section_id: 2).first
+  end
+
+  def section_contacto
+    deal_sections.where(section_id: 3).first
   end
 
   private

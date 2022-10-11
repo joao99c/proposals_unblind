@@ -15,6 +15,24 @@
     </div>
 
     <div class="w-2/3">
+      <div class="p-4 mb-4 space-y-4 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+
+        <div class="flex justify-between items-center">
+          <div>
+            <p class="text-gray-900 font-semibold">Template Unblind</p>
+          </div>
+          <div>
+            <div class="flex space-x-4">
+              <%= form_tag(select_unblind_admin_deal_template_index_path(@deal), method: :post) do %>
+                <button type="submit" class="border border-blue-600 text-blue-600 bg-white font-medium text-sm inline-flex items-center justify-center py-2 px-3 rounded-lg border dark:border-transparent hover:text-blue-800 hover:border-blue-800">
+                  Selecionar
+                </button>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <% if current_user.templates %>
         <div class="space-y-4">
           <% if @deal.template %>

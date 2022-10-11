@@ -14,15 +14,28 @@
       <%= render partial: "admin/editor/sections/shared/description", locals: { deal_section:, deal: } %>
     </div>
 
-    <div class="flex justify-center">
-      <div id="<%= dom_id(deal_section, "items") %>" class="flex gap-8 flex-wrap justify-center">
-        <% deal_section.deal_section_items.map do |dsi| %>
-          <div class="flex">
-            <%= render_section_preview dsi.child, deal %>
-          </div>
-        <% end %>
+    <% if deal_section.section.is_grelha? %>
+      <div class="flex justify-center">
+        <div id="<%= dom_id(deal_section, "items") %>" class="flex grid grid-cols-3 gap-8">
+          <% deal_section.deal_section_items.map do |dsi| %>
+            <div class="flex">
+              <%= render_section_preview dsi.child, deal %>
+            </div>
+          <% end %>
+        </div>
       </div>
-    </div>
+    <% else %>
+      <p>1233333</p>
+      <div class="flex justify-center">
+        <div id="<%= dom_id(deal_section, "items") %>" class="flex gap-8 flex-wrap justify-center">
+          <% deal_section.deal_section_items.map do |dsi| %>
+            <div class="flex">
+              <%= render_section_preview dsi.child, deal %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
 
   </div>
 </div>
