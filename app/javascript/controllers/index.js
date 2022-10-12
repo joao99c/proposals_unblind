@@ -46,6 +46,9 @@ application.register("modal", ModalController)
 import QuantityChangerController from "./quantity_changer_controller"
 application.register("quantity-changer", QuantityChangerController)
 
+import SearchDropdownController from "./search_dropdown_controller"
+application.register("search-dropdown", SearchDropdownController)
+
 import SidebarController from "./sidebar_controller"
 application.register("sidebar", SidebarController)
 

@@ -1,15 +1,22 @@
 <%= turbo_frame_tag :choose_product do %>
 
-  <%= form_tag(step_1_search_product_admin_deal_path, method: :get, class: "flex items-center", data: {
+  <%= form_tag(step_1_search_product_admin_deal_path, method: :get, data: {
     turbo_frame: "product_search",
   }) do %>
-    <label for="simple-search" class="sr-only">Search</label>
-    <div class="relative w-full">
-      <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-        <%= heroicon("search", options: { class: "w-5 h-5 text-blue-600" }) %>
+    <div data-controller="search-dropdown">
+      <div class="flex items-center">
+        <label for="simple-search" class="sr-only">Search</label>
+        <div class="relative w-full">
+          <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+            <%= heroicon("search", options: { class: "w-5 h-5 text-blue-600" }) %>
+          </div>
+          <%= text_field_tag :query, params[:query], placeholder: "Search", oninput: "this.form.requestSubmit()", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 !pl-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                             data: {
+                               "search-dropdown-target": "input"
+                             } %>
+        </div>
       </div>
-      <%= text_field_tag :query, params[:query], placeholder: "Search", oninput: "this.form.requestSubmit()", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 !pl-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+      <%= turbo_frame_tag :product_search, src: step_1_search_product_admin_deal_path, data: { "search-dropdown-target": "dropdown" }, class: "hidden" %>
     </div>
   <% end %>
-  <%= turbo_frame_tag :product_search %>
 <% end %>

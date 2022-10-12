@@ -2,14 +2,16 @@
   <div class="rounded-lg bg-white p-4 mt-4 space-y-3">
     <p class="font-semibold text-gray-900 text-xs">Produtos</p>
 
-    <% @products.map do |o| %>
-      <%= button_to step_1_choose_product_admin_deal_path, params: { product_id: o.id } do %>
-        <div class="bg-gray-50 rounded-lg flex space-x-2 px-3 py-2">
-          <%= heroicon("user-circle", variant: :solid, options: { class: "h-6 w-6 shrink-0 bg-white text-gray-400" }) %>
-          <p class="text-sm font-medium text-gray-500"><%= o.name %></p>
-        </div>
+    <div class="max-h-96 overflow-auto space-y-3">
+      <% @products.map do |o| %>
+        <%= button_to step_1_choose_product_admin_deal_path, params: { product_id: o.id } do %>
+          <div class="bg-gray-50 rounded-lg flex space-x-2 px-3 py-2">
+            <%= heroicon("user-circle", variant: :solid, options: { class: "h-6 w-6 shrink-0 bg-white text-gray-400" }) %>
+            <p class="text-sm font-medium text-gray-500"><%= o.name %></p>
+          </div>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
 
     <div data-controller="modal">
 
