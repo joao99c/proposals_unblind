@@ -76,6 +76,9 @@ module Admin
           @deal_section_item.child.theme['hidden'][visibility_item.to_s] = params.require(:deal_section_item)["hidden_#{visibility_item}"] if params.require(:deal_section_item)["hidden_#{visibility_item}"].present?
         end
 
+        @deal_section_item.child.theme['button'] ||= {}
+        @deal_section_item.child.theme['button']['organization'] = params.require(:deal_section_item)[:button_organization] if params.require(:deal_section_item)[:button_organization].present?
+
         @deal_section_item.assign_attributes(deal_section_item_params)
 
         respond_to do |format|

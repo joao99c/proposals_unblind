@@ -16,22 +16,18 @@
 
     <% if deal_section.section.is_grelha? %>
       <div class="flex justify-center">
-        <div id="<%= dom_id(deal_section, "items") %>" class="flex grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
+        <div id="<%= dom_id(deal_section, "items") %>" class="
+        grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 content-center justify-center items-center justify-items-center">
           <% deal_section.deal_section_items.map do |dsi| %>
-            <div class="flex">
-              <%= render_section_preview dsi.child, deal %>
-            </div>
+            <%= render_section_preview dsi.child, deal %>
           <% end %>
         </div>
       </div>
     <% else %>
-      <p>1233333</p>
       <div class="flex justify-center">
         <div id="<%= dom_id(deal_section, "items") %>" class="flex gap-8 flex-wrap justify-center">
           <% deal_section.deal_section_items.map do |dsi| %>
-            <div class="flex">
-              <%= render_section_preview dsi.child, deal %>
-            </div>
+            <%= render_section_preview dsi.child, deal %>
           <% end %>
         </div>
       </div>
