@@ -73,7 +73,7 @@ module Admin
       if params[:query].present?
         @customers = Customer.where('name LIKE ?', "%#{params[:query]}%")
       else
-        @customers = Deal.last(5).map { |d| d.customer }.compact.flatten.last(5)
+        @customers = Deal.last(5).map { |d| d.customer }.compact.flatten.uniq.last(5)
       end
     end
 
@@ -107,7 +107,7 @@ module Admin
       if params[:query].present?
         @products = Product.where('name LIKE ?', "%#{params[:query]}%")
       else
-        @products = Deal.last(5).map { |d| d.products }.compact.flatten.last(5)
+        @products = Deal.last(5).map { |d| d.products }.compact.flatten.uniq.last(5)
       end
     end
 
