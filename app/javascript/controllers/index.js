@@ -7,6 +7,9 @@ import { application } from "./application"
 import AccordionController from "./accordion_controller"
 application.register("accordion", AccordionController)
 
+import CharCounterController from "./char_counter_controller"
+application.register("char-counter", CharCounterController)
+
 import CurrencyInputController from "./currency_input_controller"
 application.register("currency-input", CurrencyInputController)
 
