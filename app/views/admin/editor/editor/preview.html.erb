@@ -2,10 +2,10 @@
   <div id="font-text" class="h-full relative">
 
     <%= turbo_stream_from @deal, :deal_sections_preview %>
-    <div class="page_div">
-      <%= render partial: 'admin/editor/deal_sections/deal_section', locals: { deal_section: @template.section_cabecalho, deal: @deal } %>
-    </div>
     <div id="deal_sections_preview">
+      <div class="page_div">
+        <%= render partial: 'admin/editor/deal_sections/deal_section', locals: { deal_section: @template.section_cabecalho, deal: @deal } %>
+      </div>
       <% @template.deal_sections.map do |deal_section| %>
         <% unless deal_section.section_id == 1 %>
           <div class="page_div">

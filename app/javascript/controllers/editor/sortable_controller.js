@@ -12,7 +12,8 @@ export default class extends Controller {
     end(e) {
         let id = e.item.dataset.id;
         let data = new FormData();
-        data.append("position", e.newIndex + 1);
+        let position = e.newIndex + 2
+        data.append("position", position); // Start at 0; 1 is always the heading
         const token = document.querySelector('meta[name="csrf-token"]').content
         fetch(this.data.get('url').replace(':id', id), {
             method: 'PATCH',
@@ -33,9 +34,9 @@ export default class extends Controller {
         const parentNode = currentPageSection.parentNode;
 
         if (event.newIndex > event.oldIndex) {
-            parentNode.insertBefore(currentPageSection, parentNode.children[event.newIndex + 1]);
+            parentNode.insertBefore(currentPageSection, parentNode.children[event.newIndex + 2]);
         } else {
-            parentNode.insertBefore(currentPageSection, parentNode.children[event.newIndex]);
+            parentNode.insertBefore(currentPageSection, parentNode.children[event.newIndex + 1]);
         }
         window.scrollTo({
             top: currentPageSection.offsetTop,

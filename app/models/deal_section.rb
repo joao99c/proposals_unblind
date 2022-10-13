@@ -3,7 +3,7 @@
 class DealSection < ApplicationRecord
   include ActionView::RecordIdentifier
 
-  acts_as_list scope: :template, sequential_updates: false
+  acts_as_list scope: [:template_id, :parent_id], sequential_updates: false
 
   scope :ordered, -> { order(:position) }
 
@@ -15,7 +15,7 @@ class DealSection < ApplicationRecord
 
   belongs_to :template
   belongs_to :section
-  has_many :deal_section_items, foreign_key: :parent_id, dependent: :destroy
+  has_many :deal_section_items, -> { order(position: :asc) }, foreign_key: :parent_id, dependent: :destroy
   accepts_nested_attributes_for :deal_section_items, allow_destroy: true, reject_if: :all_blank
 
   # after_create_commit :broadcast_create
