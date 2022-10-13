@@ -110,6 +110,7 @@ module Admin
           @deal_section.theme['colors'] ||= {}
           @deal_section.theme['border'] ||= {}
 
+          @deal_section.theme['colors']['overlay'] = params.require(:deal_section)[:color_overlay] if params.require(:deal_section)[:color_overlay].present?
           @deal_section.theme['colors']['title'] = params.require(:deal_section)[:color_title] if params.require(:deal_section)[:color_title].present?
           @deal_section.theme['colors']['description'] = params.require(:deal_section)[:color_description] if params.require(:deal_section)[:color_description].present?
           @deal_section.theme['colors']['table_border'] = params.require(:deal_section)[:color_table_border] if params.require(:deal_section)[:color_table_border].present?
@@ -136,6 +137,7 @@ module Admin
           @deal_section.theme['contacto']['email'] = params.require(:deal_section)[:email] if params.require(:deal_section)[:email].present?
           @deal_section.theme['contacto']['tel'] = params.require(:deal_section)[:tel] if params.require(:deal_section)[:tel].present?
 
+          @deal_section.theme['colors']['overlay'] = params.require(:deal_section)[:color_overlay] if params.require(:deal_section)[:color_overlay].present?
           @deal_section.theme['colors']['title'] = params.require(:deal_section)[:color_title] if params.require(:deal_section)[:color_title].present?
           @deal_section.theme['colors']['description'] = params.require(:deal_section)[:color_description] if params.require(:deal_section)[:color_description].present?
           @deal_section.theme['colors']['contacto_title'] = params.require(:deal_section)[:color_contacto_title] if params.require(:deal_section)[:color_contacto_title].present?
@@ -155,6 +157,7 @@ module Admin
             @deal_section.background_image = params.require(:deal_section)[:background_image] if params.require(:deal_section)[:background_image].present?
           end
 
+          @deal_section.theme['colors']['overlay'] = params.require(:deal_section)[:color_overlay] if params.require(:deal_section)[:color_overlay].present?
           @deal_section.theme['colors']['title'] = params.require(:deal_section)[:color_title] if params.require(:deal_section)[:color_title].present?
           @deal_section.theme['colors']['description'] = params.require(:deal_section)[:color_description] if params.require(:deal_section)[:color_description].present?
           @deal_section.theme['colors']['background_items'] = params.require(:deal_section)[:color_background_items] if params.require(:deal_section)[:color_background_items].present?
@@ -180,6 +183,7 @@ module Admin
             @deal_section.background_image = params.require(:deal_section)[:background_image] if params.require(:deal_section)[:background_image].present?
           end
 
+          @deal_section.theme['colors']['overlay'] = params.require(:deal_section)[:color_overlay] if params.require(:deal_section)[:color_overlay].present?
           @deal_section.theme['colors']['title'] = params.require(:deal_section)[:color_title] if params.require(:deal_section)[:color_title].present?
           @deal_section.theme['colors']['description'] = params.require(:deal_section)[:color_description] if params.require(:deal_section)[:color_description].present?
           @deal_section.theme['colors']['border_images'] = params.require(:deal_section)[:color_border_images] if params.require(:deal_section)[:color_border_images].present?
@@ -210,6 +214,7 @@ module Admin
             @deal_section.background_image = params.require(:deal_section)[:background_image] if params.require(:deal_section)[:background_image].present?
           end
 
+          @deal_section.theme['colors']['overlay'] = params.require(:deal_section)[:color_overlay] if params.require(:deal_section)[:color_overlay].present?
           @deal_section.theme['colors']['title'] = params.require(:deal_section)[:color_title] if params.require(:deal_section)[:color_title].present?
           @deal_section.theme['colors']['description'] = params.require(:deal_section)[:color_description] if params.require(:deal_section)[:color_description].present?
           @deal_section.theme['colors']['items_title'] = params.require(:deal_section)[:color_items_title] if params.require(:deal_section)[:color_items_title].present?
@@ -233,6 +238,7 @@ module Admin
             @deal_section.background_image = params.require(:deal_section)[:background_image] if params.require(:deal_section)[:background_image].present?
           end
 
+          @deal_section.theme['colors']['overlay'] = params.require(:deal_section)[:color_overlay] if params.require(:deal_section)[:color_overlay].present?
           @deal_section.theme['colors']['title'] = params.require(:deal_section)[:color_title] if params.require(:deal_section)[:color_title].present?
           @deal_section.theme['colors']['description'] = params.require(:deal_section)[:color_description] if params.require(:deal_section)[:color_description].present?
           @deal_section.theme['colors']['border_accordion'] = params.require(:deal_section)[:color_border_accordion] if params.require(:deal_section)[:color_border_accordion].present?

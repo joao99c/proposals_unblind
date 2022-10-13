@@ -58,19 +58,16 @@
       </div>
     </div>
 
-    <% if deal_section.section.is_cabecalho? %>
-
-      <div class="space-y-1">
-        <%= form.label :color_overlay, "Overlay" %>
-        <div class="flex items-center space-x-3">
-          <%= form.color_field :color_overlay,
-                               value: form.object&.theme&.dig("colors", "overlay"),
-                               data: { key: "colors" },
-                               class: "rounded-full h-[60px] w-[60px]" %>
-          <p class="leading-tight text-sm text-gray-900"><%= form.object&.theme&.dig("colors", "overlay").upcase if form.object&.theme&.dig("colors", "overlay") %></p>
-        </div>
+    <div class="space-y-1">
+      <%= form.label :color_overlay, "Overlay" %>
+      <div class="flex items-center space-x-3">
+        <%= form.color_field :color_overlay,
+                             value: form.object&.theme&.dig("colors", "overlay"),
+                             data: { key: "colors" },
+                             class: "rounded-full h-[60px] w-[60px]" %>
+        <p class="leading-tight text-sm text-gray-900"><%= form.object&.theme&.dig("colors", "overlay").upcase if form.object&.theme&.dig("colors", "overlay") %></p>
       </div>
-    <% end %>
+    </div>
 
     <div class="space-y-1">
       <%= form.label :color_title, "Título" %>
@@ -454,7 +451,8 @@
     <hr class="-mx-5">
 
     <div class="px-1 py-2">
-      <p class="text-xs text-gray-500">Edite ainda mais o design da secção nas <%= link_to "definições da proposta", admin_deal_editor_deal_sections_path(tab:"settings"), class: "text-blue-600" %></p>
+      <p class="text-xs text-gray-500">Edite ainda mais o design da secção
+        nas <%= link_to "definições da proposta", admin_deal_editor_deal_sections_path(tab: "settings"), class: "text-blue-600" %></p>
     </div>
 
   </div>
