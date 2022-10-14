@@ -12,7 +12,12 @@ export default class extends Controller {
     end(e) {
         let id = e.item.dataset.id;
         let data = new FormData();
-        let position = e.newIndex + 2
+        let position = null
+        if (this.element.dataset.sortableMode === "items") {
+            position = e.newIndex + 1
+        } else {
+            position = e.newIndex + 2
+        }
         data.append("position", position); // Start at 0; 1 is always the heading
         const token = document.querySelector('meta[name="csrf-token"]').content
         fetch(this.data.get('url').replace(':id', id), {
@@ -29,14 +34,29 @@ export default class extends Controller {
     }
 
     reorder_preview(event) {
-        const eventPageSection = event.item
-        const currentPageSection = document.querySelector("iframe").contentDocument.querySelector("#" + eventPageSection.dataset.previewId).parentElement;
-        const parentNode = currentPageSection.parentNode;
+        // Mode items = subitems inside section
+        let eventPageSection = null
+        let currentPageSection = null
+        let parentNode = null
 
-        if (event.newIndex > event.oldIndex) {
-            parentNode.insertBefore(currentPageSection, parentNode.children[event.newIndex + 2]);
+        if (this.element.dataset.sortableMode === "items") {
+            eventPageSection = event.item
+            currentPageSection = document.querySelector("iframe").contentDocument.querySelector("#" + eventPageSection.dataset.previewId);
+            parentNode = currentPageSection.parentNode;
+            if (event.newIndex > event.oldIndex) {
+                parentNode.insertBefore(currentPageSection, parentNode.children[event.newIndex +1 ]);
+            } else {
+                parentNode.insertBefore(currentPageSection, parentNode.children[event.newIndex]);
+            }
         } else {
-            parentNode.insertBefore(currentPageSection, parentNode.children[event.newIndex + 1]);
+            eventPageSection = event.item
+            currentPageSection = document.querySelector("iframe").contentDocument.querySelector("#" + eventPageSection.dataset.previewId).parentElement;
+            parentNode = currentPageSection.parentNode;
+            if (event.newIndex > event.oldIndex) {
+                parentNode.insertBefore(currentPageSection, parentNode.children[event.newIndex + 2]);
+            } else {
+                parentNode.insertBefore(currentPageSection, parentNode.children[event.newIndex + 1]);
+            }
         }
         window.scrollTo({
             top: currentPageSection.offsetTop,

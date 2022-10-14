@@ -80,7 +80,7 @@ module Admin
             @deal.save(validate: false)
           end
 
-          if params.require(:deal_section)[:color_background] != @deal_section.theme['colors']['background']
+          if params.require(:deal_section)[:color_background] && (params.require(:deal_section)[:color_background] != @deal_section.theme['colors']['background'])
             @deal_section.theme['colors']['background'] = params.require(:deal_section)[:color_background]
             @deal_section.background_image = nil
           else
@@ -90,7 +90,7 @@ module Admin
           @deal_section.theme ||= {}
           @deal_section.theme['colors'] ||= {}
 
-          @deal_section.theme['colors']['background'] = params.require(:deal_section)[:color_background] if params.require(:deal_section)[:color_background] != @deal_section.theme['colors']['background']
+          @deal_section.theme['colors']['background'] = params.require(:deal_section)[:color_background] if params.require(:deal_section)[:color_background] && (params.require(:deal_section)[:color_background] != @deal_section.theme['colors']['background'])
           @deal_section.theme['colors']['overlay'] = params.require(:deal_section)[:color_overlay] if params.require(:deal_section)[:color_overlay].present?
           @deal_section.theme['colors']['title'] = params.require(:deal_section)[:color_title] if params.require(:deal_section)[:color_title].present?
           @deal_section.theme['colors']['description'] = params.require(:deal_section)[:color_description] if params.require(:deal_section)[:color_description].present?
@@ -99,7 +99,7 @@ module Admin
         end
 
         if @deal_section.section.is_proposta?
-          if params.require(:deal_section)[:color_background] != @deal_section.theme['colors']['background']
+          if params.require(:deal_section)[:color_background] && (params.require(:deal_section)[:color_background] != @deal_section.theme['colors']['background'])
             @deal_section.theme['colors']['background'] = params.require(:deal_section)[:color_background]
             @deal_section.background_image = nil
           else
@@ -123,7 +123,7 @@ module Admin
         end
 
         if @deal_section.section.is_contacto?
-          if params.require(:deal_section)[:color_background] != @deal_section.theme['colors']['background']
+          if params.require(:deal_section)[:color_background] && (params.require(:deal_section)[:color_background] != @deal_section.theme['colors']['background'])
             @deal_section.theme['colors']['background'] = params.require(:deal_section)[:color_background]
             @deal_section.background_image = nil
           else
@@ -150,8 +150,8 @@ module Admin
           @deal_section.theme['border'] ||= {}
           @deal_section.theme['image'] ||= {}
 
-          if params.require(:deal_section)[:color_background] != @deal_section.theme['colors']['background']
-            @deal_section.theme['colors']['background'] = params.require(:deal_section)[:color_background] if params.require(:deal_section)[:color_background] != @deal_section.theme['colors']['background']
+          if params.require(:deal_section)[:color_background] && (params.require(:deal_section)[:color_background] != @deal_section.theme['colors']['background'])
+            @deal_section.theme['colors']['background'] = params.require(:deal_section)[:color_background] if params.require(:deal_section)[:color_background] && (params.require(:deal_section)[:color_background] != @deal_section.theme['colors']['background'])
             @deal_section.background_image = nil
           else
             @deal_section.background_image = params.require(:deal_section)[:background_image] if params.require(:deal_section)[:background_image].present?
@@ -176,8 +176,8 @@ module Admin
           @deal_section.theme['border'] ||= {}
           @deal_section.theme['image'] ||= {}
 
-          if params.require(:deal_section)[:color_background] != @deal_section.theme['colors']['background']
-            @deal_section.theme['colors']['background'] = params.require(:deal_section)[:color_background] if params.require(:deal_section)[:color_background] != @deal_section.theme['colors']['background']
+          if params.require(:deal_section)[:color_background] && (params.require(:deal_section)[:color_background] != @deal_section.theme['colors']['background'])
+            @deal_section.theme['colors']['background'] = params.require(:deal_section)[:color_background] if params.require(:deal_section)[:color_background] && (params.require(:deal_section)[:color_background] != @deal_section.theme['colors']['background'])
             @deal_section.background_image = nil
           else
             @deal_section.background_image = params.require(:deal_section)[:background_image] if params.require(:deal_section)[:background_image].present?
@@ -207,8 +207,8 @@ module Admin
           @deal_section.theme['border'] ||= {}
           @deal_section.theme['image'] ||= {}
 
-          if params.require(:deal_section)[:color_background] != @deal_section.theme['colors']['background']
-            @deal_section.theme['colors']['background'] = params.require(:deal_section)[:color_background] if params.require(:deal_section)[:color_background] != @deal_section.theme['colors']['background']
+          if params.require(:deal_section)[:color_background] && (params.require(:deal_section)[:color_background] != @deal_section.theme['colors']['background'])
+            @deal_section.theme['colors']['background'] = params.require(:deal_section)[:color_background] if params.require(:deal_section)[:color_background] && (params.require(:deal_section)[:color_background] != @deal_section.theme['colors']['background'])
             @deal_section.background_image = nil
           else
             @deal_section.background_image = params.require(:deal_section)[:background_image] if params.require(:deal_section)[:background_image].present?
@@ -231,8 +231,8 @@ module Admin
           @deal_section.theme['border'] ||= {}
           @deal_section.theme['image'] ||= {}
 
-          if params.require(:deal_section)[:color_background] != @deal_section.theme['colors']['background']
-            @deal_section.theme['colors']['background'] = params.require(:deal_section)[:color_background] if params.require(:deal_section)[:color_background] != @deal_section.theme['colors']['background']
+          if params.require(:deal_section)[:color_background] && (params.require(:deal_section)[:color_background] != @deal_section.theme['colors']['background'])
+            @deal_section.theme['colors']['background'] = params.require(:deal_section)[:color_background] if params.require(:deal_section)[:color_background] && (params.require(:deal_section)[:color_background] != @deal_section.theme['colors']['background'])
             @deal_section.background_image = nil
           else
             @deal_section.background_image = params.require(:deal_section)[:background_image] if params.require(:deal_section)[:background_image].present?

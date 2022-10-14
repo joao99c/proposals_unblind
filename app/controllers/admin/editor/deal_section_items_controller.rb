@@ -105,7 +105,7 @@ module Admin
       end
 
       def reorder
-        @deal_section_item.insert_at(params[:position].to_i - 1)
+        @deal_section_item.insert_at(params[:position].to_i)
         head :ok
       end
 
