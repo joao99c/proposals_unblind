@@ -91,8 +91,8 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.action_controller.default_url_options = { host: 'www.unbliind.com' }
-  config.action_mailer.default_url_options = { host: "www.unbliind.com" }
-  config.action_mailer.asset_host = 'https://www.unbliind.com'
+  config.action_controller.default_url_options = { host: 'www.powerdeal.pt' }
+  config.action_mailer.default_url_options = { host: "www.powerdeal.pt" }
+  config.action_mailer.asset_host = 'https://www.powerdeal.pt'
 
 end
