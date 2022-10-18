@@ -54,6 +54,7 @@ Rails.application.routes.draw do
       resources :template, only: %i[create destroy] do
         member do
           post 'select'
+          post 'favorite'
         end
 
         collection do
@@ -97,7 +98,7 @@ Rails.application.routes.draw do
       post 'step_1', to: 'deals#save_step_1'
 
       get 'step_2', to: 'deals#step_2', as: 'deal_step_2'
-      post 'step_2', to: 'deals#save_step_2'
+      post 'new_custom_design', to: 'deals#new_custom_design'
     end
     ApplicationRecord.admin_resources.each do |admin_resource|
       resources admin_resource do

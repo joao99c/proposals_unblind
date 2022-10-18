@@ -1,0 +1,6 @@
+<%= form_tag(favorite_admin_deal_template_path(deal, template), id: dom_id(template, "favorite_btn"), method: :post, class:"h-full") do %>
+  <%= button_tag class: "h-full px-4 space-x-2.5 flex items-center border-l #{template.isFavorite ? 'text-blue-600' : 'text-gray-900' }" do %>
+    <%= heroicon("save-as", options: { class: "h-5 w-5" }) %>
+    <p class="text-sm font-medium">Template</p>
+  <% end %>
+<% end %>

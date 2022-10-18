@@ -15,25 +15,7 @@
     </div>
 
     <div class="w-2/3">
-      <div class="p-4 mb-4 space-y-4 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-
-        <div class="flex justify-between items-center">
-          <div>
-            <p class="text-gray-900 font-semibold">Template Unblind</p>
-          </div>
-          <div>
-            <div class="flex space-x-4">
-              <%= form_tag(select_unblind_admin_deal_template_index_path(@deal), method: :post) do %>
-                <button type="submit" class="border border-blue-600 text-blue-600 bg-white font-medium text-sm inline-flex items-center justify-center py-2 px-3 rounded-lg border dark:border-transparent hover:text-blue-800 hover:border-blue-800">
-                  Selecionar
-                </button>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <% if current_user.templates %>
+      <% if current_user.templates.present? || @deal.template %>
         <div class="space-y-4">
           <% if @deal.template %>
             <div class="p-4 space-y-4 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
@@ -42,12 +24,12 @@
                 <div>
                   <p class="text-xs font-medium text-blue-600">Activo</p>
                   <p class="text-gray-900 font-semibold"><%= @deal.template.name %></p>
-                  <p class="text-sm text-gray-500">Ultima
+                  <p class="text-sm text-gray-500">Última
                     versão: <%= localize(@deal.template.updated_at, format: "%B %d às %H:%M").titleize %></p>
                 </div>
                 <div>
                   <div class="flex space-x-4">
-                    <%= link_to admin_deal_editor_preview_path(@deal, template: @deal.template),target:"_blank"  do %>
+                    <%= link_to admin_deal_editor_preview_path(@deal, template: @deal.template), target: "_blank" do %>
                       <button type="button" class="font-medium text-sm inline-flex items-center justify-center py-2 px-3 rounded-lg border dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-200 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300">
                         <%= heroicon("eye", options: { class: "mr-2 -ml-1 w-5 h-5" }) %>
                         Visualizar
@@ -72,31 +54,33 @@
 
           <% current_user.templates.map do |t| %>
             <% unless t == @deal.template %>
-              <div class="p-4 space-y-4 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+              <% if t.isFavorite %>
+                <div class="p-4 space-y-4 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
 
-                <div class="flex justify-between items-center">
-                  <div>
-                    <p class="text-gray-900 font-semibold"><%= t.name %></p>
-                    <p class="text-sm text-gray-500">Ultima
-                      versão: <%= localize(t.updated_at, format: "%B %d às %H:%M").titleize %></p>
-                  </div>
-                  <div>
-                    <div class="flex space-x-4">
-                      <%= form_tag(admin_deal_template_path(@deal, t), method: :delete) do %>
-                        <button type="submit" class="border border-blue-600 text-blue-600 bg-white font-medium text-sm inline-flex items-center justify-center py-2 px-3 rounded-lg border dark:border-transparent hover:text-blue-800 hover:border-blue-800">
-                          Apagar
-                        </button>
-                      <% end %>
+                  <div class="flex justify-between items-center">
+                    <div>
+                      <p class="text-gray-900 font-semibold"><%= t.name %></p>
+                      <p class="text-sm text-gray-500">Última
+                        versão: <%= localize(t.updated_at, format: "%B %d às %H:%M").titleize %></p>
+                    </div>
+                    <div>
+                      <div class="flex space-x-4">
+                        <%= form_tag(admin_deal_template_path(@deal, t), method: :delete) do %>
+                          <button type="submit" class="border border-blue-600 text-blue-600 bg-white font-medium text-sm inline-flex items-center justify-center py-2 px-3 rounded-lg border dark:border-transparent hover:text-blue-800 hover:border-blue-800">
+                            Apagar
+                          </button>
+                        <% end %>
 
-                      <%= form_tag(select_admin_deal_template_path(@deal, t), method: :post) do %>
-                        <button type="submit" class="border border-blue-600 text-blue-600 bg-white font-medium text-sm inline-flex items-center justify-center py-2 px-3 rounded-lg border dark:border-transparent hover:text-blue-800 hover:border-blue-800">
-                          Selecionar
-                        </button>
-                      <% end %>
+                        <%= form_tag(select_admin_deal_template_path(@deal, t), method: :post) do %>
+                          <button type="submit" class="border border-blue-600 text-blue-600 bg-white font-medium text-sm inline-flex items-center justify-center py-2 px-3 rounded-lg border dark:border-transparent hover:text-blue-800 hover:border-blue-800">
+                            Selecionar
+                          </button>
+                        <% end %>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              <% end %>
             <% end %>
           <% end %>
         </div>
@@ -110,10 +94,16 @@
               em
               template. Depois de criado o primeiro template, vai poder usar rapidamente em todas as propostas.</p>
           </div>
-          <div class="flex justify-center mt-2 py-0.5">
+          <div class="flex justify-center mt-2 py-0.5 space-x-4">
             <%= form_tag(admin_deal_template_index_path(@deal), method: :post) do %>
               <%= button_tag class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" do %>
-                Criar Template
+                Criar Novo
+              <% end %>
+            <% end %>
+
+            <%= form_tag(select_unblind_admin_deal_template_index_path(@deal), method: :post) do %>
+              <%= button_tag class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" do %>
+                Utilizar Template
               <% end %>
             <% end %>
           </div>
@@ -134,8 +124,8 @@
       </button>
     <% end %>
 
-    <%= form_tag(admin_deal_step_2_path(@deal), method: :post) do %>
-      <%= button_tag class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center" do %>
+    <%= form_tag(review_admin_deal_path(@deal), method: :get) do %>
+      <%= button_tag disabled: @deal.template.nil?, class: "disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center" do %>
         Próximo passo
         <%= heroicon("chevron-right", options: { class: "ml-2 -mr-1 w-4 h-4" }) %>
       <% end %>

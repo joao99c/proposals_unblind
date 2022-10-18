@@ -2,7 +2,7 @@
 
 module Admin
   class DealsController < Admin::BaseController
-    before_action :set_deal, only: %i[destroy step_1 step_2 save_step_2 update_state review save_review search_customer choose_customer save_choose_customer delete_choose_customer search_product choose_product save_choose_product delete_choose_product update_dp new_customer update_customer new_product update_product]
+    before_action :set_deal, only: %i[destroy step_1 step_2 new_custom_design update_state review save_review search_customer choose_customer save_choose_customer delete_choose_customer search_product choose_product save_choose_product delete_choose_product update_dp new_customer update_customer new_product update_product]
 
     skip_before_action :authenticate_user!, only: :public_preview
     skip_before_action :find_current_tenant, only: :public_preview
@@ -44,7 +44,7 @@ module Admin
 
     def step_2; end
 
-    def save_step_2
+    def new_custom_design
       unless @deal.template
         template = Template.new(name: "Template Personalizado da Proposta ##{@deal.id}", user: current_user)
         if template.save

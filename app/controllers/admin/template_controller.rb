@@ -19,7 +19,20 @@ module Admin
       @deal.template = @template
       respond_to do |format|
         if @deal.save(validate: false)
-          format.html { redirect_to admin_deal_editor_path(@deal, template_id: @template) }
+          format.html { redirect_to admin_deal_step_2_path(@deal) }
+        end
+      end
+    end
+
+    def favorite
+      respond_to do |format|
+        if @template.update(isFavorite: !@template.isFavorite)
+          format.turbo_stream do
+            render turbo_stream: turbo_stream.replace(
+              helpers.dom_id(@template, 'favorite_btn').to_s,
+              partial: 'admin/editor/editor/favorite_button',
+              locals: { deal: @deal, template: @template })
+          end
         end
       end
     end
@@ -75,9 +88,10 @@ module Admin
     end
 
     def destroy
-      @template.destroy
       respond_to do |format|
-        format.html { redirect_to step_2_admin_deal_path(@deal) }
+        if @template.update(isFavorite: false)
+          format.html { redirect_to step_2_admin_deal_path(@deal) }
+        end
       end
     end
 

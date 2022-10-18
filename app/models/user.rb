@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :deals
-  has_many :templates
+  has_many :templates, -> { where(isFavorite: true) }
   has_many :customers
   has_many :products
 
