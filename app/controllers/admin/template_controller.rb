@@ -25,7 +25,17 @@ module Admin
     end
 
     def update
-      @template.update(params.require('template').permit([:name, :isFavorite]))
+      respond_to do |format|
+        if @template.update(params.require('template').permit([:name, :isFavorite]))
+          format.turbo_stream do
+            render turbo_stream: turbo_stream.replace(
+              helpers.dom_id(@template).to_s,
+              partial: 'admin/deals/template',
+              locals: { deal: @deal, template: @template }
+            )
+          end
+        end
+      end
     end
 
     def select_unblind
