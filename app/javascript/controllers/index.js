@@ -61,9 +61,6 @@ application.register("sidebar", SidebarController)
 import Step1Controller from "./step1_controller"
 application.register("step1", Step1Controller)
 
-import Step2Controller from "./step2_controller"
-application.register("step2", Step2Controller)
-
 import TabsController from "./tabs_controller"
 application.register("tabs", TabsController)
 
