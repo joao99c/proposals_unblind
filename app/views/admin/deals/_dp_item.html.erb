@@ -32,7 +32,7 @@
       <% end %>
     </div>
   </td>
-  <td id="<%= dom_id(dp, "total_price") %>" class="py-4 px-6 font-medium text-gray-900 dark:text-white">
+  <td id="<%= dom_id(dp, "total_price") %>" class="py-4 px-6 font-medium text-gray-900 dark:text-white whitespace-nowrap">
     <%= number_to_currency(dp.price_without_discount) %>
   </td>
   <td class="py-4 px-6">
