@@ -43,15 +43,17 @@ module Admin
 
       cabecalho = @template.section_cabecalho
       cabecalho.position = 1
+      cabecalho['theme']['colors']['overlay'] = '#000000'
+      cabecalho.background_image.attach(io: File.open(File.join(Rails.root, 'app/assets/images/sections/cabecalho/img.png')), filename: 'cabecalho.png', content_type: 'image/png')
       cabecalho.save
 
-      #HEADING
       about_us_section = Admin::Editor::AboutUsSection.new(@template)
       about_us_section.position = 2
       about_us_section.save
 
       step_by_step_section = Admin::Editor::StepByStepSection.new(@template)
       step_by_step_section.position = 3
+      cabecalho.background_image.attach(io: File.open(File.join(Rails.root, 'app/assets/images/sections/step_by_step/img.png')), filename: 'step_by_step.png', content_type: 'image/png')
       step_by_step_section.save
 
       team_section = Admin::Editor::TeamSection.new(@template)
@@ -62,7 +64,6 @@ module Admin
       portfolio_section.position = 5
       portfolio_section.save
 
-      #PROPOSTA
       propostas = @template.section_propostas
       propostas.position = 6
       propostas.save
@@ -75,7 +76,6 @@ module Admin
       faqs_section.position = 8
       faqs_section.save
 
-      #CONTACTO
       contacto = @template.section_contacto
       contacto.position = 9
       contacto.save

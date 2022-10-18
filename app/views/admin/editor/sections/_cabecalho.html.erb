@@ -2,7 +2,7 @@
   <div id="<%= dom_id(Section.find(1)) %>" class="hidden"></div>
 
   <% if deal_section.background_image.attached? %>
-    <% style = "background: linear-gradient(0deg, #{deal_section&.theme&.dig("colors", "overlay")}70, #{deal_section&.theme&.dig("colors", "overlay")}70), url(#{url_for(deal_section.background_image)}) no-repeat center center; background-size: cover;" %>
+    <% style = "background: linear-gradient(0deg, #{deal_section&.theme&.dig("colors", "overlay")}70, #{deal_section&.theme&.dig("colors", "overlay")}70), url(#{url_for(deal_section.background_image)}) no-repeat center center; " %>
   <% else %>
     <% style = "background-color: #{deal_section&.theme&.dig("colors", "background")};" %>
   <% end %>

@@ -11,7 +11,7 @@ module Admin
           theme: { "colors": { "background": "#111928", "title": "#ffffff", "description": "#d1d5db", "background_items": "#F3F4F6", "border_items": "#F3F4F6", "items_title": "#111928", "items_description": "#6B7280", "links": "#1C64F2", "border_images": "#ffffff" }, "border": { "width": "10px" }, "image": { "organization": "feature" }, "hidden": {} },
           deal_section_items: []
         )
-        5.times do
+        5.times do |i|
           dsi = DealSectionItem.create(
             parent: deal_section,
             child_attributes: {
@@ -20,7 +20,7 @@ module Admin
               section_id: 5,
               child: true
             })
-          dsi.child.logo.attach(io: File.open(File.join(Rails.root, 'app/assets/images/unblind.png')), filename: 'unblind.png', content_type: 'image/png')
+          dsi.child.logo.attach(io: File.open(File.join(Rails.root, "app/assets/images/sections/portfolio/img_#{i}.png")), filename: "image_#{i}.png", content_type: 'image/png')
           dsi.child.save
         end
         deal_section

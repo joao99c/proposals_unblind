@@ -21,7 +21,7 @@ module Admin
             child: true,
             theme: { "image": { "organization": 'left' } },
           })
-        dsi.child.logo.attach(io: File.open(File.join(Rails.root, 'app/assets/images/unblind.png')), filename: 'unblind.png', content_type: 'image/png')
+        dsi.child.logo.attach(io: File.open(File.join(Rails.root, 'app/assets/images/sections/about_us/img.png')), filename: 'about_us.png', content_type: 'image/png')
         dsi.child.save
         deal_section
       end

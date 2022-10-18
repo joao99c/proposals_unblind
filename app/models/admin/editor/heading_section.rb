@@ -13,7 +13,7 @@ module Admin
         attributes['theme']['colors'] ||= {}
 
         attributes['theme']['colors']['background'] = '#111928'
-        attributes['theme']['colors']['overlay'] = '#FFFFFF'
+        attributes['theme']['colors']['overlay'] = '#000000'
         attributes['theme']['colors']['title'] = '#FFFFFF'
         attributes['theme']['colors']['description'] = '#FFFFFF'
         attributes['theme']['colors']['client_name'] = '#FFFFFF'

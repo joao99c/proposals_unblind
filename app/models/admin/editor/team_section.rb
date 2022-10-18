@@ -28,7 +28,7 @@ module Admin
           },
           deal_section_items: []
         )
-        5.times do
+        5.times do |i|
           dsi = DealSectionItem.create(
             parent: deal_section,
             child_attributes: {
@@ -39,7 +39,7 @@ module Admin
               section_id: 5,
               child: true
             })
-          dsi.child.logo.attach(io: File.open(File.join(Rails.root, 'app/assets/images/unblind.png')), filename: 'unblind.png', content_type: 'image/png')
+          dsi.child.logo.attach(io: File.open(File.join(Rails.root, "app/assets/images/sections/team/img_#{i}.png")), filename: "team_member_#{i}.png", content_type: 'image/png')
           dsi.child.save
         end
         deal_section

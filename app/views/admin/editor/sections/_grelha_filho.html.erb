@@ -2,7 +2,7 @@
   <div id="<%= dom_id(Section.find(5)) %>" class="hidden"></div>
 
   <% if deal_section.background_image.attached? %>
-    <% style = "background: linear-gradient(0deg, #{deal_section&.theme&.dig("colors", "overlay")}70, #{deal_section&.theme&.dig("colors", "overlay")}70), url(#{url_for(deal_section.background_image)}) no-repeat center center; background-size: cover;" %>
+    <% style = "background: linear-gradient(0deg, #{deal_section&.theme&.dig("colors", "overlay")}70, #{deal_section&.theme&.dig("colors", "overlay")}70), url(#{url_for(deal_section.background_image)}) no-repeat center center; " %>
   <% else %>
     <% style = "background-color: #{deal_section.parent&.theme&.dig("colors", "background_items")};" %>
   <% end %>
@@ -61,7 +61,7 @@
         border-color: <%= deal_section.parent&.theme&.dig("colors","border_images") %>;
         border-width: <%= deal_section.parent&.theme&.dig("border", "width") %>">
         <% if deal_section.logo.attached? %>
-          <div class="w-full h-full min-h-[150px] md:min-h-[300px] mx-auto" style="<%= "background: url(#{url_for(deal_section.logo)}) no-repeat center center; background-size: cover;" %>">
+          <div class="w-full h-full min-h-[150px] md:min-h-[300px] mx-auto" style="<%= "background: url(#{url_for(deal_section.logo)}) no-repeat center center; " %>">
             <% if deal_section.text.to_plain_text.present? %>
               <% unless deal_section&.theme&.dig("hidden", "text") == "1" %>
                 <div class="flex justify-center items-end h-full">
