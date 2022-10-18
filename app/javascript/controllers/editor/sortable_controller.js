@@ -12,12 +12,7 @@ export default class extends Controller {
     end(e) {
         let id = e.item.dataset.id;
         let data = new FormData();
-        let position = null
-        if (this.element.dataset.sortableMode === "items") {
-            position = e.newIndex + 1
-        } else {
-            position = e.newIndex + 2
-        }
+        let position = e.newIndex + 1
         data.append("position", position); // Start at 0; 1 is always the heading
         const token = document.querySelector('meta[name="csrf-token"]').content
         fetch(this.data.get('url').replace(':id', id), {
@@ -39,24 +34,16 @@ export default class extends Controller {
         let currentPageSection = null
         let parentNode = null
 
-        if (this.element.dataset.sortableMode === "items") {
-            eventPageSection = event.item
-            currentPageSection = document.querySelector("iframe").contentDocument.querySelector("#" + eventPageSection.dataset.previewId);
-            parentNode = currentPageSection.parentNode;
-            if (event.newIndex > event.oldIndex) {
-                parentNode.insertBefore(currentPageSection, parentNode.children[event.newIndex +1 ]);
-            } else {
-                parentNode.insertBefore(currentPageSection, parentNode.children[event.newIndex]);
-            }
+        eventPageSection = event.item
+        currentPageSection = (this.element.dataset.sortableMode === "items") ?
+            document.querySelector("iframe").contentDocument.querySelector("#" + eventPageSection.dataset.previewId) :
+            document.querySelector("iframe").contentDocument.querySelector("#" + eventPageSection.dataset.previewId).parentElement;
+
+        parentNode = currentPageSection.parentNode;
+        if (event.newIndex > event.oldIndex) {
+            parentNode.insertBefore(currentPageSection, parentNode.children[event.newIndex + 1]);
         } else {
-            eventPageSection = event.item
-            currentPageSection = document.querySelector("iframe").contentDocument.querySelector("#" + eventPageSection.dataset.previewId).parentElement;
-            parentNode = currentPageSection.parentNode;
-            if (event.newIndex > event.oldIndex) {
-                parentNode.insertBefore(currentPageSection, parentNode.children[event.newIndex + 2]);
-            } else {
-                parentNode.insertBefore(currentPageSection, parentNode.children[event.newIndex + 1]);
-            }
+            parentNode.insertBefore(currentPageSection, parentNode.children[event.newIndex]);
         }
         window.scrollTo({
             top: currentPageSection.offsetTop,
