@@ -24,17 +24,8 @@ module Admin
       end
     end
 
-    def favorite
-      respond_to do |format|
-        if @template.update(isFavorite: !@template.isFavorite)
-          format.turbo_stream do
-            render turbo_stream: turbo_stream.replace(
-              helpers.dom_id(@template, 'favorite_btn').to_s,
-              partial: 'admin/editor/editor/favorite_button',
-              locals: { deal: @deal, template: @template })
-          end
-        end
-      end
+    def update
+      @template.update(params.require('template').permit([:name, :isFavorite]))
     end
 
     def select_unblind

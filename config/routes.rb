@@ -51,10 +51,9 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :template, only: %i[create destroy] do
+      resources :template, only: %i[create update destroy] do
         member do
           post 'select'
-          post 'favorite'
         end
 
         collection do
