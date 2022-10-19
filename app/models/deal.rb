@@ -7,6 +7,7 @@ class Deal < ApplicationRecord
 
   after_create do
     self.uuid = generate_uuid
+    self.template = user&.templates&.first
     while !save
       self.uuid = generate_uuid
     end
