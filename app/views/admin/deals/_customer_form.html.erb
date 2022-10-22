@@ -25,7 +25,7 @@
 
   <div class="space-y-2">
     <%= form.label :responsable_email, "Email do responsável" %>
-    <%= form.email_field :responsable_email, placeholder: "Inserir email..." %>
+    <%= form.email_field :responsable_email, placeholder: "Inserir email...", pattern: "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" %>
     <%= error_message_for(form.object, :responsable_email, "Email do responsável") %>
   </div>
 
