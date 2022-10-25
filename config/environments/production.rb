@@ -94,5 +94,5 @@ Rails.application.configure do
   config.action_controller.default_url_options = { host: 'www.powerdeal.io' }
   config.action_mailer.default_url_options = { host: "www.powerdeal.io" }
   config.action_mailer.asset_host = 'https://www.powerdeal.io'
-
+  config.force_ssl = true
 end
