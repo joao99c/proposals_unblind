@@ -72,4 +72,17 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: '3000' }
   config.action_mailer.asset_host = 'https://localhost:3000'
 
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+    address: Rails.application.credentials.dig(:email, :address),
+    port: Rails.application.credentials.dig(:email, :port),
+    domain: Rails.application.credentials.dig(:email, :domain),
+    user_name: Rails.application.credentials.dig(:email, :user_name),
+    password: Rails.application.credentials.dig(:email, :password),
+    authentication: 'plain',
+    enable_starttls_auto: true,
+    open_timeout: 5,
+    read_timeout: 5
+  }
+  ActionMailer::Base.perform_deliveries = true
 end
