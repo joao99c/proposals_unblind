@@ -23,24 +23,36 @@
 </td>
 <td class="p-4 flex space-x-2">
   <% if d.template.present? %>
-    <%= link_to "#{admin_pdf_download_path(d)}.pdf", donwload: "Proposta ##{d.id}", target:"_blank" do %>
-      <%= button_tag class: "font-medium text-sm inline-flex items-center justify-center py-2 px-3 rounded-lg border dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-200 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300" do %>
+    <%= link_to "#{admin_pdf_download_path(d)}.pdf", donwload: "Proposta ##{d.id}", target: "_blank" do %>
+      <%= button_tag data: { tooltip_target: "tooltip-pdf" }, class: "font-medium text-sm inline-flex items-center justify-center py-2 px-3 rounded-lg border dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-200 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300" do %>
         <%= heroicon("download", options: { class: "w-5 h-5" }) %>
       <% end %>
+      <div id="tooltip-pdf" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+        Download PDF
+        <div class="tooltip-arrow" data-popper-arrow></div>
+      </div>
     <% end %>
 
 
-    <%= link_to ver_proposta_path(d.uuid), target:"_blank" do %>
-      <button type="button" class="font-medium text-sm inline-flex items-center justify-center py-2 px-3 rounded-lg border dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-200 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300">
+    <%= link_to ver_proposta_path(d.uuid), target: "_blank" do %>
+      <%= button_tag data: { tooltip_target: "tooltip-visualizar" }, class: "font-medium text-sm inline-flex items-center justify-center py-2 px-3 rounded-lg border dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-200 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300" do %>
         <%= heroicon("eye", options: { class: "w-5 h-5" }) %>
-      </button>
+      <% end %>
+      <div id="tooltip-visualizar" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+        Visualizar
+        <div class="tooltip-arrow" data-popper-arrow></div>
+      </div>
     <% end %>
   <% end %>
 
   <%= link_to step_1_admin_deal_path(d) do %>
-    <button type="button" class="font-medium text-sm inline-flex items-center justify-center py-2 px-3 rounded-lg border dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-200 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300">
+    <%= button_tag data: { tooltip_target: "tooltip-editar" }, class: "font-medium text-sm inline-flex items-center justify-center py-2 px-3 rounded-lg border dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-200 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300" do %>
       <%= heroicon("pencil", options: { class: "w-5 h-5" }) %>
-    </button>
+    <% end %>
+    <div id="tooltip-editar" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+      Editar
+      <div class="tooltip-arrow" data-popper-arrow></div>
+    </div>
   <% end %>
 
   <%
@@ -57,12 +69,30 @@
     end
   %>
 
-  <%= button_to update_state_admin_deal_path(d), method: :put, params: { deal: { status: won_status } }, aria: { selected: Deal.statuses[d.status] == "won" }, class: "bg-blue-50 text-blue-900 aria-selected:text-green-800 aria-selected:bg-green-200 aria-selected:border-green-100 font-medium text-sm inline-flex items-center justify-center py-2 px-3 rounded-lg text-gray-500 hover:text-gray-600 dark:text-gray-400 hover:text-green-800 hover:bg-green-100 hover:border-green-100" do %>
-    <%= heroicon("thumb-up", options: { class: "w-5 h-5" }) %>
-  <% end %>
+  <div>
+    <%= form_with model: d, url: update_state_admin_deal_path(d), method: :put do |form| %>
+      <%= form.hidden_field :status, value: won_status %>
+      <%= button_tag data: { tooltip_target: "tooltip-ganho" }, aria: { selected: Deal.statuses[d.status] == "won" }, class: "bg-blue-50 text-blue-900 aria-selected:text-green-800 aria-selected:bg-green-200 aria-selected:border-green-100 font-medium text-sm inline-flex items-center justify-center py-2 px-3 rounded-lg text-gray-500 hover:text-gray-600 dark:text-gray-400 hover:text-green-800 hover:bg-green-100 hover:border-green-100" do %>
+        <%= heroicon("thumb-up", options: { class: "w-5 h-5" }) %>
+      <% end %>
+      <div id="tooltip-ganho" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+        Ganho
+        <div class="tooltip-arrow" data-popper-arrow></div>
+      </div>
+    <% end %>
+  </div>
 
-  <%= button_to update_state_admin_deal_path(d), method: :put, params: { deal: { status: lost_status } }, aria: { selected: Deal.statuses[d.status] == "lost" }, class: "bg-blue-50 text-blue-900 aria-selected:text-red-800 aria-selected:bg-red-200 aria-selected:border-red-100 font-medium text-sm inline-flex items-center justify-center py-2 px-3 rounded-lg text-gray-500 hover:text-gray-600 dark:text-gray-400 hover:text-red-800 hover:bg-red-100 hover:border-red-100" do %>
-    <%= heroicon("thumb-down", options: { class: "w-5 h-5" }) %>
-  <% end %>
+  <div>
+    <%= form_with model: d, url: update_state_admin_deal_path(d), method: :put do |form| %>
+      <%= form.hidden_field :status, value: lost_status %>
+      <%= button_tag data: { tooltip_target: "tooltip-perdido" }, aria: { selected: Deal.statuses[d.status] == "lost" }, class: "bg-blue-50 text-blue-900 aria-selected:text-red-800 aria-selected:bg-red-200 aria-selected:border-red-100 font-medium text-sm inline-flex items-center justify-center py-2 px-3 rounded-lg text-gray-500 hover:text-gray-600 dark:text-gray-400 hover:text-red-800 hover:bg-red-100 hover:border-red-100" do %>
+        <%= heroicon("thumb-down", options: { class: "w-5 h-5" }) %>
+      <% end %>
+      <div id="tooltip-perdido" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+        Perdido
+        <div class="tooltip-arrow" data-popper-arrow></div>
+      </div>
+    <% end %>
+  </div>
 
 </td>
