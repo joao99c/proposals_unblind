@@ -89,7 +89,9 @@ module Admin
           @deal_section.logo = params.require(:deal_section)[:logo] if params.require(:deal_section)[:logo].present?
           @deal_section.theme ||= {}
           @deal_section.theme['colors'] ||= {}
+          @deal_section.theme['company'] ||= {}
 
+          @deal_section.theme['company']['name'] = params.require(:deal_section).permit(:company_name)[:company_name] if params.require(:deal_section).permit(:company_name)[:company_name].present?
           @deal_section.theme['colors']['background'] = params.require(:deal_section)[:color_background] if params.require(:deal_section)[:color_background] && (params.require(:deal_section)[:color_background] != @deal_section.theme['colors']['background'])
           @deal_section.theme['colors']['overlay'] = params.require(:deal_section)[:color_overlay] if params.require(:deal_section)[:color_overlay].present?
           @deal_section.theme['colors']['title'] = params.require(:deal_section)[:color_title] if params.require(:deal_section)[:color_title].present?
@@ -253,7 +255,7 @@ module Admin
 
         @deal_section.theme ||= {}
         @deal_section.theme['hidden'] ||= {}
-        %w[heading logo text button email tel address date].each do |visibility_item|
+        %w[heading logo text button email tel address date company_name].each do |visibility_item|
           @deal_section.theme['hidden'][visibility_item.to_s] = params.require(:deal_section)["hidden_#{visibility_item}"] if params.require(:deal_section)["hidden_#{visibility_item}"].present?
         end
 

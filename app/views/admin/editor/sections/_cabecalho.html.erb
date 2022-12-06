@@ -10,14 +10,18 @@
   <div class="text-white bg-gray-500 p-12 full-full" style="<%= style %>color: <%= deal_section.text_color %>;">
     <div class="max-w-[672px] mx-auto text-center full-full flex flex-col justify-between">
 
-      <% unless deal_section&.theme&.dig("hidden", "logo") == "1" %>
-        <div class="flex items-center justify-center space-x-3">
+      <div class="flex items-center justify-center space-x-3">
+        <% unless deal_section&.theme&.dig("hidden", "logo") == "1" %>
           <% if deal_section.logo.attached? %>
-            <%= image_tag(deal_section.logo, class: "w-8") %>
+            <%= image_tag(deal_section.logo, class: "w-10") %>
+          <% elsif deal.user.company_avatar.attached? %>
+            <%= image_tag(user.company_avatar, class: "w-10") %>
           <% end %>
-          <p class="text-2xl font-semibold">Power Deal</p>
-        </div>
-      <% end %>
+        <% end %>
+        <% unless deal_section&.theme&.dig("hidden", "company_name") == "1" %>
+          <p class="text-2xl font-semibold"><%= deal_section&.theme&.dig("company", "name").present? ? deal_section&.theme&.dig("company", "name") : deal.user.company_name %></p>
+        <% end %>
+      </div>
 
       <div class="space-y-4 pb-60">
         <% unless deal_section&.theme&.dig("hidden", "heading") == "1" %>

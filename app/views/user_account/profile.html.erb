@@ -38,6 +38,11 @@
 
 
             <div class="col-span-2">
+              <%= form.label :company_name, "Nome da empresa" %>
+              <%= form.text_field :company_name %>
+            </div>
+
+            <div class="col-span-2">
               <%= form.label :company_avatar, "Logo da empresa" %>
               <%# if current_user.company_avatar.attached? %>
               <%#= image_tag(current_user.company_avatar.variant(:thumb)) %>

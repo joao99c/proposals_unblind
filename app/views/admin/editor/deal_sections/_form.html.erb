@@ -33,6 +33,18 @@
           <%= form.file_field :logo, data: { key: "heading" } %>
         </div>
       </div>
+
+      <div class="space-y-2">
+        <div class="flex justify-between items-center">
+          <%= form.label :company_name, "Nome da Empresa", class: "mb-0" %>
+          <%= hide_button_field form, :company_name %>
+        </div>
+        <div class="flex">
+          <%= form.text_field :company_name, placeholder: "Nome da empresa", value: form.object&.theme&.dig("company","name"), data: { key: "heading" } %>
+        </div>
+      </div>
+
+
     <% end %>
 
     <% if deal_section.section.is_cabecalho? ||
