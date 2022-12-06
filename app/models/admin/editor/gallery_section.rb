@@ -28,6 +28,7 @@ module Admin
         attributes[:theme][:colors][:title] ||= '#000000'
         attributes[:theme][:colors][:description] ||= '#000000'
         attributes[:theme][:colors][:border_images] ||= '#ffffff'
+        attributes[:theme][:colors][:background_images_subtitles] ||= '#ffffff'
 
 
         attributes[:theme][:border] ||= {}

@@ -189,6 +189,7 @@ module Admin
           @deal_section.theme['colors']['title'] = params.require(:deal_section)[:color_title] if params.require(:deal_section)[:color_title].present?
           @deal_section.theme['colors']['description'] = params.require(:deal_section)[:color_description] if params.require(:deal_section)[:color_description].present?
           @deal_section.theme['colors']['border_images'] = params.require(:deal_section)[:color_border_images] if params.require(:deal_section)[:color_border_images].present?
+          @deal_section.theme['colors']['background_images_subtitles'] = params.require(:deal_section)[:color_background_images_subtitles] if params.require(:deal_section)[:color_background_images_subtitles].present?
 
           @deal_section.theme['border']['width'] = params.require(:deal_section)[:border_images] if params.require(:deal_section)[:border_images].present?
           @deal_section.theme['image']['organization'] = params.require(:deal_section)[:image_organization] if params.require(:deal_section)[:image_organization].present?

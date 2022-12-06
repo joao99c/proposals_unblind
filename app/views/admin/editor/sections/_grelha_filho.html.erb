@@ -65,7 +65,7 @@
             <% if deal_section.text.to_plain_text.present? %>
               <% unless deal_section&.theme&.dig("hidden", "text") == "1" %>
                 <div class="flex justify-center items-end h-full">
-                  <h2 class="deal-font-text font-medium text-black bg-gray-50 mb-4 p-1 py-0.5" style="background-color: <%= deal_section.parent&.theme&.dig("colors", "border_images") %>;font-family: <%= deal&.text_typeface&.name %>;
+                  <h2 class="deal-font-text font-medium text-black bg-gray-50 mb-4 p-1 py-0.5" style="background-color: <%= deal_section.parent&.theme&.dig("colors", "background_images_subtitles") %>;font-family: <%= deal&.text_typeface&.name %>;
                     font-weight: <%= deal&.text_weight %>;
                     line-height: <%= deal&.text_height %>;
                     letter-spacing:<%= deal&.text_spacing %>em;"><%= deal_section.text %></h2>
