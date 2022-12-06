@@ -16,6 +16,9 @@ application.register("currency-input", CurrencyInputController)
 import DarkModeController from "./dark_mode_controller"
 application.register("dark-mode", DarkModeController)
 
+import DirtyFormController from "./dirty_form_controller"
+application.register("dirty-form", DirtyFormController)
+
 import DiscountInputController from "./discount_input_controller"
 application.register("discount-input", DiscountInputController)
 
