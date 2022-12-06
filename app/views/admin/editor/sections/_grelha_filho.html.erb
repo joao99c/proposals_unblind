@@ -27,7 +27,7 @@
                 letter-spacing:<%= deal&.sub_section_heading_spacing %>em;"><%= deal_section.heading %></h1>
             <% end %>
             <% unless deal_section&.theme&.dig("hidden", "text") == "1" %>
-              <div class="deal-font-text font-medium text-gray-500 max-w-[400px]" style="color: <%= deal_section&.parent&.theme&.dig("colors", "items_description") %>; font-family: <%= deal&.text_typeface&.name %>;
+              <div class="deal-font-text font-medium text-gray-500 max-w-[200px]" style="color: <%= deal_section&.parent&.theme&.dig("colors", "items_description") %>; font-family: <%= deal&.text_typeface&.name %>;
                 font-weight: <%= deal&.text_weight %>;
                 line-height: <%= deal&.text_height %>;
                 letter-spacing:<%= deal&.text_spacing %>em;"><%= deal_section.text %></div>
