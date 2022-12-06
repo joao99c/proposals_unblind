@@ -14,12 +14,13 @@
         <% unless deal_section&.theme&.dig("hidden", "logo") == "1" %>
           <% if deal_section.logo.attached? %>
             <%= image_tag(deal_section.logo, class: "w-10") %>
-          <% elsif deal.user.company_avatar.attached? %>
-            <%= image_tag(user.company_avatar, class: "w-10") %>
+            <%# elsif deal.user.company_avatar.attached? %>
+            <%#= image_tag(user.company_avatar, class: "w-10") %>
           <% end %>
         <% end %>
         <% unless deal_section&.theme&.dig("hidden", "company_name") == "1" %>
-          <p class="text-2xl font-semibold"><%= deal_section&.theme&.dig("company", "name").present? ? deal_section&.theme&.dig("company", "name") : deal.user.company_name %></p>
+          <!--          <p class="text-2xl font-semibold"><%#= deal_section&.theme&.dig("company", "name").present? ? deal_section&.theme&.dig("company", "name") : deal.user.company_name %></p>-->
+          <p class="text-2xl font-semibold"><%= deal_section&.theme&.dig("company", "name") %></p>
         <% end %>
       </div>
 
