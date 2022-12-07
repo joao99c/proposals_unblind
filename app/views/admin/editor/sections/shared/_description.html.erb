@@ -1,5 +1,17 @@
 <% unless deal_section&.theme&.dig("hidden", "text") == "1" %>
-  <h2 class="deal-font-text text-xl" style="color: <%= deal_section&.theme&.dig("colors", "description") %>;
+  <%
+    classlist = case deal_section&.theme&.dig('organization','description')
+                when 'center'
+                  'text-center mx-auto'
+                when 'left'
+                  'text-start mr-auto'
+                when 'end'
+                  'text-end ml-auto'
+                else
+                  'text-center mx-auto'
+                end
+  %>
+  <h2 class="deal-font-text text-xl <%= classlist %>" style="color: <%= deal_section&.theme&.dig("colors", "description") %>;
     font-family: <%= deal&.text_typeface&.name %>;
     font-weight: <%= deal&.text_weight %>;
     line-height: <%= deal&.text_height %>;

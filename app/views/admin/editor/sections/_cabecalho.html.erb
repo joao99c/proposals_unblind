@@ -26,7 +26,19 @@
 
       <div class="space-y-4 pb-60">
         <% unless deal_section&.theme&.dig("hidden", "heading") == "1" %>
-          <h1 class="deal-font-heading text-6xl leading-tight font-semibold" style="
+          <%
+            classlist = case deal_section&.theme&.dig('organization','text')
+                        when 'center'
+                          'text-center mx-auto'
+                        when 'left'
+                          'text-start mr-auto'
+                        when 'end'
+                          'text-end ml-auto'
+                        else
+                          'text-center mx-auto'
+                        end
+          %>
+          <h1 class="deal-font-heading text-6xl leading-tight font-semibold <%= classlist %>" style="
           color: <%= deal_section&.theme&.dig("colors", "title") %>;
             font-family: <%= deal&.heading_typeface&.name %>;
             font-weight: <%= deal&.heading_weight %>;
@@ -40,7 +52,9 @@
       </div>
 
       <div class="space-y-4 pb-40">
-        <h3 class="leading-tight text-3xl font-semibold" style="color: <%= deal_section&.theme&.dig("colors", "client_name") %>"><%= deal.customer.name %></h3>
+        <% unless deal_section&.theme&.dig("hidden", "customer_name") == "1" %>
+          <h3 class="leading-tight text-3xl font-semibold" style="color: <%= deal_section&.theme&.dig("colors", "client_name") %>"><%= deal_section&.theme&.dig("customer", "name") ? deal_section&.theme&.dig("customer", "name") : deal.customer.name %></h3>
+        <% end %>
         <% unless deal_section&.theme&.dig("hidden", "date") == "1" %>
           <h4 class="text-xl" style="color: <%= deal_section&.theme&.dig("colors", "date") %>"><%= deal.send_date_formatted %></h4>
         <% end %>

@@ -36,11 +36,11 @@
 
       <div class="space-y-2">
         <div class="flex justify-between items-center">
-          <%= form.label :company_name, "Nome da Empresa", class: "mb-0" %>
+          <%= form.label :company_name, "Nome do Cliente", class: "mb-0" %>
           <%= hide_button_field form, :company_name %>
         </div>
         <div class="flex">
-          <%= form.text_field :company_name, placeholder: "Nome da empresa", value: form.object&.theme&.dig("company","name"), data: { key: "heading" } %>
+          <%= form.text_field :company_name, placeholder: "Nome da empresa", value: form.object&.theme&.dig("company", "name"), data: { key: "heading" } %>
         </div>
       </div>
 
@@ -63,6 +63,38 @@
           <%= form.text_field :heading, placeholder: "Proposta #{@deal.customer.name}", data: { key: "heading" } %>
         </div>
       </div>
+      <div class="space-y-1">
+        <%= form.label :text_organization, "Alinhamento do Texto" %>
+        <div class="text-sm font-medium flex rounded-lg overflow-hidden border border-gray-300">
+          <div class="bg-white text-gray-500 w-full">
+            <%= form.radio_button :text_organization, :left,
+                                  checked: form.object&.theme&.dig("organization", "text") == "left",
+                                  class: "hidden peer",
+                                  data: { key: "image_format" } %>
+            <%= form.label :text_organization, value: :left, class: "text-gray-500 flex space-x-2 items-center justify-center py-2.5 px-5 h-full peer-checked:text-blue-600 peer-checked:bg-blue-100" do %>
+              <%= heroicon("menu-alt-2", options: { class: "w-6 h-6" }) %>
+            <% end %>
+          </div>
+          <div class="bg-white text-gray-500 w-full">
+            <%= form.radio_button :text_organization, :center,
+                                  checked: form.object&.theme&.dig("organization", "text") == "center",
+                                  class: "hidden peer",
+                                  data: { key: "image_format" } %>
+            <%= form.label :text_organization, value: :center, class: "text-gray-500 flex items-center justify-center py-2.5 px-5 h-full peer-checked:text-blue-600 peer-checked:bg-blue-100" do %>
+              <%= heroicon("menu", options: { class: "w-6 h-6" }) %>
+            <% end %>
+          </div>
+          <div class="bg-white text-gray-500 w-full">
+            <%= form.radio_button :text_organization, :end,
+                                  checked: form.object&.theme&.dig("organization", "text") == "end",
+                                  class: "hidden peer",
+                                  data: { key: "image_format" } %>
+            <%= form.label :text_organization, value: :end, class: "text-gray-500 flex items-center justify-center py-2.5 px-5 h-full peer-checked:text-blue-600 peer-checked:bg-blue-100" do %>
+              <%= heroicon("menu-alt-3", options: { class: "w-6 h-6" }) %>
+            <% end %>
+          </div>
+        </div>
+      </div>
       <div class="space-y-2">
         <div class="flex justify-between items-center">
           <%= form.label :text, "Descrição", class: "mb-0" %>
@@ -70,6 +102,38 @@
         </div>
         <div class="trix-container">
           <%= form.rich_text_area :text, data: { key: "text" } %>
+        </div>
+      </div>
+      <div class="space-y-1">
+        <%= form.label :description_organization, "Alinhamento da Descrição" %>
+        <div class="text-sm font-medium flex rounded-lg overflow-hidden border border-gray-300">
+          <div class="bg-white text-gray-500 w-full">
+            <%= form.radio_button :description_organization, :left,
+                                  checked: form.object&.theme&.dig("organization", "description") == "left",
+                                  class: "hidden peer",
+                                  data: { key: "image_format" } %>
+            <%= form.label :description_organization, value: :left, class: "text-gray-500 flex space-x-2 items-center justify-center py-2.5 px-5 h-full peer-checked:text-blue-600 peer-checked:bg-blue-100" do %>
+              <%= heroicon("menu-alt-2", options: { class: "w-6 h-6" }) %>
+            <% end %>
+          </div>
+          <div class="bg-white text-gray-500 w-full">
+            <%= form.radio_button :description_organization, :center,
+                                  checked: form.object&.theme&.dig("organization", "description") == "center",
+                                  class: "hidden peer",
+                                  data: { key: "image_format" } %>
+            <%= form.label :description_organization, value: :center, class: "text-gray-500 flex items-center justify-center py-2.5 px-5 h-full peer-checked:text-blue-600 peer-checked:bg-blue-100" do %>
+              <%= heroicon("menu", options: { class: "w-6 h-6" }) %>
+            <% end %>
+          </div>
+          <div class="bg-white text-gray-500 w-full">
+            <%= form.radio_button :description_organization, :end,
+                                  checked: form.object&.theme&.dig("organization", "description") == "end",
+                                  class: "hidden peer",
+                                  data: { key: "image_format" } %>
+            <%= form.label :description_organization, value: :end, class: "text-gray-500 flex items-center justify-center py-2.5 px-5 h-full peer-checked:text-blue-600 peer-checked:bg-blue-100" do %>
+              <%= heroicon("menu-alt-3", options: { class: "w-6 h-6" }) %>
+            <% end %>
+          </div>
         </div>
       </div>
     <% end %>
@@ -145,6 +209,15 @@
 
 
     <% if deal_section.section.is_cabecalho? %>
+      <div class="space-y-2">
+        <div class="flex justify-between items-center">
+          <%= form.label :customer_name, "Nome do Cliente", class: "mb-0" %>
+          <%= hide_button_field form, :customer_name %>
+        </div>
+        <div class="flex">
+          <%= form.text_field :customer_name, placeholder: "Nome da empresa", value: form.object&.theme&.dig("customer", "name") ? form.object&.theme&.dig("customer", "name") : @deal.customer.name, data: { key: "heading" } %>
+        </div>
+      </div>
       <div class="space-y-2">
         <div class="flex justify-between items-center">
           <%= form.label :date, "Data", class: "mb-0" %>

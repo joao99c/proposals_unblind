@@ -90,8 +90,11 @@ module Admin
           @deal_section.theme ||= {}
           @deal_section.theme['colors'] ||= {}
           @deal_section.theme['company'] ||= {}
+          @deal_section.theme['customer'] ||= {}
 
           @deal_section.theme['company']['name'] = params.require(:deal_section).permit(:company_name)[:company_name] if params.require(:deal_section).permit(:company_name)[:company_name].present?
+          @deal_section.theme['customer']['name'] = params.require(:deal_section).permit(:customer_name)[:customer_name] if params.require(:deal_section).permit(:customer_name)[:customer_name].present?
+
           @deal_section.theme['colors']['background'] = params.require(:deal_section)[:color_background] if params.require(:deal_section)[:color_background] && (params.require(:deal_section)[:color_background] != @deal_section.theme['colors']['background'])
           @deal_section.theme['colors']['overlay'] = params.require(:deal_section)[:color_overlay] if params.require(:deal_section)[:color_overlay].present?
           @deal_section.theme['colors']['title'] = params.require(:deal_section)[:color_title] if params.require(:deal_section)[:color_title].present?
@@ -256,7 +259,7 @@ module Admin
 
         @deal_section.theme ||= {}
         @deal_section.theme['hidden'] ||= {}
-        %w[heading logo text button email tel address date company_name].each do |visibility_item|
+        %w[heading logo text button email tel address date company_name customer_name].each do |visibility_item|
           @deal_section.theme['hidden'][visibility_item.to_s] = params.require(:deal_section)["hidden_#{visibility_item}"] if params.require(:deal_section)["hidden_#{visibility_item}"].present?
         end
 
@@ -264,6 +267,10 @@ module Admin
         @deal_section.button[:text] = params.require(:deal_section)[:button_text] if params.require(:deal_section)[:button_text].present?
         @deal_section.button[:url] = params.require(:deal_section)[:button_url] if params.require(:deal_section)[:button_url].present?
         @deal_section.assign_attributes(deal_section_params)
+
+        @deal_section.theme['organization'] ||= {}
+        @deal_section.theme['organization']['text'] = params.require(:deal_section)[:text_organization] if params.require(:deal_section)[:text_organization].present?
+        @deal_section.theme['organization']['description'] = params.require(:deal_section)[:description_organization] if params.require(:deal_section)[:description_organization].present?
 
         if @deal_section.save
           @deal.broadcast_preview_update(@deal_section)

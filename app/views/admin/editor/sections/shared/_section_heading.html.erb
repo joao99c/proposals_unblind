@@ -1,5 +1,17 @@
 <% unless deal_section&.theme&.dig("hidden", "heading") == "1" %>
-  <h1 class="deal-font-section-heading text-6xl leading-tight font-semibold" style="
+  <%
+    classlist = case deal_section&.theme&.dig('organization','text')
+                when 'center'
+                  'text-center mx-auto'
+                when 'left'
+                  'text-start mr-auto'
+                when 'end'
+                  'text-end ml-auto'
+                else
+                  'text-center mx-auto'
+                end
+  %>
+  <h1 class="deal-font-section-heading text-6xl leading-tight font-semibold <%= classlist %>" style="
   color: <%= deal_section&.theme&.dig("colors", "title") %>;
     font-family: <%= deal&.section_heading_typeface&.name %>;
     font-weight: <%= deal&.section_heading_weight %>;
