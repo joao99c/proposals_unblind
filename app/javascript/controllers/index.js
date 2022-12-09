@@ -67,5 +67,8 @@ application.register("step1", Step1Controller)
 import TabsController from "./tabs_controller"
 application.register("tabs", TabsController)
 
+import TextareaAutosizeController from "./textarea__autosize_controller"
+application.register("textarea--autosize", TextareaAutosizeController)
+
 import Ts__TagSelectController from "./ts/tag_select_controller"
 application.register("ts--tag-select", Ts__TagSelectController)

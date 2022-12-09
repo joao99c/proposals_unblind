@@ -16,7 +16,8 @@
     font-family: <%= deal&.section_heading_typeface&.name %>;
     font-weight: <%= deal&.section_heading_weight %>;
     line-height: <%= deal&.section_heading_height %>;
-    letter-spacing:<%= deal&.section_heading_spacing %>em;">
+    letter-spacing:<%= deal&.section_heading_spacing %>em;
+    white-space: pre-line;">
     <%= deal_section.heading %>
   </h1>
 <% end %>

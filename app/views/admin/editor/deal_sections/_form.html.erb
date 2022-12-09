@@ -54,13 +54,19 @@
       deal_section.section.is_conteudo? ||
       deal_section.section.is_acordeao? ||
       deal_section.section.is_galeria? %>
-      <div class="space-y-2">
+      <div data-controller="char-counter" class="space-y-2">
         <div class="flex justify-between items-center">
           <%= form.label :heading, "Título", class: "mb-0" %>
-          <%= hide_button_field form, :heading %>
+          <div class="flex space-x-2 items-center">
+            <div class="text-sm font-medium text-gray-600 dark:text-gray-100">
+              <span data-char-counter-target="output"></span>
+              <span class="text-neutral-600">/ 60</span>
+            </div>
+            <%= hide_button_field form, :heading %>
+          </div>
         </div>
         <div class="flex">
-          <%= form.text_field :heading, placeholder: "Proposta #{@deal.customer.name}", data: { key: "heading" } %>
+          <%= form.text_area :heading, rows: 1, placeholder: "Proposta #{@deal.customer.name}", maxlength: 60, data: { key: "heading", char_counter_target: "input", controller: "textarea--autosize" } %>
         </div>
       </div>
       <div class="space-y-1">
@@ -95,15 +101,26 @@
           </div>
         </div>
       </div>
-      <div class="space-y-2">
+
+
+
+      <div data-controller="char-counter" class="space-y-2">
         <div class="flex justify-between items-center">
           <%= form.label :text, "Descrição", class: "mb-0" %>
-          <%= hide_button_field form, :text %>
+          <div class="flex space-x-2 items-center">
+            <div class="text-sm font-medium text-gray-600 dark:text-gray-100">
+              <span data-char-counter-target="output"></span>
+              <span class="text-neutral-600">/ 200</span>
+            </div>
+            <%= hide_button_field form, :text %>
+          </div>
         </div>
         <div class="trix-container">
-          <%= form.rich_text_area :text, data: { key: "text" } %>
+          <%= form.rich_text_area :text, maxlength: 200, data: { key: "text",char_counter_target: "input" } %>
         </div>
       </div>
+
+
       <div class="space-y-1">
         <%= form.label :description_organization, "Alinhamento da Descrição" %>
         <div class="text-sm font-medium flex rounded-lg overflow-hidden border border-gray-300">

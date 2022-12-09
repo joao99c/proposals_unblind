@@ -56,26 +56,24 @@
       </div>
     </div>
   <% elsif deal_section.parent.section.is_galeria? %>
-    <% unless deal_section&.theme&.dig("hidden", "logo") == "1" %>
-      <div class="text-white text-center h-full" style="<%= style %>;
-        border-color: <%= deal_section.parent&.theme&.dig("colors","border_images") %>;
-        border-width: <%= deal_section.parent&.theme&.dig("border", "width") %>">
-        <% if deal_section.logo.attached? %>
-          <div class="w-full h-full min-h-[150px] md:min-h-[300px] mx-auto" style="<%= "background: url(#{url_for(deal_section.logo)}) no-repeat center center; " %>">
-            <% if deal_section.text.to_plain_text.present? %>
-              <% unless deal_section&.theme&.dig("hidden", "text") == "1" %>
-                <div class="flex justify-center items-end h-full">
-                  <h2 class="deal-font-text font-medium text-black bg-gray-50 mb-4 p-1 py-0.5" style="background-color: <%= deal_section.parent&.theme&.dig("colors", "background_images_subtitles") %>;font-family: <%= deal&.text_typeface&.name %>;
-                    font-weight: <%= deal&.text_weight %>;
-                    line-height: <%= deal&.text_height %>;
-                    letter-spacing:<%= deal&.text_spacing %>em;"><%= deal_section.text %></h2>
-                </div>
-              <% end %>
+    <div class="text-white text-center h-full" style="<%= style %>;
+      border-color: <%= deal_section.parent&.theme&.dig("colors","border_images") %>;
+      border-width: <%= deal_section.parent&.theme&.dig("border", "width") %>">
+      <% if deal_section.logo.attached? %>
+        <div class="w-full h-full min-h-[150px] md:min-h-[300px] mx-auto" style="<%= "background: url(#{url_for(deal_section.logo)}) no-repeat center center; " unless deal_section&.theme&.dig("hidden", "logo") == "1" %>">
+          <% if deal_section.text.to_plain_text.present? %>
+            <% unless deal_section&.theme&.dig("hidden", "text") == "1" %>
+              <div class="flex justify-center items-end h-full">
+                <h2 class="deal-font-text font-medium text-black bg-gray-50 mb-4 p-1 py-0.5" style="background-color: <%= deal_section.parent&.theme&.dig("colors", "background_images_subtitles") %>;font-family: <%= deal&.text_typeface&.name %>;
+                  font-weight: <%= deal&.text_weight %>;
+                  line-height: <%= deal&.text_height %>;
+                  letter-spacing:<%= deal&.text_spacing %>em;"><%= deal_section.text %></h2>
+              </div>
             <% end %>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   <% elsif deal_section.parent.section.is_conteudo? %>
     <% if deal_section.logo.attached? %>
       <div class="text-white flex flex-col md:flex-row space-y-6 md:space-x-12 md:space-y-0 <%= deal_section&.theme&.dig("image", "organization") == "left" ? '' : 'flex-col-reverse md:flex-row-reverse' %>">

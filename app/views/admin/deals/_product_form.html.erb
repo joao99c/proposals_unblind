@@ -12,7 +12,7 @@
       <p class="text-button text-neutral-400"><span data-char-counter-target="output"></span>
         <span class="text-neutral-600">/ 1000</span></p>
     </div>
-    <%= form.text_area :description, placeholder: "Inserir descrição do produto ou serviço ... ", maxlength: 1000, data: { char_counter_target: "input" }, class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+    <%= form.text_area :description, placeholder: "Inserir descrição do produto ou serviço ... ", maxlength: 1000, data: { char_counter_target: "input", controller:"textarea-autosize" }, class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
   </div>
 
 
