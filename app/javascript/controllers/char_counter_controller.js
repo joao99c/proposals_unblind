@@ -17,7 +17,7 @@ export default class extends Controller {
         if (this.inputTarget.tagName == 'TRIX-EDITOR') {
 
             // Limit the length of the trix-editor
-            let max_length = 199;
+            let max_length = parseInt(this.inputTarget.getAttribute('maxlength')) - 1 || 200;
             let current_length = this.inputTarget.editor.getDocument().toString().length;
             console.log(current_length)
             if (current_length >= max_length) {
