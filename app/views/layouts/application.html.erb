@@ -23,6 +23,13 @@
   </div>
 </div>
 
+
+<script>
+    document.addEventListener("turbo:load", function(event) {
+        hj('stateChange', '<%=request.referer%>');
+    });
+</script>
+
 <!-- Hotjar Tracking Code for my site -->
 <script>
     (function(h,o,t,j,a,r){
