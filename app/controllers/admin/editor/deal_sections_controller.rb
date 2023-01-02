@@ -92,8 +92,8 @@ module Admin
           @deal_section.theme['company'] ||= {}
           @deal_section.theme['customer'] ||= {}
 
-          @deal_section.theme['company']['name'] = params.require(:deal_section).permit(:company_name)[:company_name] if params.require(:deal_section).permit(:company_name)[:company_name].present?
-          @deal_section.theme['customer']['name'] = params.require(:deal_section).permit(:customer_name)[:customer_name] if params.require(:deal_section).permit(:customer_name)[:customer_name].present?
+          @deal_section.theme['company']['name'] = params.require(:deal_section).permit(:company_name)[:company_name] if params.require(:deal_section).permit(:company_name)[:company_name]
+          @deal_section.theme['customer']['name'] = params.require(:deal_section).permit(:customer_name)[:customer_name] if params.require(:deal_section).permit(:customer_name)[:customer_name]
 
           @deal_section.theme['colors']['background'] = params.require(:deal_section)[:color_background] if params.require(:deal_section)[:color_background] && (params.require(:deal_section)[:color_background] != @deal_section.theme['colors']['background'])
           @deal_section.theme['colors']['overlay'] = params.require(:deal_section)[:color_overlay] if params.require(:deal_section)[:color_overlay].present?

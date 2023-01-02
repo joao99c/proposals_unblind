@@ -64,6 +64,13 @@ module Admin
         @deal_section_item.child.button[:text] = params.require(:deal_section_item).dig("child_attributes", "button_text") if params.require(:deal_section_item).dig("child_attributes", "button_text")
         @deal_section_item.child.button[:url] = params.require(:deal_section_item).dig("child_attributes", "button_url") if params.require(:deal_section_item).dig("child_attributes", "button_url")
 
+
+        @deal_section_item.child.theme ||= {}
+        @deal_section_item.child.theme['organization'] ||= {}
+        @deal_section_item.child.theme['organization']['text'] = params.require(:deal_section_item)["child_attributes"][:text_organization] if params.require(:deal_section_item)["child_attributes"][:text_organization].present?
+        @deal_section_item.child.theme['organization']['description'] = params.require(:deal_section_item)["child_attributes"][:description_organization] if params.require(:deal_section_item)["child_attributes"][:description_organization].present?
+
+
         if @parent.section.is_conteudo?
           @deal_section_item.child.theme ||= {}
           @deal_section_item.child.theme['image'] ||= {}
